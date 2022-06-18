@@ -4,6 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<style type="text/css">
+	<jsp:include page="css\StyleSheet.css"></jsp:include>
+</style>
 <title>Insert title here</title>
 </head>
 <body>
