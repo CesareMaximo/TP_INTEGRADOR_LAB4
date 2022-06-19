@@ -7,7 +7,7 @@
 <style type="text/css">
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
-<title>Insert title here</title>
+<title>Menú Administrador</title>
 </head>
 <body>
  <!-- MENSAJE BIENVENIDA
@@ -18,9 +18,76 @@ MENU PACIENTE
 MENU MEDICO
 ASIGNACION DE TURNOS
 LISTADO DE TURNOS
-REPORTES
- 
- 
+REPORTES 
   -->
+ <div class="User"><img width="16px"class="imag" src="https://i.ibb.co/M5PCn3q/user.png"/> Bienvenido <b>NombreUsuario</b>
+ <input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary" style="margin-left:10px;"></div>
+
+	<br>
+	<div class="registro">
+		<form>
+			<h1>Menú Administrador</h1>
+			
+			 <div style="display: flex; flex-direction: row; flex-wrap: wrap">
+                        <a href="" style="text-decoration: none; color: dimgrey;">
+                            <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:50px;">
+                                <img src="https://cdn-icons-png.flaticon.com/512/1430/1430402.png" style="width: 50px" class="card-img-top" alt="..." />
+                                <div class="card-body">
+                                    <p class="card-text" style="font-size: 14px">Menú Paciente</p>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <a href="" style="text-decoration: none; color: dimgrey;">
+                            <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:80px;">
+                                <img src="https://cdn-icons-png.flaticon.com/512/4850/4850806.png" style="width: 50px" class="card-img-top" alt="..." />
+                                <div class="card-body">
+                                    <p class="card-text" style="font-size: 14px">Menú Médico</p>
+                                </div>
+                            </div>
+                        </a>
+                        
+                       
+                       <a href="" style="text-decoration: none; color: dimgrey;">
+                            <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:50px;">
+                                <img src="https://cdn-icons-png.flaticon.com/512/2464/2464632.png" style="width: 50px" class="card-img-top" alt="..." />
+                                <div class="card-body">
+                                    <p class="card-text" style="font-size: 14px">Asignación de Turnos</p>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <a href="" style="text-decoration: none; color: dimgrey;">
+                            <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:80px;">
+                                <img src="https://cdn-icons-png.flaticon.com/512/901/901533.png" style="width: 50px" class="card-img-top" alt="..." />
+                                <div class="card-body">
+                                    <p class="card-text" style="font-size: 14px">Listado de Turnos</p>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <a href="" style="text-decoration: none; color: dimgrey;">
+                            <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:50px;">
+                                <img src="https://cdn-icons-png.flaticon.com/512/1188/1188576.png" style="width: 50px" class="card-img-top" alt="..." />
+                                <div class="card-body">
+                                    <p class="card-text" style="font-size: 14px">Reportes</p>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <a href="" style="text-decoration: none; color: dimgrey;">
+                            <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:80px;">
+                                <img src="https://cdn-icons-png.flaticon.com/512/2082/2082800.png" style="width: 50px" class="card-img-top" alt="..." />
+                                <div class="card-body">
+                                    <p class="card-text" style="font-size: 14px">Agregar Administrador</p>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        
+			</div>
+			</form>
+	</div>
+	
 </body>
 </html>
