@@ -20,7 +20,9 @@ DE CONFIRMACION Y EN EL BACK CAMBIAR EL ESTADO DE TURNO A OCUPADO Y ASIGNAR ID P
 SI NO ESTA REGISTRADO, MENSAJE "PACIENTE NO REGISTRADO, BOTON PARA REGISTRAR"
 -->
 
-<div class="User"><img width="16px"class="imag" src="https://i.ibb.co/M5PCn3q/user.png"/> Bienvenido <b>NombreUsuario</b></div>
+ <div class="User"><img width="16px"class="imag" src="img/user.png"/> Bienvenido <b>NombreUsuario</b>
+ <input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary" style="margin-left:10px;"></div>
+	<br>
 	<div class="registro">
 		<form method="post">
 			<h1>Registro de Turnos</h1>

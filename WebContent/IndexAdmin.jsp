@@ -20,9 +20,8 @@ ASIGNACION DE TURNOS
 LISTADO DE TURNOS
 REPORTES 
   -->
- <div class="User"><img width="16px"class="imag" src="https://i.ibb.co/M5PCn3q/user.png"/> Bienvenido <b>NombreUsuario</b>
+ <div class="User"><img width="16px"class="imag" src="img/user.png"/> Bienvenido <b>NombreUsuario</b>
  <input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary" style="margin-left:10px;"></div>
-
 	<br>
 	<div class="registro">
 		<form>
@@ -31,7 +30,7 @@ REPORTES
 			 <div style="display: flex; flex-direction: row; flex-wrap: wrap">
                         <a href="" style="text-decoration: none; color: dimgrey;">
                             <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:50px;">
-                                <img src="https://cdn-icons-png.flaticon.com/512/1430/1430402.png" style="width: 50px" class="card-img-top" alt="..." />
+                                <img src="img/MenuPaciente.png" style="width: 50px" class="card-img-top" alt="..." />
                                 <div class="card-body">
                                     <p class="card-text" style="font-size: 14px">Menú Paciente</p>
                                 </div>
@@ -40,7 +39,7 @@ REPORTES
                         
                         <a href="" style="text-decoration: none; color: dimgrey;">
                             <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:80px;">
-                                <img src="https://cdn-icons-png.flaticon.com/512/4850/4850806.png" style="width: 50px" class="card-img-top" alt="..." />
+                                <img src="img/MenuMedicos.png" style="width: 50px" class="card-img-top" alt="..." />
                                 <div class="card-body">
                                     <p class="card-text" style="font-size: 14px">Menú Médico</p>
                                 </div>
@@ -50,7 +49,7 @@ REPORTES
                        
                        <a href="" style="text-decoration: none; color: dimgrey;">
                             <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:50px;">
-                                <img src="https://cdn-icons-png.flaticon.com/512/2464/2464632.png" style="width: 50px" class="card-img-top" alt="..." />
+                                <img src="img/AsignacionTurno.png" style="width: 50px" class="card-img-top" alt="..." />
                                 <div class="card-body">
                                     <p class="card-text" style="font-size: 14px">Asignación de Turnos</p>
                                 </div>
@@ -59,7 +58,7 @@ REPORTES
                         
                         <a href="" style="text-decoration: none; color: dimgrey;">
                             <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:80px;">
-                                <img src="https://cdn-icons-png.flaticon.com/512/901/901533.png" style="width: 50px" class="card-img-top" alt="..." />
+                                <img src="img/ListadoTurnos.png" style="width: 50px" class="card-img-top" alt="..." />
                                 <div class="card-body">
                                     <p class="card-text" style="font-size: 14px">Listado de Turnos</p>
                                 </div>
@@ -68,7 +67,7 @@ REPORTES
                         
                         <a href="" style="text-decoration: none; color: dimgrey;">
                             <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:50px;">
-                                <img src="https://cdn-icons-png.flaticon.com/512/1188/1188576.png" style="width: 50px" class="card-img-top" alt="..." />
+                                <img src="img/Reportes.png" style="width: 50px" class="card-img-top" alt="..." />
                                 <div class="card-body">
                                     <p class="card-text" style="font-size: 14px">Reportes</p>
                                 </div>
@@ -77,7 +76,7 @@ REPORTES
                         
                         <a href="" style="text-decoration: none; color: dimgrey;">
                             <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:80px;">
-                                <img src="https://cdn-icons-png.flaticon.com/512/2082/2082800.png" style="width: 50px" class="card-img-top" alt="..." />
+                                <img src="img/AgregarAdministrador.png" style="width: 50px" class="card-img-top" alt="..." />
                                 <div class="card-body">
                                     <p class="card-text" style="font-size: 14px">Agregar Administrador</p>
                                 </div>

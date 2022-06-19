@@ -25,7 +25,9 @@ EMAIL
 TELEFONO 
 -->
 
-<div class="User"><img width="16px"class="imag" src="https://i.ibb.co/M5PCn3q/user.png"/> Bienvenido <b>NombreUsuario</b></div>
+ <div class="User"><img width="16px"class="imag" src="img/user.png"/> Bienvenido <b>NombreUsuario</b>
+ <input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary" style="margin-left:10px;"></div>
+	<br>
 	<div class="registro">
 		<form>
 			<h1>Registro de Nuevo Paciente</h1>

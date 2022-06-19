@@ -14,8 +14,10 @@
 <!-- LISTADO DE PACIENTES CON BOTON AGREGAR PACIENTE Y BOTONES MODIFICAR Y ELIMINAR EN CADA FILA 
 CUANDO APRETAS ELIMINAR SALTA VENTANA DE CONFIRMACIÓN 
 FILTRO DE BUSQUEDA-->
-<div class="User"><img width="16px"class="imag" src="https://i.ibb.co/M5PCn3q/user.png"/> Bienvenido <b>NombreUsuario</b></div>
-	<div class="registro">
+ <div class="User"><img width="16px"class="imag" src="img/user.png"/> Bienvenido <b>NombreUsuario</b>
+ <input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary" style="margin-left:10px;"></div>
+	<br>
+		<div class="registro">
 		<form>
 			<h1>MENU PACIENTE</h1>
 			<div class="filtros">
