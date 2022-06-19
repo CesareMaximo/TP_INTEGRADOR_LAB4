@@ -44,7 +44,7 @@ TELEFONO
 				<tr><td><label>Tel&eacutefono Opcional:</label></td><td><input name="txtTelefono2" type="text" class="inputForm" size="20"></td></tr>				
 			</table>
 			<br>
-				<input name=" insert" type="submit" value="Aceptar" class="btn btn-primary btn-block btn-large" ">
+				<input name=" insert" type="submit" value="Aceptar" class="btn btn-primary btn-block btn-large">
 			</form>
 	</div>
 
