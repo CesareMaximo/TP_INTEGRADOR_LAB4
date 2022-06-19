@@ -7,7 +7,7 @@
 <style type="text/css">
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
-<title>Insert title here</title>
+<title>Nuevo médico</title>
 </head>
 <body>
 
@@ -28,31 +28,92 @@ DIA Y HORARIO DE ATENCIÓN
 NOMBRE USUARIO
 CONTRASEÑA
 -->
+<div class="User"><img width="16px"class="imag" src="https://i.ibb.co/M5PCn3q/user.png"/> Bienvenido <b>NombreUsuario</b></div>
 	<div class="registro">
 		<form>
-			<h1>Registro de Nuevo Medico</h1>
-			<p>
-				<label>DNI:</label><input name="txtDni" type="text" size="20" required><br>
-				<label>Nombres:</label><input name="txtNombre" type="text" size="20" required><br>
-				<label>Apellidos:</label><input name="txtApellido" type="text" size="20" required><br>
-				<label>Fecha Nacimiento:</label><input name="txtFechaNac" type="text" size="20" required>
-				<br>
-				<label>Sexo</label><br>
-				<label>Nacionalidad:</label><br>
-				<label>Provincia:</label><br>
-				<label>Localidad:</label><br>
-				<label>Dirección:</label><textarea name="txtDireccion" cols="26" rows="3" required></textarea><br>
-				<label>E-mail:</label><input name="email " type="email" size="20" required><br>
-				<label>Telefono:</label><input name="txtTelefono1" type="text" size="20" required><br>
-				<label>Telefono Opcional:</label><input name="txtTelefono2" type="text" size="20"><br>
-				<label>Especialidad:</label><br>
-				<label>Dia de atención:</label><input name="txtDia" type="text" size="20"><br>
-				<label>Horario de Atención:</label><input name="txtHorario" type="text" size="20"><br>
-				<label>Nombre de Usuario:</label><input name="txtUser" type="text" size="20"><br>
-				<label>Contrase&ntildea:</label><input name="txtTelefono1" type="password" size="20"><br>
-				<br>
-				<input name=" insert" type="submit" value="Aceptar" class="btn btn-primary btn-block btn-large">
-			</p>
+			<h1>Registro de Nuevo Médico</h1>
+			<table class="formulario">
+				<tr><td><label>DNI:</label></td><td><input name="txtDni" type="text" class="inputForm" size="20" required></td></tr>
+				<tr><td><label>Nombres:</label></td><td><input name="txtNombre" type="text" class="inputForm" size="20" required></td></tr>
+				<tr><td><label>Apellidos:</label></td><td><input name="txtApellido" type="text" class="inputForm" size="20" required></td></tr>
+				<tr><td><label>Fecha Nacimiento:</label></td><td><input name="txtFechaNac" type="text" class="inputForm" size="20" required></td></tr>
+				<tr><td><label>Sexo</label></td><td><select class="select"></select></tr>
+				<tr><td><label>Nacionalidad:</label></td><td><select class="select"></select></tr>
+				<tr><td><label>Provincia:</label></td><td><select class="select"></select></tr>
+				<tr><td><label>Localidad:</label></td><td><select class="select"></select></tr>
+				<tr><td><label>Dirección:</label></td><td><textarea name="txtDireccion" style="resize: none;" class="inputForm" cols="21" rows="3" required></textarea></td></tr>
+				<tr><td><label>E-mail:</label></td><td><input name="email " type="email" class="inputForm" size="20" required></td></tr>
+				<tr><td><label>Teléfono:</label></td><td><input name="txtTelefono1" type="text"  class="inputForm"size="20" required></td></tr>
+				<tr><td><label>Teléfono Opcional:</label></td><td><input name="txtTelefono2" type="text" class="inputForm" size="20"></td></tr>
+				<tr><td><label>Especialidad:</label></td><td><select class="select"></select></tr> 
+				<tr><td class=top><label>Dia de atención:</label></td><td>
+				<div class="control-group">
+    <label class="control control-checkbox">
+        Lunes
+            <input type="checkbox" checked="checked" />
+        <div class="control_indicator"></div>
+    </label>
+    <label class="control control-checkbox">
+        Martes
+            <input type="checkbox" />
+        <div class="control_indicator"></div>
+    </label>
+    <label class="control control-checkbox">
+        Miercoles
+            <input type="checkbox" />
+        <div class="control_indicator"></div>
+    </label>
+    <label class="control control-checkbox">
+        Jueves
+            <input type="checkbox" />
+        <div class="control_indicator"></div>
+    </label>
+    <label class="control control-checkbox">
+        Viernes
+            <input type="checkbox" />
+        <div class="control_indicator"></div>
+    </label>
+    <label class="control control-checkbox">
+        Sábado
+            <input type="checkbox" />
+        <div class="control_indicator"></div>
+    </label>
+</div>
+				<tr><td class="top"><label>Horario de Atención:</label></td><td>
+				
+				<select class="select" ><option>08:00</option>
+				<option>09:00</option>
+				<option>10:00</option>
+				<option>11:00</option>
+				<option>12:00</option>
+				<option>13:00</option>
+				<option>14:00</option>
+				<option>15:00</option>
+				<option>16:00</option>
+				<option>17:00</option>
+				<option>18:00</option>
+				<option>19:00</option>
+				</select><label class="lbl">  Ingreso </label><br>
+				<select class="select">
+				<option>09:00</option>
+				<option>11:00</option>
+				<option>12:00</option>
+				<option>13:00</option>
+				<option>14:00</option>
+				<option>15:00</option>
+				<option>16:00</option>
+				<option>17:00</option>
+				<option>18:00</option>
+				<option>19:00</option>
+				<option>20:00</option></select><label class="lbl">  Salida   </label>
+				
+				</td></tr>
+				<tr><td><label>Nombre de Usuario:</label></td><td><input name="txtUser" type="text" class="inputForm" size="20"></td></tr>
+				<tr><td><label>Contraseña:</label></td><td><input name="txtPass" type="password"class="inputForm" size="20"></td></tr>
+				<tr><td><label>Confirmar contraseña:</label></td><td><input name="txtPass2" type="password"class="inputForm" size="20"></td></tr>
+			</table>
+			<br>
+				<input name=" insert" type="submit" value="Aceptar" class="btn btn-primary btn-block btn-large" ">
 			</form>
 	</div>
 		

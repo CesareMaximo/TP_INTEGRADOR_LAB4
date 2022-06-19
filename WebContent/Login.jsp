@@ -19,9 +19,9 @@ BOTON ACEPTAR
 -->
 <div class="login">
 	<h1>Login</h1>
-    <form method="post" class="input">
-    	<input type="text" name="txtUsername" placeholder="Username" required="required" />
-        <input type="password" name="txtPass" placeholder="Password" required="required" />
+    <form method="post" >
+    	<input type="text" class="input"name="txtUsername" placeholder="Username" required="required" />
+        <input type="password" class="input" name="txtPass" placeholder="Password" required="required" />
         <button type="submit" class="btn btn-primary btn-block btn-large">INGRESAR</button>
     </form>
 </div>
