@@ -31,22 +31,22 @@ CONTRASEÑA
 <div class="User"><img width="16px"class="imag" src="https://i.ibb.co/M5PCn3q/user.png"/> Bienvenido <b>NombreUsuario</b></div>
 	<div class="registro">
 		<form>
-			<h1>Registro de Nuevo Médico</h1>
+			<h1>Registro de Nuevo M&eacutedico</h1>
 			<table class="formulario">
 				<tr><td><label>DNI:</label></td><td><input name="txtDni" type="text" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Nombres:</label></td><td><input name="txtNombre" type="text" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Apellidos:</label></td><td><input name="txtApellido" type="text" class="inputForm" size="20" required></td></tr>
-				<tr><td><label>Fecha Nacimiento:</label></td><td><input name="txtFechaNac" type="text" class="inputForm" size="20" required></td></tr>
+				<tr><td><label>Fecha Nacimiento:</label></td><td><input name="txtFechaNac" type="date" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Sexo</label></td><td><select class="select"></select></tr>
 				<tr><td><label>Nacionalidad:</label></td><td><select class="select"></select></tr>
 				<tr><td><label>Provincia:</label></td><td><select class="select"></select></tr>
 				<tr><td><label>Localidad:</label></td><td><select class="select"></select></tr>
-				<tr><td><label>Dirección:</label></td><td><textarea name="txtDireccion" style="resize: none;" class="inputForm" cols="21" rows="3" required></textarea></td></tr>
+				<tr><td><label>Direcci&oacuten:</label></td><td><textarea name="txtDireccion" style="resize: none;" class="inputForm" cols="21" rows="3" required></textarea></td></tr>
 				<tr><td><label>E-mail:</label></td><td><input name="email " type="email" class="inputForm" size="20" required></td></tr>
-				<tr><td><label>Teléfono:</label></td><td><input name="txtTelefono1" type="text"  class="inputForm"size="20" required></td></tr>
-				<tr><td><label>Teléfono Opcional:</label></td><td><input name="txtTelefono2" type="text" class="inputForm" size="20"></td></tr>
+				<tr><td><label>Tel&eacutefono:</label></td><td><input name="txtTelefono1" type="text"  class="inputForm"size="20" required></td></tr>
+				<tr><td><label>Tel&eacutefono Opcional:</label></td><td><input name="txtTelefono2" type="text" class="inputForm" size="20"></td></tr>
 				<tr><td><label>Especialidad:</label></td><td><select class="select"></select></tr> 
-				<tr><td class=top><label>Dia de atención:</label></td><td>
+				<tr><td class=top><label>Dia de atenci&oacuten:</label></td><td>
 				<div class="control-group">
     <label class="control control-checkbox">
         Lunes
@@ -74,12 +74,12 @@ CONTRASEÑA
         <div class="control_indicator"></div>
     </label>
     <label class="control control-checkbox">
-        Sábado
+        S&aacutebado
             <input type="checkbox" />
         <div class="control_indicator"></div>
     </label>
 </div>
-				<tr><td class="top"><label>Horario de Atención:</label></td><td>
+				<tr><td class="top"><label>Horario de Atenci&oacuten:</label></td><td>
 				
 				<select class="select" ><option>08:00</option>
 				<option>09:00</option>
@@ -109,8 +109,8 @@ CONTRASEÑA
 				
 				</td></tr>
 				<tr><td><label>Nombre de Usuario:</label></td><td><input name="txtUser" type="text" class="inputForm" size="20"></td></tr>
-				<tr><td><label>Contraseña:</label></td><td><input name="txtPass" type="password"class="inputForm" size="20"></td></tr>
-				<tr><td><label>Confirmar contraseña:</label></td><td><input name="txtPass2" type="password"class="inputForm" size="20"></td></tr>
+				<tr><td><label>Contrase&ntildea:</label></td><td><input name="txtPass" type="password"class="inputForm" size="20"></td></tr>
+				<tr><td><label>Confirmar contrase&ntildea:</label></td><td><input name="txtPass2" type="password"class="inputForm" size="20"></td></tr>
 			</table>
 			<br>
 				<input name=" insert" type="submit" value="Aceptar" class="btn btn-primary btn-block btn-large" ">

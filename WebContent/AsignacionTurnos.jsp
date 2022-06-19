@@ -7,7 +7,7 @@
 <style type="text/css">
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
-<title>Insert title here</title>
+<title>Asignaci&oacuten de Turnos</title>
 </head>
 <body>
 <!-- DESPLAGLE DE ESPECIALIDADES QUE FILTRE LOS MEDICOS
@@ -19,5 +19,38 @@ BOTON RESERVAR TURNO, AL APRETAR BOTON DEBERA CHEQUEAR SI EL DNI ESTA REGISTRADO
 DE CONFIRMACION Y EN EL BACK CAMBIAR EL ESTADO DE TURNO A OCUPADO Y ASIGNAR ID PACIENTE 
 SI NO ESTA REGISTRADO, MENSAJE "PACIENTE NO REGISTRADO, BOTON PARA REGISTRAR"
 -->
+
+<div class="User"><img width="16px"class="imag" src="https://i.ibb.co/M5PCn3q/user.png"/> Bienvenido <b>NombreUsuario</b></div>
+	<div class="registro">
+		<form method="post">
+			<h1>Registro de Turnos</h1>
+			<table class="formulario">
+				<tr><td><label>Especialidad:</label></td><td><select class="select"></select></tr>
+				<tr><td><label>Medico:</label></td><td><select class="select"></select></tr> 
+				<tr><td class="top"><label>Fecha:</label></td><td><input type="date" name="Fecha" class="inputForm" min="2022-06-01" max="2022-07-30"></input></tr>
+				<tr><td class="top"><label>Horario de Atenci&oacuten:</label></td><td>
+				 
+				<select class="select" >
+					<option>08:00</option>
+					<option>09:00</option>
+					<option>10:00</option>
+					<option>11:00</option>
+					<option>12:00</option>
+					<option>13:00</option>
+					<option>14:00</option>
+					<option>15:00</option>
+					<option>16:00</option>
+					<option>17:00</option>
+					<option>18:00</option>
+					<option>19:00</option>
+				</select>			
+			
+				<tr><td><label>DNI:</label></td><td><input name="txtDni" type="text" class="inputForm" size="20" required></td></tr>
+			</table>
+			<br>
+				<input name=" insert" type="submit" value="Reservar Turno" class="btn btn-primary btn-block btn-large">
+			</form>
+	</div>
+
 </body>
 </html>
