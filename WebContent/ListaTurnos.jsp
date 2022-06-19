@@ -7,9 +7,71 @@
 <style type="text/css">
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
-<title>Insert title here</title>
+<title>Turnos</title>
 </head>
 <body>
 <!-- LISTADO DE TURNOS CON FILTRO POR ESTADO, POR MEDICO, POR PACIENTE, POR FECHA -->
+ <div class="User"><img width="16px"class="imag" src="img/user.png"/> Bienvenido <b>NombreUsuario</b>
+ <input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary" style="margin-left:10px;"></div>
+	<br>
+		<div class="registro">
+		<form>
+			<h1>LISTADO DE TURNOS</h1>
+			<div class="filtros">
+				<table class="buscar">
+					<tr>
+						<td><label>Estado:</label></td><td><select class="select" >
+							<option>LIBRE</option>
+							<option>OCUPADO</option>
+							<option>AUSENTE</option>
+							<option>PRESENTE</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td><label>Fecha:</label></td><td><input type="date" >
+						</td>
+					</tr>
+					<tr>
+						<td><label>Especialidad:</label></td><td><select class="select"></select></td>
+					</tr> 
+					<tr>
+						<td><label>Medicos:</label></td><td><select class="select" ></select></td>
+					</tr>
+					<tr>
+						<td>
+							<label>DNI Paciente:</label>
+						</td>
+						<td>
+							<input type="search" name="Busqueda"></input>
+						</td>
+						<td><input name=" insert" type="submit" value="Buscar" class="btn btn-primary btn-large"></td>
+					</tr>
+				</table>
+				<br>
+			</div>
+			<table class="tabla">
+				<thead>
+					<tr>
+						<th>DNI Paciente</th><th>Medico</th><th>Especialidad</th><th>Fecha</th><th>Estado</th>
+					</tr>
+					<tr>
+						<td>
+						</td>
+						<td>
+						</td>
+						<td>
+						</td>
+						<td>
+						</td>
+						<td>
+						</td>
+					</tr>
+					
+				</thead>
+				</table>
+				<br></br>
+			</form>
+	</div>
 </body>
 </html>
