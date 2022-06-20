@@ -22,10 +22,12 @@
 CUANDO APRETAS ELIMINAR SALTA VENTANA DE CONFIRMACIÓN 
 FILTRO DE BUSQUEDA-->
 
-  <div class="Index"> <a href="IndexAdmin.jsp" class="btn btn-primary"  style="margin-left:10px;">Inicio</a> </div>
-
  <div  style=" font-family:Open Sans; margin-top:6px; float: right; margin-right: 12px; color: #fff; font-size: 12px; "><img width="16px"class="imag" src="img/user.png"/> Bienvenido <b>NombreUsuario</b>
  <input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary btn-sm" style="margin-left:10px;"></div>
+<div style="float: left; margin-left: 12px; margin-top:6px;">
+<a href="IndexAdmin.jsp"><img src="img/atras.png" height="20px" /></a>
+<a href="IndexAdmin.jsp"> <img src="img/home.png" height="20px" style="margin-left:10px;" width="20px" ></a> 
+</div>
 	<br>
 	
 	<div class="container-xl">
@@ -33,7 +35,10 @@ FILTRO DE BUSQUEDA-->
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-8"><h1>Médicos</h1></div>
+                    <div class="col-sm-8"><h1>Médicos</h1>
+                                        <a href="AgregarMedico.jsp" name="nuevoMedico" class="btn btn-primary btn-ml">Nuevo Médico</a>
+                    
+                    </div>
                     <div class="col-sm-4">
                         <div class="search-box">
                             <i class="material-icons">&#xE8B6;</i>
@@ -61,8 +66,7 @@ FILTRO DE BUSQUEDA-->
                         <td></td>
                         <td></td>
                         <td>
-                            <a href="#" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
-                            <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                            <a href="ModificarMedico.jsp" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
                             <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
                         </td>
                     </tr>

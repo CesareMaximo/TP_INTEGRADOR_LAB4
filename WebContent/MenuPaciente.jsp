@@ -24,15 +24,25 @@
 CUANDO APRETAS ELIMINAR SALTA VENTANA DE CONFIRMACIÓN 
 FILTRO DE BUSQUEDA-->
 <div  style=" font-family:Open Sans; margin-top:6px; float: right; margin-right: 12px; color: #fff; font-size: 12px; "><img width="16px"class="imag" src="img/user.png"/> Bienvenido <b>NombreUsuario</b>
- <input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary btn-sm" style="margin-left:10px;"></div>
+ <input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary btn-sm" style="margin-left:10px;">
+ </div>
+<div style="float: left; margin-left: 12px; margin-top:6px;">
+<a href="IndexAdmin.jsp"><img src="img/atras.png" height="20px" /></a>
+<a href="IndexAdmin.jsp"> <img src="img/home.png" height="20px" style="margin-left:10px;" width="20px" ></a> 
+</div>
+	
 	<br>
 	
 	<div class="container-xl">
     <div class="table-responsive">
         <div class="table-wrapper">
             <div class="table-title">
-                <div class="row">
-                    <div class="col-sm-8"><h1>Pacientes</h1></div>
+                <div class="row justify-content-center">
+                    <div class="col-sm-8"><h1>Pacientes</h1>
+                    
+                    <a href="AgregarPaciente.jsp" name="nuevoPaciente" class="btn btn-primary btn-ml">Nuevo Paciente</a>
+                    </div>
+                
                     <div class="col-sm-4">
                         <div class="search-box">
                             <i class="material-icons">&#xE8B6;</i>

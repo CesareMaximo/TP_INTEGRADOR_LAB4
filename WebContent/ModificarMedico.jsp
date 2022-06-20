@@ -11,7 +11,10 @@
 </head>
 <body>
 
-  <div class="Index"> <a href="IndexAdmin.jsp" class="btn btn-primary"  style="margin-left:10px;">Inicio</a> </div>
+<div style="float: left; margin-left: 12px; margin-top:6px;">
+<a href="MenuMedico.jsp"><img src="img/atras.png" height="20px" /></a>
+<a href="IndexAdmin.jsp"> <img src="img/home.png" height="20px" style="margin-left:10px;" width="20px" ></a> 
+</div>
 <!-- MISMO FORMULARIO QUE AGREGAR PERO CON DATOS PRECARGADOS -->
  <div class="User"><img width="16px"class="imag" src="img/user.png"/> Bienvenido <b>NombreUsuario</b>
  <input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary" style="margin-left:10px;"></div>
