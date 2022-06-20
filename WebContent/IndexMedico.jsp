@@ -61,8 +61,8 @@ EN CADA TURNO PODRA VER LOS DATOS DEL TURNO, AMPLIAR DETALLE DE PACIENTE, AGREGA
                         <td></td>
                         <td></td>
                         <td>
-                            <a href="#" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
-                            <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                            <a href="#openModalDetallePaciente" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
+                            <a href="#openModalTurno" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
                         </td>
                     </tr>
                 </tbody>
@@ -82,5 +82,47 @@ EN CADA TURNO PODRA VER LOS DATOS DEL TURNO, AMPLIAR DETALLE DE PACIENTE, AGREGA
         </div>
     </div>  
 </div> 
+
+<div id="openModalDetallePaciente" class="modalDialog">
+	<div class="DetallePaciente">
+		<a href="#close" title="Close" class="close">X</a>
+		<h1>Detalle Paciente</h1>
+			<table class="tablaDetalle">
+				<tr><td class="Campo"><label>DNI</label></td><td><label name="lblDni"> 12345678</label></td></tr>
+				<tr><td class="Campo"><label>Nombres</label></td><td><label name="lblNombre">Juan</label></td></tr>
+				<tr><td class="Campo"><label>Apellidos</label></td><td><label name="lblApellido">Perez</label></td></tr>
+				<tr><td class="Campo"><label>Fecha Nacimiento</label></td><td><label name="lblFechaNac"> 1997/03/16 </label></td></tr>
+				<tr><td class="Campo"><label>Sexo</label></td><td><label name="lblSexo">Masculino</label></tr>
+				<tr><td class="Campo"><label>Nacionalidad</label></td><td><label name="lblNacionalidad">Argentina</label></tr>
+				<tr><td class="Campo"><label>Provincia</label></td><td><label name="lblProvincia">Buenos Aires</label></tr>
+				<tr><td class="Campo"><label>Localidad</label></td><td><label name="lblLocalidad">Campana</label></tr>
+				<tr><td class="Campo"><label>Direcci&oacuten</label></td><td><label name="lblDireccion">Av. Mitre 1300</label></td></tr>
+				<tr><td class="Campo"><label>E-mail</label></td><td><label name="email ">juanperez@gmail.com</label></td></tr>
+				<tr><td class="Campo"><label>Tel&eacutefono</label></td><td><label name="lblTelefono1">11152635262</label></td></tr>
+				<tr><td class="Campo"><label>Tel&eacutefono Opcional</label></td><td><label name="lblTelefono2">-</label></td></tr>				
+			</table>
+		
+	</div>
+</div>
+
+
+<div id="openModalTurno" class="modalDialog">
+	<div class="DetallePaciente">
+		<a href="#close" title="Close" class="close">X</a>
+		<h1>Detalle Turno</h1>
+		<table class="tablaDetalle">
+				<tr><td class="Campo"><label>Fecha</label></td><td><label name="lblFecha"> 2022/06/20</label></td></tr>
+				<tr><td class="Campo"><label>Hora</label></td><td><label name="lblHora">08:00</label></td></tr>
+				<tr><td class="Campo"><label>Paciente</label></td><td><label name="lblPaciente">Juan Perez</label></td></tr>
+				<tr><td class="Campo"><label>Especialidad</label></td><td><label name="lblEspecialidad"> Cardiología </label></td></tr>
+				<tr><td class="Campo"><label>Estado</label></td><td><select class="select"><Option>OCUPADO</Option> <Option>PRESENTE</Option> <Option>AUSENTE</Option></select></tr>
+				<tr><td class="Campo"><label>Observación</label></td><td><textArea name="txtObservacion" style="resize: none;" class="inputForm" cols="21" rows="3" required></textArea></tr>			
+			</table>	
+		
+	</div>
+</div>
+
+
+
 </body>
 </html>

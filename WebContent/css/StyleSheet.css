@@ -377,6 +377,8 @@ table.table td i {
 	-moz-transition: opacity 400ms ease-in;
 	transition: opacity 400ms ease-in;
 	pointer-events: none;
+	overflow-y: scroll;
+	overflow-x: hidden;
 }
 .modalDialog:target {
 	opacity:1;
@@ -389,9 +391,6 @@ table.table td i {
 	padding: 5px 20px 13px 20px;
 	border-radius: 10px;
 	background: #fff;
-	background: -moz-linear-gradient(#fff, #999);
-	background: -webkit-linear-gradient(#fff, #999);
-	background: -o-linear-gradient(#fff, #999);
   -webkit-transition: opacity 400ms ease-in;
 -moz-transition: opacity 400ms ease-in;
 transition: opacity 400ms ease-in;
@@ -416,4 +415,27 @@ transition: opacity 400ms ease-in;
 }
 .close:hover { background: #00d9ff; }
 
+
+
+.DetallePaciente{
+	font-size: 13px;
+	font-family:Open Sans;
+	
+}	
+
+
+.Campo{
+	font-weight: bolder;
+	color: #092756;
+	width: 150px;
+	padding: 3px;
+}
+
+.DetallePaciente h1{
+	 font-size: 30px;
+    font-family:Open Sans;
+     letter-spacing:1px;
+     margin-top:10px;
+     margin-bottom: 20px;
+}
 	

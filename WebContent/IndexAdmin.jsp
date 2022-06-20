@@ -28,7 +28,7 @@ REPORTES
 			<h1>Menú Administrador</h1>
 			
 			 <div style="display: flex; flex-direction: row; flex-wrap: wrap">
-                        <a href="" style="text-decoration: none; color: dimgrey;">
+                        <a href="MenuPaciente.jsp" style="text-decoration: none; color: dimgrey;">
                             <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:50px;">
                                 <img src="img/MenuPaciente.png" style="width: 50px" class="card-img-top" alt="..." />
                                 <div class="card-body">
@@ -37,7 +37,7 @@ REPORTES
                             </div>
                         </a>
                         
-                        <a href="" style="text-decoration: none; color: dimgrey;">
+                        <a href="MenuMedico.jsp" style="text-decoration: none; color: dimgrey;">
                             <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:80px;">
                                 <img src="img/MenuMedicos.png" style="width: 50px" class="card-img-top" alt="..." />
                                 <div class="card-body">
@@ -47,7 +47,7 @@ REPORTES
                         </a>
                         
                        
-                       <a href="" style="text-decoration: none; color: dimgrey;">
+                       <a href="AsignacionTurnos.jsp" style="text-decoration: none; color: dimgrey;">
                             <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:50px;">
                                 <img src="img/AsignacionTurno.png" style="width: 50px" class="card-img-top" alt="..." />
                                 <div class="card-body">
@@ -56,7 +56,7 @@ REPORTES
                             </div>
                         </a>
                         
-                        <a href="" style="text-decoration: none; color: dimgrey;">
+                        <a href="ListaTurnos.jsp" style="text-decoration: none; color: dimgrey;">
                             <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:80px;">
                                 <img src="img/ListadoTurnos.png" style="width: 50px" class="card-img-top" alt="..." />
                                 <div class="card-body">
@@ -65,7 +65,7 @@ REPORTES
                             </div>
                         </a>
                         
-                        <a href="" style="text-decoration: none; color: dimgrey;">
+                        <a href="MenuReportes.jsp" style="text-decoration: none; color: dimgrey;">
                             <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:50px;">
                                 <img src="img/Reportes.png" style="width: 50px" class="card-img-top" alt="..." />
                                 <div class="card-body">
@@ -74,7 +74,7 @@ REPORTES
                             </div>
                         </a>
                         
-                        <a href="" style="text-decoration: none; color: dimgrey;">
+                        <a href="AgregarAdministrativo.jsp" style="text-decoration: none; color: dimgrey;">
                             <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:80px;">
                                 <img src="img/AgregarAdministrador.png" style="width: 50px" class="card-img-top" alt="..." />
                                 <div class="card-body">
