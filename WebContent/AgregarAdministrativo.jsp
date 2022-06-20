@@ -21,7 +21,7 @@
 			<h1>Registro de Nuevo Administrativo</h1>
 			<table class="formulario">
 				<tr>
-					<td><label>Nombres de Usuario:</label></td>
+					<td><label>Nombre de Usuario:</label></td>
 					<td><input name="txtNombre" type="user" class="inputForm" size="20" required></td>
 				</tr>
 				<tr>
