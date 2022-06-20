@@ -21,6 +21,9 @@
 <!-- LISTADO DE MEDICOS CON BOTON AGREGAR PACIENTE Y BOTONES MODIFICAR Y ELIMINAR EN CADA FILA 
 CUANDO APRETAS ELIMINAR SALTA VENTANA DE CONFIRMACIÓN 
 FILTRO DE BUSQUEDA-->
+
+  <div class="Index"> <a href="IndexAdmin.jsp" class="btn btn-primary"  style="margin-left:10px;">Inicio</a> </div>
+
  <div  style=" font-family:Open Sans; margin-top:6px; float: right; margin-right: 12px; color: #fff; font-size: 12px; "><img width="16px"class="imag" src="img/user.png"/> Bienvenido <b>NombreUsuario</b>
  <input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary btn-sm" style="margin-left:10px;"></div>
 	<br>

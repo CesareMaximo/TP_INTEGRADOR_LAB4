@@ -22,6 +22,8 @@
 <!--LISTADO DE TURNOS ASIGNADOS CON BUSQUEDA  
 EN CADA TURNO PODRA VER LOS DATOS DEL TURNO, AMPLIAR DETALLE DE PACIENTE, AGREGAR OBSERVACIÓN, CAMBIAR ESTADO 
 -->
+
+
  <div  style=" font-family:Open Sans; margin-top:6px; float: right; margin-right: 12px; color: #fff; font-size: 12px; "><img width="16px"class="imag" src="img/user.png"/> Bienvenido <b>NombreUsuario</b>
  <input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary btn-sm" style="margin-left:10px;"></div>
 	<br>

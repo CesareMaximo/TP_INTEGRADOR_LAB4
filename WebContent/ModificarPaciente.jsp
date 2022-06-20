@@ -11,7 +11,7 @@
 </head>
 <body>
 <!-- MISMO FORMULARIO QUE AGREGAR PERO CON DATOS PRECARGADOS -->
-
+  <div class="Index"> <a href="IndexAdmin.jsp" class="btn btn-primary"  style="margin-left:10px;">Inicio</a> </div>
  <div class="User"><img width="16px"class="imag" src="img/user.png"/> Bienvenido <b>NombreUsuario</b>
  <input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary" style="margin-left:10px;"></div>
 	<br>
