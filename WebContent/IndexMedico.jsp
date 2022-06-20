@@ -116,9 +116,9 @@ EN CADA TURNO PODRA VER LOS DATOS DEL TURNO, AMPLIAR DETALLE DE PACIENTE, AGREGA
 				<tr><td class="Campo"><label>Paciente</label></td><td><label name="lblPaciente">Juan Perez</label></td></tr>
 				<tr><td class="Campo"><label>Especialidad</label></td><td><label name="lblEspecialidad"> Cardiología </label></td></tr>
 				<tr><td class="Campo"><label>Estado</label></td><td><select class="select"><Option>OCUPADO</Option> <Option>PRESENTE</Option> <Option>AUSENTE</Option></select></tr>
-				<tr><td class="Campo"><label>Observación</label></td><td><textArea name="txtObservacion" style="resize: none;" class="inputForm" cols="21" rows="3" required></textArea></tr>			
+				<tr><td class="Campo"><label>Observación</label></td><td><textArea name="txtObservacion" style="resize: none;" class="inputForm" cols="26" rows="3" required></textArea></tr>		
 			</table>	
-		
+		 <input name="actualizarTurno" type="submit" value="Guardar" class="btn btn-primary btn-sm btn-block" style="margin-top:5px;">
 	</div>
 </div>
 
