@@ -24,11 +24,11 @@
 CUANDO APRETAS ELIMINAR SALTA VENTANA DE CONFIRMACIÓN 
 FILTRO DE BUSQUEDA-->
 <div  style=" font-family:Open Sans; margin-top:6px; float: right; margin-right: 12px; color: #fff; font-size: 12px; "><img width="16px"class="imag" src="img/user.png"/> Bienvenido <b>NombreUsuario</b>
- <input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary btn-sm" style="margin-left:10px;">
- </div>
+	<input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary btn-sm" style="margin-left:10px;">
+</div>
 <div style="float: left; margin-left: 12px; margin-top:6px;">
-<a href="IndexAdmin.jsp"><img src="img/atras.png" height="20px" /></a>
-<a href="IndexAdmin.jsp"> <img src="img/home.png" height="20px" style="margin-left:10px;" width="20px" ></a> 
+	<a href="IndexAdmin.jsp"><img src="img/atras.png" height="20px" /></a>
+	<a href="IndexAdmin.jsp"> <img src="img/home.png" height="20px" style="margin-left:10px;" width="20px" ></a> 
 </div>
 	
 	<br>
@@ -69,7 +69,6 @@ FILTRO DE BUSQUEDA-->
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td></td>
                         <td>
                             <a href="ModificarPaciente.jsp" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
                             <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
@@ -81,9 +80,9 @@ FILTRO DE BUSQUEDA-->
                 <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
                 <ul class="pagination">
                     <li class="page-item disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
+                    <li class="page-item active"><a href="#" class="page-link">1</a></li>
                     <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                    <li class="page-item"><a href="#" class="page-link">3</a></li>
                     <li class="page-item"><a href="#" class="page-link">4</a></li>
                     <li class="page-item"><a href="#" class="page-link">5</a></li>
                     <li class="page-item"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>

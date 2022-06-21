@@ -7,7 +7,7 @@
 <style type="text/css">
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
-<title>Menú Administrador</title>
+<title>Home</title>
 </head>
 <body>
  <!-- MENSAJE BIENVENIDA
@@ -25,7 +25,7 @@ REPORTES
 	<br>
 	<div class="registro">
 		<form>
-			<h1>Menú Administrador</h1>
+			<h1>Menú Administrativo</h1>
 			
 			 <div style="display: flex; flex-direction: row; flex-wrap: wrap">
                         <a href="MenuPaciente.jsp" style="text-decoration: none; color: dimgrey;">
@@ -78,7 +78,7 @@ REPORTES
                             <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:80px;">
                                 <img src="img/AgregarAdministrador.png" style="width: 50px" class="card-img-top" alt="..." />
                                 <div class="card-body">
-                                    <p class="card-text" style="font-size: 14px">Agregar Administrador</p>
+                                    <p class="card-text" style="font-size: 14px">Agregar Administrativo</p>
                                 </div>
                             </div>
                         </a>
