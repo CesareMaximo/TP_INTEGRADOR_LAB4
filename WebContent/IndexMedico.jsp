@@ -31,11 +31,11 @@ EN CADA TURNO PODRA VER LOS DATOS DEL TURNO, AMPLIAR DETALLE DE PACIENTE, AGREGA
 <div class="container-xl">
     <div class="table-responsive">
         <div class="table-wrapper">
-            <div class="table-title">
+            <div  style="padding-bottom: 0px;" class="table-title">
                 <div class="row justify-content-center">
                     <div class="col-sm-8">
                     	<h1>Mis turnos asignados</h1>
-                		<table class ="table">
+                		<table class="filtrosListado">
                 			<tr>
 							<td><label>Estado:</label></td>
 							<td><select class="select">
@@ -46,7 +46,7 @@ EN CADA TURNO PODRA VER LOS DATOS DEL TURNO, AMPLIAR DETALLE DE PACIENTE, AGREGA
 							</select></td>
 							<td><label>Fecha:</label></td>
 							<td><input type="date"></td>
-							<td><input name="btnFiltrar" type="submit" value="Filtrar" class="btn btn-primary btn-block btn-large"></td>
+							<td><input name="btnFiltrar" type="submit" value="Filtrar" class="btn btn-primary btn-sm"></td>
 						</tr>
 						
                 		</table>

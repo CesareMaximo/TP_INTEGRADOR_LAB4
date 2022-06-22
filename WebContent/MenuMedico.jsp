@@ -33,11 +33,13 @@ FILTRO DE BUSQUEDA-->
 	<div class="container-xl">
     <div class="table-responsive">
         <div class="table-wrapper">
-            <div class="table-title">
+            <div  style="padding-bottom: 0px;"class="table-title">
                 <div class="row">
                     <div class="col-sm-8"><h1>Médicos</h1>
                                         <a href="AgregarMedico.jsp" name="nuevoMedico" class="btn btn-primary btn-ml">Nuevo Médico</a>
-                    
+                    <table class="filtrosListado" >
+                    <tr><td><label style="margin-right: 5px">Especialidad:</label></td>
+							<td><select class="select"></select></td> <td><input name="btnFiltrar" type="submit" value="Filtrar" class="btn btn-primary btn-sm"></td></tr></table>
                     </div>
                     <div class="col-sm-4">
                         <div class="search-box">

@@ -32,11 +32,11 @@
 <div class="container-xl">
     <div class="table-responsive">
         <div class="table-wrapper">
-            <div class="table-title">
+            <div style="padding-bottom: 0px;" class="table-title">
                 <div class="row justify-content-center">
                     <div class="col-sm-8">
                     	<h1>Turnos</h1>
-                		<table class ="table">
+                		<table class ="filtrosListado">
                 			<tr>
 							<td><label>Estado:</label></td>
 							<td><select class="select">
@@ -46,14 +46,14 @@
 									<option>PRESENTE</option>
 							</select></td>
 							<td><label>Fecha:</label></td>
-							<td><input type="date"></td>
+							<td><input type="date" ></td>
 
 							<td><label>Especialidad:</label></td>
 							<td><select class="select"></select></td>
 
 							<td><label>Medicos:</label></td>
 							<td><select class="select"></select></td>
-							<td><input name="btnFiltrar" type="submit" value="Filtrar" class="btn btn-primary btn-block btn-large"></td>
+							<td><input name="btnFiltrar" type="submit" value="Filtrar" class="btn btn-primary btn-sm"></td>
 						</tr>
 						
                 		</table>
