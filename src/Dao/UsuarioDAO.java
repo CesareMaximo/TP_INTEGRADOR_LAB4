@@ -9,4 +9,6 @@ public interface UsuarioDAO {
 	public boolean delete(Usuario usuDelete);
 	public List<Usuario> readAll();
 	public Usuario iniciar(String nombre, String clave);
+	
+	public boolean insertUsuMedico(Usuario usu);
 }

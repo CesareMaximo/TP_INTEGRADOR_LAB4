@@ -5,16 +5,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+import Entidad.*;
 import Dao.PacienteDAO;
 import Entidad.Paciente;
 import javafx.css.PseudoClass;
 
 public class PacienteImpl implements PacienteDAO{
 
-	private static final String insert = "INSERT INTO Paciente(Dni) VALUES(?)";
-	private static final String delete = "delete from personas where Dni like ?";
-	private static final String readall = "SELECT * FROM Paciente"; 
+	private static final String insert = "";
+	private static final String delete = "";
+	private static final String readall = "select * from medico as m inner join persona as p on p.DNI like m.DNI"; 
 	
 	@Override
 	public boolean insert(Paciente pa) {
@@ -51,28 +51,54 @@ public class PacienteImpl implements PacienteDAO{
 	@Override
 	public List<Paciente> readAll() {
 		PreparedStatement statement;
-		ResultSet resultSet;
-		ArrayList<Paciente> lista = new ArrayList<Paciente>();
+		ResultSet resultSet; 
+		ArrayList<Paciente> pacienteList = new ArrayList<Paciente>();
+		
+	
 		Conexion conexion = Conexion.getConexion();
-		try {
+		try 
+		{
 			statement = conexion.getSQLConexion().prepareStatement(readall);
 			resultSet = statement.executeQuery();
-			while (resultSet.next()) {
-				lista.add(getPaciente(resultSet));
+			while(resultSet.next())
+			{
+				pacienteList.add(getPaciente(resultSet));
 			}
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) 
+		{
 			e.printStackTrace();
 		}
-		return lista;
+		return pacienteList;
 	}
 
 	private Paciente getPaciente(ResultSet resultSet) throws SQLException {
-		int id = resultSet.getInt("idPaciente");
-		String dni = resultSet.getString("Dni");
-		Paciente paciente = new Paciente();
-		paciente.setDni(dni);
-		paciente.setIdPaciente(id);
+		Paciente pa = new Paciente();
 		
-		return paciente;
+		Nacionalidad na = new Nacionalidad();
+		Localidad lo = new Localidad();
+		
+		pa.setDni(resultSet.getString("DNI"));
+		pa.setIdPaciente(resultSet.getInt("idPaciente"));
+
+		pa.setNombre(resultSet.getString("Nombre"));
+		pa.setApellido(resultSet.getString("Apellido"));
+		pa.setSexo(resultSet.getString("Sexo").charAt(0));
+		//
+		na.setIdNacionalidad( resultSet.getInt("idNacionalidad"));
+		pa.setnNacionalidad(na);
+		//
+		pa.setFechaNacimiento(resultSet.getDate("FechaNacimiento"));
+		pa.setDireccion(resultSet.getString("Direccion"));
+		//
+		lo.setIdLocalidad(resultSet.getInt("idLocalidad"));
+		pa.setlLocalidad(lo);
+		//
+		pa.setEmail(resultSet.getString("Email"));
+		pa.setEstado(resultSet.getBoolean("Estado"));
+		
+	
+		
+		return pa;
 	}
 }

@@ -1,0 +1,22 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `RegistrarPaciente`(in dni varchar(11),in nombre varchar(50),
+apellido varchar(50), sexo enum('M','F','O'), idnacionalidad int, fechanacimiento date, direccion varchar(50),idlocalidad int, email varchar(50),estado tinyint)
+BEGIN
+insert into paciente(DNI) values (dni);
+
+insert into Persona (DNI,Nombre,Apellido,Sexo,idNacionalidad,FechaNacimiento,Direccion,idLocalidad,Email,Estado) values (dni,nombre,apellido,sexo,idnacionalidad,fechanacimiento,direccion,idlocalidad,email,estado);
+
+END
+
+
+//////////////////////////////
+
+ESTE HAY QUE REVISAR Y TERMINAR 
+
+create procedure registrarUsuMedico(in nombreUsuario varchar(25), in clave varchar(100),in tipo enum('Admin','Medico'), in dni varchar(11), in idEspecialidad int,in nombre varchar(50),
+apellido varchar(50), sexo enum('M','F','O'), idNacionalidad int, fechaNacimiento date, direccion varchar(50),idLocalidad int, email varchar(50),Estado tinyint )
+BEGIN
+
+select * from usuarios
+
+END;
+
