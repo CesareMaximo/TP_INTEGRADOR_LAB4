@@ -20,8 +20,12 @@ ASIGNACION DE TURNOS
 LISTADO DE TURNOS
 REPORTES 
   -->
- <div class="User"><img width="16px"class="imag" src="img/user.png"/> Bienvenido <b>NombreUsuario</b>
- <input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary" style="margin-left:10px;"></div>
+ <div class="User">
+ 	<form method="post" action ="logout" >
+ 		<img width="16px"class="imag" src="img/user.png"/> Bienvenido <b> <%= session.getAttribute("username") %></b>
+ 		<input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary" style="margin-left:10px;">
+	</form>
+ </div>
 	<br>
 	<div class="registro">
 		<form>

@@ -15,7 +15,7 @@ public class Conexion {
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver"); // quitar si no es necesario
-			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/BDClinica?useSSL=false","root","root");
+			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/BDClinica?useSSL=false&autoReconnect=true","root","root");
 			this.connection.setAutoCommit(false);
 		}
 		catch(Exception e)

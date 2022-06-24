@@ -16,7 +16,7 @@
 <a href="IndexAdmin.jsp"> <img src="img/home.png" height="20px" style="margin-left:10px;" width="20px" ></a> 
 </div>
 <!-- MISMO FORMULARIO QUE AGREGAR PERO CON DATOS PRECARGADOS -->
- <div class="User"><img width="16px"class="imag" src="img/user.png"/> Bienvenido <b>NombreUsuario</b>
+ <div class="User"><img width="16px"class="imag" src="img/user.png"/> Bienvenido <b><%= session.getAttribute("username") %></b>
  <input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary" style="margin-left:10px;"></div>
 	<br>
 	<div class="registro">

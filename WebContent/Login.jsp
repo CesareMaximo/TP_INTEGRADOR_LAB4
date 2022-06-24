@@ -19,10 +19,22 @@ BOTON ACEPTAR
 -->
 <div class="login">
 	<h1>Login</h1>
-    <form method="post" >
-    	<input type="text" class="input"name="txtUsername" placeholder="Username" required="required" />
-        <input type="password" class="input" name="txtPass" placeholder="Password" required="required" />
+    <form method="post" action ="usuario" >
+    	<input type="text" class="input" name="username" placeholder="Username" required />
+        <input type="password" class="input" name="pass" placeholder="Password" required />
         <button type="submit" class="btn btn-primary btn-block btn-large">INGRESAR</button>
+        <div>
+			<p>
+				<%
+					String resultado = (String)request.getAttribute("mensaje");
+					String mensaje = "";
+					if (resultado != null) {
+						mensaje = resultado;
+					}
+				%>
+				<%=mensaje %>
+			</p>
+		</div>
     </form>
 </div>
 
