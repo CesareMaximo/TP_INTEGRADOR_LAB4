@@ -1,3 +1,5 @@
+<%@page import="Entidad.Medico"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -62,6 +64,14 @@ FILTRO DE BUSQUEDA-->
                     </div>
                 </div>
             </div>
+            <form action="Medico" method="get">
+	            <%
+					ArrayList<Medico> listaMedico = null;
+					if(request.getAttribute("listaMedico")!= null){
+						listaMedico = (ArrayList<Medico>) request.getAttribute("listaMedico");
+					}
+				 %>
+            </form>
             <table class="table table-striped table-hover table-bordered">
                 <thead>
                     <tr>
@@ -74,17 +84,22 @@ FILTRO DE BUSQUEDA-->
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <% 
+						if(listaMedico !=null)
+						for(Medico me : listaMedico){
+					%>
+						<tr> 
+							<td><%=me.getDni()%></td>
+							<td><%=me.getNombre()%></td>
+							<td><%=me.getApellido()%></td>
+							<td><%=me.geteEspecialidad()%></td>
                         <td>
                             <a href="ModificarMedico.jsp" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
                             <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
                         </td>
-                    </tr>
+        
+					<%} %>
+						</tr> 
                 </tbody>
             </table>
             <div class="clearfix">

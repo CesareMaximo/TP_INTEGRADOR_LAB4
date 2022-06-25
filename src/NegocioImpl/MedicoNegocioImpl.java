@@ -3,14 +3,14 @@ package NegocioImpl;
 import java.util.List;
 
 import Dao.MedicoDAO;
-import DaoImpl.MedicoImpl;
+import DaoImpl.MedicoDAOImpl;
 import Entidad.Medico;
 import Negocio.MedicoNegocio;
 
 public class MedicoNegocioImpl implements MedicoNegocio {
 
 	
-	MedicoDAO meDAO = new MedicoImpl();
+	MedicoDAO meDAO = new MedicoDAOImpl();
 	@Override
 	public boolean insert(Medico me) {
 		// TODO Auto-generated method stub
@@ -25,8 +25,8 @@ public class MedicoNegocioImpl implements MedicoNegocio {
 
 	@Override
 	public List<Medico> readAll() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return meDAO.readAll();
 	}
 
 }

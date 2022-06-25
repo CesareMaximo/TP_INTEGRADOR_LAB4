@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import Dao.MedicoDAO;
 import Entidad.*;
-public class MedicoImpl implements  MedicoDAO{
+public class MedicoDAOImpl implements  MedicoDAO{
 
 	
 	private static final String insert = "";
