@@ -29,4 +29,16 @@ public class MedicoNegocioImpl implements MedicoNegocio {
 		return meDAO.readAll();
 	}
 
+	@Override
+	public List<Medico> readAllFiltro(int id) {
+		
+		return meDAO.readAllfiltro(id);
+	}
+
+	@Override
+	public List<Medico> readAllBuscar(String nombre) {
+		
+		return meDAO.readAllBuscar(nombre);
+	}
+
 }

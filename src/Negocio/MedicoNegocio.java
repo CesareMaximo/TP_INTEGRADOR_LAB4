@@ -9,4 +9,6 @@ public interface MedicoNegocio {
 	public boolean insert(Medico me);
 	public boolean delete(Medico meDelete);
 	public List<Medico> readAll();
+	public List<Medico> readAllFiltro(int id);
+	public List<Medico> readAllBuscar(String nombre);
 }

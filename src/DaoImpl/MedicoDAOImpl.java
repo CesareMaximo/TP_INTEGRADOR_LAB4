@@ -15,6 +15,8 @@ public class MedicoDAOImpl implements  MedicoDAO{
 	private static final String insert = "";
 	private static final String delete = "";
 	private static final String readall = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad";
+	private static final String readallFiltro = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad where m.idEspecialidad = ?";
+	//private static final String readallBuscar = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad where p.Nombre like '%"++"%' or p.Apellido like '%"++"%' ";
 	
 	@Override
 	public boolean insert(Medico me) {
@@ -28,6 +30,7 @@ public class MedicoDAOImpl implements  MedicoDAO{
 		return false;
 	}
 
+	
 	@Override
 	public List<Medico> readAll() {
 		PreparedStatement statement;
@@ -83,6 +86,56 @@ public class MedicoDAOImpl implements  MedicoDAO{
 		me.setEstado(resultSet.getBoolean("Estado"));
 			
 		return me;
+	}
+
+	@Override
+	public List<Medico> readAllfiltro(int id) {
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		ArrayList<Medico> medicoList = new ArrayList<Medico>();
+		
+	
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(readallFiltro);
+			statement.setInt(1,id);
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				medicoList.add(getMedico(resultSet));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return medicoList;
+	}
+
+	@Override
+	public List<Medico> readAllBuscar(String nombre) {
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		ArrayList<Medico> medicoList = new ArrayList<Medico>();
+		
+	
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement("select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad where p.Nombre like "+"'%"+ nombre+"%' or p.Apellido like "+"'%"+nombre+"%' or p.DNI like "+"'%"+nombre+"%' ");
+			
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				medicoList.add(getMedico(resultSet));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return medicoList;
 	}
 
 }

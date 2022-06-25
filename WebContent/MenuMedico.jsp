@@ -1,4 +1,6 @@
-<%@page import="Entidad.Medico"%>
+
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@page import="Entidad.*"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -53,15 +55,49 @@ FILTRO DE BUSQUEDA-->
                     <div class="col-sm-8"><h1>Médicos</h1>
                                         <a href="AgregarMedico.jsp" name="nuevoMedico" class="btn btn-primary btn-ml">Nuevo Médico</a>
                     <table class="filtrosListado" >
+                    <form action="ServletMedico" method="post">		
                     <tr><td><label style="margin-right: 5px">Especialidad:</label></td>
-							<td><select class="select"></select></td> <td><input name="btnFiltrar" type="submit" value="Filtrar" class="btn btn-primary btn-sm"></td></tr></table>
+							<td><select name="espe" class="select">
+							
+							
+							<% ArrayList<Especialidad> listaEspecialidad= null;
+							
+							if(request.getAttribute("listaEspecialidad")!=null){
+							
+								listaEspecialidad = (ArrayList<Especialidad>) request.getAttribute("listaEspecialidad");
+							}
+							
+							
+							if(listaEspecialidad!=null)
+								for(Especialidad es : listaEspecialidad){
+									
+									%>
+									<option value="<%= es.getIdEspecialidad()%>"> <%= es.getDescripcion() %>	</option> 
+									
+									<% 
+								}
+								
+							
+							
+							%>
+							</select>
+
+							
+						
+							</td> <td> <input class="btn btn-primary btn-sm" type="submit" name="btnFiltrar" value="Filtrar"> <br> </td></tr></table>
+                </form>
                     </div>
+                    <form action="ServletMedico" method="post" >
                     <div class="col-sm-4">
                         <div class="search-box">
                             <i class="material-icons">&#xE8B6;</i>
-                            <input type="text" class="form-control" placeholder="Search&hellip;">
+                            <input type="text" name="txtBuscar" class="form-control" placeholder="Search&hellip;">
+                            
+                            <input class="btn btn-primary btn-sm" type="submit" name="btnBuscar" value="Filtrar">
+                            
                         </div>
                     </div>
+                    </form>
                 </div>
             </div>
             <form action="Medico" method="get">
