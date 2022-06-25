@@ -64,11 +64,16 @@ public class ServletUsuario extends HttpServlet {
 					user.setClave(request.getParameter("txtPass"));
 					user.setTipo("Admin");
 					user.setEstado(true);
-					usNeg.insert(user);
 					
-					request.setAttribute("txtUser", "");
-					request.setAttribute("txtPass", "");
-					request.setAttribute("mensaje", "");
+					if(usNeg.insert(user)) {
+						
+						request.setAttribute("txtUser", "");
+						request.setAttribute("txtPass", "");
+						request.setAttribute("mensaje", "");
+	
+						
+					}
+					
 
 					request.getRequestDispatcher("AgregarAdministrativo.jsp").forward(request, response);
 
