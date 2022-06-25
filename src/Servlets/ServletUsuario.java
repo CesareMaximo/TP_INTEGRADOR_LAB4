@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sun.glass.ui.Window;
+import com.sun.java.swing.plaf.windows.resources.windows;
+
 import DaoImpl.UsuarioDAOImpl;
 import Entidad.Usuario;
 import Negocio.UsuarioNegocio;
@@ -44,7 +47,7 @@ public class ServletUsuario extends HttpServlet {
 			
 			String pass1 = request.getParameter("txtPass");
 			String pass2 = request.getParameter("txtPass2");
-			
+			request.setAttribute("exito", false);
 			if( !(pass1.equals(pass2))) {
 				request.setAttribute("mensaje", "Las contraseñas no coinciden");
 				request.getRequestDispatcher("AgregarAdministrativo.jsp").forward(request, response);
@@ -64,11 +67,13 @@ public class ServletUsuario extends HttpServlet {
 					user.setClave(request.getParameter("txtPass"));
 					user.setTipo("Admin");
 					user.setEstado(true);
-					usNeg.insert(user);
-					
-					request.setAttribute("txtUser", "");
-					request.setAttribute("txtPass", "");
-					request.setAttribute("mensaje", "");
+					if(usNeg.insert(user) == true) {
+						request.setAttribute("exito", true);
+						request.setAttribute("txtUser", "");
+						request.setAttribute("txtPass", "");
+						request.setAttribute("mensaje", "");
+						
+					}
 
 					request.getRequestDispatcher("AgregarAdministrativo.jsp").forward(request, response);
 

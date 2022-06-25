@@ -11,8 +11,8 @@ public class UsuarioNegocioImpl implements UsuarioNegocio {
 
 	@Override
 	public boolean insert(Usuario us) {
-		usuario.insertAdmin(us);
-		return false;
+		
+		return usuario.insertAdmin(us);
 	}
 
 	@Override

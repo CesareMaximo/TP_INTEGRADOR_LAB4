@@ -20,8 +20,9 @@
 		}
 
 	
-		if (session.getAttribute("tipo").equals("Admin")) {
-	%>
+	if (session.getAttribute("tipo").equals("Admin")) {
+		%>
+
 
 <div style="float: left; margin-left: 12px; margin-top:6px;">
 <a href="IndexAdmin.jsp"><img src="img/atras.png" height="20px" /></a>
@@ -61,6 +62,7 @@
 					if (resultado != null) {
 						mensaje = resultado;
 					}
+					
 				%>
 				<%=mensaje %>
 			</p>
@@ -69,9 +71,21 @@
 		
 		
 			<br> <input name="btnNuevoUser" type="submit" onClick="BorrarCliente" value="Registrar" class="btn btn-primary btn-block btn-large">
+			<% 		boolean x = (boolean)request.getAttribute("exito");
+					if(x == true){
+						%>
+						<div id="miModal" class="modal">
+						  <div class="modal-contenido">
+				
+						    <a href="AgregarAdministrativo.jsp">X</a>
+						    <h2>USUARIO AGREGADO CON ÉXITO</h2>
+						  </div>  
+						</div>
+						 <% } 
+							%>
 		</form>
 	</div>
- <%
+	<%
 		} else {
 
 			response.sendRedirect("Error.jsp");
@@ -82,7 +96,7 @@
 	}
 	finally{
 	}
-	
+
 
 		%>
 	

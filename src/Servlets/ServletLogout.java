@@ -23,13 +23,12 @@ public class ServletLogout extends HttpServlet {
     }
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd;
+
+		HttpSession sesion = request.getSession();
 		if(request.getParameter("cerrarSesion") != null) {
-			HttpSession sesion = request.getSession();
 			
 			sesion.removeAttribute("username");
 			sesion.removeAttribute("tipo");
-			//sesion
 			//sesion.invalidate();
 			response.sendRedirect("Login.jsp");
 			//rd = request.getRequestDispatcher("Login.jsp");
