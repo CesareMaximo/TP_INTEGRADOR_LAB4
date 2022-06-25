@@ -14,7 +14,7 @@ public class MedicoDAOImpl implements  MedicoDAO{
 	
 	private static final String insert = "";
 	private static final String delete = "";
-	private static final String readall = "select * from medico as m inner join persona as p on p.DNI like m.DNI";
+	private static final String readall = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad";
 	
 	@Override
 	public boolean insert(Medico me) {
@@ -63,6 +63,7 @@ public class MedicoDAOImpl implements  MedicoDAO{
 		me.setIdMedico( resultSet.getInt("idMedico"));
 		//
 		es.setIdEspecialidad(resultSet.getInt("idEspecialidad"));	
+		es.setDescripcion(resultSet.getString("Descripcion"));
 		me.seteEspecialidad(es);
 		//
 		me.setNombre(resultSet.getString("Nombre"));
@@ -80,9 +81,7 @@ public class MedicoDAOImpl implements  MedicoDAO{
 		//
 		me.setEmail(resultSet.getString("Email"));
 		me.setEstado(resultSet.getBoolean("Estado"));
-		
-	
-		
+			
 		return me;
 	}
 

@@ -75,7 +75,6 @@ FILTRO DE BUSQUEDA-->
             <table class="table table-striped table-hover table-bordered">
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th>DNI</th>
                         <th>Nombre <i class="fa fa-sort"></i> </th>
                         <th>Apellido<i class="fa fa-sort"></i></th>

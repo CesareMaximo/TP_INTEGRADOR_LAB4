@@ -3,6 +3,7 @@ package Servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +17,7 @@ import NegocioImpl.MedicoNegocioImpl;
 /**
  * Servlet implementation class ServletMedico
  */
-@WebServlet("/Medico")
+@WebServlet("/ServletMedico")
 public class ServletMedico extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,8 +37,13 @@ public class ServletMedico extends HttpServlet {
 		Medico me = new Medico();
 		
 		ArrayList<Medico> listaMedico = (ArrayList<Medico>) meNeg.readAll();
-		request.setAttribute("listaMedico", listaMedico);
+		RequestDispatcher rd;
 		
+		if (request.getParameter("Param") != null) {
+			request.setAttribute("listaMedico", listaMedico);
+			rd = request.getRequestDispatcher("/MenuMedico.jsp");
+			rd.forward(request, response);
+		}
 		
 	}
 

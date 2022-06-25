@@ -32,7 +32,7 @@ public class Especialidad {
 	//Metodo ToString
 	@Override
 	public String toString() {
-		return "Especialidad [idEspecialidad=" + idEspecialidad + ", descripcion=" + descripcion + "]";
+		return descripcion;
 	}
 	
 	
