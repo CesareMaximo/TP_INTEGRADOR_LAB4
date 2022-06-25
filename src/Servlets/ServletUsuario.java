@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import DaoImpl.UsuarioImpl;
+import DaoImpl.UsuarioDAOImpl;
 import Entidad.Usuario;
+import Negocio.UsuarioNegocio;
+import NegocioImpl.UsuarioNegocioImpl;
 
 
 @WebServlet("/usuario")
@@ -25,29 +27,7 @@ public class ServletUsuario extends HttpServlet {
     }
 
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nombre = request.getParameter("username");
-		String clave = request.getParameter("pass");
-
-		UsuarioImpl imp = new UsuarioImpl();
-		Usuario usuario = imp.iniciar(nombre, clave);
-
-		if (usuario == null) {
-			request.setAttribute("mensaje", "Error nombre de usuario y/o clave");
-			request.getRequestDispatcher("Login.jsp").forward(request, response);
-		} else {
-			//GUARDO LA SESION
-			HttpSession sesion = request.getSession();
-			sesion.setAttribute("username", usuario.getNombreUsuario());
-			if(usuario.getTipo().equals("Admin")) {
-				response.sendRedirect("IndexAdmin.jsp");				
-			}
-			else {
-				response.sendRedirect("IndexMedico.jsp");
-			}
-		}
-		
-	}
+	
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -56,8 +36,52 @@ public class ServletUsuario extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
+		UsuarioNegocio usNeg = new UsuarioNegocioImpl();
+		Usuario user = new Usuario();
+	
+		if (request.getParameter("btnNuevoUser") != null) {
+			
+			String pass1 = request.getParameter("txtPass");
+			String pass2 = request.getParameter("txtPass2");
+			
+			if( !(pass1.equals(pass2))) {
+				request.setAttribute("mensaje", "Las contraseñas no coinciden");
+				request.getRequestDispatcher("AgregarAdministrativo.jsp").forward(request, response);
+
+			}
+			else {
+				
+				String us = request.getParameter("txtUser");
+				
+				if(usNeg.existe(us)) {
+					request.setAttribute("mensaje", "Nombre de usuario no disponible");
+					request.getRequestDispatcher("AgregarAdministrativo.jsp").forward(request, response);
+				}
+				else {
+					
+					user.setNombreUsuario(request.getParameter("txtUser"));
+					user.setClave(request.getParameter("txtPass"));
+					user.setTipo("Admin");
+					user.setEstado(true);
+					usNeg.insert(user);
+					
+					request.setAttribute("txtUser", "");
+					request.setAttribute("txtPass", "");
+					request.setAttribute("mensaje", "");
+
+					request.getRequestDispatcher("AgregarAdministrativo.jsp").forward(request, response);
+
+					///VER CONFIRMACIÓN 
+				}
+			}
+			
+			
+			
+		}
+		
+		
+		
 	}
 	
 

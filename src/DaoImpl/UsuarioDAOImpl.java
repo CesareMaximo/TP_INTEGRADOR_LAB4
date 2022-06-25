@@ -9,29 +9,27 @@ import java.util.List;
 import Dao.UsuarioDAO;
 import Entidad.Usuario;
 
-
-
 import java.sql.SQLException;
 
 
-public class UsuarioImpl implements UsuarioDAO{
+public class UsuarioDAOImpl implements UsuarioDAO{
 	
-	private static final String insert = "INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES(?, ?, ?, 1)";
+	private static final String insertAdmin = "INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES(?, ?, ?, 1)";
 	private static final String delete = "update usuarios set Estado =0 where idUsuario like '?'";
 	private static final String readall = "SELECT * FROM Usuarios"; 
 	private static final String iniciar = "SELECT U.idUsuario, U.NombreUsuario, U.clave, U.Tipo FROM Usuarios U WHERE U.NombreUsuario = ? AND U.clave = ? AND U.Estado = 1;";
-
+	private static final String existe = "SELECT * FROM Usuarios WHERE NombreUsuario = ?";
 	@Override
-	public boolean insert(Usuario usu) {
+	public boolean insertAdmin(Usuario usu) {
 		
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isInsertExitoso = false;
 		try
 		{
-			statement = conexion.prepareStatement(insert);
-			statement.setInt(1,usu.getIdUsuario());
-			statement.setString(2, usu.getNombreUsuario());
+			statement = conexion.prepareStatement(insertAdmin);
+			statement.setString(1,usu.getNombreUsuario());
+			statement.setString(2, usu.getClave());
 			statement.setString(3, usu.getTipo());
 			if(statement.executeUpdate() > 0)
 			{
@@ -151,26 +149,33 @@ public class UsuarioImpl implements UsuarioDAO{
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				if (rs != null) {
-					rs.close();
-				}
-				
-				if (statement != null) {
-					statement.close();
-				}
-				
-				if (cn != null) {
-					cn.close();
-					cn = null;
-				}
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		}
+		} 
 		
 		return usuario;
+	}
+
+	@Override
+	public boolean existe(String nombre) {
+		
+		PreparedStatement statement;
+		ResultSet rs;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean estado = false;
+		try 
+		{
+			statement = conexion.prepareStatement(existe);
+			statement.setString(1, nombre);
+			rs = statement.executeQuery();
+			while (rs.next()) {
+				conexion.commit();
+				estado = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return estado;
 	}
 
 }

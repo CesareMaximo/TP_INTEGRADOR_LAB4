@@ -26,10 +26,14 @@ public class ServletLogout extends HttpServlet {
 		RequestDispatcher rd;
 		if(request.getParameter("cerrarSesion") != null) {
 			HttpSession sesion = request.getSession();
-			sesion.invalidate();
-			//response.sendRedirect("Login.jsp");
-			rd = request.getRequestDispatcher("Login.jsp");
-			rd.forward(request, response);
+			
+			sesion.removeAttribute("username");
+			sesion.removeAttribute("tipo");
+			//sesion
+			//sesion.invalidate();
+			response.sendRedirect("Login.jsp");
+			//rd = request.getRequestDispatcher("Login.jsp");
+			//rd.forward(request, response);
 		}
 	}
 
