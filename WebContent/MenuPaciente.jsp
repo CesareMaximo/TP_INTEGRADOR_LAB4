@@ -50,7 +50,7 @@ FILTRO DE BUSQUEDA-->
                 <div class="row justify-content-center">
                     <div class="col-sm-8"><h1>Pacientes</h1>
                     
-                    <a href="AgregarPaciente.jsp" name="nuevoPaciente" class="btn btn-primary btn-ml">Nuevo Paciente</a>
+                    <a href="ServletPaciente?Nuevo=1" name="nuevoPaciente" class="btn btn-primary btn-ml">Nuevo Paciente</a>
                     </div>
                 
                     <form action="ServletPaciente" method="post" >

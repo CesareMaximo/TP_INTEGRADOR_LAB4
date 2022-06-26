@@ -2663,6 +2663,11 @@ INSERT INTO Estados (Descripcion) VALUES('PRESENTE');
 #USUARIOS
 INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES('Administrador', '1234', 'Admin', 1);
 INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES('Medico1', '1111', 'Medico', 1);
+INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES('Medico2', '1111', 'Medico', 1);
+INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES('Medico3', '1111', 'Medico', 1);
+INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES('Medico4', '1111', 'Medico', 1);
+INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES('Medico5', '1111', 'Medico', 1);
+INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES('Medico6', '1111', 'Medico', 1);
 
 #ESPECIALIDAD
 INSERT INTO Especialidad(Descripcion) VALUES('Cardiología');
@@ -2699,11 +2704,11 @@ INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento
 
 #MEDICO
 INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(2,'20900900', 1);
-#INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(3, '30900900', 2);
-#INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(4, '20600900', 3);
-#INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(5, '20700900', 4);
-#INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(6, '30300900', 5);
-#INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(7, '20200900', 6);
+INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(3, '30900900', 2);
+INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(4, '20600900', 3);
+INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(5, '20700900', 4);
+INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(6, '30300900', 5);
+INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(7, '20200900', 6);
 
 #MEDICO_X_HORARIO
 INSERT INTO Medico_x_Horario(idMedico, idHorario) VALUES(2, 1), (2, 3), (2, 5);
