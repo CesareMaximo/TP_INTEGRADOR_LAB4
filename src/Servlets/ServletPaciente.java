@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Entidad.Medico;
 import Entidad.Paciente;
 import Negocio.PacienteNegocio;
 import NegocioImpl.PacienteNegocioImpl;
@@ -50,6 +51,22 @@ public class ServletPaciente extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		PacienteNegocio paNeg = new PacienteNegocioImpl();
+
+		RequestDispatcher rd;
+		if(request.getParameter("btnBuscar")!=null) {
+			
+			String nombre= request.getParameter("txtBuscar").toString();
+			
+			ArrayList<Paciente> listaPacienteBuscar = (ArrayList<Paciente>) paNeg.readAllBuscar(nombre);
+			request.setAttribute("listaPaciente", listaPacienteBuscar);
+			
+			
+			rd = request.getRequestDispatcher("/MenuPaciente.jsp");
+			rd.forward(request, response);
+		}
+		
 		
 	}
 

@@ -110,7 +110,7 @@ public class PacienteImpl implements PacienteDAO{
 		Conexion conexion = Conexion.getConexion();
 		try 
 		{
-			statement = conexion.getSQLConexion().prepareStatement("select * from paciente as pa inner join persona as pe.DNI like "+"'%"+nombre+"%' or pe.Nombre like "+"'%"+nombre+"%' ");
+			statement = conexion.getSQLConexion().prepareStatement("Select * from paciente as pa inner join persona as pe on pa.DNI=pe.DNI where pe.DNI like "+"'%"+nombre+"%' or pe.Nombre like "+"'%"+nombre+"%' or pe.Apellido like "+"'%"+nombre+"%' or pe.Email like "+"'%"+nombre+"%'");
 			
 			resultSet = statement.executeQuery();
 			while(resultSet.next())

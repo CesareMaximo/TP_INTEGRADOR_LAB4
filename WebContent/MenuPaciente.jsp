@@ -53,7 +53,7 @@ FILTRO DE BUSQUEDA-->
                     <a href="AgregarPaciente.jsp" name="nuevoPaciente" class="btn btn-primary btn-ml">Nuevo Paciente</a>
                     </div>
                 
-                    <form action="ServletMedico" method="post" >
+                    <form action="ServletPaciente" method="post" >
 					    <div class="col-md-3 col-md-offset-9 text-right">
 					        <div class="btn-group d-flex w-100" role="group">
 					            <input type="text" name="txtBuscar" class="resizedTextbox" placeholder="Buscar">
