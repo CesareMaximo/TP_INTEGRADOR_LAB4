@@ -1,5 +1,7 @@
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="Entidad.*"%>
+<%@page import="NegocioImpl.*"%>
+<%@page import="Negocio.*"%>
 <%@page import="java.util.ArrayList"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -81,7 +83,28 @@ TELEFONO
 							%>
 				
 				</select></tr>
-				<tr><td><label>Provincia:</label></td><td><select class="select" name="slcProvincia"></select></tr>
+				<tr><td><label>Provincia:</label></td><td><select class="select" id="slctProvincia"  name="slcProvincia">
+				
+					<% ArrayList<Provincia> listaProvincia = null;
+							
+							if(request.getAttribute("listaProvincia")!=null){
+							
+								listaProvincia = (ArrayList<Provincia>)request.getAttribute("listaProvincia");
+							}
+							
+							
+							if(listaProvincia!=null)
+								for(Provincia es : listaProvincia){
+									
+									%>
+									<option value="<%= es.getIdProvincia()%>"> <%= es.getDescripcion() %>	</option> 
+									
+									<% 
+								}
+							
+							%>
+				
+				</select></tr>
 				<tr><td><label>Localidad:</label></td><td><select class="select" name="slcLocalidad"></select></tr>
 				<tr><td><label>Direcci&oacuten:</label></td><td><textarea name="txtDireccion" style="resize: none;" class="inputForm" cols="21" rows="3" required></textarea></td></tr>
 				<tr><td><label>E-mail:</label></td><td><input name="txtEmail" type="email" class="inputForm" size="20" required></td></tr>
@@ -121,5 +144,9 @@ TELEFONO
 	}
 	
 	%>	
+	
+	
+	
+	
 </body>
 </html>

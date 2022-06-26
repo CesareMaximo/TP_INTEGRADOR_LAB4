@@ -14,18 +14,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Entidad.Especialidad;
+
 import Entidad.Localidad;
-import Entidad.Medico;
 import Entidad.Nacionalidad;
 import Entidad.Paciente;
 import Entidad.Provincia;
-import Negocio.EspecialidadNegocio;
 import Negocio.NacionalidadNegocio;
 import Negocio.PacienteNegocio;
-import NegocioImpl.EspecialidadNegocioImpl;
+import Negocio.ProvinciaNegocio;
 import NegocioImpl.NacionalidadNegocioImpl;
 import NegocioImpl.PacienteNegocioImpl;
+import NegocioImpl.ProvinciaNegocioImpl;
 
 /**
  * Servlet implementation class ServletPaciente
@@ -49,12 +48,16 @@ public class ServletPaciente extends HttpServlet {
 		PacienteNegocio paNeg = new PacienteNegocioImpl();
 		NacionalidadNegocio nacNeg = new NacionalidadNegocioImpl();
 		ArrayList<Nacionalidad> listaNacionalidad = (ArrayList<Nacionalidad>)nacNeg.readAll();
+		ProvinciaNegocio provNeg = new ProvinciaNegocioImpl();
+		ArrayList<Provincia> listaProvincia = (ArrayList<Provincia>)provNeg.readAll();
 		RequestDispatcher rd;
 		
 		if(request.getParameter("Nuevo")!= null) {
 		request.setAttribute("listaNacionalidad", listaNacionalidad);
+		request.setAttribute("listaProvincia", listaProvincia);
 		rd = request.getRequestDispatcher("/AgregarPaciente.jsp");
 		rd.forward(request, response);
+		
 		}
 		
 		ArrayList<Paciente> listaPaciente = (ArrayList<Paciente>) paNeg.readAll();
