@@ -2,6 +2,7 @@ package NegocioImpl;
 
 import java.util.List;
 
+import Entidad.Medico;
 import Entidad.Paciente;
 import Negocio.PacienteNegocio;
 import Dao.*;
@@ -25,8 +26,13 @@ public class PacienteNegocioImpl implements PacienteNegocio {
 
 	@Override
 	public List<Paciente> readAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return paDAO.readAll();
+	}
+
+	@Override
+	public List<Paciente> readAllBuscar(String nombre) {
+		
+		return paDAO.readAllBuscar(nombre);
 	}
 
 	

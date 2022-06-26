@@ -1,3 +1,5 @@
+<%@page import="Entidad.*"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -8,15 +10,12 @@
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <title>Pacientes</title>
-
 </head>
 <body>
 <% 	
@@ -26,7 +25,6 @@
 		if(session == null){
 			
 		}
-
 	
 		if (session.getAttribute("tipo").equals("Admin")) {
 	%>
@@ -55,18 +53,27 @@ FILTRO DE BUSQUEDA-->
                     <a href="AgregarPaciente.jsp" name="nuevoPaciente" class="btn btn-primary btn-ml">Nuevo Paciente</a>
                     </div>
                 
-                    <div class="col-sm-4">
-                        <div class="search-box">
-                            <i class="material-icons">&#xE8B6;</i>
-                            <input type="text" class="form-control" placeholder="Search&hellip;">
-                        </div>
-                    </div>
+                    <form action="ServletMedico" method="post" >
+					    <div class="col-md-3 col-md-offset-9 text-right">
+					        <div class="btn-group d-flex w-100" role="group">
+					            <input type="text" name="txtBuscar" class="resizedTextbox" placeholder="Buscar">
+			                    <input class="btn btn-primary btn-sm" type="submit" name="btnBuscar" value="Buscar">
+					        </div>
+					    </div>
+                    </form>
                 </div>
             </div>
+            <form action="Paciente" method="get">
+	            <%
+					ArrayList<Paciente> listaPaciente = null;
+					if(request.getAttribute("listaPaciente")!= null){
+						listaPaciente = (ArrayList<Paciente>) request.getAttribute("listaPaciente");
+					}
+				 %>
+            </form>
             <table class="table table-striped table-hover table-bordered">
-                <thead>
+            	<thead>
                     <tr>
-                        <th>#</th>
                         <th>DNI</th>
                         <th>Nombre <i class="fa fa-sort"></i> </th>
                         <th>Apellido<i class="fa fa-sort"></i></th>
@@ -74,18 +81,21 @@ FILTRO DE BUSQUEDA-->
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="ModificarPaciente.jsp" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>
+                	<% 
+						if(listaPaciente !=null)
+						for(Paciente pa : listaPaciente){
+					%>
+	                    <tr>
+	                    	<td><%=pa.getDni()%></td>
+							<td><%=pa.getNombre()%></td>
+							<td><%=pa.getApellido()%></td>
+							<td><%=pa.getEmail()%></td>
+							<td>
+	                    	<a href="ModificarPaciente.jsp" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+	                       	<a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+	                       	</td>
+	               	<%} %>
+	                    </tr>                
                 </tbody>
             </table>
             <div class="clearfix">
@@ -105,7 +115,6 @@ FILTRO DE BUSQUEDA-->
 </div>   
  <%
 		} else {
-
 			response.sendRedirect("Error.jsp");
 		}
 	}

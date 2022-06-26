@@ -42,7 +42,7 @@ REPORTES
 			<h1>Menú Administrativo</h1>
 			
 			 <div style="display: flex; flex-direction: row; flex-wrap: wrap">
-                        <a href="MenuPaciente.jsp" style="text-decoration: none; color: dimgrey;">
+                        <a href="ServletPaciente?Param=1" style="text-decoration: none; color: dimgrey;">
                             <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:50px;">
                                 <img src="img/MenuPaciente.png" style="width: 50px" class="card-img-top" alt="..." />
                                 <div class="card-body">

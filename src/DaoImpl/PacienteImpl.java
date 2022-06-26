@@ -7,14 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import Entidad.*;
 import Dao.PacienteDAO;
-import Entidad.Paciente;
 import javafx.css.PseudoClass;
 
 public class PacienteImpl implements PacienteDAO{
 
 	private static final String insert = "";
 	private static final String delete = "";
-	private static final String readall = "select * from medico as m inner join persona as p on p.DNI like m.DNI"; 
+	private static final String readall = "select * from paciente as pa inner join persona as pe on pe.DNI like pa.DNI"; 
 	
 	@Override
 	public boolean insert(Paciente pa) {
@@ -100,5 +99,29 @@ public class PacienteImpl implements PacienteDAO{
 	
 		
 		return pa;
+	}
+	
+	public List<Paciente> readAllBuscar(String nombre){
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		ArrayList<Paciente> listaPaciente = new ArrayList<Paciente>();
+		
+	
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement("select * from paciente as pa inner join persona as pe.DNI like "+"'%"+nombre+"%' or pe.Nombre like "+"'%"+nombre+"%' ");
+			
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				listaPaciente.add(getPaciente(resultSet));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return listaPaciente;
 	}
 }

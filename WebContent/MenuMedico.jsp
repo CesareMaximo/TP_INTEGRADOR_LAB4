@@ -115,7 +115,6 @@ FILTRO DE BUSQUEDA-->
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody>
                     <% 
 						if(listaMedico !=null)
 						for(Medico me : listaMedico){
