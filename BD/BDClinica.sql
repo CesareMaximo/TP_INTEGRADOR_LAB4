@@ -30,6 +30,8 @@ CREATE TABLE Persona(
   idLocalidad int not null,
   Email varchar(50) not null,
   Estado Bool,
+  Telefono1 varchar(50) not null,
+  Telefono2 varchar(50),
   FOREIGN KEY (idNacionalidad) REFERENCES Nacionalidad(idNacionalidad),
   FOREIGN KEY (idLocalidad) REFERENCES Localidad(idLocalidad)
 );
@@ -102,11 +104,6 @@ CREATE TABLE Turno (
   
 );
 
-CREATE TABLE Telefono_X_Persona(
-  DNI varchar(11),
-  Telefono varchar(20),
-  FOREIGN KEY (DNI) REFERENCES Persona(DNI)
-);
 
 
 

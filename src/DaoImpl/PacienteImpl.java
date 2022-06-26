@@ -1,34 +1,46 @@
 package DaoImpl;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import Entidad.*;
 import Dao.PacienteDAO;
 import javafx.css.PseudoClass;
 
 public class PacienteImpl implements PacienteDAO{
 
-	private static final String insert = "";
 	private static final String delete = "";
 	private static final String readall = "select * from paciente as pa inner join persona as pe on pe.DNI like pa.DNI"; 
 	
 	@Override
 	public boolean insert(Paciente pa) {
-				
-		PreparedStatement statement;
-		Connection conexion = Conexion.getConexion().getSQLConexion();
+		Connection conexion = null;
 		boolean isInsertExitoso = false;
 		try {
-			statement = conexion.prepareStatement(insert);
-			statement.setString(1, pa.getDni());
+			conexion = Conexion.getConexion().getSQLConexion();
+			CallableStatement cst = conexion.prepareCall("call registrarPaciente(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			cst.setString(1, pa.getDni());
+			cst.setString(2, pa.getNombre());
+			cst.setString(3, pa.getApellido());
+			cst.setString(4, String.valueOf(pa.getSexo()));
+			cst.setInt(5, pa.getnNacionalidad().getIdNacionalidad());
+			cst.setDate(6, pa.getFechaNacimiento());
+			cst.setString(7, pa.getDireccion());
+			cst.setInt(8, pa.getlLocalidad().getIdLocalidad());
+			cst.setString(9, pa.getEmail());
+			cst.setBoolean(10, true);
+			cst.setString(11, pa.getTelefono1());
+			cst.setString(12, pa.getTelefono2());
 
-			if (statement.executeUpdate() > 0) {
+			if (cst.execute()) {
 				conexion.commit();
 				isInsertExitoso = true;
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			try {
@@ -37,7 +49,6 @@ public class PacienteImpl implements PacienteDAO{
 				e1.printStackTrace();
 			}
 		}
-
 		return isInsertExitoso;
 	}
 
@@ -95,6 +106,9 @@ public class PacienteImpl implements PacienteDAO{
 		//
 		pa.setEmail(resultSet.getString("Email"));
 		pa.setEstado(resultSet.getBoolean("Estado"));
+		//
+		pa.setTelefono1(resultSet.getString("Telefono1"));
+		pa.setTelefono2(resultSet.getString("Telefono2"));
 		
 	
 		

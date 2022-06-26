@@ -2681,17 +2681,17 @@ INSERT INTO Horario(Dia, HorarioIngreso, HorarioEgreso) VALUES(5, '8:00:00', '20
 INSERT INTO Horario(Dia, HorarioIngreso, HorarioEgreso) VALUES(6, '8:00:00', '20:00:00');
 
 #PERSONA--MEDICO
-INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado) VALUES('20900900', 'Maria', 'Gomez', 'F', 12,'1988-09-22', 'Ricardo Gutierrez 1200', 221, 'mariagomez@gmail.com', 1);
-INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado) VALUES('30900900', 'Silvia', 'Rodriguez', 'F', 12,'1990-02-10', 'Ugarte 200', 221, 'silviaRO@gmail.com', 1);
-INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado) VALUES('20600900', 'Lucas', 'Mari', 'M', 12, '1980-09-22', 'Avenida Santa Fe 1900', 213, 'lucasmari@gmail.com', 1);
-INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado) VALUES('20700900', 'Diego', 'Gonzalez', 'M', 12,'1982-10-21', 'Avenida de Mayo 100', 256, 'diegog@gmail.com', 1);
-INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado) VALUES('30300900', 'Macarena', 'Alvarez', 'F', 12,'1983-08-22', 'Avenida Cordoba 1900', 303, 'macaalvarez@gmail.com', 1);
-INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado) VALUES('20200900', 'Luciano', 'Ceballos', 'M', 12,'1977-09-29', 'Libertador 1300', 303, 'lucianoceballos@gmail.com', 1);
+INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('20900900', 'Maria', 'Gomez', 'F', 12,'1988-09-22', 'Ricardo Gutierrez 1200', 221, 'mariagomez@gmail.com', 1, '476545496', null);
+INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('30900900', 'Silvia', 'Rodriguez', 'F', 12,'1990-02-10', 'Ugarte 200', 221, 'silviaRO@gmail.com', 1, '4984894', null);
+INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('20600900', 'Lucas', 'Mari', 'M', 12, '1980-09-22', 'Avenida Santa Fe 1900', 213, 'lucasmari@gmail.com', 1, '4898945', null);
+INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('20700900', 'Diego', 'Gonzalez', 'M', 12,'1982-10-21', 'Avenida de Mayo 100', 256, 'diegog@gmail.com', 1, '418414', null);
+INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('30300900', 'Macarena', 'Alvarez', 'F', 12,'1983-08-22', 'Avenida Cordoba 1900', 303, 'macaalvarez@gmail.com', 1, '215612896', null);
+INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('20200900', 'Luciano', 'Ceballos', 'M', 12,'1977-09-29', 'Libertador 1300', 303, 'lucianoceballos@gmail.com', 1, '1815955885', null);
 
 #PERSONA--PACIENTE
-INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado) VALUES('22333444', 'Rosalia', 'Gonzalez', 'M', 12,'1982-10-21', 'Avenida de Mayo 1004', 256, 'rosaliag@gmail.com', 1);
-INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado) VALUES('33222111', 'Laura', 'Alvarez', 'F', 12,'1983-08-22', 'Las Heras 1900', 303, 'lau10@gmail.com', 1);
-INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado) VALUES('44333222', 'Mauro', 'Ceballos', 'M', 12,'1977-09-29', 'Libertador 1200', 303, 'mauceba@gmail.com', 1);
+INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('22333444', 'Rosalia', 'Gonzalez', 'M', 12,'1982-10-21', 'Avenida de Mayo 1004', 256, 'rosaliag@gmail.com', 1, '123456', null);
+INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('33222111', 'Laura', 'Alvarez', 'F', 12,'1983-08-22', 'Las Heras 1900', 303, 'lau10@gmail.com', 1, '54645645', null);
+INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('44333222', 'Mauro', 'Ceballos', 'M', 12,'1977-09-29', 'Libertador 1200', 303, 'mauceba@gmail.com', 1, '44849592', null);
 
 #TELEFONO--MEDICO
 #INSERT INTO

@@ -14,8 +14,7 @@ public class PacienteNegocioImpl implements PacienteNegocio {
 	PacienteDAO paDAO = new PacienteImpl();
 	@Override
 	public boolean insert(Paciente pa) {
-		// TODO Auto-generated method stub
-		return false;
+		return paDAO.insert(pa);
 	}
 
 	@Override

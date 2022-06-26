@@ -14,9 +14,9 @@ public class Paciente extends Persona {
 	
 	
 	public Paciente(int idPaciente, String dni,String nombre,String apellido, char sexo, Nacionalidad nNacionalidad,Date fechaNacimiento,String direccion,
-			Localidad lLocalidad,String email,boolean estado) {
+			Localidad lLocalidad,String email,boolean estado, String telefono1, String telefono2) {
 		
-		super(dni,nombre,apellido,sexo,nNacionalidad,lLocalidad,email,estado,fechaNacimiento,direccion);
+		super(dni,nombre,apellido,sexo,nNacionalidad,lLocalidad,email,estado,fechaNacimiento,direccion, telefono1, telefono2);
 		this.idPaciente = idPaciente;
 		this.dni = dni;
 	}

@@ -26,14 +26,14 @@ TELEFONO
 -->
 <% 	
 	
-	try{
+/* 	try{
 	
 		if(session == null){
 			
 		}
 
 	
-		if (session.getAttribute("tipo").equals("Admin")) {
+		if (session.getAttribute("tipo").equals("Admin")) { */
 	%>
 <div style="float: left; margin-left: 12px; margin-top:6px;">
 <a href="MenuPaciente.jsp"><img src="img/atras.png" height="20px" /></a>
@@ -45,38 +45,54 @@ TELEFONO
 	<br>
 </form>	
 	<div class="registro">
-		<form>
+		<form method="post" action= "ServletPaciente">
 			<h1>Registro de Nuevo Paciente</h1>
 			<table class="formulario">
 				<tr><td><label>DNI:</label></td><td><input name="txtDni" type="text" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Nombres:</label></td><td><input name="txtNombre" type="text" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Apellidos:</label></td><td><input name="txtApellido" type="text" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Fecha Nacimiento:</label></td><td><input name="txtFechaNac" type="date" class="inputForm" size="20" required></td></tr>
-				<tr><td><label>Sexo</label></td><td><select class="select"></select></tr>
-				<tr><td><label>Nacionalidad:</label></td><td><select class="select"></select></tr>
-				<tr><td><label>Provincia:</label></td><td><select class="select"></select></tr>
-				<tr><td><label>Localidad:</label></td><td><select class="select"></select></tr>
+				<tr><td><label>Sexo</label></td><td><select class="select" name="slcSexo"></select></tr>
+				<tr><td><label>Nacionalidad:</label></td><td><select class="select" name="slcNacionalidad"></select></tr>
+				<tr><td><label>Provincia:</label></td><td><select class="select" name="slcProvincia"></select></tr>
+				<tr><td><label>Localidad:</label></td><td><select class="select" name="slcLocalidad"></select></tr>
 				<tr><td><label>Direcci&oacuten:</label></td><td><textarea name="txtDireccion" style="resize: none;" class="inputForm" cols="21" rows="3" required></textarea></td></tr>
-				<tr><td><label>E-mail:</label></td><td><input name="email " type="email" class="inputForm" size="20" required></td></tr>
+				<tr><td><label>E-mail:</label></td><td><input name="txtEmail" type="email" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Tel&eacutefono:</label></td><td><input name="txtTelefono1" type="text"  class="inputForm"size="20" required></td></tr>
 				<tr><td><label>Tel&eacutefono Opcional:</label></td><td><input name="txtTelefono2" type="text" class="inputForm" size="20"></td></tr>				
 			</table>
 			<br>
-				<input name=" insert" type="submit" value="Aceptar" class="btn btn-primary btn-block btn-large">
+				<input name="insert" type="submit" value="Aceptar" class="btn btn-primary btn-block btn-large">
+				<%-- <% 		
+					
+					boolean x = (boolean)request.getAttribute("exito");
+					
+					if(x == true){
+						%>
+						<div id="miModal" class="modal">
+						  <div class="modal-contenido">
+				
+						    <a href="AgregarPaciente.jsp">X</a>
+						    <h2>PACIENTE AGREGADO CON ÉXITO</h2>
+						  </div>  
+						</div>
+						 <% } 
+							%> --%>
 			</form>
 	</div>
-	 <%
+	<%--  <%
 		} else {
 
 			response.sendRedirect("Error.jsp");
 		}
 	}
 	catch(Exception e){
-		response.sendRedirect("Login.jsp");
+		e.printStackTrace();
+		//response.sendRedirect("Login.jsp");
 	}
 	finally{
 	}
 	
-	%>	
+	%>	 --%>
 </body>
 </html>

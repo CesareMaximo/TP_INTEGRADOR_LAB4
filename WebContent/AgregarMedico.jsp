@@ -56,15 +56,15 @@ CONTRASEÑA
 				<tr><td><label>Nombres:</label></td><td><input name="txtNombre" type="text" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Apellidos:</label></td><td><input name="txtApellido" type="text" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Fecha Nacimiento:</label></td><td><input name="txtFechaNac" type="date" class="inputForm" size="20" required></td></tr>
-				<tr><td><label>Sexo</label></td><td><select class="select"></select></tr>
-				<tr><td><label>Nacionalidad:</label></td><td><select class="select"></select></tr>
-				<tr><td><label>Provincia:</label></td><td><select class="select"></select></tr>
-				<tr><td><label>Localidad:</label></td><td><select class="select"></select></tr>
+				<tr><td><label>Sexo</label></td><td><select class="select" name="slcSexo"></select></tr>
+				<tr><td><label>Nacionalidad:</label></td><td><select class="select" name="slcNacionalidad"></select></tr>
+				<tr><td><label>Provincia:</label></td><td><select class="select" name="slcProvincia"></select></tr>
+				<tr><td><label>Localidad:</label></td><td><select class="select" name="slcLocalidad"></select></tr>
 				<tr><td><label>Direcci&oacuten:</label></td><td><textarea name="txtDireccion" style="resize: none;" class="inputForm" cols="21" rows="3" required></textarea></td></tr>
-				<tr><td><label>E-mail:</label></td><td><input name="email " type="email" class="inputForm" size="20" required></td></tr>
+				<tr><td><label>E-mail:</label></td><td><input name="txtEmail " type="email" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Tel&eacutefono:</label></td><td><input name="txtTelefono1" type="text"  class="inputForm"size="20" required></td></tr>
 				<tr><td><label>Tel&eacutefono Opcional:</label></td><td><input name="txtTelefono2" type="text" class="inputForm" size="20"></td></tr>
-				<tr><td><label>Especialidad:</label></td><td><select class="select"></select></tr> 
+				<tr><td><label>Especialidad:</label></td><td><select class="select" name="slcEspecialidad"></select></tr> 
 				<tr><td class=top><label>Dia de atenci&oacuten:</label></td><td>
 				<div class="control-group">
     <label class="control control-checkbox">
