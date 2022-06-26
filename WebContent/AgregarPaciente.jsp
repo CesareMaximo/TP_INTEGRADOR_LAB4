@@ -26,14 +26,14 @@ TELEFONO
 -->
 <% 	
 	
-/* 	try{
+ 	try{
 	
 		if(session == null){
 			
 		}
 
 	
-		if (session.getAttribute("tipo").equals("Admin")) { */
+		if (session.getAttribute("tipo").equals("Admin")) { 
 	%>
 <div style="float: left; margin-left: 12px; margin-top:6px;">
 <a href="MenuPaciente.jsp"><img src="img/atras.png" height="20px" /></a>
@@ -63,7 +63,7 @@ TELEFONO
 			</table>
 			<br>
 				<input name="insert" type="submit" value="Aceptar" class="btn btn-primary btn-block btn-large">
-				<%-- <% 		
+				<% 		
 					
 					boolean x = (boolean)request.getAttribute("exito");
 					
@@ -77,10 +77,10 @@ TELEFONO
 						  </div>  
 						</div>
 						 <% } 
-							%> --%>
+							%>
 			</form>
 	</div>
-	<%--  <%
+	 <%
 		} else {
 
 			response.sendRedirect("Error.jsp");
@@ -93,6 +93,6 @@ TELEFONO
 	finally{
 	}
 	
-	%>	 --%>
+	%>	
 </body>
 </html>

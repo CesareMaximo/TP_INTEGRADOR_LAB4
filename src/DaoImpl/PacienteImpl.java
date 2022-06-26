@@ -36,7 +36,7 @@ public class PacienteImpl implements PacienteDAO{
 			cst.setString(11, pa.getTelefono1());
 			cst.setString(12, pa.getTelefono2());
 
-			if (cst.execute()) {
+			if (cst.executeUpdate()>0) {
 				conexion.commit();
 				isInsertExitoso = true;
 			}

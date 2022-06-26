@@ -554,16 +554,6 @@ body {
   }
 }
 
-.modal-contenido{
-  background: rgba(0, 0, 0, 0.7);
-  width:300px;
-  padding: 10px 20px;
-  margin: 20% auto;
-  position: relative;
-  text-align: center;
-  border-radius: 1rem; 
-  color: white;
-}
 .modal{
   background-color: rgba(0,0,0,.8);
   position:fixed;
@@ -573,22 +563,14 @@ body {
   left:0; 
 }
 .modal-contenido{
-  background: rgba(0, 0, 0, 0.7);
+  background: #E9E2E8;
   width:300px;
   padding: 10px 20px;
   margin: 20% auto;
   position: relative;
   text-align: center;
   border-radius: 1rem; 
-  color: white;
-}
-.modal{
-  background-color: rgba(0,0,0,.8);
-  position:fixed;
-  top:0;
-  right:0;
-  bottom:0;
-  left:0; 
+  color: #491A42;
 }
 .resizedTextbox {
   background-color: light grey;
