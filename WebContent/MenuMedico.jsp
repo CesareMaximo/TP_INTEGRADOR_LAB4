@@ -88,18 +88,15 @@ FILTRO DE BUSQUEDA-->
                 </form>
                     </div>
                     <form action="ServletMedico" method="post" >
-                    <div class="col-sm-4">
-                        <div class="search-box">
-                            <i class="material-icons">&#xE8B6;</i>
-                            <input type="text" name="txtBuscar" class="form-control" placeholder="Search&hellip;">
-                            
-                            <input class="btn btn-primary btn-sm" type="submit" name="btnBuscar" value="Filtrar">
-                            
-                        </div>
-                    </div>
+                    <div class="row">
+					    <div class="col-md-3 col-md-offset-9 text-right">
+					        <div class="btn-group d-flex w-100" role="group">
+					            <input type="text" name="txtBuscar" class="resizedTextbox" placeholder="Buscar">
+			                    <input class="btn btn-primary btn-sm" type="submit" name="btnBuscar" value="Buscar">
+					        </div>
+					    </div>
+					</div>
                     </form>
-                </div>
-            </div>
             <form action="Medico" method="get">
 	            <%
 					ArrayList<Medico> listaMedico = null;
@@ -141,9 +138,9 @@ FILTRO DE BUSQUEDA-->
                 <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
                 <ul class="pagination">
                     <li class="page-item disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
+                    <li class="page-item active"><a href="#" class="page-link">1</a></li>
                     <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                    <li class="page-item"><a href="#" class="page-link">3</a></li>
                     <li class="page-item"><a href="#" class="page-link">4</a></li>
                     <li class="page-item"><a href="#" class="page-link">5</a></li>
                     <li class="page-item"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
