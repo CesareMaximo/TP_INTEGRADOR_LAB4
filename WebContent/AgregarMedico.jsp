@@ -12,10 +12,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <style type="text/css">
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
+	
+	 
+        
+        
+	
 </style>
 <title>Nuevo médico</title>
 </head>
-<body>
+<body onLoad="myLoad()">
+
 
 <!-- FORMULARIO PARA AGREGAR UN MEDICO
 DNI
@@ -36,14 +42,15 @@ CONTRASEÑA
 -->
 <% 	
 	
+/*
 	try{
 	
 		if(session == null){
 			
 		}
-
+*/
 	
-		if (session.getAttribute("tipo").equals("Admin")) {
+//	if (session.getAttribute("tipo").equals("Admin")) {
 	%>
 <div style="float: left; margin-left: 12px; margin-top:6px;">
 <a href="ServletMedico?Param=1"><img src="img/atras.png" height="20px" /></a>
@@ -92,7 +99,7 @@ CONTRASEÑA
 							%>
 				
 				</select></tr>
-				<tr><td><label>Provincia:</label></td><td><select class="select" name="slcProvincia">
+				<tr><td><label>Provincia:</label></td><td><select class="textbox" id="provincia1" onchange="cargar_localidades()" required name="slcProvincia">
 				
 					<% ArrayList<Provincia> listaProvincia = null;
 							
@@ -106,7 +113,7 @@ CONTRASEÑA
 								for(Provincia es : listaProvincia){
 									
 									%>
-									<option value="<%= es.getIdProvincia()%>"> <%= es.getDescripcion() %>	</option> 
+									<option value="<%= es.getIdProvincia()%>"> <%= es.getDescripcion() %></option> 
 									
 									<% 
 								}
@@ -115,13 +122,16 @@ CONTRASEÑA
 				
 				
 				</select></tr>
-				<tr><td><label>Localidad:</label></td><td><select class="select" name="slcLocalidad"></select></tr>
+				<tr><td><label>Localidad:</label></td><td><select class="textbox" required id="localidadReal" name="slcLocalidad"></select></tr>
 				<tr><td><label>Direcci&oacuten:</label></td><td><textarea name="txtDireccion" style="resize: none;" class="inputForm" cols="21" rows="3" required></textarea></td></tr>
 				<tr><td><label>E-mail:</label></td><td><input name="txtEmail " type="email" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Tel&eacutefono:</label></td><td><input name="txtTelefono1" type="text"  class="inputForm"size="20" required></td></tr>
 				<tr><td><label>Tel&eacutefono Opcional:</label></td><td><input name="txtTelefono2" type="text" class="inputForm" size="20"></td></tr>
 				<tr><td><label>Especialidad:</label></td><td><select class="select" name="slcEspecialidad"></select></tr> 
 				<tr><td class=top><label>Dia de atenci&oacuten:</label></td><td>
+				
+	
+				
 				<div class="control-group">
     <label class="control control-checkbox">
         Lunes
@@ -203,11 +213,14 @@ CONTRASEÑA
 			</div>
 			<input name="btnNuevoMedico" type="submit" value="Aceptar" class="btn btn-primary btn-block btn-large" >
 			</form>
+			
+		
+			
 	</div>
 	 <%
-		} else {
+	//	} else {
 
-			response.sendRedirect("Error.jsp");
+	/*		response.sendRedirect("Error.jsp");
 		}
 	}
 	catch(Exception e){
@@ -215,7 +228,81 @@ CONTRASEÑA
 	}
 	finally{
 	}
+*/
 	
 	%>	
+	
+		<select name="localidades" id="localidad2">
+	<% 
+	ArrayList<Localidad> listaLocalidad2 = null;
+	
+	if(request.getAttribute("listaLocalidad")!=null){
+		listaLocalidad2 = (ArrayList<Localidad>) request.getAttribute("listaLocalidad");
+	}
+	
+	
+	if(listaLocalidad2 !=null){
+		for(Localidad lo: listaLocalidad2){
+	%>
+		<option value="<%= lo.getpProvincia().getIdProvincia()%>" data-uid="<%=lo.getIdLocalidad()%>"><%=lo.getDescripcion()%></option>
+	
+	<%}
+		}%>
+	
+	 </select>
+	
+	
+	
+	 
+	 
+	 <script>
+function myOnLoad() {
+		var earrings = document.getElementById('localidad2');
+		earrings.style.visibility = 'hidden';
+		 cargar_localidades();
+	
+	}
+</script>
+
+
+<script>
+function cargar_localidades() {
+	document.getElementById("localidadReal").options.length = 0;
+	
+	var x = document.getElementById("localidad2");
+	var array = new Array();
+	var a = new Array();
+	var b = new Array();
+	for (i = 0; i < x.length; i++) { 
+		
+		array.push(x.options[i].text);
+		a.push(x.options[i].value);
+		b.push(x.options[i].getAttribute('data-uid'));
+		
+}
+
+	
+
+	 addOptions("slcLocalidad", array, a,b);
+	}
+</script>
+
+<script>
+function addOptions(domElement, array, a,b) {
+	 var select = document.getElementsByName(domElement)[0];
+	 var inde = document.getElementById('provincia1').value;
+
+	 for (value in array) {
+		if(a[value] === inde){
+	  var option = document.createElement("option");
+	  option.text = array[value];
+	  option.value = b[value];
+	  select.add(option);
+		}
+	 }
+	}
+</script>
+
+	 
 </body>
 </html>

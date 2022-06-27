@@ -7,5 +7,6 @@ import Entidad.Localidad;
 
 
 public interface LocalidadDAO {
-	public List<Localidad> readAll(int idProvincia);
+	public List<Localidad> readAllxid(int idProvincia);
+	public List<Localidad> readAll();
 }

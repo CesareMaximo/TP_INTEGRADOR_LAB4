@@ -7,5 +7,6 @@ import Entidad.Localidad;
 
 public interface LocalidadNegocio {
  
-	public List<Localidad> readAll(int idProvincia);
+	public List<Localidad> readAllxid(int idProvincia);
+	public List<Localidad> readAll();
 }

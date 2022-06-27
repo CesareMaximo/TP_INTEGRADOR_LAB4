@@ -20,10 +20,12 @@ import Entidad.Nacionalidad;
 import Entidad.Provincia;
 import Entidad.Usuario;
 import Negocio.EspecialidadNegocio;
+import Negocio.LocalidadNegocio;
 import Negocio.MedicoNegocio;
 import Negocio.NacionalidadNegocio;
 import Negocio.ProvinciaNegocio;
 import NegocioImpl.EspecialidadNegocioImpl;
+import NegocioImpl.LocalidadNegocioImpl;
 import NegocioImpl.MedicoNegocioImpl;
 import NegocioImpl.NacionalidadNegocioImpl;
 import NegocioImpl.ProvinciaNegocioImpl;
@@ -52,7 +54,16 @@ public class ServletMedico extends HttpServlet {
 		ArrayList<Especialidad> listaEspecialidad = (ArrayList<Especialidad>) esNeg.readAll();
 		request.setAttribute("listaNacionalidad", listaNacionalidad);
 		request.setAttribute("listaProvincia", listaProvincia);
-		ArrayList<Medico> listaMedico = (ArrayList<Medico>) meNeg.readAll();		
+		ArrayList<Medico> listaMedico = (ArrayList<Medico>) meNeg.readAll();
+		
+
+		LocalidadNegocio loNeg = new LocalidadNegocioImpl();
+		
+		ArrayList<Localidad> listaLocalidad = (ArrayList<Localidad>) loNeg.readAll();
+		
+		request.setAttribute("listaLocalidad", listaLocalidad);
+		
+		
 	
 		RequestDispatcher rd;
 		
@@ -67,6 +78,7 @@ public class ServletMedico extends HttpServlet {
 		}
 		
 		if (request.getParameter("Nuevo") != null) {
+			
 			rd = request.getRequestDispatcher("/AgregarMedico.jsp");
 			rd.forward(request, response);
 		}		
@@ -91,6 +103,12 @@ public class ServletMedico extends HttpServlet {
 		RequestDispatcher rd;	
 		
 		Usuario usu = new Usuario();
+		
+		
+		LocalidadNegocio loNeg = new LocalidadNegocioImpl();
+		
+		ArrayList<Localidad> listaLocalidad = (ArrayList<Localidad>) loNeg.readAll();
+		request.setAttribute("listaLocalidad", listaLocalidad);
 		
 		//BtnFiltrar
 		if(request.getParameter("btnFiltrar")!=null) {
