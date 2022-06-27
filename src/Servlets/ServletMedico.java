@@ -12,10 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import Entidad.Especialidad;
 import Entidad.Medico;
+import Entidad.Nacionalidad;
+import Entidad.Provincia;
 import Negocio.EspecialidadNegocio;
 import Negocio.MedicoNegocio;
+import Negocio.NacionalidadNegocio;
+import Negocio.ProvinciaNegocio;
 import NegocioImpl.EspecialidadNegocioImpl;
 import NegocioImpl.MedicoNegocioImpl;
+import NegocioImpl.NacionalidadNegocioImpl;
+import NegocioImpl.ProvinciaNegocioImpl;
 
 /**
  * Servlet implementation class ServletMedico
@@ -42,10 +48,16 @@ public class ServletMedico extends HttpServlet {
 		Medico me = new Medico();
 		EspecialidadNegocio esNeg = new EspecialidadNegocioImpl();
 		Especialidad es = new Especialidad();
-		
+		NacionalidadNegocio nacNeg = new NacionalidadNegocioImpl();
+		ArrayList<Nacionalidad> listaNacionalidad = (ArrayList<Nacionalidad>)nacNeg.readAll();
+		ProvinciaNegocio provNeg = new ProvinciaNegocioImpl();
+		ArrayList<Provincia> listaProvincia = (ArrayList<Provincia>)provNeg.readAll();
+		request.setAttribute("listaNacionalidad", listaNacionalidad);
+		request.setAttribute("listaProvincia", listaProvincia);
 		
 		ArrayList<Especialidad> listaEspecialidad = (ArrayList<Especialidad>) esNeg.readAll();
-		
+		request.setAttribute("listaNacionalidad", listaNacionalidad);
+		request.setAttribute("listaProvincia", listaProvincia);
 		ArrayList<Medico> listaMedico = (ArrayList<Medico>) meNeg.readAll();
 		
 		
@@ -64,7 +76,10 @@ public class ServletMedico extends HttpServlet {
 			rd.forward(request, response);
 		}
 		
-		
+		if (request.getParameter("Nuevo") != null) {
+			rd = request.getRequestDispatcher("/AgregarMedico.jsp");
+			rd.forward(request, response);
+		}
 		
 	}
 

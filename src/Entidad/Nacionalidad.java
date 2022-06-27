@@ -29,7 +29,7 @@ public class Nacionalidad {
 	//Metodo ToString
 	@Override
 	public String toString() {
-		return "Nacionalidad [idNacionalidad=" + idNacionalidad + ", Descripcion=" + descripcion + "]";
+		return descripcion; 
 	}
 	
 	

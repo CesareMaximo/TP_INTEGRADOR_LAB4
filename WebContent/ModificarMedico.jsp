@@ -22,7 +22,7 @@
 		if (session.getAttribute("tipo").equals("Admin")) {
 	%>
 <div style="float: left; margin-left: 12px; margin-top:6px;">
-<a href="MenuMedico.jsp"><img src="img/atras.png" height="20px" /></a>
+<a href="ServletMedico?Param=1"><img src="img/atras.png" height="20px" /></a>
 <a href="IndexAdmin.jsp"> <img src="img/home.png" height="20px" style="margin-left:10px;" width="20px" ></a> 
 </div>
 <!-- MISMO FORMULARIO QUE AGREGAR PERO CON DATOS PRECARGADOS -->

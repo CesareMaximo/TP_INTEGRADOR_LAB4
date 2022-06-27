@@ -14,9 +14,9 @@ import javafx.css.PseudoClass;
 public class PacienteImpl implements PacienteDAO{
 
 	private static final String delete = "";
-	private static final String readall = "select * from paciente as pa inner join persona as pe on pe.DNI like pa.DNI"; 
+	private static final String readall = "select * from paciente as pa inner join persona as pe on pe.DNI like pa.DNI INNER JOIN Nacionalidad as N on Pe.idNacionalidad = N.idNacionalidad "; 
 	private static final String update = "UPDATE Persona SET Nombre = ?, Apellido = ?, Sexo = ?, idNacionalidad = ?, FechaNacimiento = ?, Direccion = ?, idLocalidad = ?, Email = ?, Telefono1 = ?, Telefono2 = ? WHERE Dni = ?";
-	private static final String readPaciente = "SELECT * FROM Paciente as Pa INNER JOIN Persona AS Pe ON Pe.Dni = Pa.Dni WHERE Pe.Dni = ?";
+	private static final String readPaciente = "SELECT * FROM Paciente as Pa INNER JOIN Persona AS Pe ON Pe.Dni = Pa.Dni INNER JOIN Nacionalidad as N on Pe.idNacionalidad = N.idNacionalidad WHERE Pe.Dni = ?";
 	
 	@Override
 	public boolean insert(Paciente pa) {
@@ -97,7 +97,8 @@ public class PacienteImpl implements PacienteDAO{
 		pa.setApellido(resultSet.getString("Apellido"));
 		pa.setSexo(resultSet.getString("Sexo").charAt(0));
 		//
-		na.setIdNacionalidad( resultSet.getInt("idNacionalidad"));
+		na.setIdNacionalidad( resultSet.getInt("idNacionalidad"));	
+		na.setDescripcion( resultSet.getString("Descripcion"));
 		pa.setnNacionalidad(na);
 		//
 		pa.setFechaNacimiento(resultSet.getDate("FechaNacimiento"));
@@ -126,7 +127,7 @@ public class PacienteImpl implements PacienteDAO{
 		Conexion conexion = Conexion.getConexion();
 		try 
 		{
-			statement = conexion.getSQLConexion().prepareStatement("Select * from paciente as pa inner join persona as pe on pa.DNI=pe.DNI where pe.DNI like "+"'%"+nombre+"%' or pe.Nombre like "+"'%"+nombre+"%' or pe.Apellido like "+"'%"+nombre+"%' or pe.Email like "+"'%"+nombre+"%'");
+			statement = conexion.getSQLConexion().prepareStatement("Select * from paciente as pa inner join persona as pe on pa.DNI=pe.DNI  INNER JOIN Nacionalidad as N on Pe.idNacionalidad = N.idNacionalidad where pe.DNI like "+"'%"+nombre+"%' or pe.Nombre like "+"'%"+nombre+"%' or pe.Apellido like "+"'%"+nombre+"%' or pe.Email like "+"'%"+nombre+"%'");
 			
 			resultSet = statement.executeQuery();
 			while(resultSet.next())

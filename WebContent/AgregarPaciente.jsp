@@ -58,7 +58,13 @@ TELEFONO
 				<tr><td><label>Nombres:</label></td><td><input name="txtNombre" type="text" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Apellidos:</label></td><td><input name="txtApellido" type="text" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Fecha Nacimiento:</label></td><td><input name="txtFechaNac" type="date" class="inputForm" size="20" required></td></tr>
-				<tr><td><label>Sexo</label></td><td><select class="select" name="slcSexo"></select></tr>
+				<tr><td><label>Sexo</label></td><td><select class="select" name="slcSexo">
+					
+				<option value="M">Masculino</option>
+				<option value="F">Femenino</option>
+				<option value="O">Otro</option>
+				
+				</select></tr>
 				<tr><td><label>Nacionalidad:</label></td><td><select class="select" name="slcNacionalidad">
 				
 				<% ArrayList<Nacionalidad> listaNacionalidad = null;

@@ -53,7 +53,7 @@ FILTRO DE BUSQUEDA-->
             <div  style="padding-bottom: 0px;"class="table-title">
                 <div class="row">
                     <div class="col-sm-8"><h1>Médicos</h1>
-                                        <a href="AgregarMedico.jsp" name="nuevoMedico" class="btn btn-primary btn-ml">Nuevo Médico</a>
+                                        <a href="ServletMedico?Nuevo=1" name="nuevoMedico" class="btn btn-primary btn-ml">Nuevo Médico</a>
                     <table class="filtrosListado" >
                     <form action="ServletMedico" method="post">		
                     <tr><td><label style="margin-right: 5px">Especialidad:</label></td>

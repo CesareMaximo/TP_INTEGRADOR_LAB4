@@ -1,3 +1,9 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@page import="Entidad.*"%>
+<%@page import="NegocioImpl.*"%>
+<%@page import="Negocio.*"%>
+<%@page import="java.util.ArrayList"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -40,7 +46,7 @@ CONTRASEÑA
 		if (session.getAttribute("tipo").equals("Admin")) {
 	%>
 <div style="float: left; margin-left: 12px; margin-top:6px;">
-<a href="MenuMedico.jsp"><img src="img/atras.png" height="20px" /></a>
+<a href="ServletMedico?Param=1"><img src="img/atras.png" height="20px" /></a>
 <a href="IndexAdmin.jsp"> <img src="img/home.png" height="20px" style="margin-left:10px;" width="20px" ></a> 
 </div>
  <form method="post" action ="logout" >
@@ -56,9 +62,59 @@ CONTRASEÑA
 				<tr><td><label>Nombres:</label></td><td><input name="txtNombre" type="text" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Apellidos:</label></td><td><input name="txtApellido" type="text" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Fecha Nacimiento:</label></td><td><input name="txtFechaNac" type="date" class="inputForm" size="20" required></td></tr>
-				<tr><td><label>Sexo</label></td><td><select class="select" name="slcSexo"></select></tr>
-				<tr><td><label>Nacionalidad:</label></td><td><select class="select" name="slcNacionalidad"></select></tr>
-				<tr><td><label>Provincia:</label></td><td><select class="select" name="slcProvincia"></select></tr>
+				<tr><td><label>Sexo</label></td><td><select class="select" name="slcSexo">
+				<option value="M">Masculino</option>
+				<option value="F">Femenino</option>
+				<option value="O">Otro</option>
+				
+				</select></tr>
+				<tr><td><label>Nacionalidad:</label></td><td><select class="select" name="slcNacionalidad">
+				
+						<% ArrayList<Nacionalidad> listaNacionalidad = null;
+							
+							if(request.getAttribute("listaNacionalidad")!=null){
+							
+								listaNacionalidad = (ArrayList<Nacionalidad>)request.getAttribute("listaNacionalidad");
+							}
+							
+							
+							if(listaNacionalidad!=null)
+								for(Nacionalidad es : listaNacionalidad){
+									
+									%>
+									<option value="<%= es.getIdNacionalidad()%>"> <%= es.getDescripcion() %>	</option> 
+									
+									<% 
+								}
+								
+							
+							
+							%>
+				
+				</select></tr>
+				<tr><td><label>Provincia:</label></td><td><select class="select" name="slcProvincia">
+				
+					<% ArrayList<Provincia> listaProvincia = null;
+							
+							if(request.getAttribute("listaProvincia")!=null){
+							
+								listaProvincia = (ArrayList<Provincia>)request.getAttribute("listaProvincia");
+							}
+							
+							
+							if(listaProvincia!=null)
+								for(Provincia es : listaProvincia){
+									
+									%>
+									<option value="<%= es.getIdProvincia()%>"> <%= es.getDescripcion() %>	</option> 
+									
+									<% 
+								}
+							
+							%>
+				
+				
+				</select></tr>
 				<tr><td><label>Localidad:</label></td><td><select class="select" name="slcLocalidad"></select></tr>
 				<tr><td><label>Direcci&oacuten:</label></td><td><textarea name="txtDireccion" style="resize: none;" class="inputForm" cols="21" rows="3" required></textarea></td></tr>
 				<tr><td><label>E-mail:</label></td><td><input name="txtEmail " type="email" class="inputForm" size="20" required></td></tr>
@@ -132,7 +188,7 @@ CONTRASEÑA
 				<tr><td><label>Confirmar contrase&ntildea:</label></td><td><input name="txtPass2" type="password"class="inputForm" size="20"></td></tr>
 			</table>
 			<br>
-				<input name=" insert" type="submit" value="Aceptar" class="btn btn-primary btn-block btn-large" ">
+				<input name=" insert" type="submit" value="Aceptar" class="btn btn-primary btn-block btn-large" >
 			</form>
 	</div>
 	 <%

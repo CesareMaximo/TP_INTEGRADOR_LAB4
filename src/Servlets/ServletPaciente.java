@@ -47,9 +47,10 @@ public class ServletPaciente extends HttpServlet {
 		RequestDispatcher rd;
 		Paciente pa = new Paciente();
 		
-		if(request.getParameter("Nuevo")!= null) {
 		request.setAttribute("listaNacionalidad", listaNacionalidad);
 		request.setAttribute("listaProvincia", listaProvincia);
+		
+		if(request.getParameter("Nuevo")!= null) {
 		rd = request.getRequestDispatcher("/AgregarPaciente.jsp");
 		rd.forward(request, response);
 		
