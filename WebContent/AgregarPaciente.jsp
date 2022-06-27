@@ -15,7 +15,7 @@
 </style>
 <title>Nuevo Paciente</title>
 </head>
-<body>
+<body onLoad="myOnLoad()">
 
 <!-- FORMULARIO PARA AGREGAR UN PACIENTE
 DNI
@@ -32,14 +32,14 @@ TELEFONO
 -->
 <% 	
 	
- 	try{
+ /*	try{
 	
 		if(session == null){
 			
 		}
 
 	
-		if (session.getAttribute("tipo").equals("Admin")) { 
+		if (session.getAttribute("tipo").equals("Admin")) { */
 	%>
 <div style="float: left; margin-left: 12px; margin-top:6px;">
 <a href="ServletPaciente?Param=1"><img src="img/atras.png" height="20px" /></a>
@@ -89,7 +89,7 @@ TELEFONO
 							%>
 				
 				</select></tr>
-				<tr><td><label>Provincia:</label></td><td><select class="select" id="slctProvincia"  name="slcProvincia">
+				<tr><td><label>Provincia:</label></td><td><select class="textbox"  onchange="cargar_localidades()" required  id="provincia1"  name="slcProvincia">
 				
 					<% ArrayList<Provincia> listaProvincia = null;
 							
@@ -111,7 +111,7 @@ TELEFONO
 							%>
 				
 				</select></tr>
-				<tr><td><label>Localidad:</label></td><td><select class="select" name="slcLocalidad"></select></tr>
+				<tr><td><label>Localidad:</label></td><td><select class="textbox" required id="localidadReal"  name="slcLocalidad"></select></tr>
 				<tr><td><label>Direcci&oacuten:</label></td><td><textarea name="txtDireccion" style="resize: none;" class="inputForm" cols="21" rows="3" required></textarea></td></tr>
 				<tr><td><label>E-mail:</label></td><td><input name="txtEmail" type="email" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Tel&eacutefono:</label></td><td><input name="txtTelefono1" type="text"  class="inputForm"size="20" required></td></tr>
@@ -120,11 +120,14 @@ TELEFONO
 			<br>
 				<input name="insert" type="submit" value="Aceptar" class="btn btn-primary btn-block btn-large">
 				<% 		
-					
+			
+				/*
 					boolean x = (boolean)request.getAttribute("exito");
 					
 					if(x == true){
+						*/
 						%>
+						<!--
 						<div id="miModal" class="modal">
 						  <div class="modal-contenido">
 				
@@ -132,11 +135,14 @@ TELEFONO
 						    <h2>PACIENTE AGREGADO CON ÉXITO</h2>
 						  </div>  
 						</div>
-						 <% } 
+						-->
+						 <% /* } */
 							%>
 			</form>
 	</div>
 	 <%
+	 
+	 /*
 		} else {
 
 			response.sendRedirect("Error.jsp");
@@ -148,9 +154,81 @@ TELEFONO
 	}
 	finally{
 	}
-	
+	*/
 	%>	
 	
+	
+	
+		<select name="localidades" id="localidad2">
+	<% 
+	ArrayList<Localidad> listaLocalidad2 = null;
+	
+	if(request.getAttribute("listaLocalidad")!=null){
+		listaLocalidad2 = (ArrayList<Localidad>) request.getAttribute("listaLocalidad");
+	}
+	
+	
+	if(listaLocalidad2 !=null){
+		for(Localidad lo: listaLocalidad2){
+	%>
+		<option value="<%= lo.getpProvincia().getIdProvincia()%>" data-uid="<%=lo.getIdLocalidad()%>"><%=lo.getDescripcion()%></option>
+	
+	<%}
+		}%>
+	
+	 </select>
+	
+	
+	
+	 
+	 
+	 <script>
+function myOnLoad() {
+		var earrings = document.getElementById('localidad2');
+		earrings.style.visibility = 'hidden';
+		 cargar_localidades();
+	
+	}
+</script>
+
+
+<script>
+function cargar_localidades() {
+	document.getElementById("localidadReal").options.length = 0;
+	
+	var x = document.getElementById("localidad2");
+	var array = new Array();
+	var a = new Array();
+	var b = new Array();
+	for (i = 0; i < x.length; i++) { 
+		
+		array.push(x.options[i].text);
+		a.push(x.options[i].value);
+		b.push(x.options[i].getAttribute('data-uid'));
+		
+}
+
+	
+
+	 addOptions("slcLocalidad", array, a,b);
+	}
+</script>
+
+<script>
+function addOptions(domElement, array, a,b) {
+	 var select = document.getElementsByName(domElement)[0];
+	 var inde = document.getElementById('provincia1').value;
+
+	 for (value in array) {
+		if(a[value] === inde){
+	  var option = document.createElement("option");
+	  option.text = array[value];
+	  option.value = b[value];
+	  select.add(option);
+		}
+	 }
+	}
+</script>
 	
 	
 	
