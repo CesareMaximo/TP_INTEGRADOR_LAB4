@@ -1,7 +1,7 @@
 package DaoImpl;
 
 import java.util.List;
-
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +12,7 @@ import Entidad.*;
 public class MedicoDAOImpl implements  MedicoDAO{
 
 	
-	private static final String insert = "";
+	//private static final String insert = "";
 	private static final String delete = "";
 	private static final String readall = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad";
 	private static final String readallFiltro = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad where m.idEspecialidad = ?";
@@ -20,8 +20,41 @@ public class MedicoDAOImpl implements  MedicoDAO{
 	
 	@Override
 	public boolean insert(Medico me) {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conexion = null;
+		boolean isInsertExitoso = false;
+		try {
+			conexion = Conexion.getConexion().getSQLConexion();
+			CallableStatement cst = conexion.prepareCall("call registrarUsuMedico(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			//falta todo lo de usuario: nombreUsuario, clave, tipo
+			cst.setString(4, me.getDni());
+			//idespecialidad
+			cst.setString(6, me.getNombre());
+			cst.setString(7, me.getApellido());
+			cst.setString(8, String.valueOf(me.getSexo()));
+			cst.setInt(9, me.getnNacionalidad().getIdNacionalidad());
+			cst.setDate(10, me.getFechaNacimiento());
+			cst.setString(11, me.getDireccion());
+			cst.setInt(12, me.getlLocalidad().getIdLocalidad());
+			cst.setString(13, me.getEmail());
+			cst.setBoolean(14, true);
+			cst.setString(14, me.getTelefono1());
+			cst.setString(15, me.getTelefono2());
+			//idUsuario = IdMedico
+
+			if (cst.executeUpdate()>0) {
+				conexion.commit();
+				isInsertExitoso = true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return isInsertExitoso;
 	}
 
 	@Override

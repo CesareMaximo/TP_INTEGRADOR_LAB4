@@ -11,10 +11,10 @@ public class MedicoNegocioImpl implements MedicoNegocio {
 
 	
 	MedicoDAO meDAO = new MedicoDAOImpl();
+	
 	@Override
 	public boolean insert(Medico me) {
-		// TODO Auto-generated method stub
-		return false;
+		return meDAO.insert(me);
 	}
 
 	@Override

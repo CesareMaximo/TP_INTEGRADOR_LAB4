@@ -55,7 +55,7 @@ CONTRASEÑA
 	<br>
 </form>	
 	<div class="registro">
-		<form>
+		<form method="post" action="ServletMedico">
 			<h1>Registro de Nuevo M&eacutedico</h1>
 			<table class="formulario">
 				<tr><td><label>DNI:</label></td><td><input name="txtDni" type="text" class="inputForm" size="20" required></td></tr>
@@ -188,7 +188,20 @@ CONTRASEÑA
 				<tr><td><label>Confirmar contrase&ntildea:</label></td><td><input name="txtPass2" type="password"class="inputForm" size="20"></td></tr>
 			</table>
 			<br>
-				<input name=" insert" type="submit" value="Aceptar" class="btn btn-primary btn-block btn-large" >
+			<div>
+				<p style="color: red; margin-left: 125px;">
+					<%
+						String resultado = (String) request.getAttribute("mensaje");
+								String mensaje = "";
+								if (resultado != null) {
+									mensaje = resultado;
+								}
+					%>
+					<%=mensaje%>
+				</p>
+
+			</div>
+			<input name="btnNuevoMedico" type="submit" value="Aceptar" class="btn btn-primary btn-block btn-large" >
 			</form>
 	</div>
 	 <%
