@@ -34,5 +34,15 @@ public class PacienteNegocioImpl implements PacienteNegocio {
 		return paDAO.readAllBuscar(nombre);
 	}
 
+	@Override
+	public boolean update(Paciente pa) {
+		return paDAO.update(pa);
+	}
+
+	@Override
+	public Paciente mostrarPaciente(String dni) {
+		return paDAO.mostrarPaciente(dni);
+	}
+
 	
 }

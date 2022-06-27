@@ -10,4 +10,6 @@ public interface PacienteDAO {
 	public boolean delete(Paciente paDelete);
 	public List<Paciente> readAll();
 	public List<Paciente> readAllBuscar(String nombre);
+	public boolean update(Paciente pa);
+	public Paciente mostrarPaciente(String dni);
 }

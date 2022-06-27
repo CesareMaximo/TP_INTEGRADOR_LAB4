@@ -15,6 +15,8 @@ public class PacienteImpl implements PacienteDAO{
 
 	private static final String delete = "";
 	private static final String readall = "select * from paciente as pa inner join persona as pe on pe.DNI like pa.DNI"; 
+	private static final String update = "UPDATE Persona SET Nombre = ?, Apellido = ?, Sexo = ?, idNacionalidad = ?, FechaNacimiento = ?, Direccion = ?, idLocalidad = ?, Email = ?, Telefono1 = ?, Telefono2 = ? WHERE Dni = ?";
+	private static final String readPaciente = "SELECT * FROM Paciente as Pa INNER JOIN Persona AS Pe ON Pe.Dni = Pa.Dni WHERE Pe.Dni = ?";
 	
 	@Override
 	public boolean insert(Paciente pa) {
@@ -137,5 +139,56 @@ public class PacienteImpl implements PacienteDAO{
 			e.printStackTrace();
 		}
 		return listaPaciente;
+	}
+
+	@Override
+	public boolean update(Paciente pa) {
+		boolean isUpdateExitoso = false;		
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		try 
+		{
+			statement = conexion.prepareStatement(update);
+			statement.setString(1, pa.getNombre());
+			statement.setString(2, pa.getApellido());
+			statement.setString(3, String.valueOf(pa.getSexo()));
+			statement.setInt(4, pa.getnNacionalidad().getIdNacionalidad());
+			statement.setDate(5, pa.getFechaNacimiento());
+			statement.setString(6, pa.getDireccion());
+			statement.setInt(7, pa.getlLocalidad().getIdLocalidad());
+			statement.setString(8, pa.getEmail());
+			statement.setString(9, pa.getTelefono1());
+			statement.setString(10, pa.getTelefono2());
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isUpdateExitoso = true;
+			}
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return isUpdateExitoso;
+	}
+
+	@Override
+	public Paciente mostrarPaciente(String dni) {
+		Connection cn = Conexion.getConexion().getSQLConexion();
+		Paciente pa = new Paciente();
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		try
+		 {
+			statement = cn.prepareStatement(readPaciente);
+			statement.setString(1, dni);
+			resultSet = statement.executeQuery();
+			resultSet.next();
+			pa = getPaciente(resultSet);			
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return pa;			
 	}
 }

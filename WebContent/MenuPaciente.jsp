@@ -18,7 +18,7 @@
 <title>Pacientes</title>
 </head>
 <body>
-<% 	
+<%-- <% 	
 	
 	try{
 	
@@ -27,7 +27,7 @@
 		}
 	
 		if (session.getAttribute("tipo").equals("Admin")) {
-	%>
+	%> --%>
 <!-- LISTADO DE PACIENTES CON BOTON AGREGAR PACIENTE Y BOTONES MODIFICAR Y ELIMINAR EN CADA FILA 
 CUANDO APRETAS ELIMINAR SALTA VENTANA DE CONFIRMACIÓN 
 FILTRO DE BUSQUEDA-->
@@ -86,12 +86,12 @@ FILTRO DE BUSQUEDA-->
 						for(Paciente pa : listaPaciente){
 					%>
 	                    <tr>
-	                    	<td><%=pa.getDni()%></td>
+	                    	<td><%=pa.getDni()%><input type="hidden" name="dniPaciente" value="<%=pa.getDni() %>"></td>
 							<td><%=pa.getNombre()%></td>
 							<td><%=pa.getApellido()%></td>
 							<td><%=pa.getEmail()%></td>
 							<td>
-	                    	<a href="ModificarPaciente.jsp" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+	                    	<a href="ServletPaciente?Modificar=<%=pa.getDni() %>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
 	                       	<a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
 	                       	</td>
 	               	<%} %>
@@ -113,7 +113,7 @@ FILTRO DE BUSQUEDA-->
         </div>
     </div>  
 </div>   
- <%
+<%--  <%
 		} else {
 			response.sendRedirect("Error.jsp");
 		}
@@ -124,6 +124,6 @@ FILTRO DE BUSQUEDA-->
 	finally{
 	}
 	
-	%>		
+	%>	 --%>	
 </body>
 </html>

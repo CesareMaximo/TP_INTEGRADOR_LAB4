@@ -6,7 +6,6 @@ public class Paciente extends Persona {
 
 	
 	private int idPaciente;
-	//private String dni;
 	
 	public Paciente() {
 		super();
@@ -18,7 +17,6 @@ public class Paciente extends Persona {
 		
 		super(dni,nombre,apellido,sexo,nNacionalidad,lLocalidad,email,estado,fechaNacimiento,direccion, telefono1, telefono2);
 		this.idPaciente = idPaciente;
-		//this.dni = dni;
 	}
 	
 	//Getters & Setters
@@ -28,13 +26,5 @@ public class Paciente extends Persona {
 	public void setIdPaciente(int idPaciente) {
 		this.idPaciente = idPaciente;
 	}
-/*	public String getDni() {
-		return dni;
-	}
-	public void setDni(String dni) {
-		this.dni = dni;
-	}*/
-	
-	
 	
 }
