@@ -61,7 +61,7 @@ REPORTES
                         </a>
                         
                        
-                       <a href="AsignacionTurnos.jsp" style="text-decoration: none; color: dimgrey;">
+                       <a href="ServletTurno?Param=1" style="text-decoration: none; color: dimgrey;">
                             <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:50px;">
                                 <img src="img/AsignacionTurno.png" style="width: 50px" class="card-img-top" alt="..." />
                                 <div class="card-body">
