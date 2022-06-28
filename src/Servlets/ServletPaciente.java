@@ -49,15 +49,15 @@ public class ServletPaciente extends HttpServlet {
 		RequestDispatcher rd;
 		Paciente pa = new Paciente();
 		
+		
 		request.setAttribute("listaNacionalidad", listaNacionalidad);
 		request.setAttribute("listaProvincia", listaProvincia);
 		
-LocalidadNegocio loNeg = new LocalidadNegocioImpl();
+		LocalidadNegocio loNeg = new LocalidadNegocioImpl();
 		
 		ArrayList<Localidad> listaLocalidad = (ArrayList<Localidad>) loNeg.readAll();
 		
 		request.setAttribute("listaLocalidad", listaLocalidad);
-		
 		
 		if(request.getParameter("Nuevo")!= null) {
 		rd = request.getRequestDispatcher("/AgregarPaciente.jsp");
@@ -76,11 +76,15 @@ LocalidadNegocio loNeg = new LocalidadNegocioImpl();
 		
 		if(request.getParameter("Modificar")!=null)
 		{
+			
 			String dni = request.getParameter("Modificar").toString();
 			pa = paNeg.mostrarPaciente(dni);            
 			request.getSession().setAttribute("paciente", pa);
+			ArrayList<Localidad> listaLocalidad2 = (ArrayList<Localidad>) loNeg.readAllxid(pa.getlLocalidad().getpProvincia().getIdProvincia());
+			request.setAttribute("listaLocalidad2", listaLocalidad2);
 			rd = request.getRequestDispatcher("/ModificarPaciente.jsp");   
 	        rd.forward(request, response);
+	        
 			
 		}
 	}
@@ -127,15 +131,12 @@ LocalidadNegocio loNeg = new LocalidadNegocioImpl();
 			}  
 			java.sql.Date date1 = new java.sql.Date(dateFormateado.getTime());
 			paciente.setFechaNacimiento(date1);
-			//paciente.setSexo(request.getParameter("slcSexo").charAt(0));
-			paciente.setSexo('M'); // para prueba
+			paciente.setSexo(request.getParameter("slcSexo").charAt(0));
 			Nacionalidad nacionalidad = new Nacionalidad();
-			//nacionalidad.setIdNacionalidad(Integer.parseInt(request.getParameter("slcNacionalidad")));
-			nacionalidad.setIdNacionalidad(1); // para prueba
+			nacionalidad.setIdNacionalidad(Integer.parseInt(request.getParameter("slcNacionalidad")));
 			paciente.setnNacionalidad(nacionalidad);
 			Localidad localidad = new Localidad();
-			//localidad.setIdLocalidad(Integer.parseInt(request.getParameter("slcLocalidad")));
-			localidad.setIdLocalidad(1); // para prueba
+			localidad.setIdLocalidad(Integer.parseInt(request.getParameter("slcLocalidad")));
 			paciente.setlLocalidad(localidad);
 			paciente.setDireccion(request.getParameter("txtDireccion"));
 			paciente.setEmail(request.getParameter("txtEmail"));

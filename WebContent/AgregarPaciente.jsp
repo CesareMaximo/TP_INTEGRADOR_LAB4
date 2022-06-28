@@ -156,10 +156,7 @@ TELEFONO
 	}
 	*/
 	%>	
-	
-	
-	
-		<select name="localidades" id="localidad2">
+		<select name="localidades" id="localidad2"> 
 	<% 
 	ArrayList<Localidad> listaLocalidad2 = null;
 	
@@ -186,7 +183,7 @@ TELEFONO
 function myOnLoad() {
 		var earrings = document.getElementById('localidad2');
 		earrings.style.visibility = 'hidden';
-		 cargar_localidades();
+		cargar_localidades();
 	
 	}
 </script>

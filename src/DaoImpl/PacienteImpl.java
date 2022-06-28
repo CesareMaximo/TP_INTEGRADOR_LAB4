@@ -14,9 +14,9 @@ import javafx.css.PseudoClass;
 public class PacienteImpl implements PacienteDAO{
 
 	private static final String delete = "";
-	private static final String readall = "select * from paciente as pa inner join persona as pe on pe.DNI like pa.DNI INNER JOIN Nacionalidad as N on Pe.idNacionalidad = N.idNacionalidad "; 
+	private static final String readall = "select * from paciente as pa inner join persona as pe on pe.DNI like pa.DNI INNER JOIN Nacionalidad as N on Pe.idNacionalidad = N.idNacionalidad WHERE pe.Estado = 1"; 
 	private static final String update = "UPDATE Persona SET Nombre = ?, Apellido = ?, Sexo = ?, idNacionalidad = ?, FechaNacimiento = ?, Direccion = ?, idLocalidad = ?, Email = ?, Telefono1 = ?, Telefono2 = ? WHERE Dni = ?";
-	private static final String readPaciente = "SELECT * FROM Paciente as Pa INNER JOIN Persona AS Pe ON Pe.Dni = Pa.Dni INNER JOIN Nacionalidad as N on Pe.idNacionalidad = N.idNacionalidad WHERE Pe.Dni = ?";
+	private static final String readPaciente = "SELECT Pe.Estado, Pa.idPaciente, Pe.DNI, Pe.Nombre, Pe.Apellido, Pe.Sexo, Pe.idNacionalidad, N.Descripcion as DescripcionNac, Pe.FechaNacimiento, Pe.Direccion, Pe.idLocalidad, Lo.Descripcion as DescripcionLo, Pe.Email, Pe.Telefono1, Pe.Telefono2, Lo.idProvincia, Pro.Descripcion as DescripcionPro  FROM Paciente as Pa INNER JOIN Persona AS Pe ON Pe.Dni = Pa.Dni INNER JOIN Nacionalidad as N on Pe.idNacionalidad = N.idNacionalidad INNER JOIN Localidad as Lo ON Lo.idLocalidad = Pe.idLocalidad INNER JOIN Provincia as Pro ON Pro.idProvincia = Lo.idProvincia WHERE Pe.Dni = ?";
 	
 	@Override
 	public boolean insert(Paciente pa) {
@@ -86,7 +86,6 @@ public class PacienteImpl implements PacienteDAO{
 
 	private Paciente getPaciente(ResultSet resultSet) throws SQLException {
 		Paciente pa = new Paciente();
-		
 		Nacionalidad na = new Nacionalidad();
 		Localidad lo = new Localidad();
 		
@@ -112,9 +111,45 @@ public class PacienteImpl implements PacienteDAO{
 		//
 		pa.setTelefono1(resultSet.getString("Telefono1"));
 		pa.setTelefono2(resultSet.getString("Telefono2"));
+		//
 		
+		return pa;
+	}
 	
+	private Paciente getPaciente2(ResultSet resultSet) throws SQLException {
+		Paciente pa = new Paciente();
+		Nacionalidad na = new Nacionalidad();
+		Localidad lo = new Localidad();
+		Provincia pro = new Provincia();
 		
+		pa.setDni(resultSet.getString("DNI"));
+		pa.setIdPaciente(resultSet.getInt("idPaciente"));
+
+		pa.setNombre(resultSet.getString("Nombre"));
+		pa.setApellido(resultSet.getString("Apellido"));
+		pa.setSexo(resultSet.getString("Sexo").charAt(0));
+		//
+		na.setIdNacionalidad( resultSet.getInt("idNacionalidad"));	
+		na.setDescripcion( resultSet.getString("DescripcionNac"));
+		pa.setnNacionalidad(na);
+		//
+		pa.setFechaNacimiento(resultSet.getDate("FechaNacimiento"));
+		pa.setDireccion(resultSet.getString("Direccion"));
+		//
+		pro.setIdProvincia(resultSet.getInt("idProvincia"));
+		pro.setDescripcion(resultSet.getString("DescripcionPro"));
+		lo.setpProvincia(pro);
+		//
+		lo.setIdLocalidad(resultSet.getInt("idLocalidad"));
+		lo.setDescripcion(resultSet.getString("DescripcionLo"));
+		pa.setlLocalidad(lo);
+		//
+		pa.setEmail(resultSet.getString("Email"));
+		pa.setEstado(resultSet.getBoolean("Estado"));
+		//
+		pa.setTelefono1(resultSet.getString("Telefono1"));
+		pa.setTelefono2(resultSet.getString("Telefono2"));
+		//
 		return pa;
 	}
 	
@@ -184,7 +219,7 @@ public class PacienteImpl implements PacienteDAO{
 			statement.setString(1, dni);
 			resultSet = statement.executeQuery();
 			resultSet.next();
-			pa = getPaciente(resultSet);			
+			pa = getPaciente2(resultSet);			
 		} 
 		catch (SQLException e) 
 		{

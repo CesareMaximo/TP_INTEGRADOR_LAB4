@@ -36,8 +36,7 @@ public class Localidad {
 	//Metodo ToString
 	@Override
 	public String toString() {
-		return "Localidad [idLocalidad=" + idLocalidad + ", pProvincia=" + pProvincia + ", descripcion=" + descripcion
-				+ "]";
+		return descripcion;
 	}
 	
 	

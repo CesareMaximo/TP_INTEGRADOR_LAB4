@@ -20,7 +20,7 @@
 </style>
 <title>Nuevo médico</title>
 </head>
-<body onLoad="myLoad()">
+<body onLoad="myOnLoad()">
 
 
 <!-- FORMULARIO PARA AGREGAR UN MEDICO
@@ -251,10 +251,7 @@ CONTRASEÑA
 	
 	 </select>
 	
-	
-	
-	 
-	 
+
 	 <script>
 function myOnLoad() {
 		var earrings = document.getElementById('localidad2');

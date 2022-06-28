@@ -12,7 +12,7 @@ import Entidad.Provincia;
 
 public class LocalidadDAOImpl implements LocalidadDAO{
 
-	private static final String readallxid = "Select * from Localidad where idProvincia = ?";
+	private static final String readallxid = "Select Lo.idLocalidad, Lo.Descripcion as DescripcionLo, Pro.idProvincia, Pro.Descripcion as DescripcionPro from Localidad Lo INNER JOIN Provincia Pro ON Pro.idProvincia = Lo.idProvincia where Lo.idProvincia = ?";
 	private static final String readall = "Select * from Localidad ";
 	
 	@Override
@@ -32,10 +32,13 @@ public class LocalidadDAOImpl implements LocalidadDAO{
 			while(resultSet.next())
 			{
 				Localidad loc = new Localidad();
+				Provincia pro = new Provincia();
 				
+				pro.setIdProvincia(resultSet.getInt("idProvincia"));
+				pro.setDescripcion(resultSet.getString("DescripcionPro"));
 				loc.setIdLocalidad(resultSet.getInt("idLocalidad"));
-				loc.setDescripcion(resultSet.getString("descripcion"));
-				loc.setIdLocalidad(resultSet.getInt("idProvincia"));
+				loc.setDescripcion(resultSet.getString("DescripcionLo"));
+				loc.setpProvincia(pro);
 				
 				localidadList.add(loc);
 			}

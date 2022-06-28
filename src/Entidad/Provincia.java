@@ -28,7 +28,7 @@ public class Provincia {
 		//Metodo ToString
 		@Override
 		public String toString() {
-			return "Provincia [idProvincia=" + idProvincia + ", descripcion=" + descripcion + "]";
+			return descripcion;
 		}
 		
 		

@@ -21,7 +21,7 @@ public class LocalidadNegocioImpl implements LocalidadNegocio {
 	@Override
 	public List<Localidad> readAllxid(int idProvincia) {
 		// TODO Auto-generated method stub
-		return null;
+		return loc.readAllxid(idProvincia);
 	}
 
 }
