@@ -159,7 +159,7 @@
 					</select>
 				</tr>
 				<tr><td><label>Localidad:</label></td><td><select class="textbox" required id="localidadReal"  name="slcLocalidad" value=<%=id2%>>
-				
+				<option selected="selected" value=<%=id2%>>${paciente.lLocalidad}</option>
 				<%
 					ArrayList<Localidad> listaLocalidad = null;
 
@@ -168,9 +168,9 @@
 					listaLocalidad = (ArrayList<Localidad>) request.getAttribute("listaLocalidad2");
 				}
 
-				if (listaLocalidad != null)
+				if (listaLocalidad != null){
 					for (Localidad lo : listaLocalidad) {
-						//if (lo.getIdLocalidad() != Integer.parseInt(id2)){
+						if (lo.getIdLocalidad() != Integer.parseInt(id2)){
 	%>
 	<option value="<%=lo.getIdLocalidad()%>">
 		<%=lo.getDescripcion()%>
@@ -178,8 +178,10 @@
 
 	<%
 		}
-					//}
+					}
+					}
 	%>
+	
 				</select></tr>
 				<tr>
 					<td><label>Direcci&oacuten</label></td>
@@ -204,11 +206,39 @@
 			</table>
 			<br> <input name="btnModificarPaciente" type="submit"
 				value="Aceptar" class="btn btn-primary btn-block btn-large">
-		</form>
-	</div>
+				
+						<script>
+		
+var temp = <%=id%>;
+var mySelect = document.getElementById('provincia1');
+
+for(var i, j = 0; i = mySelect.options[j]; j++) {
+    if(i.value == temp) {
+        mySelect.selectedIndex = j;
+        break;
+    }
+}
+</script>
+
+
+
+<script>
+var temp = <%=id2%>;
+var mySelect = document.getElementById('localidadReal');
+
+for(var i, j = 0; i = mySelect.options[j]; j++) {
+    if(i.value == temp) {
+        mySelect.selectedIndex = j;
+        break;
+    }
+    }
+</script>
+				
+		
+	
 
 	<select name="localidades" id="localidad2">
-		
+		<option selected="selected" value=<%=id2%>>${paciente.lLocalidad}</option>
 		<%
 			ArrayList<Localidad> listaLocalidad2 = null;
 
@@ -249,9 +279,8 @@
 	<script>
 		function myOnLoad() {
 			var earrings = document.getElementById('localidad2');
-			//earrings.style.visibility = 'hidden';
-			cargar_localidades();
-
+			earrings.style.visibility = 'hidden';
+		
 		}
 	</script>
 
@@ -259,66 +288,45 @@
 	<script>
 		function cargar_localidades() {
 			document.getElementById("localidadReal").options.length = 0;
-
+			
 			var x = document.getElementById("localidad2");
 			var array = new Array();
 			var a = new Array();
 			var b = new Array();
-			for (i = 0; i < x.length; i++) {
-
+			for (i = 0; i < x.length; i++) { 
+				
 				array.push(x.options[i].text);
 				a.push(x.options[i].value);
 				b.push(x.options[i].getAttribute('data-uid'));
-
-			}
-
-			addOptions("slcLocalidad", array, a, b);
+				
 		}
+
+			
+
+			 addOptions("slcLocalidad", array, a,b);
+			}
+	
 	</script>
 
 	<script>
-		function addOptions(domElement, array, a, b) {
-			var select = document.getElementsByName(domElement)[0];
-			var inde = document.getElementById('provincia1').value;
+	function addOptions(domElement, array, a,b) {
+		 var select = document.getElementsByName(domElement)[0];
+		 var inde = document.getElementById('provincia1').value;
 
-			for (value in array) {
-				if (a[value] === inde) {
-					var option = document.createElement("option");
-					option.text = array[value];
-					option.value = b[value];
-					select.add(option);
-				}
+		 for (value in array) {
+			if(a[value] === inde){
+		  var option = document.createElement("option");
+		  option.text = array[value];
+		  option.value = b[value];
+		  select.add(option);
 			}
+		 }
 		}
 	</script>
 	
-		<script>
-		
-var temp = <%=id%>;
-var mySelect = document.getElementById('provincia1');
 
-for(var i, j = 0; i = mySelect.options[j]; j++) {
-    if(i.value == temp) {
-        mySelect.selectedIndex = j;
-        break;
-    }
-}
-</script>
-
-
-
-<script>
-var temp = <%=id2%>;
-var mySelect = document.getElementById('localidadReal');
-
-for(var i, j = 0; i = mySelect.options[j]; j++) {
-    if(i.value == temp) {
-        mySelect.selectedIndex = j;
-        break;
-    }
-    }
-</script>
-
+</form>
+</div>
 </body>
 </html>
 
