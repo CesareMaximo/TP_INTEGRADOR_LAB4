@@ -15,6 +15,12 @@
 </style>
 <title>Nuevo Paciente</title>
 </head>
+
+<% 	
+if(session.getAttribute("tipo") != null){
+if (session.getAttribute("tipo").equals("Admin")) {
+%>
+
 <body onLoad="myOnLoad()">
 
 <!-- FORMULARIO PARA AGREGAR UN PACIENTE
@@ -30,17 +36,6 @@ DIRECCION
 EMAIL
 TELEFONO 
 -->
-<% 	
-	
- /*	try{
-	
-		if(session == null){
-			
-		}
-
-	
-		if (session.getAttribute("tipo").equals("Admin")) { */
-	%>
 <div style="float: left; margin-left: 12px; margin-top:6px;">
 <a href="ServletPaciente?Param=1"><img src="img/atras.png" height="20px" /></a>
 <a href="IndexAdmin.jsp"> <img src="img/home.png" height="20px" style="margin-left:10px;" width="20px" ></a> 
@@ -142,19 +137,13 @@ TELEFONO
 	</div>
 	 <%
 	 
-	 /*
-		} else {
+} else {
 
-			response.sendRedirect("Error.jsp");
-		}
-	}
-	catch(Exception e){
-		e.printStackTrace();
-		//response.sendRedirect("Login.jsp");
-	}
-	finally{
-	}
-	*/
+	response.sendRedirect("Error.jsp");
+}
+}else{
+	response.sendRedirect("Login.jsp");
+}
 	%>	
 		<select name="localidades" id="localidad2"> 
 	<% 

@@ -14,24 +14,18 @@
 </style>
 <title>Modificar Paciente</title>
 </head>
-<body onLoad="myOnLoad()">
-	<!-- MISMO FORMULARIO QUE AGREGAR PERO CON DATOS PRECARGADOS -->
-	<%
-		/* try {
-
-			if (session == null) {
-
-			}
-
-			if (session.getAttribute("tipo").equals("Admin")) {
- */
+<% 	
+if(session.getAttribute("tipo") != null){
+if (session.getAttribute("tipo").equals("Admin")) {
 				Paciente pa = new Paciente();
 				pa = (Paciente) session.getAttribute("paciente");
 				String id = String.valueOf(pa.getlLocalidad().getpProvincia().getIdProvincia());
 				String id2 = String.valueOf(pa.getlLocalidad().getIdLocalidad());
+%>
 
-				
-	%>
+<body onLoad="myOnLoad()">
+	<!-- MISMO FORMULARIO QUE AGREGAR PERO CON DATOS PRECARGADOS -->
+
 	<div style="float: left; margin-left: 12px; margin-top: 6px;">
 		<a href="ServletPaciente?Param=1"><img src="img/atras.png"
 			height="20px" /></a> <a href="IndexAdmin.jsp"> <img
@@ -265,16 +259,17 @@ for(var i, j = 0; i = mySelect.options[j]; j++) {
 
 
 
-<%-- 	<%
+  <%
 		} else {
 
-				response.sendRedirect("Error.jsp");
-			}
-		} catch (Exception e) {
-			response.sendRedirect("Login.jsp");
-		} finally {
+			response.sendRedirect("Error.jsp");
 		}
-	%> --%>
+		}else{
+			response.sendRedirect("Login.jsp");
+		}
+	
+	
+	%>	
 
 	<script>
 		function myOnLoad() {

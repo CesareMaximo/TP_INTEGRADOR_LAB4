@@ -7,20 +7,16 @@
 <style type="text/css">
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
+
+<% 	
+if(session.getAttribute("tipo") != null){
+if (session.getAttribute("tipo").equals("Admin")) {
+%>
+
+
 <title>Modificar Médico</title>
 </head>
 <body>
-<% 	
-	
-	try{
-	
-		if(session == null){
-			
-		}
-
-	
-		if (session.getAttribute("tipo").equals("Admin")) {
-	%>
 <div style="float: left; margin-left: 12px; margin-top:6px;">
 <a href="ServletMedico?Param=1"><img src="img/atras.png" height="20px" /></a>
 <a href="IndexAdmin.jsp"> <img src="img/home.png" height="20px" style="margin-left:10px;" width="20px" ></a> 
@@ -119,17 +115,15 @@
 			</form>
 	</div>
 
- <%
+  <%
 		} else {
 
 			response.sendRedirect("Error.jsp");
 		}
-	}
-	catch(Exception e){
-		response.sendRedirect("Login.jsp");
-	}
-	finally{
-	}
+		}else{
+			response.sendRedirect("Login.jsp");
+		}
+	
 	
 	%>	
 </body>

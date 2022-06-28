@@ -20,14 +20,8 @@ ASIGNACION DE TURNOS
 LISTADO DE TURNOS
 REPORTES 
   --><% 	
-	
-	try{
-	
-		if(session == null){
-			
-		}
 
-	
+		if(session.getAttribute("tipo") != null){
 		if (session.getAttribute("tipo").equals("Admin")) {
 	%>
  <div class="User">
@@ -106,12 +100,9 @@ REPORTES
 
 			response.sendRedirect("Error.jsp");
 		}
-	}
-	catch(Exception e){
-		response.sendRedirect("Login.jsp");
-	}
-	finally{
-	}
+		}else{
+			response.sendRedirect("Login.jsp");
+		}
 	
 	%>	
 </body>

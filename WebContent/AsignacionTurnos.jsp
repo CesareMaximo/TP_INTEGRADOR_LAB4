@@ -15,6 +15,11 @@
 </style>
 <title>Asignaci&oacuten de Turnos</title>
 </head>
+<% 	
+if(session.getAttribute("tipo") != null){
+if (session.getAttribute("tipo").equals("Admin")) {
+%>
+
 <body  onLoad="myOnLoad()" >
 <!-- DESPLAGLE DE ESPECIALIDADES QUE FILTRE LOS MEDICOS
 DESPLEGABLE DE MEDICOS
@@ -24,17 +29,7 @@ INPUT PARA DNI PACIENTE
 BOTON RESERVAR TURNO, AL APRETAR BOTON DEBERA CHEQUEAR SI EL DNI ESTA REGISTRADO, SI ESTA REGISTRADO MENSAJE
 DE CONFIRMACION Y EN EL BACK CAMBIAR EL ESTADO DE TURNO A OCUPADO Y ASIGNAR ID PACIENTE 
 SI NO ESTA REGISTRADO, MENSAJE "PACIENTE NO REGISTRADO, BOTON PARA REGISTRAR"
---><% 	
-	
-	try{
-	
-		if(session == null){
-			
-		}
-
-	
-		if (session.getAttribute("tipo").equals("Admin")) {
-	%>
+-->
   <div style="float: left; margin-left: 12px; margin-top:6px;">
 <a href="IndexAdmin.jsp"><img src="img/atras.png" height="20px" /></a>
 <a href="IndexAdmin.jsp"> <img src="img/home.png" height="20px" style="margin-left:10px;" width="20px" ></a> 
@@ -100,17 +95,14 @@ SI NO ESTA REGISTRADO, MENSAJE "PACIENTE NO REGISTRADO, BOTON PARA REGISTRAR"
 				<input name=" insert" type="submit" value="Reservar Turno" class="btn btn-primary btn-block btn-large">
 			</form>
 	</div>
-	 <%
+		 <%
 		} else {
 
 			response.sendRedirect("Error.jsp");
 		}
-	}
-	catch(Exception e){
-		response.sendRedirect("Login.jsp");
-	}
-	finally{
-	}
+		}else{
+			response.sendRedirect("Login.jsp");
+		}
 	
 	%>	
 	

@@ -5,16 +5,10 @@
 
 	<% 	
 	
-	try{
-	
-		if(session == null){
-
-		}
-
-	
+	if(session.getAttribute("tipo") != null){
 		if (session.getAttribute("tipo").equals("Medico")) {
 	%>
-
+	
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
@@ -29,6 +23,8 @@
 <title>Mis turnos asignados</title>
 </head>
 <body>
+
+
 
 	<!--LISTADO DE TURNOS ASIGNADOS CON BUSQUEDA  
 EN CADA TURNO PODRA VER LOS DATOS DEL TURNO, AMPLIAR DETALLE DE PACIENTE, AGREGAR OBSERVACIÓN, CAMBIAR ESTADO 
@@ -226,12 +222,10 @@ EN CADA TURNO PODRA VER LOS DATOS DEL TURNO, AMPLIAR DETALLE DE PACIENTE, AGREGA
 
 			response.sendRedirect("Error.jsp");
 		}
-	}
-	catch(Exception e){
-		
-		response.sendRedirect("Login.jsp");
-	}
-	
+		}else{
+			response.sendRedirect("Login.jsp");
+		}
+
 	%>
 </body>
 </html>

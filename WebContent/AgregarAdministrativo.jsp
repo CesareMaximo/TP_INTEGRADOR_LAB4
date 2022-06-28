@@ -12,17 +12,9 @@
 </head>
 <body>
 <% 	
-	
-	try{
-	
-		if(session == null){
-			
-		}
-
-	
-	if (session.getAttribute("tipo").equals("Admin")) {
-		%>
-
+if(session.getAttribute("tipo") != null){
+if (session.getAttribute("tipo").equals("Admin")) {
+%>
 
 <div style="float: left; margin-left: 12px; margin-top:6px;">
 <a href="IndexAdmin.jsp"><img src="img/atras.png" height="20px" /></a>
@@ -86,17 +78,13 @@
 		</form>
 	</div>
 	<%
-		} else {
+	} else {
 
-			response.sendRedirect("Error.jsp");
-		}
+		response.sendRedirect("Error.jsp");
 	}
-	catch(Exception e){
+	}else{
 		response.sendRedirect("Login.jsp");
 	}
-	finally{
-	}
-
 
 		%>
 	
