@@ -550,29 +550,29 @@ body {
   }
 }
 
-/* .modal{ */
-/*   background-color: rgba(0,0,0,.8); */
-/*   position:fixed; */
-/*   top:0; */
-/*   right:0; */
-/*   bottom:0; */
-/*   left:0;  */
-/* } */
-/* .modal-contenido{ */
-/*   background: #E9E2E8; */
-/*   width:300px; */
-/*   padding: 10px 20px; */
-/*   margin: 20% auto; */
-/*   position: relative; */
-/*   text-align: center; */
-/*   border-radius: 1rem;  */
-/*   color: #491A42; */
-/* } */
-/* .resizedTextbox { */
-/*   background-color: light grey; */
-/*   border: none; */
-/*   color: black; */
-/*  } */
+.modificar{
+  background-color: rgba(0,0,0,.8);
+  position:fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0; 
+}
+.modificar-contenido{
+  background: #E9E2E8;
+  width:300px;
+  padding: 10px 20px;
+  margin: 20% auto;
+  position: relative;
+  text-align: center;
+  border-radius: 1rem; 
+  color: #491A42;
+}
+.resizedTextbox {
+  background-color: light grey;
+  border: none;
+  color: black;
+ }
 
 .modal-confirm {
 	

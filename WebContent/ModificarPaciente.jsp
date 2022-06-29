@@ -47,7 +47,7 @@
 				<tr>
 					<td><label>DNI</label></td>
 					<td><input name="txtDni" type="text" class="inputForm"
-						size="20" disabled value="${paciente.dni}"></td>
+						size="20" readonly value="${paciente.dni}"></td>
 				</tr>
 				<tr>
 					<td><label>Nombres</label></td>
@@ -136,7 +136,7 @@
 											listaProvincia = (ArrayList<Provincia>) request.getAttribute("listaProvincia");
 										}
 
-										if (listaProvincia != null)
+										if (listaProvincia != null){
 											for (Provincia es : listaProvincia) {
 												//if (es.getIdProvincia() != Integer.parseInt(id)){
 							%>
@@ -146,7 +146,7 @@
 
 							<%
 								}
-											//}
+											}
 							%>
 
 					</select>
@@ -170,9 +170,9 @@
 	</option>
 
 	<%
-		}
 					}
-					}
+						}
+							}
 	%>
 	
 				</select></tr>
@@ -183,7 +183,7 @@
 				</tr>
 				<tr>
 					<td><label>E-mail</label></td>
-					<td><input name="txtEmail " type="email" class="inputForm"
+					<td><input name="txtEmail" type="email" class="inputForm"
 						size="20" required value="${paciente.email}"></td>
 				</tr>
 				<tr>
@@ -201,6 +201,7 @@
 				value="Aceptar" class="btn btn-primary btn-block btn-large">
 				
 						<script>
+						
 		
 var temp = <%=id%>;
 var mySelect = document.getElementById('provincia1');
@@ -212,6 +213,7 @@ for(var i, j = 0; i = mySelect.options[j]; j++) {
     }
 }
 </script>
+
 
 
 

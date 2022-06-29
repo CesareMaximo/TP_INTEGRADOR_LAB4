@@ -112,13 +112,11 @@ TELEFONO
 				<input name="insert" type="submit" value="Aceptar" class="btn btn-primary btn-block btn-large">
 				<% 		
 			
-				/*
+				
 					boolean x = (boolean)request.getAttribute("exito");
 					
 					if(x == true){
-						*/
 						%>
-						<!--
 						<div id="miModal" class="modal">
 						  <div class="modal-contenido">
 				
@@ -126,8 +124,7 @@ TELEFONO
 						    <h2>PACIENTE AGREGADO CON ÉXITO</h2>
 						  </div>  
 						</div>
-						-->
-						 <% /* } */
+						 <%} 
 							%>
 			</form>
 	</div>

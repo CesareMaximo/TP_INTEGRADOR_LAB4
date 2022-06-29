@@ -211,6 +211,7 @@ public class PacienteImpl implements PacienteDAO{
 			statement.setString(8, pa.getEmail());
 			statement.setString(9, pa.getTelefono1());
 			statement.setString(10, pa.getTelefono2());
+			statement.setString(11, pa.getDni());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();

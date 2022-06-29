@@ -72,6 +72,7 @@ public class ServletPaciente extends HttpServlet {
 		
 		if(request.getParameter("Param")!= null) {
 			request.setAttribute("listaPaciente", listaPaciente);
+			request.setAttribute("exito", false);
 			
 			rd = request.getRequestDispatcher("/MenuPaciente.jsp");
 			rd.forward(request, response);
@@ -179,9 +180,9 @@ public class ServletPaciente extends HttpServlet {
 		}
 		
 		if(request.getParameter("btnModificarPaciente") != null) {
-			paciente.setDni(request.getParameter("txtDni").toString());
 			paciente.setNombre(request.getParameter("txtNombre").toString());
 			paciente.setApellido(request.getParameter("txtApellido").toString());
+			paciente.setDni(request.getParameter("txtDni").toString());
 			SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 			Date dateFormateado = new Date();
 			try {
@@ -191,15 +192,12 @@ public class ServletPaciente extends HttpServlet {
 			}  
 			java.sql.Date date1 = new java.sql.Date(dateFormateado.getTime());
 			paciente.setFechaNacimiento(date1);
-			//paciente.setSexo(request.getParameter("slcSexo").charAt(0));
-			paciente.setSexo('M'); // para prueba
+			paciente.setSexo(request.getParameter("slcSexo").charAt(0));
 			Nacionalidad nacionalidad = new Nacionalidad();
-			//nacionalidad.setIdNacionalidad(Integer.parseInt(request.getParameter("slcNacionalidad")));
-			nacionalidad.setIdNacionalidad(1); // para prueba
+			nacionalidad.setIdNacionalidad(Integer.parseInt(request.getParameter("slcNacionalidad")));
 			paciente.setnNacionalidad(nacionalidad);
 			Localidad localidad = new Localidad();
-			//localidad.setIdLocalidad(Integer.parseInt(request.getParameter("slcLocalidad")));
-			localidad.setIdLocalidad(1); // para prueba
+			localidad.setIdLocalidad(Integer.parseInt(request.getParameter("slcLocalidad")));
 			paciente.setlLocalidad(localidad);
 			paciente.setDireccion(request.getParameter("txtDireccion"));
 			paciente.setEmail(request.getParameter("txtEmail"));
@@ -208,10 +206,13 @@ public class ServletPaciente extends HttpServlet {
 			
 			if(paNeg.update(paciente) == true) {
 				request.setAttribute("exito", true);
-				request.setAttribute("mensaje", "");				
+				request.setAttribute("mensaje", "");
+				ArrayList<Paciente> listaPaciente = (ArrayList<Paciente>) paNeg.readAll();
+				request.setAttribute("listaPaciente", listaPaciente);
+				rd = request.getRequestDispatcher("/MenuPaciente.jsp");
+				rd.forward(request, response);
 			}
 
-			request.getRequestDispatcher("ServletPaciente?Param=1").forward(request, response);
 		}
 		
 		

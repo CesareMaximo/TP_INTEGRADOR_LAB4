@@ -149,8 +149,24 @@ FILTRO DE BUSQUEDA-->
 										</div>
 									</div>
 								</div>
-							</div>     
+							</div>    
 						</form>
+						
+						<% 		
+			
+				
+					boolean x = (boolean)request.getAttribute("exito");
+					if(x == true){
+						%>
+						<div id="miModal" class="modificar">
+						  <div class="modificar-contenido">
+				
+						    <a href="ServletPaciente?Param=1.jsp">X</a>
+						    <h2>PACIENTE MODIFICADO CON ÉXITO</h2>
+						  </div>  
+						</div>
+						 <%} 
+							%>
 	
 	
 </body>
