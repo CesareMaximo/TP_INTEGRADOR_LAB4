@@ -11,10 +11,7 @@
 <title>Nuevo Administrador</title>
 </head>
 <body>
-<% 	
-if(session.getAttribute("tipo") != null){
-if (session.getAttribute("tipo").equals("Admin")) {
-%>
+
 
 <div style="float: left; margin-left: 12px; margin-top:6px;">
 <a href="IndexAdmin.jsp"><img src="img/atras.png" height="20px" /></a>
@@ -77,16 +74,7 @@ if (session.getAttribute("tipo").equals("Admin")) {
 							%>
 		</form>
 	</div>
-	<%
-	} else {
 
-		response.sendRedirect("Error.jsp");
-	}
-	}else{
-		response.sendRedirect("Login.jsp");
-	}
-
-		%>
 	
 </body>
 </html>

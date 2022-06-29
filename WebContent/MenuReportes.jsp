@@ -22,10 +22,7 @@ TOTAL DE TURNOS AUSENTES POR ENTRE FECHA Y FECHA
 PROMEDIO DE PACIENTES POR MEDICO
 PROMEDIO DE PACIENTES POR ESPECIALIDAD
  -->
-<% 	
-if(session.getAttribute("tipo") != null){
-if (session.getAttribute("tipo").equals("Admin")) {
-%>
+
  
 <div style="float: left; margin-left: 12px; margin-top:6px;">
 <a href="IndexAdmin.jsp"><img src="img/atras.png" height="20px" /></a>
@@ -132,13 +129,6 @@ if (session.getAttribute("tipo").equals("Admin")) {
 		
 	</div>
 </div>
-<%} else {
 
-			response.sendRedirect("Error.jsp");
-		}
-		}else{
-			response.sendRedirect("Login.jsp");
-		}
-	%>	
 </body>
 </html>

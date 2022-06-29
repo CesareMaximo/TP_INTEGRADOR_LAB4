@@ -13,9 +13,9 @@ public class MedicoDAOImpl implements  MedicoDAO{
 
 	
 	//private static final String insert = "";
-	private static final String delete = "";
-	private static final String readall = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad";
-	private static final String readallFiltro = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad where m.idEspecialidad = ?";
+	private static final String delete = "UPDATE Persona set Estado = 0 where DNI like ?";
+	private static final String readall = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad WHERE p.Estado = 1";
+	private static final String readallFiltro = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad where m.idEspecialidad = ? and p.Estado = 1";
 	//private static final String readallBuscar = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad where p.Nombre like '%"++"%' or p.Apellido like '%"++"%' ";
 	
 	@Override
@@ -57,13 +57,7 @@ public class MedicoDAOImpl implements  MedicoDAO{
 		return isInsertExitoso;
 	}
 
-	@Override
-	public boolean delete(Medico meDelete) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
-	
 	@Override
 	public List<Medico> readAll() {
 		PreparedStatement statement;
@@ -169,6 +163,28 @@ public class MedicoDAOImpl implements  MedicoDAO{
 			e.printStackTrace();
 		}
 		return medicoList;
+	}
+
+	@Override
+	public boolean delete(String dni) {
+		boolean isUpdateExitoso = false;		
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		try 
+		{
+			statement = conexion.prepareStatement(delete);
+			statement.setString(1, dni);
+			
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isUpdateExitoso = true;
+			}
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return isUpdateExitoso;
 	}
 
 }

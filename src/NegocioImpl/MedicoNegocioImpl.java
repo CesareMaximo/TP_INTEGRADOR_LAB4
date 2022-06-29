@@ -18,9 +18,9 @@ public class MedicoNegocioImpl implements MedicoNegocio {
 	}
 
 	@Override
-	public boolean delete(Medico meDelete) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean delete(String dni) {
+		return meDAO.delete(dni);
+		
 	}
 
 	@Override

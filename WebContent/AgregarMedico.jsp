@@ -21,10 +21,6 @@
 <title>Nuevo médico</title>
 </head>
 
-<% 	
-if(session.getAttribute("tipo") != null){
-if (session.getAttribute("tipo").equals("Admin")) {
-%>
 
 <body onLoad="myOnLoad()">
 
@@ -213,16 +209,7 @@ CONTRASEÑA
 		
 			
 	</div>
-	 <%
-		} else {
 
-			response.sendRedirect("Error.jsp");
-		}
-		}else{
-			response.sendRedirect("Login.jsp");
-		}
-	
-	%>	
 	
 		<select name="localidades" id="localidad2">
 	<% 

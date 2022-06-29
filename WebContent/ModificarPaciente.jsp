@@ -15,8 +15,7 @@
 <title>Modificar Paciente</title>
 </head>
 <% 	
-if(session.getAttribute("tipo") != null){
-if (session.getAttribute("tipo").equals("Admin")) {
+
 				Paciente pa = new Paciente();
 				pa = (Paciente) session.getAttribute("paciente");
 				String id = String.valueOf(pa.getlLocalidad().getpProvincia().getIdProvincia());
@@ -259,17 +258,6 @@ for(var i, j = 0; i = mySelect.options[j]; j++) {
 
 
 
-  <%
-		} else {
-
-			response.sendRedirect("Error.jsp");
-		}
-		}else{
-			response.sendRedirect("Login.jsp");
-		}
-	
-	
-	%>	
 
 	<script>
 		function myOnLoad() {

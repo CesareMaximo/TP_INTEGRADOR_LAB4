@@ -12,21 +12,15 @@
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
 
-<% 	
-if(session.getAttribute("tipo") != null){
-if (session.getAttribute("tipo").equals("Admin")) {
-%>
-
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<title>Medicos</title>
 </head>
 <body>
 <!-- LISTADO DE MEDICOS CON BOTON AGREGAR PACIENTE Y BOTONES MODIFICAR Y ELIMINAR EN CADA FILA 
@@ -122,7 +116,7 @@ FILTRO DE BUSQUEDA-->
 							<td><%=me.geteEspecialidad()%></td>
                         <td>
                             <a href="ModificarMedico.jsp" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                           <a href="#myModal" class="delete" title="Delete" data-toggle="modal" data-med-id="<%=me.getDni()%>" ><i class="material-icons">&#xE872;</i></a>
                         </td>
         
 					<%} %>
@@ -144,16 +138,44 @@ FILTRO DE BUSQUEDA-->
         </div>
     </div>  
 </div> 
- <%
-		} else {
 
-			response.sendRedirect("Error.jsp");
-		}
-		}else{
-			response.sendRedirect("Login.jsp");
-		}
+					<script type="text/javascript">
+	                        $(document).ready(function (e) {
+	                        	  $('#myModal').on('show.bs.modal', function(e) {
+	                        	 
+	                        		  var dni = $(e.relatedTarget).data('med-id'); 
+	                        		  $(e.currentTarget).find('input[name="medId"]').val(dni);
+										
+	                        		  
+	                        	  });
+	                        	});
+							
+							</script>	
+
 	
 	
-	%>	
+			<form action="ServletMedico?Eliminar=1" method="post">
+							<div id="myModal" class="modal fade">
+								<div class="modal-dialog modal-confirm">
+									<div class="modal-content">
+										<div class="modal-header flex-column">
+											<div class="icon-box">
+												<i class="material-icons">&#xE5CD;</i>
+											</div>						
+											<h4 class="modal-title w-100">¿Estás seguro?</h4>	
+							                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+										</div>
+										<div class="modal-body">
+											<p>¿Desea eliminar el médico? Esta operación no se puede deshacer</p>
+											<input type="hidden" name="medId" id="medId">
+										</div>
+										<div class="modal-footer justify-content-center">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+											<button type="submit" class="btn btn-danger">Borrar</button>
+										</div>
+									</div>
+								</div>
+							</div>     
+						</form>
 </body>
 </html>

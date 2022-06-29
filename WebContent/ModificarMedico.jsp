@@ -8,10 +8,7 @@
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
 
-<% 	
-if(session.getAttribute("tipo") != null){
-if (session.getAttribute("tipo").equals("Admin")) {
-%>
+
 
 
 <title>Modificar Médico</title>
@@ -115,16 +112,6 @@ if (session.getAttribute("tipo").equals("Admin")) {
 			</form>
 	</div>
 
-  <%
-		} else {
-
-			response.sendRedirect("Error.jsp");
-		}
-		}else{
-			response.sendRedirect("Login.jsp");
-		}
 	
-	
-	%>	
 </body>
 </html>

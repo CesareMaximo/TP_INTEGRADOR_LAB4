@@ -18,9 +18,9 @@ public class PacienteNegocioImpl implements PacienteNegocio {
 	}
 
 	@Override
-	public boolean delete(Paciente paDelete) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean delete(String dni) {
+		
+		return paDAO.delete(dni);
 	}
 
 	@Override

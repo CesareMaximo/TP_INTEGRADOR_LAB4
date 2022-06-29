@@ -15,10 +15,7 @@
 </style>
 <title>Asignaci&oacuten de Turnos</title>
 </head>
-<% 	
-if(session.getAttribute("tipo") != null){
-if (session.getAttribute("tipo").equals("Admin")) {
-%>
+
 
 <body  onLoad="myOnLoad()" >
 <!-- DESPLAGLE DE ESPECIALIDADES QUE FILTRE LOS MEDICOS
@@ -95,16 +92,7 @@ SI NO ESTA REGISTRADO, MENSAJE "PACIENTE NO REGISTRADO, BOTON PARA REGISTRAR"
 				<input name=" insert" type="submit" value="Reservar Turno" class="btn btn-primary btn-block btn-large">
 			</form>
 	</div>
-		 <%
-		} else {
-
-			response.sendRedirect("Error.jsp");
-		}
-		}else{
-			response.sendRedirect("Login.jsp");
-		}
 	
-	%>	
 	
 	
   <select name="medicosaux" id="medico2"> 

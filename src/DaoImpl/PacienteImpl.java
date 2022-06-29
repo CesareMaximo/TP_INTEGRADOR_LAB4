@@ -13,7 +13,7 @@ import javafx.css.PseudoClass;
 
 public class PacienteImpl implements PacienteDAO{
 
-	private static final String delete = "";
+	private static final String delete = "UPDATE Persona set Estado = 0 where DNI like ?";
 	private static final String readall = "select * from paciente as pa inner join persona as pe on pe.DNI like pa.DNI INNER JOIN Nacionalidad as N on Pe.idNacionalidad = N.idNacionalidad WHERE pe.Estado = 1"; 
 	private static final String update = "UPDATE Persona SET Nombre = ?, Apellido = ?, Sexo = ?, idNacionalidad = ?, FechaNacimiento = ?, Direccion = ?, idLocalidad = ?, Email = ?, Telefono1 = ?, Telefono2 = ? WHERE Dni = ?";
 	private static final String readPaciente = "SELECT Pe.Estado, Pa.idPaciente, Pe.DNI, Pe.Nombre, Pe.Apellido, Pe.Sexo, Pe.idNacionalidad, N.Descripcion as DescripcionNac, Pe.FechaNacimiento, Pe.Direccion, Pe.idLocalidad, Lo.Descripcion as DescripcionLo, Pe.Email, Pe.Telefono1, Pe.Telefono2, Lo.idProvincia, Pro.Descripcion as DescripcionPro  FROM Paciente as Pa INNER JOIN Persona AS Pe ON Pe.Dni = Pa.Dni INNER JOIN Nacionalidad as N on Pe.idNacionalidad = N.idNacionalidad INNER JOIN Localidad as Lo ON Lo.idLocalidad = Pe.idLocalidad INNER JOIN Provincia as Pro ON Pro.idProvincia = Lo.idProvincia WHERE Pe.Dni = ?";
@@ -55,9 +55,25 @@ public class PacienteImpl implements PacienteDAO{
 	}
 
 	@Override
-	public boolean delete(Paciente paDelete) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean delete(String dni) {
+		boolean isUpdateExitoso = false;		
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		try 
+		{
+			statement = conexion.prepareStatement(delete);
+			statement.setString(1, dni);
+			
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isUpdateExitoso = true;
+			}
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return isUpdateExitoso;
 	}
 
 	@Override

@@ -7,7 +7,7 @@ import Entidad.Paciente;
 public interface PacienteNegocio {
 
 	public boolean insert(Paciente pa);
-	public boolean delete(Paciente paDelete);
+	public boolean delete(String dni);
 	public List<Paciente> readAll();
 	public List<Paciente> readAllBuscar(String nombre);
 	public boolean update(Paciente pa);

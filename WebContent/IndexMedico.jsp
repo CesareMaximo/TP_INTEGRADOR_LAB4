@@ -3,12 +3,6 @@
 <jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
 
-	<% 	
-	
-	if(session.getAttribute("tipo") != null){
-		if (session.getAttribute("tipo").equals("Medico")) {
-	%>
-	
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
@@ -217,15 +211,6 @@ EN CADA TURNO PODRA VER LOS DATOS DEL TURNO, AMPLIAR DETALLE DE PACIENTE, AGREGA
 				class="btn btn-primary btn-sm btn-block" style="margin-top: 5px;">
 		</div>
 	</div>
-	<%
-		} else {
 
-			response.sendRedirect("Error.jsp");
-		}
-		}else{
-			response.sendRedirect("Login.jsp");
-		}
-
-	%>
 </body>
 </html>

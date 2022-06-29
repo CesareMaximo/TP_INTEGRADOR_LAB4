@@ -67,6 +67,9 @@ public class ServletPaciente extends HttpServlet {
 		
 		ArrayList<Paciente> listaPaciente = (ArrayList<Paciente>) paNeg.readAll();
 		
+		
+		
+		
 		if(request.getParameter("Param")!= null) {
 			request.setAttribute("listaPaciente", listaPaciente);
 			
@@ -96,15 +99,31 @@ public class ServletPaciente extends HttpServlet {
 		
 		PacienteNegocio paNeg = new PacienteNegocioImpl();
 		Paciente paciente = new Paciente();
-		
+		RequestDispatcher rd;
 		
 		LocalidadNegocio loNeg = new LocalidadNegocioImpl();
 		
 		ArrayList<Localidad> listaLocalidad = (ArrayList<Localidad>) loNeg.readAll();
 		
 		request.setAttribute("listaLocalidad", listaLocalidad);
-
-		RequestDispatcher rd;
+		
+		
+		if (request.getParameter("Eliminar") != null) {
+			String dni = request.getParameter("pacId");
+			
+			if(paNeg.delete(dni)==true) {
+				request.setAttribute("exito", true);
+				request.setAttribute("mensaje", "");
+				ArrayList<Paciente> listaPaciente = (ArrayList<Paciente>) paNeg.readAll();
+				request.setAttribute("listaPaciente", listaPaciente);
+				rd = request.getRequestDispatcher("/MenuPaciente.jsp");
+				rd.forward(request, response);
+			}
+			
+		}
+		
+		
+		
 		if(request.getParameter("btnBuscar")!=null) {
 			
 			String nombre= request.getParameter("txtBuscar").toString();
@@ -194,6 +213,11 @@ public class ServletPaciente extends HttpServlet {
 
 			request.getRequestDispatcher("ServletPaciente?Param=1").forward(request, response);
 		}
+		
+		
+	
+		
+		
 		
 	}
 

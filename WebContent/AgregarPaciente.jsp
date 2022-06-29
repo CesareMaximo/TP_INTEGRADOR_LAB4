@@ -16,10 +16,6 @@
 <title>Nuevo Paciente</title>
 </head>
 
-<% 	
-if(session.getAttribute("tipo") != null){
-if (session.getAttribute("tipo").equals("Admin")) {
-%>
 
 <body onLoad="myOnLoad()">
 
@@ -135,16 +131,7 @@ TELEFONO
 							%>
 			</form>
 	</div>
-	 <%
-	 
-} else {
 
-	response.sendRedirect("Error.jsp");
-}
-}else{
-	response.sendRedirect("Login.jsp");
-}
-	%>	
 		<select name="localidades" id="localidad2"> 
 	<% 
 	ArrayList<Localidad> listaLocalidad2 = null;

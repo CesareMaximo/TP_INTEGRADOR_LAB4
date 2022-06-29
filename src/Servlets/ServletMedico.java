@@ -17,6 +17,7 @@ import Entidad.Especialidad;
 import Entidad.Localidad;
 import Entidad.Medico;
 import Entidad.Nacionalidad;
+import Entidad.Paciente;
 import Entidad.Provincia;
 import Entidad.Usuario;
 import Negocio.EspecialidadNegocio;
@@ -119,7 +120,26 @@ public class ServletMedico extends HttpServlet {
 			rd = request.getRequestDispatcher("/MenuMedico.jsp");
 			rd.forward(request, response);
 		}
-					
+				
+		//Eliminar
+		
+		if (request.getParameter("Eliminar") != null) {
+			String dni = request.getParameter("medId");
+			
+			if(meNeg.delete(dni)==true) {
+				request.setAttribute("exito", true);
+				request.setAttribute("mensaje", "");
+				ArrayList<Medico> listaMedico = (ArrayList<Medico>) meNeg.readAll();
+				request.setAttribute("listaMedico", listaMedico);
+				rd = request.getRequestDispatcher("/MenuMedico.jsp");
+				rd.forward(request, response);
+			}
+			
+		}
+		
+		
+		
+		
 		//BtnBuscar
 		if(request.getParameter("btnBuscar")!=null) {
 			

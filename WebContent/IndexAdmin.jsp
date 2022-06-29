@@ -19,11 +19,7 @@ MENU MEDICO
 ASIGNACION DE TURNOS
 LISTADO DE TURNOS
 REPORTES 
-  --><% 	
-
-		if(session.getAttribute("tipo") != null){
-		if (session.getAttribute("tipo").equals("Admin")) {
-	%>
+  -->
  <div class="User">
  	<form method="post" action ="logout" >
  		<img width="16px"class="imag" src="img/user.png"/> Bienvenido <b> <%= session.getAttribute("username") %></b>
@@ -95,15 +91,6 @@ REPORTES
 			</div>
 			</form>
 	</div>
- <%
-		} else {
 
-			response.sendRedirect("Error.jsp");
-		}
-		}else{
-			response.sendRedirect("Login.jsp");
-		}
-	
-	%>	
 </body>
 </html>
