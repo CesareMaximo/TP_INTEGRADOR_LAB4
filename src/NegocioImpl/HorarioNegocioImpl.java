@@ -16,4 +16,10 @@ public class HorarioNegocioImpl implements HorarioNegocio{
 		return hoDAO.readall(idMedico);
 	}
 
+	@Override
+	public boolean insert(int idMedico, int idHorario) {
+	
+		return hoDAO.Insert(idMedico, idHorario);
+	}
+
 }
