@@ -1,3 +1,8 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@page import="Entidad.*"%>
+<%@page import="NegocioImpl.*"%>
+<%@page import="Negocio.*"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -8,10 +13,16 @@
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
 
-
-
-
 <title>Modificar Médico</title>
+
+<% 	
+
+				Medico me = new Medico();
+				me = (Medico) session.getAttribute("medico");
+				String id = String.valueOf(me.getlLocalidad().getpProvincia().getIdProvincia());
+				String id2 = String.valueOf(me.getlLocalidad().getIdLocalidad());
+%>
+
 </head>
 <body>
 <div style="float: left; margin-left: 12px; margin-top:6px;">

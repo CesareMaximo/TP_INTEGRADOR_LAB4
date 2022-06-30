@@ -89,8 +89,10 @@ public class MedicoDAOImpl implements  MedicoDAO{
 		Especialidad es = new Especialidad();
 		Nacionalidad na = new Nacionalidad();
 		Localidad lo = new Localidad();
+		Usuario us = new Usuario();
 		me.setDni(resultSet.getString("DNI"));
-		me.setIdMedico( resultSet.getInt("idMedico"));
+		us.setIdUsuario(resultSet.getInt("idMedico"));
+		me.setIdMedico(us);
 		//
 		es.setIdEspecialidad(resultSet.getInt("idEspecialidad"));	
 		es.setDescripcion(resultSet.getString("Descripcion"));

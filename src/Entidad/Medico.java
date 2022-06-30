@@ -1,12 +1,10 @@
 package Entidad;
 
-import java.sql.Date;
-
 public class Medico extends Persona{
 
 	
 	private String dni;
-	private int idMedico;
+	private Usuario idMedico;
 	private Especialidad eEspecialidad;
 	private Horario hHorario;
 	
@@ -14,17 +12,14 @@ public class Medico extends Persona{
 		super();
 	}
 	
-	
-	public Medico(String dni, int idMedico, Especialidad eEspecialidad, Horario hHorario,String nombre
-			,String apellido, char sexo, Nacionalidad nNacionalidad,Date fechaNacimiento,String direccion,Localidad lLocalidad,String email,boolean estado, String telefono1, String telefono2) {
-		
-		super(dni,nombre,apellido,sexo,nNacionalidad,lLocalidad,email,estado,fechaNacimiento,direccion, telefono1, telefono2);
+	public Medico(String dni, Usuario idMedico, Especialidad eEspecialidad, Horario hHorario) {
+		super();
 		this.dni = dni;
 		this.idMedico = idMedico;
 		this.eEspecialidad = eEspecialidad;
 		this.hHorario = hHorario;
 	}
-	
+
 	//Getters & Setters
 	public String getDni() {
 		return dni;
@@ -32,10 +27,10 @@ public class Medico extends Persona{
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
-	public int getIdMedico() {
+	public Usuario getIdMedico() {
 		return idMedico;
 	}
-	public void setIdMedico(int idMedico) {
+	public void setIdMedico(Usuario idMedico) {
 		this.idMedico = idMedico;
 	}
 	public Especialidad geteEspecialidad() {

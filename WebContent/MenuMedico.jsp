@@ -44,39 +44,37 @@ FILTRO DE BUSQUEDA-->
                 <div class="row">
                     <div class="col-sm-8"><h1>Médicos</h1>
                                         <a href="ServletMedico?Nuevo=1" name="nuevoMedico" class="btn btn-primary btn-ml">Nuevo Médico</a>
-                    <table class="filtrosListado" >
-                    <form action="ServletMedico" method="post">		
-                    <tr><td><label style="margin-right: 5px">Especialidad:</label></td>
-							<td><select name="espe" class="select">
-							
-							
-							<% ArrayList<Especialidad> listaEspecialidad= null;
-							
-							if(request.getAttribute("listaEspecialidad")!=null){
-							
-								listaEspecialidad = (ArrayList<Especialidad>) request.getAttribute("listaEspecialidad");
-							}
-							
-							
-							if(listaEspecialidad!=null)
-								for(Especialidad es : listaEspecialidad){
-									
-									%>
-									<option value="<%= es.getIdEspecialidad()%>"> <%= es.getDescripcion() %>	</option> 
-									
-									<% 
-								}
-								
-							
-							
-							%>
-							</select>
+							<table class="filtrosListado">
+								<form action="ServletMedico" method="post">
+									<tr>
+										<td><label style="margin-right: 5px">Especialidad:</label></td>
+										<td><select name="espe" class="select">
 
-							
-						
-							</td> <td> <input class="btn btn-primary btn-sm" type="submit" name="btnFiltrar" value="Filtrar"> <br> </td></tr></table>
-                </form>
-                    </div>
+
+												<%
+													ArrayList<Especialidad> listaEspecialidad = null;
+
+													if (request.getAttribute("listaEspecialidad") != null) {
+
+														listaEspecialidad = (ArrayList<Especialidad>) request.getAttribute("listaEspecialidad");
+													}
+
+													if (listaEspecialidad != null)
+														for (Especialidad es : listaEspecialidad) {
+												%>
+												<option value="<%=es.getIdEspecialidad()%>">
+													<%=es.getDescripcion()%>
+												</option>
+
+												<%
+													}
+												%>
+										</select></td>
+										<td><input class="btn btn-primary btn-sm" type="submit" name="btnFiltrar" value="Filtrar"> <br></td>
+									</tr>
+							</table>
+							</form>
+						</div>
                     <form action="ServletMedico" method="post" >
                     <div class="row">
 					    <div class="col-md-3 col-md-offset-9 text-right">
@@ -115,7 +113,8 @@ FILTRO DE BUSQUEDA-->
 							<td><%=me.getApellido()%></td>
 							<td><%=me.geteEspecialidad()%></td>
                         <td>
-                            <a href="ModificarMedico.jsp" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                           <a href="ModificarMedico.jsp" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                           <a href="Horario?param=<%=me.getIdMedico()%>" title="Horario" data-toggle="tooltip"><i class="material-icons blue-color" style="color: blue">edit_calendar</i></a>
                            <a href="#myModal" class="delete" title="Delete" data-toggle="modal" data-med-id="<%=me.getDni()%>" ><i class="material-icons">&#xE872;</i></a>
                         </td>
         

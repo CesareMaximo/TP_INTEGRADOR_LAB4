@@ -173,21 +173,19 @@ public class ServletMedico extends HttpServlet {
 				}  
 				java.sql.Date date1 = new java.sql.Date(dateFormateado.getTime());
 				me.setFechaNacimiento(date1);
-				//me.setSexo(request.getParameter("slcSexo").charAt(0));
-				me.setSexo('M'); // para prueba
+				me.setSexo(request.getParameter("slcSexo").charAt(0));
 				Nacionalidad nacionalidad = new Nacionalidad();
-				//nacionalidad.setIdNacionalidad(Integer.parseInt(request.getParameter("slcNacionalidad")));
-				nacionalidad.setIdNacionalidad(1); // para prueba
+				nacionalidad.setIdNacionalidad(Integer.parseInt(request.getParameter("slcNacionalidad")));
 				me.setnNacionalidad(nacionalidad);
 				Localidad localidad = new Localidad();
-				//localidad.setIdLocalidad(Integer.parseInt(request.getParameter("slcLocalidad")));
-				localidad.setIdLocalidad(1); // para prueba
+				localidad.setIdLocalidad(Integer.parseInt(request.getParameter("slcLocalidad")));
 				me.setlLocalidad(localidad);
-				me.setDireccion(request.getParameter(""));
-				me.setEmail(request.getParameter(""));
-				me.setTelefono1(request.getParameter(""));
-				me.setTelefono2(request.getParameter(""));
-				//me.seteEspecialidad(request.getParameter(""));
+				me.setDireccion(request.getParameter("txtDireccion"));
+				me.setEmail(request.getParameter("txtEmail"));
+				me.setTelefono1(request.getParameter("txtTelefono1"));
+				me.setTelefono2(request.getParameter("txtTelefono2"));
+				Especialidad espe = new Especialidad();
+				me.seteEspecialidad(espe);
 				usu.setNombreUsuario(request.getParameter("txtUser"));
 				usu.setClave(request.getParameter("txtPass"));
 				usu.setTipo("Medico");

@@ -116,10 +116,32 @@ CONTRASEÑA
 				</select></tr>
 				<tr><td><label>Localidad:</label></td><td><select class="textbox" required id="localidadReal" name="slcLocalidad"></select></tr>
 				<tr><td><label>Direcci&oacuten:</label></td><td><textarea name="txtDireccion" style="resize: none;" class="inputForm" cols="21" rows="3" required></textarea></td></tr>
-				<tr><td><label>E-mail:</label></td><td><input name="txtEmail " type="email" class="inputForm" size="20" required></td></tr>
+				<tr><td><label>E-mail:</label></td><td><input name="txtEmail" type="email" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Tel&eacutefono:</label></td><td><input name="txtTelefono1" type="text"  class="inputForm"size="20" required></td></tr>
 				<tr><td><label>Tel&eacutefono Opcional:</label></td><td><input name="txtTelefono2" type="text" class="inputForm" size="20"></td></tr>
-				<tr><td><label>Especialidad:</label></td><td><select class="select" name="slcEspecialidad"></select></tr> 
+				<tr><td><label>Especialidad:</label></td>
+				<td><select name="slcEspecialidad" class="select">
+											
+							<% ArrayList<Especialidad> listaEspecialidad= null;
+							
+							if(request.getAttribute("listaEspecialidad")!=null){
+							
+								listaEspecialidad = (ArrayList<Especialidad>) request.getAttribute("listaEspecialidad");
+							}
+														
+							if(listaEspecialidad!=null)
+								for(Especialidad es : listaEspecialidad){
+									
+									%>
+									<option value="<%= es.getIdEspecialidad()%>"> <%= es.getDescripcion() %>	</option> 
+									
+									<% 
+								}
+														
+							%>
+							</select>						
+						
+							</td></tr> 
 				<tr><td class=top><label>Dia de atenci&oacuten:</label></td><td>
 				
 	

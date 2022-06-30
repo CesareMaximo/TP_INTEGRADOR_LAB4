@@ -160,10 +160,11 @@ FILTRO DE BUSQUEDA-->
 						%>
 						<div id="miModal" class="modificar">
 						  <div class="modificar-contenido">
-				
-						    <a href="ServletPaciente?Param=1.jsp">X</a>
-						    <h2>PACIENTE MODIFICADO CON ÉXITO</h2>
-						  </div>  
+						    <h4>PACIENTE MODIFICADO CON ÉXITO</h4>
+							</div>  
+							<div class="modificar-footer">
+							    <a href="ServletPaciente?Param=1.jsp" class="btn btn-success btn-block">OK</a>
+							</div>
 						</div>
 						 <%} 
 							%>
