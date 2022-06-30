@@ -6,13 +6,13 @@ public class Medico extends Persona{
 	private String dni;
 	private Usuario idMedico;
 	private Especialidad eEspecialidad;
-	private Horario hHorario;
+	private DiaXMedico hHorario;
 	
 	public Medico() {
 		super();
 	}
 	
-	public Medico(String dni, Usuario idMedico, Especialidad eEspecialidad, Horario hHorario) {
+	public Medico(String dni, Usuario idMedico, Especialidad eEspecialidad, DiaXMedico hHorario) {
 		super();
 		this.dni = dni;
 		this.idMedico = idMedico;
@@ -39,10 +39,10 @@ public class Medico extends Persona{
 	public void seteEspecialidad(Especialidad eEspecialidad) {
 		this.eEspecialidad = eEspecialidad;
 	}
-	public Horario gethHorario() {
+	public DiaXMedico gethHorario() {
 		return hHorario;
 	}
-	public void sethHorario(Horario hHorario) {
+	public void sethHorario(DiaXMedico hHorario) {
 		this.hHorario = hHorario;
 	}
 	

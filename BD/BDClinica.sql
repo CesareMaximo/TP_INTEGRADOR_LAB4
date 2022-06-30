@@ -57,15 +57,6 @@ CREATE TABLE Especialidad(
   Descripcion varchar(50) not null
 );
 
-CREATE TABLE Horario(
-  idHorario int not null primary key auto_increment,
-  Dia int not null,
-  HorarioIngreso time not null,
-  HorarioEgreso time not null,
-  
-  CONSTRAINT Dia CHECK (Dia>=1 AND Dia<=7)
-);
-
 CREATE TABLE Medico (
   DNI varchar(11) not null unique,
   idMedico int not null primary key,
@@ -74,13 +65,22 @@ CREATE TABLE Medico (
   FOREIGN KEY (idMedico) REFERENCES Usuarios(idUsuario)
 );
 
-CREATE TABLE Medico_x_Horario (
+CREATE TABLE Dia(
+	idDia int not null primary key,
+    Descripcion varchar(15) not null,
+    
+    CONSTRAINT idDia CHECK (idDia>=1 AND idDia<=7)
+);
+
+CREATE TABLE Dia_x_Medico(
+  idDia int not null,
   idMedico int not null,
-  idHorario int not null,
-  PRIMARY KEY (idMedico, idHorario),
-  
+  HorarioIngreso time not null,
+  HorarioEgreso time not null,
+  Estado boolean not null,
+  FOREIGN KEY (idDia) REFERENCES Dia(idDia),
   FOREIGN KEY (idMedico) REFERENCES Medico(idMedico),
-  FOREIGN KEY (idHorario) REFERENCES Horario(idHorario)
+  primary key (idDia, idMedico)
 );
 
 CREATE TABLE Estados(
@@ -101,7 +101,6 @@ CREATE TABLE Turno (
   FOREIGN KEY (idMedico) REFERENCES Medico(idMedico),
   FOREIGN KEY (idPaciente) REFERENCES Paciente(idPaciente),
   FOREIGN KEY (idEstado) REFERENCES Estados(idEstado)
-  
 );
 
 

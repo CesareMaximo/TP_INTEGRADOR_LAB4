@@ -1,6 +1,9 @@
 package Servlets;
 
 import java.io.IOException;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -10,11 +13,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Entidad.Horario;
+import com.sun.jmx.snmp.Timestamp;
+
+import Entidad.Dia;
+import Entidad.DiaXMedico;
 import Entidad.Medico;
-import Negocio.HorarioNegocio;
+import Negocio.DiaXMedicoNegocio;
 import Negocio.MedicoNegocio;
-import NegocioImpl.HorarioNegocioImpl;
+import NegocioImpl.DiaXMedicoNegocioImpl;
 import NegocioImpl.MedicoNegocioImpl;
 
 
@@ -31,12 +37,12 @@ public class ServletHorario extends HttpServlet {
 		Medico me = new Medico();
 		int idMedico;
 		MedicoNegocio meNeg = new MedicoNegocioImpl();
-		HorarioNegocio hoNeg = new HorarioNegocioImpl();
+		DiaXMedicoNegocio hoNeg = new DiaXMedicoNegocioImpl();
 		RequestDispatcher rd;
 		if(request.getParameter("param") != null) {
 			idMedico = Integer.parseInt((request.getParameter("param").toString()));
 			me = meNeg.mostrarMedico(idMedico);
-			ArrayList<Horario> listaHorario = (ArrayList<Horario>) hoNeg.readall(idMedico);
+			ArrayList<DiaXMedico> listaHorario = (ArrayList<DiaXMedico>) hoNeg.readall(idMedico);
 			request.getSession().setAttribute("medico", me);
 			request.getSession().setAttribute("listaHorario", listaHorario);
 			rd = request.getRequestDispatcher("/MenuHorario.jsp");
@@ -49,8 +55,24 @@ public class ServletHorario extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		doGet(request, response);
+		DiaXMedicoNegocio hoNeg = new DiaXMedicoNegocioImpl();
+		DiaXMedico diaXMedico = new DiaXMedico();
+		Medico me = (Medico)request.getSession().getAttribute("medico");
+		Dia dia = new Dia();
+		RequestDispatcher rd;
+		
+		int idMedico = me.getIdMedico().getIdUsuario();
+		
+		if (request.getParameter("btnNuevoHorario")!=null) {
+			dia.setId(Integer.parseInt(request.getParameter("slcDia")));
+			diaXMedico.setDia(dia);
+			diaXMedico.setMedico(me);
+			diaXMedico.setHorarioIngreso(Time.valueOf(request.getParameter("slcIngreso")));
+			diaXMedico.setHorarioEgreso(Time.valueOf(request.getParameter("slcEgreso")));
+			hoNeg.insert(diaXMedico);
+			rd = request.getRequestDispatcher("/MenuHorario.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 }

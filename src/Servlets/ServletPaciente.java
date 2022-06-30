@@ -113,7 +113,7 @@ public class ServletPaciente extends HttpServlet {
 			String dni = request.getParameter("pacId");
 			
 			if(paNeg.delete(dni)==true) {
-				request.setAttribute("exito", true);
+				request.setAttribute("delete", true);
 				request.setAttribute("mensaje", "");
 				ArrayList<Paciente> listaPaciente = (ArrayList<Paciente>) paNeg.readAll();
 				request.setAttribute("listaPaciente", listaPaciente);

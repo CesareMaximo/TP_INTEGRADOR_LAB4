@@ -2678,12 +2678,14 @@ INSERT INTO Especialidad(Descripcion) VALUES('Oftalmología');
 INSERT INTO Especialidad(Descripcion) VALUES('Traumatología');
 INSERT INTO Especialidad(Descripcion) VALUES('Pediatria');
 
-#HORARIO
-INSERT INTO Horario(Dia, HorarioIngreso, HorarioEgreso) VALUES(2, '8:00:00', '20:00:00');
-INSERT INTO Horario(Dia, HorarioIngreso, HorarioEgreso) VALUES(3, '8:00:00', '20:00:00');
-INSERT INTO Horario(Dia, HorarioIngreso, HorarioEgreso) VALUES(4, '8:00:00', '20:00:00');
-INSERT INTO Horario(Dia, HorarioIngreso, HorarioEgreso) VALUES(5, '8:00:00', '20:00:00');
-INSERT INTO Horario(Dia, HorarioIngreso, HorarioEgreso) VALUES(6, '8:00:00', '20:00:00');
+#DIAS
+INSERT INTO Dia (idDia, Descripcion) VALUES (1, 'Domingo');
+INSERT INTO Dia (idDia, Descripcion) VALUES (2, 'Lunes');
+INSERT INTO Dia (idDia, Descripcion) VALUES (3, 'Martes');
+INSERT INTO Dia (idDia, Descripcion) VALUES (4, 'Miércoles');
+INSERT INTO Dia (idDia, Descripcion) VALUES (5, 'Jueves');
+INSERT INTO Dia (idDia, Descripcion) VALUES (6, 'Viernes');
+INSERT INTO Dia (idDia, Descripcion) VALUES (7, 'Sábado');
 
 #PERSONA--MEDICO
 INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('20900900', 'Maria', 'Gomez', 'F', 12,'1988-09-22', 'Ricardo Gutierrez 1200', 221, 'mariagomez@gmail.com', 1, '476545496', null);
@@ -2693,15 +2695,6 @@ INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento
 INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('30300900', 'Macarena', 'Alvarez', 'F', 12,'1983-08-22', 'Avenida Cordoba 1900', 303, 'macaalvarez@gmail.com', 1, '215612896', null);
 INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('20200900', 'Luciano', 'Ceballos', 'M', 12,'1977-09-29', 'Libertador 1300', 303, 'lucianoceballos@gmail.com', 1, '1815955885', null);
 
-#PERSONA--PACIENTE
-INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('22333444', 'Rosalia', 'Gonzalez', 'M', 12,'1982-10-21', 'Avenida de Mayo 1004', 256, 'rosaliag@gmail.com', 1, '123456', null);
-INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('33222111', 'Laura', 'Alvarez', 'F', 12,'1983-08-22', 'Las Heras 1900', 303, 'lau10@gmail.com', 1, '54645645', null);
-INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('44333222', 'Mauro', 'Ceballos', 'M', 12,'1977-09-29', 'Libertador 1200', 303, 'mauceba@gmail.com', 1, '44849592', null);
-
-#TELEFONO--MEDICO
-#INSERT INTO
-#TELEFONO--PACIENTE
-
 #MEDICO
 INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(2,'20900900', 1);
 INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(3, '30900900', 2);
@@ -2710,8 +2703,22 @@ INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(5, '20700900', 4);
 INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(6, '30300900', 5);
 INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(7, '20200900', 6);
 
-#MEDICO_X_HORARIO
-INSERT INTO Medico_x_Horario(idMedico, idHorario) VALUES(2, 1), (2, 3), (2, 5);
+#HORARIO
+INSERT INTO Dia_x_Medico(idDia, idMedico, HorarioIngreso, HorarioEgreso, Estado) VALUES(2, 2, '8:00:00', '20:00:00', 1);
+INSERT INTO Dia_x_Medico(idDia, idMedico, HorarioIngreso, HorarioEgreso, Estado) VALUES(3, 2, '8:00:00', '20:00:00', 1);
+INSERT INTO Dia_x_Medico(idDia, idMedico, HorarioIngreso, HorarioEgreso, Estado) VALUES(4, 2, '8:00:00', '20:00:00', 1);
+INSERT INTO Dia_x_Medico(idDia, idMedico, HorarioIngreso, HorarioEgreso, Estado) VALUES(5, 2, '8:00:00', '20:00:00', 1);
+INSERT INTO Dia_x_Medico(idDia, idMedico, HorarioIngreso, HorarioEgreso, Estado) VALUES(6, 2, '8:00:00', '20:00:00', 1);
+INSERT INTO Dia_x_Medico(idDia, idMedico, HorarioIngreso, HorarioEgreso, Estado) VALUES(7, 2, '8:00:00', '20:00:00', 1);
+
+#PERSONA--PACIENTE
+INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('22333444', 'Rosalia', 'Gonzalez', 'M', 12,'1982-10-21', 'Avenida de Mayo 1004', 256, 'rosaliag@gmail.com', 1, '123456', null);
+INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('33222111', 'Laura', 'Alvarez', 'F', 12,'1983-08-22', 'Las Heras 1900', 303, 'lau10@gmail.com', 1, '54645645', null);
+INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('44333222', 'Mauro', 'Ceballos', 'M', 12,'1977-09-29', 'Libertador 1200', 303, 'mauceba@gmail.com', 1, '44849592', null);
+
+#TELEFONO--MEDICO
+#INSERT INTO
+#TELEFONO--PACIENTE
 
 #PACIENTE
 INSERT INTO Paciente(DNI) VALUES('22333444'), ('33222111'), ('44333222'); 

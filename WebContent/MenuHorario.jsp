@@ -47,7 +47,7 @@
 		            </div>
 
 	                	<%
-						ArrayList<Horario> listaHorario = null;
+						ArrayList<DiaXMedico> listaHorario = null;
 	                	listaHorario = (ArrayList) session.getAttribute("listaHorario");
 						/* if(session.getAttribute("listaHorario")!= null){
 							listaHorario = (ArrayList<Horario>) request.getAttribute("listaHorario");
@@ -65,16 +65,16 @@
                 	</thead>
  					<%
  					if(listaHorario !=null)
-					for(Horario ho : listaHorario){ 
+					for(DiaXMedico ho : listaHorario){ 
 					%>
 						<tr> 
- 							<td><%=ho.getDia()%> </td>
+ 							<td><%=ho.getDia().getDescripcion()%></td>
 							<td><%=ho.getHorarioIngreso()%></td>
 							<td><%=ho.getHorarioEgreso()%></td>
 
                         <td>
                            <a href="ModificarMedico.jsp" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>                        
-                           <a href="#myModal" class="delete" title="Delete" data-toggle="modal" data-med-id="<%=ho.getIdHorario()%> --%>" ><i class="material-icons">&#xE872;</i></a>
+                           <a href="#myModal" class="delete" title="Delete" data-toggle="modal" data-med-id="<%=ho.getDia().getId()%>" ><i class="material-icons">&#xE872;</i></a>
                         </td>
         
 					<%} %>

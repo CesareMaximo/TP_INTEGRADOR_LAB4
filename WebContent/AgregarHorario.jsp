@@ -37,40 +37,41 @@
 				<tr>
 					<td class=top><label>Dia de atenci&oacuten:</label></td>
 					<td>
-						<select class="select">
-							<option>Lunes</option>
-							<option>Martes</option>
-							<option>Miercoles</option>
-							<option>Jueves</option>
-							<option>Viernes</option>
-							<option>Sabado</option>
+						<select class="select" name="slcDia">
+							<option value=2>Lunes</option>
+							<option value=3>Martes</option>
+							<option value=4>Miercoles</option>
+							<option value=5>Jueves</option>
+							<option value=6>Viernes</option>
+							<option value=7>Sabado</option>
 						</select>
 				<tr>
 					<td class="top"><label>Horario de Atenci&oacuten:</label></td>
-					<td><select class="select"><option>08:00</option>
-							<option>09:00</option>
-							<option>10:00</option>
-							<option>11:00</option>
-							<option>12:00</option>
-							<option>13:00</option>
-							<option>14:00</option>
-							<option>15:00</option>
-							<option>16:00</option>
-							<option>17:00</option>
-							<option>18:00</option>
-							<option>19:00</option>
-					</select><label class="lbl"> Ingreso </label><br> <select class="select">
-							<option>09:00</option>
-							<option>11:00</option>
-							<option>12:00</option>
-							<option>13:00</option>
-							<option>14:00</option>
-							<option>15:00</option>
-							<option>16:00</option>
-							<option>17:00</option>
-							<option>18:00</option>
-							<option>19:00</option>
-							<option>20:00</option>
+					<td><select class="select" name="slcIngreso">
+							<option>08:00:00</option>
+							<option>09:00:00</option>
+							<option>10:00:00</option>
+							<option>11:00:00</option>
+							<option>12:00:00</option>
+							<option>13:00:00</option>
+							<option>14:00:00</option>
+							<option>15:00:00</option>
+							<option>16:00:00</option>
+							<option>17:00:00</option>
+							<option>18:00:00</option>
+							<option>19:00:00</option>
+					</select><label class="lbl"> Ingreso </label><br> <select class="select" name="slcEgreso">
+							<option>09:00:00</option>
+							<option>11:00:00</option>
+							<option>12:00:00</option>
+							<option>13:00:00</option>
+							<option>14:00:00</option>
+							<option>15:00:00</option>
+							<option>16:00:00</option>
+							<option>17:00:00</option>
+							<option>18:00:00</option>
+							<option>19:00:00</option>
+							<option>20:00:00</option>
 					</select><label class="lbl"> Salida </label></td>
 				</tr>
 			</table>

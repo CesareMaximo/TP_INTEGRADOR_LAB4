@@ -171,6 +171,13 @@ FILTRO DE BUSQUEDA-->
 							 texto = "modificado";
 							
 						}
+						
+						if(request.getAttribute("delete")!=null){
+							
+							exito = (boolean)request.getAttribute("delete");
+							 texto = "eliminado";
+							
+						}
 							
 							if(exito == true){
 								%>
