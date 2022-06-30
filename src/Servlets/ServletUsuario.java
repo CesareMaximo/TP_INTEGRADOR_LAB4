@@ -34,7 +34,8 @@ public class ServletUsuario extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.setAttribute("exito", false);
+		request.getRequestDispatcher("AgregarAdministrativo.jsp").forward(request, response);
 	}
 
 
@@ -42,14 +43,17 @@ public class ServletUsuario extends HttpServlet {
 
 		UsuarioNegocio usNeg = new UsuarioNegocioImpl();
 		Usuario user = new Usuario();
-	
+		boolean exito = false;
+		request.setAttribute("exito", exito);
+		request.getRequestDispatcher("AgregarAdministrativo.jsp").forward(request, response);
 		if (request.getParameter("btnNuevoUser") != null) {
 			
 			String pass1 = request.getParameter("txtPass");
 			String pass2 = request.getParameter("txtPass2");
-			request.setAttribute("exito", false);
+			exito = false;
 			if( !(pass1.equals(pass2))) {
 				request.setAttribute("mensaje", "Las contraseñas no coinciden");
+				request.setAttribute("exito", exito);
 				request.getRequestDispatcher("AgregarAdministrativo.jsp").forward(request, response);
 
 			}
@@ -59,6 +63,7 @@ public class ServletUsuario extends HttpServlet {
 				
 				if(usNeg.existe(us)) {
 					request.setAttribute("mensaje", "Nombre de usuario no disponible");
+					request.setAttribute("exito", exito);
 					request.getRequestDispatcher("AgregarAdministrativo.jsp").forward(request, response);
 				}
 				else {
@@ -67,6 +72,7 @@ public class ServletUsuario extends HttpServlet {
 					user.setClave(request.getParameter("txtPass"));
 					user.setTipo("Admin");
 					user.setEstado(true);
+					exito = true;
 					if(usNeg.insert(user) == true) {
 						request.setAttribute("exito", true);
 						request.setAttribute("txtUser", "");
@@ -74,11 +80,12 @@ public class ServletUsuario extends HttpServlet {
 						request.setAttribute("mensaje", "");
 						
 					}
-
+					request.setAttribute("exito", exito);
 					request.getRequestDispatcher("AgregarAdministrativo.jsp").forward(request, response);
 
 					///VER CONFIRMACIÓN 
 				}
+				
 			}
 			
 			

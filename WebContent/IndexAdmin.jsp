@@ -20,6 +20,9 @@ ASIGNACION DE TURNOS
 LISTADO DE TURNOS
 REPORTES 
   -->
+<% boolean exito = false;
+request.setAttribute("exito", exito); %>  
+  
  <div class="User">
  	<form method="post" action ="logout" >
  		<img width="16px"class="imag" src="img/user.png"/> Bienvenido <b> <%= session.getAttribute("username") %></b>

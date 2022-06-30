@@ -61,12 +61,12 @@ public class ServletPaciente extends HttpServlet {
 		
 		if(request.getParameter("Nuevo")!= null) {
 		rd = request.getRequestDispatcher("/AgregarPaciente.jsp");
+		request.setAttribute("exito", false);
 		rd.forward(request, response);
 		
 		}
 		
 		ArrayList<Paciente> listaPaciente = (ArrayList<Paciente>) paNeg.readAll();
-		
 		
 		
 		
@@ -212,14 +212,6 @@ public class ServletPaciente extends HttpServlet {
 				rd = request.getRequestDispatcher("/MenuPaciente.jsp");
 				rd.forward(request, response);
 			}
-
 		}
-		
-		
-	
-		
-		
-		
 	}
-
 }

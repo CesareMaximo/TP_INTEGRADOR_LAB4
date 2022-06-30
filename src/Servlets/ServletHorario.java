@@ -42,6 +42,9 @@ public class ServletHorario extends HttpServlet {
 			rd = request.getRequestDispatcher("/MenuHorario.jsp");
 			rd.forward(request, response);
 		}
+		if(request.getParameter("Nuevo") != null) {
+			request.getRequestDispatcher("/AgregarHorario.jsp").forward(request, response);
+		}
 		
 	}
 

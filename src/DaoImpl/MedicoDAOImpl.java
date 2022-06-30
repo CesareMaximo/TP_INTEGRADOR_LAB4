@@ -212,9 +212,7 @@ public class MedicoDAOImpl implements  MedicoDAO{
 		return me;		
 	}
 
-	private Medico getMedico2(ResultSet resultSet) throws SQLException
-	{
-		
+	private Medico getMedico2(ResultSet resultSet) throws SQLException{		
 		Medico me = new Medico();
 		Especialidad es = new Especialidad();
 		Nacionalidad na = new Nacionalidad();
