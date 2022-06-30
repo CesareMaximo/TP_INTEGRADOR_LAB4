@@ -60,8 +60,8 @@ public class ServletPaciente extends HttpServlet {
 		request.setAttribute("listaLocalidad", listaLocalidad);
 		
 		if(request.getParameter("Nuevo")!= null) {
-		rd = request.getRequestDispatcher("/AgregarPaciente.jsp");
 		request.setAttribute("exito", false);
+		rd = request.getRequestDispatcher("/AgregarPaciente.jsp");
 		rd.forward(request, response);
 		
 		}
@@ -175,8 +175,11 @@ public class ServletPaciente extends HttpServlet {
 				request.setAttribute("txtTelefono2", "");
 				request.setAttribute("mensaje", "");				
 			}
-
-			request.getRequestDispatcher("/AgregarPaciente.jsp").forward(request, response);	
+			
+			ArrayList<Paciente> listaPaciente = (ArrayList<Paciente>) paNeg.readAll();
+			request.setAttribute("listaPaciente", listaPaciente);
+			rd = request.getRequestDispatcher("/MenuPaciente.jsp");
+			rd.forward(request, response);	
 		}
 		
 		if(request.getParameter("btnModificarPaciente") != null) {
@@ -205,7 +208,7 @@ public class ServletPaciente extends HttpServlet {
 			paciente.setTelefono2(request.getParameter("txtTelefono2"));
 			
 			if(paNeg.update(paciente) == true) {
-				request.setAttribute("exito", true);
+				request.setAttribute("update", true);
 				request.setAttribute("mensaje", "");
 				ArrayList<Paciente> listaPaciente = (ArrayList<Paciente>) paNeg.readAll();
 				request.setAttribute("listaPaciente", listaPaciente);

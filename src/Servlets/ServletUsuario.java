@@ -45,7 +45,6 @@ public class ServletUsuario extends HttpServlet {
 		Usuario user = new Usuario();
 		boolean exito = false;
 		request.setAttribute("exito", exito);
-		request.getRequestDispatcher("AgregarAdministrativo.jsp").forward(request, response);
 		if (request.getParameter("btnNuevoUser") != null) {
 			
 			String pass1 = request.getParameter("txtPass");
@@ -79,11 +78,8 @@ public class ServletUsuario extends HttpServlet {
 						request.setAttribute("txtPass", "");
 						request.setAttribute("mensaje", "");
 						
+						request.getRequestDispatcher("AgregarAdministrativo.jsp").forward(request, response);
 					}
-					request.setAttribute("exito", exito);
-					request.getRequestDispatcher("AgregarAdministrativo.jsp").forward(request, response);
-
-					///VER CONFIRMACIÓN 
 				}
 				
 			}

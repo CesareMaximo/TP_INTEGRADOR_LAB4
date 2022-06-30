@@ -154,20 +154,53 @@ FILTRO DE BUSQUEDA-->
 						
 						<% 		
 			
-				
-					boolean x = (boolean)request.getAttribute("exito");
-					if(x == true){
-						%>
-						<div id="miModal" class="modificar">
-						  <div class="modificar-contenido">
-						    <h4>PACIENTE MODIFICADO CON ÉXITO</h4>
-							</div>  
-							<div class="modificar-footer">
-							    <a href="ServletPaciente?Param=1.jsp" class="btn btn-success btn-block">OK</a>
-							</div>
+						
+						boolean exito = false;
+						String texto = "";
+						
+						if(request.getAttribute("exito")!=null){
+						
+							exito = (boolean)request.getAttribute("exito");
+							 texto = "registrado";
+							
+						}
+						
+						if(request.getAttribute("update")!=null){
+							
+							exito = (boolean)request.getAttribute("update");
+							 texto = "modificado";
+							
+						}
+							
+							if(exito == true){
+								%>
+								<script type="text/javascript">
+										window.onload = function() {
+											OpenBootstrapPopup();
+										};
+										function OpenBootstrapPopup() {
+											$("#simpleModal").modal('show');
+										}
+									</script>
+									
+									<div id="simpleModal" class="modal fade">
+			<div class="modal-dialog modal-ok">
+				<div class="modal-content">
+					<div class="modal-header justify-content-center">
+						<div class="icon-box">
+							<i style="color: green" class="material-icons">&#xE876;</i>
 						</div>
-						 <%} 
-							%>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body text-center">
+						<h4>Exito!</h4>	
+						<p>El paciente se ha <%=texto %> satisfactoriamente.</p>
+					</div>
+				</div>
+			</div>
+		</div>     
+								 <%} 
+									%>
 	
 	
 </body>

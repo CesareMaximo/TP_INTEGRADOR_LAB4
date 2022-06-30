@@ -13,6 +13,7 @@
 <style type="text/css">
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
+<
 <title>Nuevo Paciente</title>
 </head>
 
@@ -110,22 +111,7 @@ TELEFONO
 			</table>
 			<br>
 				<input name="insert" type="submit" value="Aceptar" class="btn btn-primary btn-block btn-large">
-				<% 		
-			
 				
-					boolean x = (boolean)request.getAttribute("exito");
-					
-					if(x == true){
-						%>
-						<div id="miModal" class="modal">
-						  <div class="modal-contenido">
-				
-						    <a href="AgregarPaciente.jsp">X</a>
-						    <h2>PACIENTE AGREGADO CON ÉXITO</h2>
-						  </div>  
-						</div>
-						 <%} 
-							%>
 			</form>
 	</div>
 
