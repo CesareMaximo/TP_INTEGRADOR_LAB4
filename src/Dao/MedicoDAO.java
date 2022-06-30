@@ -11,4 +11,5 @@ public interface MedicoDAO {
 	public List<Medico> readAll();
 	public List<Medico> readAllfiltro(int id);
 	public List<Medico> readAllBuscar(String nombre);
+	public Medico mostrarMedico(int idMedico);
 }

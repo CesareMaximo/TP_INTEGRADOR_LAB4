@@ -11,7 +11,7 @@ import Entidad.*;
 import Dao.PacienteDAO;
 import javafx.css.PseudoClass;
 
-public class PacienteImpl implements PacienteDAO{
+public class PacienteDAOImpl implements PacienteDAO{
 
 	private static final String delete = "UPDATE Persona set Estado = 0 where DNI like ?";
 	private static final String readall = "select * from paciente as pa inner join persona as pe on pe.DNI like pa.DNI INNER JOIN Nacionalidad as N on Pe.idNacionalidad = N.idNacionalidad WHERE pe.Estado = 1"; 

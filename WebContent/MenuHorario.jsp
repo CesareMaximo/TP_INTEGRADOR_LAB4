@@ -1,3 +1,5 @@
+<%@page import="Entidad.*"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -20,15 +22,38 @@
 </head>
 
 <body>
+<form method="post" action ="logout" >
+ <div  style=" font-family:Open Sans; margin-top:6px; float: right; margin-right: 12px; color: #fff; font-size: 12px; "><img width="16px"class="imag" src="img/user.png"/> Bienvenido <b><%= session.getAttribute("username") %></b>
+ <input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary btn-sm" style="margin-left:10px;"></div>
+	<br>
+</form>	
+<div style="float: left; margin-left: 12px; margin-top:6px;">
+<a href="ServletMedico?Param=1"><img src="img/atras.png" height="20px" /></a>
+<a href="IndexAdmin.jsp"> <img src="img/home.png" height="20px" style="margin-left:10px;" width="20px" ></a> 
+</div>
+	<br>
 	<div class="container-xl">
 		<div class="table-responsive">
         	<div class="table-wrapper">
-            	<div  style="padding-bottom: 0px;"class="table-title">
+            	<div style="padding-bottom: 0px;"class="table-title">
                 	<div class="row">
-                    <div class="col-sm-8"><h1>Médicos</h1>
+                	<% 
+                	Medico me = (Medico)session.getAttribute("medico");
+                	%>
+                    <div class="col-sm-8"><h1>HORARIOS <%=me.getNombre()%> <%=me.getApellido()%></h1>
                         <a href="Horario?Nuevo=1" name="nuevoHorario" class="btn btn-primary btn-ml">Agregar Horario</a>
 		            </div>
+	            </div>
 		            </div>
+
+	                	<%
+						ArrayList<Horario> listaHorario = null;
+	                	listaHorario = (ArrayList) session.getAttribute("listaHorario");
+						/* if(session.getAttribute("listaHorario")!= null){
+							listaHorario = (ArrayList<Horario>) request.getAttribute("listaHorario");
+						} */
+						%>
+
  					<table class="table table-striped table-hover table-bordered">
                 	<thead>
 	                    <tr>
@@ -38,25 +63,24 @@
 	                        <th>EDIT</th>
 	                    </tr>
                 	</thead>
-                    <% 
-/* 						if(listaHorario !=null)
-						for(Horario ho : listaHorario){ */
+ 					<%
+ 					if(listaHorario !=null)
+					for(Horario ho : listaHorario){ 
 					%>
 						<tr> 
- 							<td><%--<%=ho.getDia()%> --%></td>
-							<td><%--<%=ho.getHorarioIngreso()%> --%></td>
-							<td><%--<%=ho.getHorarioEgreso()%> --%></td>
+ 							<td><%=ho.getDia()%> </td>
+							<td><%=ho.getHorarioIngreso()%></td>
+							<td><%=ho.getHorarioEgreso()%></td>
 
                         <td>
                            <a href="ModificarMedico.jsp" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>                        
-                           <a href="#myModal" class="delete" title="Delete" data-toggle="modal" data-med-id="<%-- <%=ho.getIdHorario()%> --%>" ><i class="material-icons">&#xE872;</i></a>
+                           <a href="#myModal" class="delete" title="Delete" data-toggle="modal" data-med-id="<%=ho.getIdHorario()%> --%>" ><i class="material-icons">&#xE872;</i></a>
                         </td>
         
-					<%//} %>
+					<%} %>
 						</tr> 
                 </tbody>
             </table>
-            </div>
             </div>
         </div>
 	</div>

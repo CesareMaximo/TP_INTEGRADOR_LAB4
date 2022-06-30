@@ -16,6 +16,7 @@ public class MedicoDAOImpl implements  MedicoDAO{
 	private static final String delete = "UPDATE Persona set Estado = 0 where DNI like ?";
 	private static final String readall = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad WHERE p.Estado = 1";
 	private static final String readallFiltro = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad where m.idEspecialidad = ? and p.Estado = 1";
+	private static final String readMedico = "SELECT * FROM Medico AS M INNER JOIN Persona AS P ON P.DNI = M.DNI WHERE IdMedico=?";
 	//private static final String readallBuscar = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad where p.Nombre like '%"++"%' or p.Apellido like '%"++"%' ";
 	
 	@Override
@@ -189,4 +190,59 @@ public class MedicoDAOImpl implements  MedicoDAO{
 		return isUpdateExitoso;
 	}
 
+
+	@Override
+	public Medico mostrarMedico(int idMedico) {
+		Connection cn = Conexion.getConexion().getSQLConexion();
+		Medico me = new Medico();
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		try
+		 {
+			statement = cn.prepareStatement(readMedico);
+			statement.setInt(1, idMedico);
+			resultSet = statement.executeQuery();
+			resultSet.next();
+			me = getMedico2(resultSet);			
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return me;		
+	}
+
+	private Medico getMedico2(ResultSet resultSet) throws SQLException
+	{
+		
+		Medico me = new Medico();
+		Especialidad es = new Especialidad();
+		Nacionalidad na = new Nacionalidad();
+		Localidad lo = new Localidad();
+		Usuario us = new Usuario();
+		me.setDni(resultSet.getString("DNI"));
+		us.setIdUsuario(resultSet.getInt("idMedico"));
+		me.setIdMedico(us);
+		//
+		es.setIdEspecialidad(resultSet.getInt("idEspecialidad"));	
+		me.seteEspecialidad(es);
+		//
+		me.setNombre(resultSet.getString("Nombre"));
+		me.setApellido(resultSet.getString("Apellido"));
+		me.setSexo(resultSet.getString("Sexo").charAt(0));
+		//
+		na.setIdNacionalidad( resultSet.getInt("idNacionalidad"));
+		me.setnNacionalidad(na);
+		//
+		me.setFechaNacimiento(resultSet.getDate("FechaNacimiento"));
+		me.setDireccion(resultSet.getString("Direccion"));
+		//
+		lo.setIdLocalidad(resultSet.getInt("idLocalidad"));
+		me.setlLocalidad(lo);
+		//
+		me.setEmail(resultSet.getString("Email"));
+		me.setEstado(resultSet.getBoolean("Estado"));
+			
+		return me;
+	}
 }

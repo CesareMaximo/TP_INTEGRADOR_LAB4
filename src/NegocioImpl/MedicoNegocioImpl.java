@@ -41,4 +41,9 @@ public class MedicoNegocioImpl implements MedicoNegocio {
 		return meDAO.readAllBuscar(nombre);
 	}
 
+	@Override
+	public Medico mostrarMedico(int idMedico) {
+		return meDAO.mostrarMedico(idMedico);
+	}
+
 }

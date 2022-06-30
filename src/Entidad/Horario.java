@@ -5,14 +5,14 @@ import java.sql.Time;
 public class Horario {
 
 	private int idHorario;
-	private String dia;
+	private int dia;
 	private Time horarioIngreso;
 	private Time horarioEgreso;
 	
 	
 	public Horario() {}
 	
-	public Horario(int idHorario, String dia, Time horarioIngreso, Time horarioEgreso) {
+	public Horario(int idHorario, int dia, Time horarioIngreso, Time horarioEgreso) {
 		super();
 		this.idHorario = idHorario;
 		this.dia = dia;
@@ -27,10 +27,10 @@ public class Horario {
 	public void setIdHorario(int idHorario) {
 		this.idHorario = idHorario;
 	}
-	public String getDia() {
+	public int getDia() {
 		return dia;
 	}
-	public void setDia(String dia) {
+	public void setDia(int dia) {
 		this.dia = dia;
 	}
 	public Time getHorarioIngreso() {

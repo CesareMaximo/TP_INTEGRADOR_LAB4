@@ -11,7 +11,7 @@ import DaoImpl.*;
 public class PacienteNegocioImpl implements PacienteNegocio {
 
 	
-	PacienteDAO paDAO = new PacienteImpl();
+	PacienteDAO paDAO = new PacienteDAOImpl();
 	@Override
 	public boolean insert(Paciente pa) {
 		return paDAO.insert(pa);
