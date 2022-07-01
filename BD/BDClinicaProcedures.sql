@@ -34,25 +34,9 @@ IN idLocalidad int,
 IN email varchar(50),
 IN estado tinyint,
 IN telefono1 varchar(50),
-IN telefono2 varchar(50),
-IN id int)
+IN telefono2 varchar(50))
 BEGIN
 	INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES(nombreUsuario, clave, tipo, estado);
     INSERT INTO Persona (DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES (dni,nombre,apellido,sexo,idnacionalidad,fechanacimiento,direccion,idlocalidad,email,estado, telefono1, telefono2);
-END;
-
-
-
-
-DELIMITER // 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `registrarNuevoHorario`(
-IN dia int,
-IN ingreso time,
-IN egreso time,
-IN idM int,
-IN idH int)
-BEGIN
-	INSERT INTO Horario(Dia, HorarioIngreso, HorarioEgreso) VALUES(dia, ingreso, egreso);
-    INSERT INTO Medico_x_Horario(idMedico, idHorario) VALUES(idM, idH);
 END;
 

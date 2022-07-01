@@ -9,15 +9,17 @@
 </style>
 
 
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 <title>Turnos</title>
 </head>
 
@@ -36,11 +38,15 @@
 	<br>
 </form>	
 
+
+
+
+
 <div class="container-xl">
     <div class="table-responsive">
         <div class="table-wrapper">
             <div style="padding-bottom: 0px;" class="table-title">
-                <div class="row justify-content-center">
+                <div class="row justify-content-left">
                     <div class="col-sm-8">
                     	<h1>Turnos</h1>
                 		<table class ="filtrosListado">
@@ -65,19 +71,17 @@
 						
                 		</table>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="search-box">
-                            <i class="material-icons">&#xE8B6;</i>
-                            <input type="text" class="form-control" placeholder="Search&hellip;">
-                        </div>
-                    </div>
+                    
                 
                 	<div>
                 	</div>
                 </div>
             </div>
-            <table class="table table-striped table-hover table-bordered">
-                <thead>
+
+
+
+				<table id="table_turnos" class="display">
+					   <thead>
                     <tr>
                         <th>#</th>
                         <th>DNI Paciente</th>
@@ -88,7 +92,7 @@
                         <th>Acciones </th>
                     </tr>
                 </thead>
-                <tbody>
+					 <tbody>
                     <tr>
                         <td></td>
                         <td></td>
@@ -102,22 +106,23 @@
                         </td>
                     </tr>
                 </tbody>
-            </table>
-            <div class="clearfix">
-                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                <ul class="pagination">
-                    <li class="page-item disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                    <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    <li class="page-item"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
-                </ul>
-            </div>
+				</table>
+
         </div>
     </div>  
 </div>  
-
+	<script>
+			$(document).ready( function () {
+			    $('#table_turnos').DataTable();
+			} );
+			</script>	
+			<script>
+			var table = $('#table_turnos').DataTable( {
+			    columnDefs: [
+			        { targets: [6], orderable: false},
+			     
+			    ]
+			} );
+			</script>	
 </body>
 </html>

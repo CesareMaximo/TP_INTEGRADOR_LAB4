@@ -14,9 +14,13 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 <title>Pacientes</title>
 </head>
 <body>
@@ -24,37 +28,40 @@
 <!-- LISTADO DE PACIENTES CON BOTON AGREGAR PACIENTE Y BOTONES MODIFICAR Y ELIMINAR EN CADA FILA 
 CUANDO APRETAS ELIMINAR SALTA VENTANA DE CONFIRMACIÓN 
 FILTRO DE BUSQUEDA-->
+  <div style="float: left; margin-left: 12px; margin-top:6px;">
+<a href="IndexAdmin.jsp"><img src="img/atras.png" height="20px" /></a>
+<a href="IndexAdmin.jsp"> <img src="img/home.png" height="20px" style="margin-left:10px;" width="20px" ></a> 
+</div>
 <form method="post" action ="logout" >
  <div  style=" font-family:Open Sans; margin-top:6px; float: right; margin-right: 12px; color: #fff; font-size: 12px; "><img width="16px"class="imag" src="img/user.png"/> Bienvenido <b><%= session.getAttribute("username") %></b>
  <input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary btn-sm" style="margin-left:10px;"></div>
 	<br>
 </form>	
-<div style="float: left; margin-left: 12px; margin-top:6px;">
-	<a href="IndexAdmin.jsp"><img src="img/atras.png" height="20px" /></a>
-	<a href="IndexAdmin.jsp"> <img src="img/home.png" height="20px" style="margin-left:10px;" width="20px" ></a> 
-</div>
 	
 	<br>
 	
 	<div class="container-xl">
-    <div class="table-responsive">
+    <div class="table-responsive" id="tb">
         <div class="table-wrapper">
             <div class="table-title">
-                <div class="row justify-content-center">
-                    <div class="col-sm-8"><h1>Pacientes</h1>
-                    
-                    <a href="ServletPaciente?Nuevo=1" name="nuevoPaciente" class="btn btn-primary btn-ml">Nuevo Paciente</a>
-                    </div>
-                
-                    <form action="ServletPaciente" method="post" >
-					    <div class="col-md-3 col-md-offset-9 text-right">
-					        <div class="btn-group d-flex w-100" role="group">
-					            <input type="text" name="txtBuscar" class="resizedTextbox" placeholder="Buscar">
-			                    <input class="btn btn-primary btn-sm" type="submit" name="btnBuscar" value="Buscar">
-					        </div>
-					    </div>
-                    </form>
+                <div class="row">
+                <div class="col-md-6">
+                    <h1>Pacientes</h1>
+                 </div>
+                 <div class="col-md-6 d-flex justify-content-end">   
+                    <a style="height:38px;" href="ServletPaciente?Nuevo=1" name="nuevoPaciente" class="btn btn-primary">Nuevo Paciente</a>
                 </div>
+                </div>
+          
+                
+<!--                     <form action="ServletPaciente" method="post" > -->
+<!-- 					    <div class="col-md-3 col-md-offset-9 text-right"> -->
+<!-- 					        <div class="btn-group d-flex w-100" role="group"> -->
+<!-- 					            <input type="text" name="txtBuscar" class="resizedTextbox" placeholder="Buscar"> -->
+<!-- 			                    <input class="btn btn-primary btn-sm" type="submit" name="btnBuscar" value="Buscar"> -->
+<!-- 					        </div> -->
+<!-- 					    </div> -->
+<!--                     </form> -->
             </div>
             <form action="Paciente" method="get">
 	            <%
@@ -64,19 +71,20 @@ FILTRO DE BUSQUEDA-->
 					}
 				 %>
             </form>
-            <table class="table table-striped table-hover table-bordered">
-            	<thead>
+
+				<table id="table_id" class="display">
+				<thead>
                     <tr>
                         <th>DNI</th>
-                        <th>Nombre <i class="fa fa-sort"></i> </th>
-                        <th>Apellido<i class="fa fa-sort"></i></th>
+                        <th>Nombre </th>
+                        <th>Apellido</th>
                         <th>Email</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                	<%  
-                		
-						if(listaPaciente !=null)
+					<tbody>
+					
+					<%  if(listaPaciente !=null)
 						for(Paciente pa : listaPaciente){
 					
 					%>
@@ -95,19 +103,54 @@ FILTRO DE BUSQUEDA-->
 	               	<%} %>
 	                    </tr>                
                 </tbody>
-            </table>
-            <div class="clearfix">
-                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                <ul class="pagination">
-                    <li class="page-item disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                    <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    <li class="page-item"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
-                </ul>
-            </div>
+				</table>
+
+
+
+				<!--             <table class="table table-striped table-hover table-bordered"> -->
+<!--             	<thead> -->
+<!--                     <tr> -->
+<!--                         <th>DNI</th> -->
+<!--                         <th>Nombre <i class="fa fa-sort"></i> </th> -->
+<!--                         <th>Apellido<i class="fa fa-sort"></i></th> -->
+<!--                         <th>Email</th> -->
+<!--                         <th>Acciones</th> -->
+<!--                     </tr> -->
+<!--                 </thead> -->
+<%--                 	<%   --%>
+                		
+			<!--  			if(listaPaciente !=null)
+// 						for(Paciente pa : listaPaciente){-->
+					
+<%-- 					%> --%>
+<!-- 	                    <tr> -->
+<%-- 	                    	<td><%=pa.getDni()%></td> --%>
+<%-- 							<td><%=pa.getNombre()%></td> --%>
+<%-- 							<td><%=pa.getApellido()%></td> --%>
+<%-- 							<td><%=pa.getEmail()%></td> --%>
+<!-- 							<td> -->
+<%-- 	                    	<a href="ServletPaciente?Modificar=<%=pa.getDni() %>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a> --%>
+<%-- 	                       	<a href="#myModal" class="delete" title="Delete" data-toggle="modal" data-pac-id="<%=pa.getDni()%>" ><i class="material-icons">&#xE872;</i></a> --%>
+<!-- 	                       	</td> -->
+	              
+	                       	
+	                 	
+<%-- 	               	<%} %> --%>
+<!-- 	                    </tr>                 -->
+<!--                 </tbody> -->
+<!--             </table> -->
+<!--             <div class="clearfix"> -->
+<!--                 <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div> -->
+<!--                 <ul class="pagination"> -->
+<!--                     <li class="page-item disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li> -->
+<!--                     <li class="page-item active"><a href="#" class="page-link">1</a></li> -->
+<!--                     <li class="page-item"><a href="#" class="page-link">2</a></li> -->
+<!--                     <li class="page-item"><a href="#" class="page-link">3</a></li> -->
+<!--                     <li class="page-item"><a href="#" class="page-link">4</a></li> -->
+<!--                     <li class="page-item"><a href="#" class="page-link">5</a></li> -->
+<!--                     <li class="page-item"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a></li> -->
+<!--                 </ul> -->
+<!--             </div> -->
         </div>
     </div>  
 </div>   
@@ -127,7 +170,7 @@ FILTRO DE BUSQUEDA-->
 							</script>	
 
 	
-	
+
 			<form action="ServletPaciente?Eliminar=1" method="post">
 							<div id="myModal" class="modal fade">
 								<div class="modal-dialog modal-confirm">
@@ -151,6 +194,21 @@ FILTRO DE BUSQUEDA-->
 								</div>
 							</div>    
 						</form>
+						
+			<script>
+			$(document).ready( function () {
+			    $('#table_id').DataTable();
+			} );
+			</script>	
+			<script>
+			var table = $('#table_id').DataTable( {
+			    columnDefs: [
+			        { targets: [4], orderable: false},
+			     
+			    ]
+			} );
+			</script>		
+						
 						
 						<% 		
 			

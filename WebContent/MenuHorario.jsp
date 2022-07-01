@@ -11,13 +11,18 @@
 <style type="text/css">
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 
 </head>
 
@@ -36,14 +41,17 @@
 		<div class="table-responsive">
         	<div class="table-wrapper">
             	<div style="padding-bottom: 0px;"class="table-title">
-                	<div class="row">
-                	<% 
+            	 <div class="row">
+            	 <% 
                 	Medico me = (Medico)session.getAttribute("medico");
                 	%>
-                    <div class="col-sm-8"><h1>HORARIOS <%=me.getNombre()%> <%=me.getApellido()%></h1>
-                        <a href="Horario?Nuevo=1" name="nuevoHorario" class="btn btn-primary btn-ml">Agregar Horario</a>
-		            </div>
-	            </div>
+                <div class="col-md-10">
+                    <h1>Horarios: Dr/a <%=me.getNombre()%> <%=me.getApellido()%></h1>
+                 </div>
+                 <div class="col-md-2 d-flex justify-content-end">  
+                 <a style="height:38px;" href="Horario?Nuevo=1" name="nuevoHorario" class="btn btn-primary btn-ml">Agregar Horario</a> 
+                </div>
+                </div>
 		            </div>
 
 	                	<%
@@ -54,16 +62,19 @@
 						} */
 						%>
 
- 					<table class="table table-striped table-hover table-bordered">
-                	<thead>
+
+					
+					<table id="table_id" class="display">
+					   	<thead>
 	                    <tr>
-	                        <th>DIA</th>
-	                        <th>HORARIO INGRESO </th>
-	                        <th>HORARIO EGRESO</th>
-	                        <th>EDIT</th>
+	                        <th>Dia</th>
+	                        <th>Horario Ingreso </th>
+	                        <th>Horario Egreso</th>
+	                        <th>Edit</th>
 	                    </tr>
                 	</thead>
- 					<%
+					    <tbody>
+					     	<%
  					if(listaHorario !=null)
 					for(DiaXMedico ho : listaHorario){ 
 					%>
@@ -80,9 +91,24 @@
 					<%} %>
 						</tr> 
                 </tbody>
-            </table>
+					</table>
+
             </div>
         </div>
 	</div>
+	<script>
+			$(document).ready( function () {
+			    $('#table_id').DataTable();
+			} );
+			</script>	
+			<script>
+			var table = $('#table_id').DataTable( {
+			    columnDefs: [
+			        { targets: [3], orderable: false},
+			     
+			    ]
+			} );
+			</script>	
+	
 </body>
 </html>

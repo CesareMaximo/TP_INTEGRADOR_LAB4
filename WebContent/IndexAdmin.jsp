@@ -91,7 +91,7 @@ request.setAttribute("exito", exito); %>
                         </a>
                         
 						<a href="ServletEspecialidad?Param=1" style="text-decoration: none; color: dimgrey;">
-                            <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:80px;">
+                            <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:50px;">
                                 <img src="img/AgregarAdministrador.png" style="width: 50px" class="card-img-top" alt="..." />
                                 <div class="card-body">
                                     <p class="card-text" style="font-size: 14px">Menu Especialidades</p>
