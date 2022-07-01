@@ -46,4 +46,9 @@ public class MedicoNegocioImpl implements MedicoNegocio {
 		return meDAO.mostrarMedico(idMedico);
 	}
 
+	@Override
+	public boolean insertMe(Medico me) {
+		return meDAO.insertMe(me);
+	}
+
 }

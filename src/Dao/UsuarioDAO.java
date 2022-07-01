@@ -11,4 +11,5 @@ public interface UsuarioDAO {
 	public Usuario iniciar(String nombre, String clave);
 	public boolean existe(String nombre);
 	public boolean insertUsuMedico(Usuario usu);
+	public int ultimoUsuario();
 }

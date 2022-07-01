@@ -25,11 +25,13 @@ import Negocio.LocalidadNegocio;
 import Negocio.MedicoNegocio;
 import Negocio.NacionalidadNegocio;
 import Negocio.ProvinciaNegocio;
+import Negocio.UsuarioNegocio;
 import NegocioImpl.EspecialidadNegocioImpl;
 import NegocioImpl.LocalidadNegocioImpl;
 import NegocioImpl.MedicoNegocioImpl;
 import NegocioImpl.NacionalidadNegocioImpl;
 import NegocioImpl.ProvinciaNegocioImpl;
+import NegocioImpl.UsuarioNegocioImpl;
 
 
 @WebServlet("/ServletMedico")
@@ -104,7 +106,7 @@ public class ServletMedico extends HttpServlet {
 		RequestDispatcher rd;	
 		
 		Usuario usu = new Usuario();
-		
+		UsuarioNegocio usNeg = new UsuarioNegocioImpl();
 		
 		LocalidadNegocio loNeg = new LocalidadNegocioImpl();
 		
@@ -121,8 +123,7 @@ public class ServletMedico extends HttpServlet {
 			rd.forward(request, response);
 		}
 				
-		//Eliminar
-		
+		//Eliminar		
 		if (request.getParameter("Eliminar") != null) {
 			String dni = request.getParameter("medId");
 			
@@ -135,10 +136,7 @@ public class ServletMedico extends HttpServlet {
 				rd.forward(request, response);
 			}
 			
-		}
-		
-		
-		
+		}		
 		
 		//BtnBuscar
 		if(request.getParameter("btnBuscar")!=null) {
@@ -161,9 +159,9 @@ public class ServletMedico extends HttpServlet {
 
 			}
 			else {
-				me.setDni(request.getParameter(""));
-				me.setNombre(request.getParameter(""));
-				me.setApellido(request.getParameter(""));
+				me.setDni(request.getParameter("txtDni"));
+				me.setNombre(request.getParameter("txtNombre"));
+				me.setApellido(request.getParameter("txtApellido"));
 				SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 				Date dateFormateado = new Date();
 				try {
@@ -185,15 +183,24 @@ public class ServletMedico extends HttpServlet {
 				me.setTelefono1(request.getParameter("txtTelefono1"));
 				me.setTelefono2(request.getParameter("txtTelefono2"));
 				Especialidad espe = new Especialidad();
+				String especialidad = request.getParameter("slcEspecialidad");
+				espe.setIdEspecialidad(Integer.parseInt(request.getParameter("slcEspecialidad")));
 				me.seteEspecialidad(espe);
 				usu.setNombreUsuario(request.getParameter("txtUser"));
 				usu.setClave(request.getParameter("txtPass"));
 				usu.setTipo("Medico");
+				me.setIdMedico(usu);
 				me.setEstado(true);
 				
-				//usNeg.insert(user) == true;
-
-				request.getRequestDispatcher("MenuMedioc.jsp").forward(request, response);
+				meNeg.insert(me);
+				int idUsu = usNeg.ultimoUsuario();
+				usu.setIdUsuario(idUsu);
+				me.setIdMedico(usu);
+				
+				meNeg.insertMe(me);
+				
+				request.getSession().setAttribute("medico", me);
+				request.getRequestDispatcher("AgregarHorario.jsp").forward(request, response);
 			}
 		}
 	}

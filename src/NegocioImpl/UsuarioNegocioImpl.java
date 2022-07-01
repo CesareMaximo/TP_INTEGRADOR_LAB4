@@ -37,5 +37,11 @@ public class UsuarioNegocioImpl implements UsuarioNegocio {
 		return usuario.existe(nombre);
 	}
 
+	@Override
+	public int ultimoUsuario() {
+
+		return usuario.ultimoUsuario();
+	}
+
 	
 }

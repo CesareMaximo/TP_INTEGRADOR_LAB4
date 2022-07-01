@@ -6,7 +6,8 @@ import Entidad.Medico;;
 
 public interface MedicoDAO {
 
-	public boolean insert(Medico me);
+	public boolean insert(Medico me); //inserta usuario y persona
+	public boolean insertMe(Medico me); //inserta medico al obtener el ultimo idusuario
 	public boolean delete(String dni);
 	public List<Medico> readAll();
 	public List<Medico> readAllfiltro(int id);

@@ -142,7 +142,7 @@ CONTRASEÑA
 							</select>						
 						
 							</td></tr> 
-				<tr><td class=top><label>Dia de atenci&oacuten:</label></td><td>
+				<!-- <tr><td class=top><label>Dia de atenci&oacuten:</label></td><td>
 				
 	
 				
@@ -206,7 +206,7 @@ CONTRASEÑA
 				<option>19:00</option>
 				<option>20:00</option></select><label class="lbl">  Salida   </label>
 				
-				</td></tr>
+				</td></tr> -->
 				<tr><td><label>Nombre de Usuario:</label></td><td><input name="txtUser" type="text" class="inputForm" size="20"></td></tr>
 				<tr><td><label>Contrase&ntildea:</label></td><td><input name="txtPass" type="password"class="inputForm" size="20"></td></tr>
 				<tr><td><label>Confirmar contrase&ntildea:</label></td><td><input name="txtPass2" type="password"class="inputForm" size="20"></td></tr>

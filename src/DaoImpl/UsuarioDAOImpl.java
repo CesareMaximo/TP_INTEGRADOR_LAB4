@@ -19,6 +19,8 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 	private static final String readall = "SELECT * FROM Usuarios"; 
 	private static final String iniciar = "SELECT U.idUsuario, U.NombreUsuario, U.clave, U.Tipo FROM Usuarios U WHERE U.NombreUsuario = ? AND U.clave = ? AND U.Estado = 1;";
 	private static final String existe = "SELECT * FROM Usuarios WHERE NombreUsuario = ?";
+	private static final String ultimoId = "SELECT idUsuario FROM Usuarios ORDER BY idUsuario DESC LIMIT 1";
+	
 	@Override
 	public boolean insertAdmin(Usuario usu) {
 		
@@ -176,6 +178,28 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 			e.printStackTrace();
 		}
 		return estado;
+	}
+
+	@Override
+	public int ultimoUsuario() {
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		Usuario usu = new Usuario();
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(ultimoId);
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				usu.setIdUsuario( resultSet.getInt("idUsuario"));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return usu.getIdUsuario();
 	}
 
 }

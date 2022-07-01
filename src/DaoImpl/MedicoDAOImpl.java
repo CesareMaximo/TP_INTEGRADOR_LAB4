@@ -12,7 +12,7 @@ import Entidad.*;
 public class MedicoDAOImpl implements  MedicoDAO{
 
 	
-	//private static final String insert = "";
+	private static final String insert = "INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES (?, ?, ?)";
 	private static final String delete = "UPDATE Persona set Estado = 0 where DNI like ?";
 	private static final String readall = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad WHERE p.Estado = 1";
 	private static final String readallFiltro = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad where m.idEspecialidad = ? and p.Estado = 1";
@@ -25,19 +25,20 @@ public class MedicoDAOImpl implements  MedicoDAO{
 		boolean isInsertExitoso = false;
 		try {
 			conexion = Conexion.getConexion().getSQLConexion();
-			CallableStatement cst = conexion.prepareCall("call registrarUsuMedico(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			//falta todo lo de usuario: nombreUsuario, clave, tipo
+			CallableStatement cst = conexion.prepareCall("call registrarUsuMedico(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			cst.setString(1, me.getIdMedico().getNombreUsuario());
+			cst.setString(2, me.getIdMedico().getClave());
+			cst.setString(3, "Medico");
 			cst.setString(4, me.getDni());
-			//idespecialidad
-			cst.setString(6, me.getNombre());
-			cst.setString(7, me.getApellido());
-			cst.setString(8, String.valueOf(me.getSexo()));
-			cst.setInt(9, me.getnNacionalidad().getIdNacionalidad());
-			cst.setDate(10, me.getFechaNacimiento());
-			cst.setString(11, me.getDireccion());
-			cst.setInt(12, me.getlLocalidad().getIdLocalidad());
-			cst.setString(13, me.getEmail());
-			cst.setBoolean(14, true);
+			cst.setString(5, me.getNombre());
+			cst.setString(6, me.getApellido());
+			cst.setString(7, String.valueOf(me.getSexo()));
+			cst.setInt(8, me.getnNacionalidad().getIdNacionalidad());
+			cst.setDate(9, me.getFechaNacimiento());
+			cst.setString(10, me.getDireccion());
+			cst.setInt(11, me.getlLocalidad().getIdLocalidad());
+			cst.setString(12, me.getEmail());
+			cst.setBoolean(13, true);
 			cst.setString(14, me.getTelefono1());
 			cst.setString(15, me.getTelefono2());
 			//idUsuario = IdMedico
@@ -57,7 +58,37 @@ public class MedicoDAOImpl implements  MedicoDAO{
 		}
 		return isInsertExitoso;
 	}
-
+	
+	@Override
+	public boolean insertMe(Medico me) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isInsertExitoso = false;
+		try
+		{
+			statement = conexion.prepareStatement(insert);
+			statement.setInt(1, me.getIdMedico().getIdUsuario());
+			statement.setString(2, me.getDni());
+			statement.setInt(3, me.geteEspecialidad().getIdEspecialidad());
+	
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isInsertExitoso = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		
+		return isInsertExitoso;
+	}
 
 	@Override
 	public List<Medico> readAll() {
@@ -243,4 +274,5 @@ public class MedicoDAOImpl implements  MedicoDAO{
 			
 		return me;
 	}
+
 }
