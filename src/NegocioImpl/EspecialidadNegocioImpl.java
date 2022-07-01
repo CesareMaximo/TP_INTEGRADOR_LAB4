@@ -20,14 +20,25 @@ public class EspecialidadNegocioImpl implements EspecialidadNegocio{
 
 	@Override
 	public boolean delete(Especialidad esDelete) {
-		// TODO Auto-generated method stub
-		return false;
+		return dao.delete(esDelete);
 	}
 
 	@Override
 	public List<Especialidad> readAll() {
 	
 		return dao.readAll();
+	}
+
+	@Override
+	public Especialidad readAllxId(int idEspecialidad) {
+		
+		return dao.readAllxId(idEspecialidad);
+	}
+
+	@Override
+	public boolean update(Especialidad esMod) {
+		
+		return dao.update(esMod);
 	}
 	
 	
