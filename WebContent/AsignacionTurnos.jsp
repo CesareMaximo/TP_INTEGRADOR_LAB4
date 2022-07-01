@@ -111,7 +111,7 @@ SI NO ESTA REGISTRADO, MENSAJE "PACIENTE NO REGISTRADO, BOTON PARA REGISTRAR"
 		  
 		  %>
 		  	
-		  	<option value="<%= me.geteEspecialidad().getIdEspecialidad()%>" data-uid="<%=me.getIdMedico()%>"> <%= me.getApellido() %> </option>
+		  	<option value="<%= me.geteEspecialidad().getIdEspecialidad()%>" data-uid="<%=me.getIdMedico().getIdUsuario()%>"> <%= me.getApellido() %> </option>
 		  
 		  <% 
 	  }

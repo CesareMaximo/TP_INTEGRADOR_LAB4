@@ -70,6 +70,8 @@ public class ServletHorario extends HttpServlet {
 			diaXMedico.setHorarioIngreso(Time.valueOf(request.getParameter("slcIngreso")));
 			diaXMedico.setHorarioEgreso(Time.valueOf(request.getParameter("slcEgreso")));
 			hoNeg.insert(diaXMedico);
+			ArrayList<DiaXMedico> listaHorario = (ArrayList<DiaXMedico>) hoNeg.readall(idMedico);
+			request.getSession().setAttribute("listaHorario", listaHorario);//hace un get y lo setea
 			rd = request.getRequestDispatcher("/MenuHorario.jsp");
 			rd.forward(request, response);
 		}
