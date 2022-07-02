@@ -143,9 +143,7 @@ CONTRASEÑA
 						
 							</td></tr> 
 				<!-- <tr><td class=top><label>Dia de atenci&oacuten:</label></td><td>
-				
-	
-				
+						
 				<div class="control-group">
     <label class="control control-checkbox">
         Lunes

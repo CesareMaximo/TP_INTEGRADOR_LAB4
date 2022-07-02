@@ -29,7 +29,7 @@ DE CONFIRMACION Y EN EL BACK CAMBIAR EL ESTADO DE TURNO A OCUPADO Y ASIGNAR ID P
 SI NO ESTA REGISTRADO, MENSAJE "PACIENTE NO REGISTRADO, BOTON PARA REGISTRAR"
 -->
   <div style="float: left; margin-left: 12px; margin-top:6px;">
-<a href="IndexAdmin.jsp"><img src="img/atras.png" height="20px" /></a>
+<a href="ServletTurno?Param=1"><img src="img/atras.png" height="20px" /></a>
 <a href="IndexAdmin.jsp"> <img src="img/home.png" height="20px" style="margin-left:10px;" width="20px" ></a> 
 </div>
  <form method="post" action ="logout" >

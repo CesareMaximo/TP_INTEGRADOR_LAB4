@@ -66,8 +66,9 @@ public class ServletTurno extends HttpServlet {
 		if (request.getParameter("Param") != null) {
 
 			request.setAttribute("listaEspecialidad", listaEspecialidad);
-			request.setAttribute("listaTurnos", listaTurno);
+			//request.setAttribute("listaTurnos", listaTurno);
 			request.setAttribute("listaMedico", listaMedico);
+			request.getSession().setAttribute("listaTurnos", listaTurno);
 				
 			rd = request.getRequestDispatcher("/ListaTurnos.jsp");
 			rd.forward(request, response);

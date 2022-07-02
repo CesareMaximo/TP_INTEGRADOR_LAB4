@@ -30,21 +30,22 @@
 <body onLoad="myOnLoad()">
 <!-- LISTADO DE TURNOS CON FILTRO POR ESTADO, POR MEDICO, POR PACIENTE, POR FECHA -->
 
-  <div style="float: left; margin-left: 12px; margin-top:6px;">
-<a href="IndexAdmin.jsp"><img src="img/atras.png" height="20px" /></a>
-<a href="IndexAdmin.jsp"> <img src="img/home.png" height="20px" style="margin-left:10px;" width="20px" ></a> 
-</div>
-<form method="post" action ="logout" >
- <div  style=" font-family:Open Sans; margin-top:6px; float: right; margin-right: 12px; color: #fff; font-size: 12px; "><img width="16px"class="imag" src="img/user.png"/> Bienvenido <b><%= session.getAttribute("username") %></b>
- <input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary btn-sm" style="margin-left:10px;"></div>
-	<br>
-</form>	
+	<div style="float: left; margin-left: 12px; margin-top: 6px;">
+		<a href="IndexAdmin.jsp"><img src="img/atras.png" height="20px" /></a>
+		<a href="IndexAdmin.jsp"> <img src="img/home.png" height="20px"
+			style="margin-left: 10px;" width="20px"></a>
+	</div>
+	<form method="post" action="logout">
+		<div
+			style="font-family: Open Sans; margin-top: 6px; float: right; margin-right: 12px; color: #fff; font-size: 12px;">
+			<img width="16px" class="imag" src="img/user.png" /> Bienvenido <b><%=session.getAttribute("username")%></b>
+			<input name="cerrarSesion" type="submit" value="Cerrar Sesión"
+				class="btn btn-primary btn-sm" style="margin-left: 10px;">
+		</div>
+		<br>
+	</form>
 
-
-
-
-
-<div class="container-xl">
+	<div class="container-xl">
     <div class="table-responsive">
         <div class="table-wrapper">
             <div style="padding-bottom: 0px;" class="table-title">
@@ -58,6 +59,7 @@
                 			<tr>
 							<td><label>Estado:</label></td>
 							<td><select class="select">
+									<option>TODOS</option>
 									<option>LIBRE</option>
 									<option>OCUPADO</option>
 									<option>AUSENTE</option>
@@ -67,31 +69,51 @@
 							<td><input type="date" ></td>
 
 							<td><label>Especialidad:</label></td>
-							<td><select class="select">
-							
-							<% ArrayList<Especialidad> listaEspecialidad = null;
-				
-				if(request.getAttribute("listaEspecialidad")!=null){
-					
-					listaEspecialidad = (ArrayList<Especialidad>)request.getAttribute("listaEspecialidad");
-				}
-				
-				if(listaEspecialidad!=null){
-					
-				
-					for(Especialidad es:listaEspecialidad){
-					%>
-					<option value="<%= es.getIdEspecialidad()%>"> <%= es.getDescripcion() %> </option>
-					<%
-					}
-				}
-				%>
-							</select></td>
+								<td><select class="select" id="especialidadMedico" name="especialidades">
+										<option>TODOS</option>
+										<%
+											ArrayList<Especialidad> listaEspecialidad = null;
+											if (request.getAttribute("listaEspecialidad") != null) {
+												listaEspecialidad = (ArrayList<Especialidad>) request.getAttribute("listaEspecialidad");
+											}
 
-							<tr><td><label>Medico:</label></td><td><select class="textbox" name="medicos" id="medicoReal" required></select></tr> 
+											if (listaEspecialidad != null) {
+												for (Especialidad es : listaEspecialidad) {
+										%>
+										<option value="<%=es.getIdEspecialidad()%>">
+											<%=es.getDescripcion()%>
+										</option>
+										<%
+											}
+											}
+										%>
+								</select></td><td><label>Medico:</label></td><td><select class="select" name="medicos" id="medicoReal">
+										<option>TODOS</option>
+
+											<%
+												ArrayList<Medico> listaMedico2 = null;
+
+												if (request.getAttribute("listaMedico") != null) {
+													listaMedico2 = (ArrayList<Medico>) request.getAttribute("listaMedico");
+												}
+
+												if (listaMedico2 != null) {
+
+													for (Medico me : listaMedico2) {
+											%>
+
+											<option
+												value="<%=me.geteEspecialidad().getIdEspecialidad()%>"
+												data-uid="<%=me.getIdMedico().getIdUsuario()%>">
+												<%=me.getApellido()%>
+											</option>
+										<%
+											}
+											}
+										%>
+								</select>
 							<td><input name="btnFiltrar" type="submit" value="Filtrar" class="btn btn-primary btn-sm"></td>
-						</tr>
-						
+						</tr> 
                 		</table>
                     </div>
                     
@@ -144,31 +166,6 @@
     </div>  
 </div>  
 
-<select name="medicosaux" id="medico2"> 
-  
-  <% 
-  ArrayList<Medico> listaMedico2 =null;
-  
-  if(request.getAttribute("listaMedico")!=null){
-	  listaMedico2 = (ArrayList<Medico>) request.getAttribute("listaMedico");
-  }
-  
-  
-  if(listaMedico2 !=null){
-	  
-	  for(Medico me:listaMedico2){
-		  
-		  %>
-		  
-		  	<option value="<%= me.geteEspecialidad().getIdEspecialidad()%>" data-uid="<%=me.getIdMedico().getIdUsuario()%>"> <%= me.getApellido() %> </option>
-		  
-		  <% 
-	  }
-	  
-  }
-	  %>
-  </select>
-  
   	<script>
 			$(document).ready( function () {
 			    $('#table_turnos').DataTable();
@@ -181,51 +178,6 @@
 			     
 			    ]
 			} );
-			</script>	
-	
-	  <script>
-function myOnLoad() {
-		var earrings = document.getElementById('medico2');
-		earrings.style.visibility = 'hidden';
-		cargar_medicos();
-	}
-</script>
-
-<script>
-function cargar_medicos() {
-	document.getElementById("medicoReal").options.length = 0;
-	
-	var x = document.getElementById("medico2");
-	var array = new Array();
-	var a = new Array();
-	var b = new Array();
-	for (i = 0; i < x.length; i++) { 
-		
-		array.push(x.options[i].text);
-		a.push(x.options[i].value);
-		b.push(x.options[i].getAttribute('data-uid'));
-		
-}
-	 addOptions("medicos", array, a,b);
-	}
-</script>
-
-<script>
-function addOptions(domElement, array, a,b) {
-	 var select = document.getElementsByName(domElement)[0];
-	 var inde = document.getElementById('especialidadMedico').value;
-
-	 for (value in array) {
-		if(a[value] === inde){
-	  var option = document.createElement("option");
-	  option.text = array[value];
-	  option.value = b[value];
-	  select.add(option);
-		}
-	 }
-	}
-</script>
-
-
+			</script>
 </body>
 </html>
