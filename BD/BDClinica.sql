@@ -85,7 +85,7 @@ CREATE TABLE Dia_x_Medico(
 
 CREATE TABLE Estados(
   idEstado int not null primary key auto_increment,
-  Descripcion varchar(20) not null
+  NombreEstado varchar(20) not null
 );
 
 

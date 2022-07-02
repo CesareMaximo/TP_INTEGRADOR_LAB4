@@ -2655,10 +2655,10 @@ INSERT INTO Localidad (idProvincia, Descripcion) VALUES
 ( 25, 'Yerba Buena (S)');
 
 #ESTADOS
-INSERT INTO Estados (Descripcion) VALUES('LIBRE');
-INSERT INTO Estados (Descripcion) VALUES('OCUPADO');
-INSERT INTO Estados (Descripcion) VALUES('AUSENTE');
-INSERT INTO Estados (Descripcion) VALUES('PRESENTE');
+INSERT INTO Estados (NombreEstado) VALUES('LIBRE');
+INSERT INTO Estados (NombreEstado) VALUES('OCUPADO');
+INSERT INTO Estados (NombreEstado) VALUES('AUSENTE');
+INSERT INTO Estados (NombreEstado) VALUES('PRESENTE');
 
 #USUARIOS
 INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES('Administrador', '1234', 'Admin', 1);
