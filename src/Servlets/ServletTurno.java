@@ -52,23 +52,24 @@ public class ServletTurno extends HttpServlet {
 			throws ServletException, IOException {
 
 		MedicoNegocio meNeg = new MedicoNegocioImpl();
+		TurnoNegocio tuNeg = new TurnoNegocioImpl();
 		Medico me = new Medico();
 		EspecialidadNegocio esNeg = new EspecialidadNegocioImpl();
 		Especialidad es = new Especialidad();
 
 		ArrayList<Especialidad> listaEspecialidad = (ArrayList<Especialidad>) esNeg.readAll();
-
 		ArrayList<Medico> listaMedico = (ArrayList<Medico>) meNeg.readAll();
+		ArrayList<Turno> listaTurno = (ArrayList<Turno>) tuNeg.readAll();
 
 		RequestDispatcher rd;
 
 		if (request.getParameter("Param") != null) {
 
 			request.setAttribute("listaEspecialidad", listaEspecialidad);
-
+			request.setAttribute("listaTurnos", listaTurno);
 			request.setAttribute("listaMedico", listaMedico);
-
-			rd = request.getRequestDispatcher("/AsignacionTurnos.jsp");
+				
+			rd = request.getRequestDispatcher("/ListaTurnos.jsp");
 			rd.forward(request, response);
 		}
 
@@ -126,7 +127,7 @@ public class ServletTurno extends HttpServlet {
 				while (inicio.compareTo(fin) == 0 || inicio.compareTo(fin) < 0) {
 
 					Calendar calendar = Calendar.getInstance();
-					calendar.setTime(inicio);
+					calendar.setTime(inicio); 
 
 					int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
@@ -147,9 +148,10 @@ public class ServletTurno extends HttpServlet {
 								turno.setHora(Cas2);
 
 								listaAgenda.add(turno);
-
+								System.out.println(listaAgenda.toString());
 								horaIng.add(Calendar.HOUR_OF_DAY, 1);
-									///CARGAR ESTA LISTA EN LA BASE DE DATOS. TABLA TURNO
+								
+								
 							}
 						}
 
@@ -157,6 +159,11 @@ public class ServletTurno extends HttpServlet {
 					calendar.add(Calendar.DATE, 1);
 					inicio = new java.sql.Date(calendar.getTimeInMillis());
 				}
+				
+				if(tneg.insert(listaAgenda)) {
+					request.getRequestDispatcher("/ListaTurnos.jsp").forward(request, response);
+				}
+				
 				
 			} catch (Exception e) {
 				e.printStackTrace();

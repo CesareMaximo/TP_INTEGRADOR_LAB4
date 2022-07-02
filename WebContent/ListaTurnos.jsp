@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+        <%@page import="Entidad.*"%>
+    <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,7 +27,7 @@
 
 
 
-<body>
+<body onLoad="myOnLoad()">
 <!-- LISTADO DE TURNOS CON FILTRO POR ESTADO, POR MEDICO, POR PACIENTE, POR FECHA -->
 
   <div style="float: left; margin-left: 12px; margin-top:6px;">
@@ -65,10 +67,28 @@
 							<td><input type="date" ></td>
 
 							<td><label>Especialidad:</label></td>
-							<td><select class="select"></select></td>
+							<td><select class="select">
+							
+							<% ArrayList<Especialidad> listaEspecialidad = null;
+				
+				if(request.getAttribute("listaEspecialidad")!=null){
+					
+					listaEspecialidad = (ArrayList<Especialidad>)request.getAttribute("listaEspecialidad");
+				}
+				
+				if(listaEspecialidad!=null){
+					
+				
+					for(Especialidad es:listaEspecialidad){
+					%>
+					<option value="<%= es.getIdEspecialidad()%>"> <%= es.getDescripcion() %> </option>
+					<%
+					}
+				}
+				%>
+							</select></td>
 
-							<td><label>Medicos:</label></td>
-							<td><select class="select"></select></td>
+							<tr><td><label>Medico:</label></td><td><select class="textbox" name="medicos" id="medicoReal" required></select></tr> 
 							<td><input name="btnFiltrar" type="submit" value="Filtrar" class="btn btn-primary btn-sm"></td>
 						</tr>
 						
@@ -79,40 +99,77 @@
               
                 </div>
      
-
+				 <%
+					ArrayList<Turno> listaTurnos = (ArrayList<Turno>)session.getAttribute("listaTurnos"); 
+					/* if(listaTurnos!= null){
+						listaTurnos = (ArrayList<Turno>) request.getAttribute("listaTurnos");
+					} */
+				 %>
 
 				<table id="table_turnos" class="display">
 					   <thead>
                     <tr>
                         <th>#</th>
                         <th>DNI Paciente</th>
-                        <th>Medico <i class="fa fa-sort"></i> </th>
-                        <th>Especialidad<i class="fa fa-sort"></i></th>
+                        <th>Medico</th>
+                        <th>Especialidad</th>
                         <th>Fecha</th>
+                        <th>Horario</th>
                         <th>Estado</th>
                         <th>Acciones </th>
                     </tr>
                 </thead>
 					 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="#openModalDetallePaciente" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
-                            <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>
+                        <%  if(listaTurnos !=null)
+						for(Turno tu : listaTurnos){
+					
+					%>
+	                    <tr>
+	                    	<td><%=tu.getIdTurno()%></td>
+							<td><%=tu.getpPaciente().getDni()%></td>
+							<td><%=tu.getmMedico().getNombre()%> <%=tu.getmMedico().getApellido()%></td>
+							<td><%=tu.getmMedico().geteEspecialidad().getDescripcion()%></td>
+							<td><%=tu.getFecha()%></td>
+							<td><%=tu.getHora()%></td>
+							<td><%=tu.geteEstado().getDescripcion()%></td>
+							<td>
+	                    	<a href="ServletTurno?AsignarTurno=<%=tu.getIdTurno()%>" class="edit" title="Asignar" data-toggle="tooltip" style="color:green"><i class="material-icons">assignment_ind</i></a>
+	                       	</td>     	
+	                 	</tr>
+	               	<% } %>
                 </tbody>
 				</table>
 
         </div>
     </div>  
 </div>  
-	<script>
+
+<select name="medicosaux" id="medico2"> 
+  
+  <% 
+  ArrayList<Medico> listaMedico2 =null;
+  
+  if(request.getAttribute("listaMedico")!=null){
+	  listaMedico2 = (ArrayList<Medico>) request.getAttribute("listaMedico");
+  }
+  
+  
+  if(listaMedico2 !=null){
+	  
+	  for(Medico me:listaMedico2){
+		  
+		  %>
+		  
+		  	<option value="<%= me.geteEspecialidad().getIdEspecialidad()%>" data-uid="<%=me.getIdMedico().getIdUsuario()%>"> <%= me.getApellido() %> </option>
+		  
+		  <% 
+	  }
+	  
+  }
+	  %>
+  </select>
+  
+  	<script>
 			$(document).ready( function () {
 			    $('#table_turnos').DataTable();
 			} );
@@ -120,10 +177,55 @@
 			<script>
 			var table = $('#table_turnos').DataTable( {
 			    columnDefs: [
-			        { targets: [6], orderable: false},
+			        { targets: [7], orderable: false},
 			     
 			    ]
 			} );
 			</script>	
+	
+	  <script>
+function myOnLoad() {
+		var earrings = document.getElementById('medico2');
+		earrings.style.visibility = 'hidden';
+		cargar_medicos();
+	}
+</script>
+
+<script>
+function cargar_medicos() {
+	document.getElementById("medicoReal").options.length = 0;
+	
+	var x = document.getElementById("medico2");
+	var array = new Array();
+	var a = new Array();
+	var b = new Array();
+	for (i = 0; i < x.length; i++) { 
+		
+		array.push(x.options[i].text);
+		a.push(x.options[i].value);
+		b.push(x.options[i].getAttribute('data-uid'));
+		
+}
+	 addOptions("medicos", array, a,b);
+	}
+</script>
+
+<script>
+function addOptions(domElement, array, a,b) {
+	 var select = document.getElementsByName(domElement)[0];
+	 var inde = document.getElementById('especialidadMedico').value;
+
+	 for (value in array) {
+		if(a[value] === inde){
+	  var option = document.createElement("option");
+	  option.text = array[value];
+	  option.value = b[value];
+	  select.add(option);
+		}
+	 }
+	}
+</script>
+
+
 </body>
 </html>
