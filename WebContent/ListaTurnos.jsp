@@ -47,8 +47,11 @@
         <div class="table-wrapper">
             <div style="padding-bottom: 0px;" class="table-title">
                 <div class="row justify-content-left">
-                    <div class="col-sm-8">
-                    	<h1>Turnos</h1>
+                    <div class="col-md-6">
+                    	<h1>Turnos</h1></div>
+                    	<div class="col-md-6 d-flex justify-content-end">
+                    	<a style="height:38px;" href="ServletTurno?Agenda=1" name="abrirAgenda" class="btn btn-primary btn-ml">Abrir agenda</a></div>
+                    	
                 		<table class ="filtrosListado">
                 			<tr>
 							<td><label>Estado:</label></td>
@@ -73,11 +76,9 @@
                     </div>
                     
                 
-                	<div>
-                	</div>
+              
                 </div>
-            </div>
-
+     
 
 
 				<table id="table_turnos" class="display">

@@ -52,7 +52,7 @@ FILTRO DE BUSQUEDA-->
 								<tr>
 									<td><label style=" margin-left: 14px; margin-right: 5px">Especialidad:</label></td>
 									<td><select name="espe" class="select">
-
+										<option value="0">Todos</option>
 
 											<%
 													ArrayList<Especialidad> listaEspecialidad = null;
@@ -94,9 +94,9 @@ FILTRO DE BUSQUEDA-->
 							<thead>
 								<tr>
 									<th>DNI</th>
-									<th>Nombre <i class="fa fa-sort"></i>
+									<th>Nombre </i>
 									</th>
-									<th>Apellido<i class="fa fa-sort"></i></th>
+									<th>Apellido</i></th>
 									<th>Especialidad</th>
 									<th>Acciones</th>
 								</tr>

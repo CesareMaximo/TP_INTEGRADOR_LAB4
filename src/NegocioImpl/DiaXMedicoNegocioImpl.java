@@ -1,6 +1,7 @@
 package NegocioImpl;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 
 import Dao.DiaXMedicoDAO;
@@ -21,6 +22,12 @@ public class DiaXMedicoNegocioImpl implements DiaXMedicoNegocio{
 	public boolean insert(DiaXMedico diaXMedico) {
 	
 		return hoDAO.Insert(diaXMedico);
+	}
+
+	@Override
+	public ArrayList<DiaXMedico> readDias(int idMedico) {
+		 
+		return hoDAO.readDias(idMedico);
 	}
 
 }

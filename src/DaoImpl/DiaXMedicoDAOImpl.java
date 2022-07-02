@@ -19,6 +19,7 @@ public class DiaXMedicoDAOImpl implements DiaXMedicoDAO{
 	private static final String readall = "SELECT dxm.idDia as idD, dxm.idMedico, dxm.HorarioIngreso, dxm.HorarioEgreso, d.Descripcion FROM Dia_x_Medico as dxm inner join Dia as d on dxm.idDia = d.idDia WHERE dxm.idMedico = ? and dxm.Estado = 1";
 	private static final String insert = "insert into Dia_x_Medico (idDia, idMedico, HorarioIngreso, HorarioEgreso, Estado) values (?,?,?,?,?)";
 	private static final String delete = "delete from medico_x_horario where idMedico = ? and idHorario = ?";
+	private static final String readDias = "SELECT * from Dia_x_Medico WHERE idMedico = ? AND Estado=1";
 	
 	
 	@Override
@@ -124,6 +125,39 @@ public class DiaXMedicoDAOImpl implements DiaXMedicoDAO{
 		}
 		
 		return isInsertExitoso;
+	}
+
+	@Override
+	public ArrayList<DiaXMedico> readDias(int idMedico) {
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		
+		ArrayList<DiaXMedico> dias = new ArrayList<DiaXMedico>();
+	
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(readDias);
+			statement.setInt(1, idMedico);
+			resultSet = statement.executeQuery();
+			
+			while(resultSet.next())
+			{
+				DiaXMedico dxm = new DiaXMedico();
+				Dia dia = new Dia();
+				dia.setId(resultSet.getInt("idDia"));
+				dxm.setDia(dia);
+				dxm.setHorarioIngreso(resultSet.getTime("horarioIngreso"));
+				dxm.setHorarioEgreso(resultSet.getTime("horarioEgreso"));
+				
+				dias.add(dxm);
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return dias;		
 	}
 
 }

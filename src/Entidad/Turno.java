@@ -7,7 +7,6 @@ public class Turno {
 
 	private int idTurno;
 	private Medico mMedico;
-	private Especialidad eEspecialidad;
 	private Date fecha;
 	private Paciente pPaciente;
 	private Estado eEstado;
@@ -18,12 +17,12 @@ public class Turno {
 	public Turno() {}
 	
 	
-	public Turno(int idTurno, Medico mMedico, Especialidad eEspecialidad, Date fecha, Paciente pPaciente,
+	public Turno(int idTurno, Medico mMedico, Date fecha, Paciente pPaciente,
 			Estado eEstado, Time hora, String observacion) {
 		super();
 		this.idTurno = idTurno;
 		this.mMedico = mMedico;
-		this.eEspecialidad = eEspecialidad;
+
 		this.fecha = fecha;
 		this.pPaciente = pPaciente;
 		this.eEstado = eEstado;
@@ -44,12 +43,7 @@ public class Turno {
 	public void setmMedico(Medico mMedico) {
 		this.mMedico = mMedico;
 	}
-	public Especialidad geteEspecialidad() {
-		return eEspecialidad;
-	}
-	public void seteEspecialidad(Especialidad eEspecialidad) {
-		this.eEspecialidad = eEspecialidad;
-	}
+
 	public Date getFecha() {
 		return fecha;
 	}
@@ -84,7 +78,7 @@ public class Turno {
 	//Metodo ToString
 	@Override
 	public String toString() {
-		return "Turno [idTurno=" + idTurno + ", mMedico=" + mMedico + ", eEspecialidad=" + eEspecialidad + ", fecha="
+		return "Turno [idTurno=" + idTurno + ", mMedico=" + mMedico + ", fecha="
 				+ fecha + ", pPaciente=" + pPaciente + ", eEstado=" + eEstado + ", hora=" + hora + ", observacion="
 				+ observacion + "]";
 	}

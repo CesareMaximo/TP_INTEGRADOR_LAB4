@@ -84,7 +84,12 @@ public class ServletMedico extends HttpServlet {
 			
 			rd = request.getRequestDispatcher("/AgregarMedico.jsp");
 			rd.forward(request, response);
-		}		
+		}
+		
+			
+		
+		
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -115,10 +120,15 @@ public class ServletMedico extends HttpServlet {
 		
 		//BtnFiltrar
 		if(request.getParameter("btnFiltrar")!=null) {
-	
+			
 			int id = Integer.parseInt(request.getParameter("espe").toString());	
+			if(id != 0) {
 			ArrayList<Medico> listaMedicoFiltro= (ArrayList<Medico>) meNeg.readAllFiltro(id);	
 			request.setAttribute("listaMedico", listaMedicoFiltro);	
+			}else {
+				ArrayList<Medico> listaMedicoFiltro= (ArrayList<Medico>) meNeg.readAll();	
+				request.setAttribute("listaMedico", listaMedicoFiltro);	
+			}
 			rd = request.getRequestDispatcher("/MenuMedico.jsp");
 			rd.forward(request, response);
 		}
