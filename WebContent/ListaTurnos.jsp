@@ -211,6 +211,45 @@
 	<%
 		}
 	%>
+	
+	<% 		
+						boolean exito2 = false;
+						
+						if(request.getAttribute("exito2")!=null){
+						
+							exito2 = (boolean)request.getAttribute("exito2");
+							
+						}
+							if(exito2 == true){
+								%>
+								<script type="text/javascript">
+										window.onload = function() {
+											OpenBootstrapPopup();
+										};
+										function OpenBootstrapPopup() {
+											$("#simpleModal").modal('show');
+										}
+									</script>
+									
+									<div id="simpleModal" class="modal fade">
+			<div class="modal-dialog modal-ok">
+				<div class="modal-content">
+					<div class="modal-header justify-content-center">
+						<div class="icon-box">
+							<i style="color: green" class="material-icons">&#xE876;</i>
+						</div>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body text-center">
+						<h4>Exito!</h4>	
+						<p>La agenda se ha registrado satisfactoriamente.</p>
+					</div>
+				</div>
+			</div>
+		</div>     
+								 <%} 
+									%>
+	
 	<script>
 		$(document).ready(function() {
 			$('#table_turnos').DataTable();

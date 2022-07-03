@@ -108,6 +108,8 @@ SI NO ESTA REGISTRADO, MENSAJE "PACIENTE NO REGISTRADO, BOTON PARA REGISTRAR"
 	  %>
   </select>
   
+  
+  
   <script>
 function myOnLoad() {
 		var earrings = document.getElementById('medico2');
@@ -132,8 +134,6 @@ function cargar_medicos() {
 		b.push(x.options[i].getAttribute('data-uid'));
 		
 }
-
-	
 
 	 addOptions("slcMedicos", array, a,b);
 	}

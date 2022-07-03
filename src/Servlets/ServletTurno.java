@@ -80,6 +80,7 @@ public class ServletTurno extends HttpServlet {
 			int id = Integer.parseInt(request.getParameter("AsignarTurno"));
 			tu = tuNeg.devuelveTurno(id);
 			request.getSession().setAttribute("Turno", tu);
+			request.setAttribute("exito", true);	
 			rd = request.getRequestDispatcher("/AsignacionTurnos.jsp");
 			rd.forward(request, response);
 		}
@@ -180,6 +181,7 @@ public class ServletTurno extends HttpServlet {
 				if(tneg.insert(listaAgenda)) {
 					ArrayList<Turno> listaTurno3 = (ArrayList<Turno>) tneg.readAll();
 					request.getSession().setAttribute("listaTurnos", listaTurno3);
+					request.setAttribute("exito2", true);	
 					request.getRequestDispatcher("/ListaTurnos.jsp").forward(request, response);
 				}
 				
