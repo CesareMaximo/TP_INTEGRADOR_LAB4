@@ -91,6 +91,7 @@
 								}
 							%>
 					</select>
+					</td>
 				</tr>
 				<tr>
 					<td><label>Nacionalidad</label></td>
@@ -102,26 +103,24 @@
 							<%
 								ArrayList<Nacionalidad> listaNacionalidad = null;
 
-										if (request.getAttribute("listaNacionalidad") != null) {
+								if (request.getAttribute("listaNacionalidad") != null) {
 
-											listaNacionalidad = (ArrayList<Nacionalidad>) request.getAttribute("listaNacionalidad");
-										}
+									listaNacionalidad = (ArrayList<Nacionalidad>) request.getAttribute("listaNacionalidad");
+								}
 
-										if (listaNacionalidad != null)
-											for (Nacionalidad es : listaNacionalidad) {
+								if (listaNacionalidad != null)
+									for (Nacionalidad es : listaNacionalidad) {
 
-												if (es.getIdNacionalidad() != value) {
+										if (es.getIdNacionalidad() != value) {
 							%>
 							<option value="<%=es.getIdNacionalidad()%>">
 								<%=es.getDescripcion()%>
 							</option>
-
 							<%
 								}
-											}
+									}
 							%>
-
-					</select>
+					</select></td>
 				</tr>
 				<tr>
 					<td><label>Provincia:</label></td>

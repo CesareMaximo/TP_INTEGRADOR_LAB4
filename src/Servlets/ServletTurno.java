@@ -148,31 +148,29 @@ public class ServletTurno extends HttpServlet {
 					calendar.setTime(inicio); 
 
 					int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-
-					for (DiaXMedico dia : diasTrabajo) {
-
-						if (dia.getDia().getId() == dayOfWeek) {
-
-							Calendar horaIng = Calendar.getInstance();
-							horaIng.setTime(dia.getHorarioIngreso());
-							Calendar horaEg = Calendar.getInstance();
-							horaEg.setTime(dia.getHorarioEgreso());
-
-							while (horaIng.compareTo(horaEg) < 0) {
-								Time Cas2 = new Time(horaIng.getTimeInMillis());
-								Turno turno2 = new Turno();
-								turno2.setmMedico(med);
-								turno2.setFecha(inicio);
-								turno2.setHora(Cas2);
-
-								listaAgenda.add(turno2);
-								System.out.println(listaAgenda.toString());
-								horaIng.add(Calendar.HOUR_OF_DAY, 1);
+					if(tneg.existeFechaTurno(med.getIdMedico().getIdUsuario(), inicio) == false){						
+						for (DiaXMedico dia : diasTrabajo) {
+							
+							if (dia.getDia().getId() == dayOfWeek) {
 								
+								Calendar horaIng = Calendar.getInstance();
+								horaIng.setTime(dia.getHorarioIngreso());
+								Calendar horaEg = Calendar.getInstance();
+								horaEg.setTime(dia.getHorarioEgreso());
 								
+								while (horaIng.compareTo(horaEg) < 0) {
+									Time Cas2 = new Time(horaIng.getTimeInMillis());
+									Turno turno2 = new Turno();
+									turno2.setmMedico(med);
+									turno2.setFecha(inicio);
+									turno2.setHora(Cas2);
+									
+									listaAgenda.add(turno2);
+									//System.out.println(listaAgenda.toString());
+									horaIng.add(Calendar.HOUR_OF_DAY, 1);															
+								}
 							}
 						}
-
 					}
 					calendar.add(Calendar.DATE, 1);
 					inicio = new java.sql.Date(calendar.getTimeInMillis());
@@ -182,6 +180,11 @@ public class ServletTurno extends HttpServlet {
 					ArrayList<Turno> listaTurno3 = (ArrayList<Turno>) tneg.readAll();
 					request.getSession().setAttribute("listaTurnos", listaTurno3);
 					request.setAttribute("exito2", true);	
+					request.getRequestDispatcher("/ListaTurnos.jsp").forward(request, response);
+				}else {
+					ArrayList<Turno> listaTurno3 = (ArrayList<Turno>) tneg.readAll();
+					request.getSession().setAttribute("listaTurnos", listaTurno3);
+					request.setAttribute("exito2", false);	
 					request.getRequestDispatcher("/ListaTurnos.jsp").forward(request, response);
 				}
 				

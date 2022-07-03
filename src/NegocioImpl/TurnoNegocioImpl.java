@@ -1,5 +1,6 @@
 package NegocioImpl;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import Dao.TurnoDAO;
@@ -32,6 +33,11 @@ public class TurnoNegocioImpl implements TurnoNegocio {
 	public boolean agendarTurno(String dni, Turno turno) {
 
 		return tur.agendarTurno(dni, turno);
+	}
+
+	@Override
+	public boolean existeFechaTurno(int idMedico, Date fecha) {
+		return tur.existeFechaTurno(idMedico, fecha);
 	}
 
 }

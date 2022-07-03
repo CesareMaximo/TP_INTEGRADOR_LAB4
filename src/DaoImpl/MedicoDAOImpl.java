@@ -16,7 +16,7 @@ public class MedicoDAOImpl implements  MedicoDAO{
 	private static final String delete = "UPDATE Persona set Estado = 0 where DNI like ?";
 	private static final String readall = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad WHERE p.Estado = 1";
 	private static final String readallFiltro = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad where m.idEspecialidad = ? and p.Estado = 1";
-	private static final String readMedico = "SELECT * FROM Medico AS M INNER JOIN Persona AS P ON P.DNI = M.DNI WHERE IdMedico=?";
+	private static final String readMedico = "SELECT P.DNI, P.Nombre, P.Apellido, P.Sexo, P.idNacionalidad, P.FechaNacimiento, P.Direccion, P.idLocalidad, P.Email, P.Telefono1, P.Telefono2, P.Estado, M.idMedico, M.idEspecialidad, E.Descripcion AS DesEspe, L.Descripcion AS DesLoc, PRO.Descripcion AS DesPro, N.Descripcion AS DesNac, U.NombreUsuario, U.Clave FROM Medico AS M INNER JOIN Persona AS P ON P.DNI = M.DNI INNER JOIN Especialidad E ON E.idEspecialidad = M.idEspecialidad INNER JOIN Localidad L ON L.idLocalidad = P.idLocalidad INNER JOIN Provincia PRO ON PRO.idProvincia = L.idProvincia INNER JOIN Nacionalidad N ON N.idNacionalidad = P.idNacionalidad INNER JOIN usuarios U ON U.idUsuario=M.idMedico WHERE IdMedico=?";
 	//private static final String readallBuscar = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad where p.Nombre like '%"++"%' or p.Apellido like '%"++"%' ";
 	
 	@Override
@@ -251,9 +251,12 @@ public class MedicoDAOImpl implements  MedicoDAO{
 		Usuario us = new Usuario();
 		me.setDni(resultSet.getString("DNI"));
 		us.setIdUsuario(resultSet.getInt("idMedico"));
+		us.setClave(resultSet.getString("Clave"));
+		us.setNombreUsuario(resultSet.getString("NombreUsuario"));
 		me.setIdMedico(us);
 		//
-		es.setIdEspecialidad(resultSet.getInt("idEspecialidad"));	
+		es.setIdEspecialidad(resultSet.getInt("idEspecialidad"));
+		es.setDescripcion(resultSet.getString("DesEspe"));
 		me.seteEspecialidad(es);
 		//
 		me.setNombre(resultSet.getString("Nombre"));
@@ -261,12 +264,14 @@ public class MedicoDAOImpl implements  MedicoDAO{
 		me.setSexo(resultSet.getString("Sexo").charAt(0));
 		//
 		na.setIdNacionalidad( resultSet.getInt("idNacionalidad"));
+		na.setDescripcion(resultSet.getString("DesNac"));
 		me.setnNacionalidad(na);
 		//
 		me.setFechaNacimiento(resultSet.getDate("FechaNacimiento"));
 		me.setDireccion(resultSet.getString("Direccion"));
 		//
 		lo.setIdLocalidad(resultSet.getInt("idLocalidad"));
+		lo.setDescripcion(resultSet.getString("DesLoc"));
 		me.setlLocalidad(lo);
 		//
 		me.setEmail(resultSet.getString("Email"));

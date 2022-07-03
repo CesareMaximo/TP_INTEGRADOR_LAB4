@@ -86,7 +86,13 @@ public class ServletMedico extends HttpServlet {
 		if(request.getParameter("modificar") != null) {
 			int idMedico = Integer.parseInt((request.getParameter("modificar").toString()));
 			me = meNeg.mostrarMedico(idMedico);
-			request.getSession().setAttribute("medico", me);
+			request.getSession().setAttribute("medico", me);	
+			request.setAttribute("listaEspecialidad", listaEspecialidad);
+			request.setAttribute("listaNacionalidad", listaNacionalidad);
+			request.setAttribute("listaProvincia", listaProvincia);
+			request.setAttribute("listaLocalidad", listaLocalidad);
+			//ArrayList<Localidad> listaLocalidad2 = (ArrayList<Localidad>) loNeg.readAllxid(me.getlLocalidad().getpProvincia().getIdProvincia());
+			//request.setAttribute("listaLocalidad2", listaLocalidad2);
 			rd = request.getRequestDispatcher("/ModificarMedico.jsp");
 			rd.forward(request, response);
 		}	

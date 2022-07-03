@@ -20,11 +20,11 @@
 				Medico me = new Medico();
 				me = (Medico) session.getAttribute("medico");
 				//String id = String.valueOf(me.getlLocalidad().getpProvincia().getIdProvincia());
-				//String id2 = String.valueOf(me.getlLocalidad().getIdLocalidad());
+				String id2 = String.valueOf(me.getlLocalidad().getIdLocalidad());
 %>
 
 </head>
-<body>
+<body onLoad="myOnLoad()">
 <div style="float: left; margin-left: 12px; margin-top:6px;">
 <a href="ServletMedico?Param=1"><img src="img/atras.png" height="20px" /></a>
 <a href="IndexAdmin.jsp"> <img src="img/home.png" height="20px" style="margin-left:10px;" width="20px" ></a> 
@@ -43,15 +43,112 @@
 				<tr><td><label>Nombres:</label></td><td><input name="txtNombre" type="text" class="inputForm" size="20" required value="${medico.nombre}"></td></tr>
 				<tr><td><label>Apellidos:</label></td><td><input name="txtApellido" type="text" class="inputForm" size="20" required value="${medico.apellido}"></td></tr>
 				<tr><td><label>Fecha Nacimiento:</label></td><td><input name="txtFechaNac" type="date" class="inputForm" size="20" required value="${medico.fechaNacimiento}"></td></tr>
-				<tr><td><label>Sexo</label></td><td><select class="select" value="${medico.sexo}"></select></tr>
-				<tr><td><label>Nacionalidad:</label></td><td><select class="select"></select></tr>
+				<tr><td><label>Sexo</label></td><td>
+					<select class="select" name="slcSexo">
+							<%
+								if (me.getSexo() == 'M') {
+							%>
+
+							<option selected value="M">Masculino</option>
+							<option value="F">Femenino</option>
+							<option value="O">Otro</option>
+							<%
+								} else if (me.getSexo() == 'F') {
+							%>
+
+							<option value="M">Masculino</option>
+							<option selected value="F">Femenino</option>
+							<option value="O">Otro</option>
+							<%
+								} else {
+							%>
+							<option value="M">Masculino</option>
+							<option value="F">Femenino</option>
+							<option selected value="O">Otro</option>
+							<%
+								}
+							%>
+					</select>
+					</td>
+				</tr>
+				<tr><td><label>Nacionalidad:</label></td>
+					<td><select class="select" name="slcNacionalidad">
+							<%
+								int value = me.getnNacionalidad().getIdNacionalidad();
+							%>
+							<option selected="selected" value=<%=value%>>${medico.nNacionalidad.descripcion}</option>
+							<%
+								ArrayList<Nacionalidad> listaNacionalidad = null;
+
+								if (request.getAttribute("listaNacionalidad") != null) {
+
+									listaNacionalidad = (ArrayList<Nacionalidad>) request.getAttribute("listaNacionalidad");
+								}
+
+								if (listaNacionalidad != null)
+									for (Nacionalidad es : listaNacionalidad) {
+
+										if (es.getIdNacionalidad() != value) {
+							%>
+							<option value="<%=es.getIdNacionalidad()%>">
+								<%=es.getDescripcion()%>
+							</option>
+							<%
+								}
+									}
+							%>
+					</select></td>
+				</tr>
 				<tr><td><label>Provincia:</label></td><td><select class="select"></select></tr>
-				<tr><td><label>Localidad:</label></td><td><select class="select"></select></tr>
+				<tr><td><label>Localidad:</label></td>
+				<td><select class="textbox" required id="localidadReal"
+						name="slcLocalidad" value=<%=id2%>>
+							<option selected="selected" value=<%=id2%>>${medico.lLocalidad.descripcion}</option>
+							<%
+								ArrayList<Localidad> listaLocalidad = null;
+								if (request.getAttribute("listaLocalidad2") != null) {
+									listaLocalidad = (ArrayList<Localidad>) request.getAttribute("listaLocalidad2");
+								}
+								if (listaLocalidad != null) {
+									for (Localidad lo : listaLocalidad) {
+										if (lo.getIdLocalidad() != Integer.parseInt(id2)) {
+							%>
+							<option value="<%=lo.getIdLocalidad()%>"> <%=lo.getDescripcion()%> </option>
+							<%
+										}
+									}
+								}
+							%>
+					</select>
+					</td>
+				</tr>
 				<tr><td><label>Direcci&oacuten:</label></td><td><textarea name="txtDireccion" style="resize: none;" class="inputForm" cols="21" rows="3" required value="${medico.direccion}"></textarea></td></tr>
 				<tr><td><label>E-mail:</label></td><td><input name="email " type="email" class="inputForm" size="20" required value="${medico.email}"></td></tr>
 				<tr><td><label>Tel&eacutefono:</label></td><td><input name="txtTelefono1" type="text"  class="inputForm"size="20" required value="${medico.telefono1}"></td></tr>
 				<tr><td><label>Tel&eacutefono Opcional:</label></td><td><input name="txtTelefono2" type="text" class="inputForm" size="20" value="${medico.telefono2}"></td></tr>
-				<tr><td><label>Especialidad:</label></td><td><select class="select"></select></tr> 
+				<tr><td><label>Especialidad:</label></td>
+					<td><select name="slcEspecialidad" class="select">
+							<%
+								int value2 = me.geteEspecialidad().getIdEspecialidad();
+							%>
+							<option selected="selected" value=<%=value2%>>${medico.eEspecialidad.descripcion}</option>										
+							<% ArrayList<Especialidad> listaEspecialidad= null;							
+							if(request.getAttribute("listaEspecialidad")!=null){					
+								listaEspecialidad = (ArrayList<Especialidad>) request.getAttribute("listaEspecialidad");
+							}											
+							if(listaEspecialidad!=null)
+								for(Especialidad es : listaEspecialidad){
+									if(es.getIdEspecialidad() != value2){
+										
+									%>
+									<option value="<%= es.getIdEspecialidad()%>"><%=es.getDescripcion() %></option> 		
+									<% 
+									}
+								}							
+							%>
+						</select>										
+					</td>
+				</tr>
 				<!-- <tr><td class=top><label>Dia de atenci&oacuten:</label></td><td>
 				<div class="control-group">
     <label class="control control-checkbox">
@@ -114,12 +211,12 @@
 				<option>20:00</option></select><label class="lbl">  Salida   </label>
 				
 				</td></tr> -->
-				<tr><td><label>Nombre de Usuario:</label></td><td><input name="txtUser" type="text" class="inputForm" size="20"></td></tr>
-				<tr><td><label>Contrase&ntildea:</label></td><td><input name="txtPass" type="password"class="inputForm" size="20"></td></tr>
+				<tr><td><label>Nombre de Usuario:</label></td><td><input name="txtUser" type="text" class="inputForm" size="20" value="${medico.idMedico.nombreUsuario}"></td></tr>
+				<tr><td><label>Contrase&ntildea:</label></td><td><input name="txtPass" type="password"class="inputForm" size="20" ></td></tr>
 				<tr><td><label>Confirmar contrase&ntildea:</label></td><td><input name="txtPass2" type="password"class="inputForm" size="20"></td></tr>
 			</table>
 			<br>
-				<input name=" insert" type="submit" value="Aceptar" class="btn btn-primary btn-block btn-large" ">
+				<input name=" insert" type="submit" value="Aceptar" class="btn btn-primary btn-block btn-large">
 			</form>
 	</div>
 
