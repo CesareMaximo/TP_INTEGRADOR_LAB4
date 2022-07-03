@@ -21,7 +21,8 @@ public class TurnoDAOImpl implements TurnoDAO {
 	
 	private static final String insert = "INSERT INTO Turno(idMedico, Fecha, idEstado, Hora) VALUES(?, ?, 1, ?)";
 	private static final String readAll = "SELECT T.idTurno, T.idMedico, T.Fecha, T.idPaciente, (SELECT PE.Nombre FROM Paciente PA INNER JOIN Persona PE ON PE.DNI = PA.DNI WHERE PA.idPaciente = T.idPaciente) AS PacienteNombre, (SELECT PE.Apellido FROM Paciente PA INNER JOIN Persona PE ON PE.DNI = PA.DNI WHERE PA.idPaciente = T.idPaciente) AS PacienteApellido, (SELECT PE.DNI FROM Paciente PA INNER JOIN Persona PE ON PE.DNI = PA.DNI WHERE PA.idPaciente = T.idPaciente) AS PacienteDNI, T.idEstado, ES.NombreEstado, T.Hora, T.Observación,(SELECT P.Apellido FROM medico AS M INNER JOIN Persona P ON P.DNI =M.DNI WHERE M.idMedico = T.idMedico) as MedicoApellido, (SELECT P.Nombre FROM medico AS M INNER JOIN Persona P ON P.DNI =M.DNI WHERE M.idMedico = T.idMedico) as MedicoNombre, (SELECT E.idEspecialidad FROM Especialidad E INNER JOIN Medico M ON M.idEspecialidad = E.idEspecialidad WHERE M.idMedico = T.idMedico) AS idEspe, (SELECT E.Descripcion FROM Especialidad E INNER JOIN Medico M ON M.idEspecialidad = E.idEspecialidad WHERE M.idMedico = T.idMedico) AS idDesEspe FROM Turno T LEFT JOIN PACIENTE PA ON T.idPaciente = PA.idPaciente LEFT JOIN PERSONA P ON P.DNI = PA.DNI LEFT JOIN ESTADOS ES ON T.idEstado = ES.idEstado WHERE T.Fecha >= NOW() ORDER BY T.Fecha ASC";
-
+	private static final String readTurno = "select T.idTurno,E.idEspecialidad,(select P.Apellido from Medico m inner join Persona as P on P.DNI = m.DNI where m.idMedico = t.idMedico) as ApellidoMedico,(select P.Nombre from Medico m inner join Persona as P on P.DNI = m.DNI where m.idMedico = t.idMedico) as NombreMedico,T.Hora,T.Fecha, E.Descripcion from Turno T inner join Medico as M on M.idMedico = T.idMedico inner join Persona P on P.DNI = M.DNI inner join Especialidad as E on E.idEspecialidad = M.idEspecialidad where idTurno = ?";
+	
 	@Override
 	public boolean insert(ArrayList<Turno> listaTurnos) {
 		
@@ -107,4 +108,41 @@ public class TurnoDAOImpl implements TurnoDAO {
 		return listaTurno;
 	}
 
+	@Override
+	public Turno devuelveTurno(int id) {
+		Connection cn = Conexion.getConexion().getSQLConexion();
+		Turno tu = new Turno();
+		Medico me = new Medico();
+		Especialidad es = new Especialidad();
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		try
+		 {
+			statement = cn.prepareStatement(readTurno);
+			statement.setInt(1, id);
+			resultSet = statement.executeQuery();
+			resultSet.next();
+			tu.setIdTurno(id);
+			tu.setFecha(resultSet.getDate("Fecha"));
+			tu.setHora(resultSet.getTime("Hora"));
+			me.setApellido(resultSet.getString("ApellidoMedico"));
+			me.setNombre(resultSet.getString("NombreMedico"));
+			es.setIdEspecialidad(resultSet.getInt("idEspecialidad"));
+			es.setDescripcion(resultSet.getString("Descripcion"));
+			me.seteEspecialidad(es);
+			tu.setmMedico(me);
+			
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return tu;
+	}
+
+	@Override
+	public boolean agendarTurno(int id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

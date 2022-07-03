@@ -44,5 +44,10 @@ public class PacienteNegocioImpl implements PacienteNegocio {
 		return paDAO.mostrarPaciente(dni);
 	}
 
+	@Override
+	public boolean existePaciente(String dni) {
+		return paDAO.existePaciente(dni);
+	}
+
 	
 }

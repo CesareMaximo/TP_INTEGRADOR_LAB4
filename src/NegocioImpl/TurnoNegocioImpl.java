@@ -7,7 +7,7 @@ import DaoImpl.TurnoDAOImpl;
 import Entidad.Turno;
 import Negocio.TurnoNegocio;
 
-public class TurnoNegocioImpl implements TurnoNegocio {
+public abstract class TurnoNegocioImpl implements TurnoNegocio {
 	
 	TurnoDAO turno = new TurnoDAOImpl();
 
@@ -22,4 +22,15 @@ public class TurnoNegocioImpl implements TurnoNegocio {
 		return turno.readAll();
 	}
 
+	@Override
+	public Turno devuelveTurno(int id) {
+		
+		return turno.devuelveTurno(id);
+	}
+	
+	@Override
+	public boolean agendarTurno(int id) {
+		
+		return turno.agendarTurno(id);
+	}
 }

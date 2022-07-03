@@ -36,136 +36,24 @@ SI NO ESTA REGISTRADO, MENSAJE "PACIENTE NO REGISTRADO, BOTON PARA REGISTRAR"
  <input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary btn-sm" style="margin-left:10px;"></div>
 	<br>
 </form>	
+	<% Turno tu = new Turno();
+	   tu = (Turno)session.getAttribute("Turno");
+	%>
 	<div class="registro">
-		<form method="post">
+		<form method="post" action="ServletTurno">
 			<h1>Registro de Turnos</h1>
 			<table class="formulario">
-				<tr><td><label>Especialidad:</label></td><td><select class="textbox" id="especialidadMedico" name="especialidades" required onchange="cargar_medicos()">
 				
-				
-				<% ArrayList<Especialidad> listaEspecialidad = null;
-				
-				if(request.getAttribute("listaEspecialidad")!=null){
-					
-					listaEspecialidad = (ArrayList<Especialidad>)request.getAttribute("listaEspecialidad");
-				}
-				
-				if(listaEspecialidad!=null){
-					
-				
-					for(Especialidad es:listaEspecialidad){
-					%>
-					<option value="<%= es.getIdEspecialidad()%>"> <%= es.getDescripcion() %> </option>
-					<%
-					}
-				}
-				
-				
-				%>
-				
-				
-				</select></tr>
-				
-				
-				<tr><td><label>Medico:</label></td><td><select class="textbox" name="medicos" id="medicoReal" required></select></tr> 
-				<tr><td class="top"><label>Fecha:</label></td><td><input type="date" name="Fecha" class="inputForm" min="2022-06-01" max="2022-07-30"></input></tr>
-				<tr><td class="top"><label>Horario de Atenci&oacuten:</label></td><td>
-				 
-				<select class="select" >
-					<option>08:00</option>
-					<option>09:00</option>
-					<option>10:00</option>
-					<option>11:00</option>
-					<option>12:00</option>
-					<option>13:00</option>
-					<option>14:00</option>
-					<option>15:00</option>
-					<option>16:00</option>
-					<option>17:00</option>
-					<option>18:00</option>
-					<option>19:00</option>
-				</select>			
-			
-				<tr><td><label>DNI:</label></td><td><input name="txtDni" type="text" class="inputForm" size="20" required></td></tr>
+				<tr><td><label>Medico:</label></td><td><input class="inputForm" name="medicos" id="medicoReal" readonly value="${Turno.mMedico.apellido}"></input></tr> 
+				<tr><td><label>Especialidad:</label></td><td><input class="inputForm" name="especialidad" id="especialidad" readonly value="${Turno.mMedico.eEspecialidad.descripcion}"></input></tr>
+				<tr><td><label>Fecha:</label></td><td><input class="inputForm" name="fecha" id="fecha" readonly value="${Turno.fecha}"></input></tr> 
+				<tr><td><label>Horario de Atenci&oacuten:</label></td><td><input class="inputForm" name="atencion" id="atencion" readonly value="${Turno.hora}"></input></tr> 
+				<tr><td><label>DNI:</label></td><td><input name="txtDni" type="text" class="inputForm" size="20" required></input></td></tr>
 			</table>
 			<br>
-				<input name=" insert" type="submit" value="Reservar Turno" class="btn btn-primary btn-block btn-large">
+				<input name="reservar" type="submit" value="Reservar Turno" class="btn btn-primary btn-block btn-large">
 			</form>
 	</div>
-	
-	
-	
-  <select name="medicosaux" id="medico2"> 
-  
-  <% 
-  ArrayList<Medico> listaMedico2 =null;
-  
-  if(request.getAttribute("listaMedico")!=null){
-	  listaMedico2 = (ArrayList<Medico>) request.getAttribute("listaMedico");
-  }
-  
-  
-  if(listaMedico2 !=null){
-	  
-	  for(Medico me:listaMedico2){
-		  
-		  %>
-		  	
-		  	<option value="<%= me.geteEspecialidad().getIdEspecialidad()%>" data-uid="<%=me.getIdMedico().getIdUsuario()%>"> <%= me.getApellido() %> </option>
-		  
-		  <% 
-	  }
-	  
-  }
-	  %>
-  </select>
-  
-  <script>
-function myOnLoad() {
-		var earrings = document.getElementById('medico2');
-		earrings.style.visibility = 'hidden';
-		cargar_medicos();
-	
-	}
-</script>
-
-<script>
-function cargar_medicos() {
-	document.getElementById("medicoReal").options.length = 0;
-	
-	var x = document.getElementById("medico2");
-	var array = new Array();
-	var a = new Array();
-	var b = new Array();
-	for (i = 0; i < x.length; i++) { 
-		
-		array.push(x.options[i].text);
-		a.push(x.options[i].value);
-		b.push(x.options[i].getAttribute('data-uid'));
-		
-}
-
-	
-
-	 addOptions("medicos", array, a,b);
-	}
-</script>
-
-<script>
-function addOptions(domElement, array, a,b) {
-	 var select = document.getElementsByName(domElement)[0];
-	 var inde = document.getElementById('especialidadMedico').value;
-
-	 for (value in array) {
-		if(a[value] === inde){
-	  var option = document.createElement("option");
-	  option.text = array[value];
-	  option.value = b[value];
-	  select.add(option);
-		}
-	 }
-	}
-</script>
 	
 	
 </body>

@@ -23,10 +23,12 @@ import Entidad.Usuario;
 import Negocio.DiaXMedicoNegocio;
 import Negocio.EspecialidadNegocio;
 import Negocio.MedicoNegocio;
+import Negocio.PacienteNegocio;
 import Negocio.TurnoNegocio;
 import NegocioImpl.DiaXMedicoNegocioImpl;
 import NegocioImpl.EspecialidadNegocioImpl;
 import NegocioImpl.MedicoNegocioImpl;
+import NegocioImpl.PacienteNegocioImpl;
 import NegocioImpl.TurnoNegocioImpl;
 
 /**
@@ -83,6 +85,15 @@ public class ServletTurno extends HttpServlet {
 			rd = request.getRequestDispatcher("/AbrirAgenda.jsp");
 			rd.forward(request, response);
 		}
+		
+		if(request.getParameter("AsignarTurno") != null) {
+			Turno tu = new Turno();
+			int id = Integer.parseInt(request.getParameter("AsignarTurno"));
+			tu = tuNeg.devuelveTurno(id);
+			request.getSession().setAttribute("Turno", tu);
+			rd = request.getRequestDispatcher("/AsignacionTurnos.jsp");
+			rd.forward(request, response);
+		}
 
 	}
 
@@ -95,10 +106,23 @@ public class ServletTurno extends HttpServlet {
 		Medico med = new Medico();
 
 		DiaXMedicoNegocio dxmNeg = new DiaXMedicoNegocioImpl();
-		TurnoNegocio tneg = new TurnoNegocioImpl();
+		TurnoNegocio tneg = new TurnoNegocioImpl(); //no se porque da error el tunonegocioimpl
 		Usuario usu = new Usuario();
 		ArrayList<Turno> listaAgenda = new ArrayList<Turno>();
+		PacienteNegocio pNeg = new PacienteNegocioImpl();
+		boolean existe = false;
 
+		if(request.getParameter("reservar") != null) {
+			existe = pNeg.existePaciente(request.getParameter("txtDni"));
+			if(existe == true) {
+				//llamo al insert, hace falta hacer la consulta pero en el dao ya esta creada la declaracion
+			}
+			else {
+				request.setAttribute("mensaje", "El DNI ingresado no se encuentra registrado");
+				request.getRequestDispatcher("AsignacionTurnos.jsp").forward(request, response);
+			}
+		}
+		
 		if (request.getParameter("abrirAgenda") != null) {
 
 			usu.setIdUsuario(Integer.parseInt(request.getParameter("slcMedicos")));
@@ -123,7 +147,8 @@ public class ServletTurno extends HttpServlet {
 			java.sql.Date fin = new java.sql.Date(dateFormateado.getTime());
 
 			ArrayList<DiaXMedico> diasTrabajo = dxmNeg.readDias(med.getIdMedico().getIdUsuario());
-
+			
+			
 			try {
 				while (inicio.compareTo(fin) == 0 || inicio.compareTo(fin) < 0) {
 

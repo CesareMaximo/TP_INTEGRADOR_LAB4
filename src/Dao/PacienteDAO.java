@@ -12,4 +12,5 @@ public interface PacienteDAO {
 	public List<Paciente> readAllBuscar(String nombre);
 	public boolean update(Paciente pa);
 	public Paciente mostrarPaciente(String dni);
+	public boolean existePaciente(String dni);
 }

@@ -17,7 +17,8 @@ public class PacienteDAOImpl implements PacienteDAO{
 	private static final String readall = "select * from paciente as pa inner join persona as pe on pe.DNI like pa.DNI INNER JOIN Nacionalidad as N on Pe.idNacionalidad = N.idNacionalidad WHERE pe.Estado = 1"; 
 	private static final String update = "UPDATE Persona SET Nombre = ?, Apellido = ?, Sexo = ?, idNacionalidad = ?, FechaNacimiento = ?, Direccion = ?, idLocalidad = ?, Email = ?, Telefono1 = ?, Telefono2 = ? WHERE Dni = ?";
 	private static final String readPaciente = "SELECT Pe.Estado, Pa.idPaciente, Pe.DNI, Pe.Nombre, Pe.Apellido, Pe.Sexo, Pe.idNacionalidad, N.Descripcion as DescripcionNac, Pe.FechaNacimiento, Pe.Direccion, Pe.idLocalidad, Lo.Descripcion as DescripcionLo, Pe.Email, Pe.Telefono1, Pe.Telefono2, Lo.idProvincia, Pro.Descripcion as DescripcionPro  FROM Paciente as Pa INNER JOIN Persona AS Pe ON Pe.Dni = Pa.Dni INNER JOIN Nacionalidad as N on Pe.idNacionalidad = N.idNacionalidad INNER JOIN Localidad as Lo ON Lo.idLocalidad = Pe.idLocalidad INNER JOIN Provincia as Pro ON Pro.idProvincia = Lo.idProvincia WHERE Pe.Dni = ?";
-
+	private static final String exists = "SELECT CASE WHEN exists ( SELECT * FROM Persona WHERE DNI = ?) THEN 'TRUE' ELSE 'FALSE' END";
+	
 	@Override
 	public boolean insert(Paciente pa) {
 		Connection conexion = null;
@@ -267,6 +268,27 @@ public class PacienteDAOImpl implements PacienteDAO{
 			e.printStackTrace();
 		}
 		return pacienteList;
+	}
+
+	@Override
+	public boolean existePaciente(String dni) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean existe = false;
+		ResultSet resultSet;
+		try {
+			statement = conexion.prepareStatement(exists);
+			statement.setString(1, dni);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				existe = Boolean.valueOf(resultSet.getString(1));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return existe;
 	}
 	
 	
