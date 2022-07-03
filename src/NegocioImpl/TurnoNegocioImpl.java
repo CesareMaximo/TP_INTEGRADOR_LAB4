@@ -29,8 +29,8 @@ public abstract class TurnoNegocioImpl implements TurnoNegocio {
 	}
 	
 	@Override
-	public boolean agendarTurno(int id) {
+	public boolean agendarTurno(String dni, Turno turno) {
 		
-		return turno.agendarTurno(id);
+		return turno.agendarTurno(dni, turno);
 	}
 }

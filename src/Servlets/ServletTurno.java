@@ -106,7 +106,7 @@ public class ServletTurno extends HttpServlet {
 		Medico med = new Medico();
 
 		DiaXMedicoNegocio dxmNeg = new DiaXMedicoNegocioImpl();
-		TurnoNegocio tneg = new TurnoNegocioImpl(); //no se porque da error el tunonegocioimpl
+		TurnoNegocio tneg = new TurnoNegocioImpl();
 		Usuario usu = new Usuario();
 		ArrayList<Turno> listaAgenda = new ArrayList<Turno>();
 		PacienteNegocio pNeg = new PacienteNegocioImpl();
@@ -115,7 +115,7 @@ public class ServletTurno extends HttpServlet {
 		if(request.getParameter("reservar") != null) {
 			existe = pNeg.existePaciente(request.getParameter("txtDni"));
 			if(existe == true) {
-				//llamo al insert, hace falta hacer la consulta pero en el dao ya esta creada la declaracion
+				tneg.agendarTurno(request.getParameter("txtDni"), request.getParameter("Turno"));
 			}
 			else {
 				request.setAttribute("mensaje", "El DNI ingresado no se encuentra registrado");
