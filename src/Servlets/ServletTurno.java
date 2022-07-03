@@ -111,6 +111,7 @@ public class ServletTurno extends HttpServlet {
 		ArrayList<Turno> listaAgenda = new ArrayList<Turno>();
 		PacienteNegocio pNeg = new PacienteNegocioImpl();
 		boolean existe = false;
+		Turno turno = new Turno();
 
 		if(request.getParameter("reservar") != null) {
 			existe = pNeg.existePaciente(request.getParameter("txtDni"));

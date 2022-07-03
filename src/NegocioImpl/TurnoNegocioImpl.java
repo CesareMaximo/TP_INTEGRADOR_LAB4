@@ -27,10 +27,11 @@ public abstract class TurnoNegocioImpl implements TurnoNegocio {
 		
 		return turno.devuelveTurno(id);
 	}
-	
+
 	@Override
 	public boolean agendarTurno(String dni, Turno turno) {
-		
-		return turno.agendarTurno(dni, turno);
+		TurnoDAO tu = new TurnoDAOImpl();
+		return tu.agendarTurno(dni, turno);
 	}
+
 }
