@@ -59,15 +59,12 @@ public class ServletMedico extends HttpServlet {
 		request.setAttribute("listaProvincia", listaProvincia);
 		ArrayList<Medico> listaMedico = (ArrayList<Medico>) meNeg.readAll();
 		
-
 		LocalidadNegocio loNeg = new LocalidadNegocioImpl();
 		
 		ArrayList<Localidad> listaLocalidad = (ArrayList<Localidad>) loNeg.readAll();
 		
 		request.setAttribute("listaLocalidad", listaLocalidad);
 		
-		
-	
 		RequestDispatcher rd;
 		
 		request.setAttribute("listaEspecialidad", listaEspecialidad);
@@ -86,10 +83,13 @@ public class ServletMedico extends HttpServlet {
 			rd.forward(request, response);
 		}
 		
-			
-		
-		
-		
+		if(request.getParameter("modificar") != null) {
+			int idMedico = Integer.parseInt((request.getParameter("modificar").toString()));
+			me = meNeg.mostrarMedico(idMedico);
+			request.getSession().setAttribute("medico", me);
+			rd = request.getRequestDispatcher("/ModificarMedico.jsp");
+			rd.forward(request, response);
+		}	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

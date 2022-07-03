@@ -97,15 +97,11 @@ FILTRO DE BUSQUEDA-->
 	                    	<a href="ServletPaciente?Modificar=<%=pa.getDni() %>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
 	                       	<a href="#myModal" class="delete" title="Delete" data-toggle="modal" data-pac-id="<%=pa.getDni()%>" ><i class="material-icons">&#xE872;</i></a>
 	                       	</td>
-	              
-	                       	
-	                 	
+	             	                                      	
 	               	<%} %>
 	                    </tr>                
                 </tbody>
 				</table>
-
-
 
 				<!--             <table class="table table-striped table-hover table-bordered"> -->
 <!--             	<thead> -->
@@ -132,8 +128,7 @@ FILTRO DE BUSQUEDA-->
 <%-- 	                    	<a href="ServletPaciente?Modificar=<%=pa.getDni() %>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a> --%>
 <%-- 	                       	<a href="#myModal" class="delete" title="Delete" data-toggle="modal" data-pac-id="<%=pa.getDni()%>" ><i class="material-icons">&#xE872;</i></a> --%>
 <!-- 	                       	</td> -->
-	              
-	                       	
+                    	
 	                 	
 <%-- 	               	<%} %> --%>
 <!-- 	                    </tr>                 -->

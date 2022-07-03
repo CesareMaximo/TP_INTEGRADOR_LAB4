@@ -98,7 +98,6 @@
 												}
 
 												if (listaMedico2 != null) {
-
 													for (Medico me : listaMedico2) {
 											%>
 
@@ -115,10 +114,7 @@
 							<td><input name="btnFiltrar" type="submit" value="Filtrar" class="btn btn-primary btn-sm"></td>
 						</tr> 
                 		</table>
-                    </div>
-                    
-                
-              
+                    </div>  
                 </div>
      
 				 <%
@@ -148,7 +144,14 @@
 					%>
 	                    <tr>
 	                    	<td><%=tu.getIdTurno()%></td>
+	                    	<%
+								if (tu.getpPaciente().getDni() == null) {
+							%><td>Sin Asignar</td>
+							<%
+								} else {
+							%>
 							<td><%=tu.getpPaciente().getDni()%></td>
+	                    	<%} %>
 							<td><%=tu.getmMedico().getNombre()%> <%=tu.getmMedico().getApellido()%></td>
 							<td><%=tu.getmMedico().geteEspecialidad().getDescripcion()%></td>
 							<td><%=tu.getFecha()%></td>
@@ -164,20 +167,64 @@
 
         </div>
     </div>  
-</div>  
+</div>
+	<%
+		boolean exito = false;
+			String texto = "";
 
-  	<script>
-			$(document).ready( function () {
-			    $('#table_turnos').DataTable();
-			} );
-			</script>	
-			<script>
-			var table = $('#table_turnos').DataTable( {
-			    columnDefs: [
-			        { targets: [7], orderable: false},
-			     
-			    ]
-			} );
-			</script>
+			if (request.getAttribute("exito") != null) {
+
+		exito = (boolean) request.getAttribute("exito");
+		texto = "registrado";
+
+		}
+		if (exito == true) {
+	%>
+	<script type="text/javascript">
+		window.onload = function() {
+			OpenBootstrapPopup();
+		};
+		function OpenBootstrapPopup() {
+			$("#simpleModal").modal('show');
+		}
+	</script>
+
+	<div id="simpleModal" class="modal fade">
+		<div class="modal-dialog modal-ok">
+			<div class="modal-content">
+				<div class="modal-header justify-content-center">
+					<div class="icon-box">
+						<i style="color: green" class="material-icons">&#xE876;</i>
+					</div>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body text-center">
+					<h4>Exito!</h4>
+					<p>
+						El turno se ha <%=texto%> satisfactoriamente.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<%
+		}
+	%>
+	<script>
+		$(document).ready(function() {
+			$('#table_turnos').DataTable();
+		});
+	</script>
+	<script>
+		var table = $('#table_turnos').DataTable({
+			columnDefs : [ {
+				targets : [ 7 ],
+				orderable : false
+			},
+
+			]
+		});
+	</script>
 </body>
 </html>

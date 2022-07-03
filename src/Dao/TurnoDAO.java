@@ -12,6 +12,6 @@ public interface TurnoDAO {
 
 	public Turno devuelveTurno(int id);
 	
-	public boolean agendarTurno(String dni, Turno turno);
+	public boolean agendarTurno (String dni, Turno turno);
 	
 }

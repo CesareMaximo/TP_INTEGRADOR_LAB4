@@ -31,25 +31,14 @@ import NegocioImpl.MedicoNegocioImpl;
 import NegocioImpl.PacienteNegocioImpl;
 import NegocioImpl.TurnoNegocioImpl;
 
-/**
- * Servlet implementation class ServletTurno
- */
 @WebServlet("/ServletTurno")
 public class ServletTurno extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public ServletTurno() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -66,12 +55,12 @@ public class ServletTurno extends HttpServlet {
 		RequestDispatcher rd;
 
 		if (request.getParameter("Param") != null) {
-
+			ArrayList<Turno> listaTurno2 = (ArrayList<Turno>) tuNeg.readAll();
 			request.setAttribute("listaEspecialidad", listaEspecialidad);
 			//request.setAttribute("listaTurnos", listaTurno);
 			request.setAttribute("listaMedico", listaMedico);
-			request.getSession().setAttribute("listaTurnos", listaTurno);
-				
+			request.getSession().setAttribute("listaTurnos", listaTurno2);
+			request.setAttribute("exito", false);	
 			rd = request.getRequestDispatcher("/ListaTurnos.jsp");
 			rd.forward(request, response);
 		}
@@ -97,10 +86,6 @@ public class ServletTurno extends HttpServlet {
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Medico med = new Medico();
@@ -116,7 +101,12 @@ public class ServletTurno extends HttpServlet {
 		if(request.getParameter("reservar") != null) {
 			existe = pNeg.existePaciente(request.getParameter("txtDni"));
 			if(existe == true) {
-				tneg.agendarTurno(request.getParameter("txtDni"), request.getParameter("Turno"));
+				turno = (Turno)request.getSession().getAttribute("Turno");
+				tneg.agendarTurno(request.getParameter("txtDni"), turno);
+				request.setAttribute("exito", true);
+				ArrayList<Turno> listaTurno2 = (ArrayList<Turno>) tneg.readAll();
+				request.getSession().setAttribute("listaTurnos", listaTurno2);
+				request.getRequestDispatcher("ListaTurnos.jsp").forward(request, response);
 			}
 			else {
 				request.setAttribute("mensaje", "El DNI ingresado no se encuentra registrado");
@@ -169,12 +159,12 @@ public class ServletTurno extends HttpServlet {
 
 							while (horaIng.compareTo(horaEg) < 0) {
 								Time Cas2 = new Time(horaIng.getTimeInMillis());
-								Turno turno = new Turno();
-								turno.setmMedico(med);
-								turno.setFecha(inicio);
-								turno.setHora(Cas2);
+								Turno turno2 = new Turno();
+								turno2.setmMedico(med);
+								turno2.setFecha(inicio);
+								turno2.setHora(Cas2);
 
-								listaAgenda.add(turno);
+								listaAgenda.add(turno2);
 								System.out.println(listaAgenda.toString());
 								horaIng.add(Calendar.HOUR_OF_DAY, 1);
 								

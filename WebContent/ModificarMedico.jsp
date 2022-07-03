@@ -19,8 +19,8 @@
 
 				Medico me = new Medico();
 				me = (Medico) session.getAttribute("medico");
-				String id = String.valueOf(me.getlLocalidad().getpProvincia().getIdProvincia());
-				String id2 = String.valueOf(me.getlLocalidad().getIdLocalidad());
+				//String id = String.valueOf(me.getlLocalidad().getpProvincia().getIdProvincia());
+				//String id2 = String.valueOf(me.getlLocalidad().getIdLocalidad());
 %>
 
 </head>
@@ -39,20 +39,20 @@
 		<form>
 			<h1>Modificar M&eacutedico</h1>
 			<table class="formulario">
-				<tr><td><label>DNI:</label></td><td><input name="txtDni" type="text" class="inputForm" size="20" required></td></tr>
-				<tr><td><label>Nombres:</label></td><td><input name="txtNombre" type="text" class="inputForm" size="20" required></td></tr>
-				<tr><td><label>Apellidos:</label></td><td><input name="txtApellido" type="text" class="inputForm" size="20" required></td></tr>
-				<tr><td><label>Fecha Nacimiento:</label></td><td><input name="txtFechaNac" type="date" class="inputForm" size="20" required></td></tr>
-				<tr><td><label>Sexo</label></td><td><select class="select"></select></tr>
+				<tr><td><label>DNI:</label></td><td><input name="txtDni" type="text" class="inputForm" size="20" required readonly value="${medico.dni}"></td></tr>
+				<tr><td><label>Nombres:</label></td><td><input name="txtNombre" type="text" class="inputForm" size="20" required value="${medico.nombre}"></td></tr>
+				<tr><td><label>Apellidos:</label></td><td><input name="txtApellido" type="text" class="inputForm" size="20" required value="${medico.apellido}"></td></tr>
+				<tr><td><label>Fecha Nacimiento:</label></td><td><input name="txtFechaNac" type="date" class="inputForm" size="20" required value="${medico.fechaNacimiento}"></td></tr>
+				<tr><td><label>Sexo</label></td><td><select class="select" value="${medico.sexo}"></select></tr>
 				<tr><td><label>Nacionalidad:</label></td><td><select class="select"></select></tr>
 				<tr><td><label>Provincia:</label></td><td><select class="select"></select></tr>
 				<tr><td><label>Localidad:</label></td><td><select class="select"></select></tr>
-				<tr><td><label>Direcci&oacuten:</label></td><td><textarea name="txtDireccion" style="resize: none;" class="inputForm" cols="21" rows="3" required></textarea></td></tr>
-				<tr><td><label>E-mail:</label></td><td><input name="email " type="email" class="inputForm" size="20" required></td></tr>
-				<tr><td><label>Tel&eacutefono:</label></td><td><input name="txtTelefono1" type="text"  class="inputForm"size="20" required></td></tr>
-				<tr><td><label>Tel&eacutefono Opcional:</label></td><td><input name="txtTelefono2" type="text" class="inputForm" size="20"></td></tr>
+				<tr><td><label>Direcci&oacuten:</label></td><td><textarea name="txtDireccion" style="resize: none;" class="inputForm" cols="21" rows="3" required value="${medico.direccion}"></textarea></td></tr>
+				<tr><td><label>E-mail:</label></td><td><input name="email " type="email" class="inputForm" size="20" required value="${medico.email}"></td></tr>
+				<tr><td><label>Tel&eacutefono:</label></td><td><input name="txtTelefono1" type="text"  class="inputForm"size="20" required value="${medico.telefono1}"></td></tr>
+				<tr><td><label>Tel&eacutefono Opcional:</label></td><td><input name="txtTelefono2" type="text" class="inputForm" size="20" value="${medico.telefono2}"></td></tr>
 				<tr><td><label>Especialidad:</label></td><td><select class="select"></select></tr> 
-				<tr><td class=top><label>Dia de atenci&oacuten:</label></td><td>
+				<!-- <tr><td class=top><label>Dia de atenci&oacuten:</label></td><td>
 				<div class="control-group">
     <label class="control control-checkbox">
         Lunes
@@ -113,7 +113,7 @@
 				<option>19:00</option>
 				<option>20:00</option></select><label class="lbl">  Salida   </label>
 				
-				</td></tr>
+				</td></tr> -->
 				<tr><td><label>Nombre de Usuario:</label></td><td><input name="txtUser" type="text" class="inputForm" size="20"></td></tr>
 				<tr><td><label>Contrase&ntildea:</label></td><td><input name="txtPass" type="password"class="inputForm" size="20"></td></tr>
 				<tr><td><label>Confirmar contrase&ntildea:</label></td><td><input name="txtPass2" type="password"class="inputForm" size="20"></td></tr>

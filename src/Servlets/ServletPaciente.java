@@ -71,7 +71,8 @@ public class ServletPaciente extends HttpServlet {
 		
 		
 		if(request.getParameter("Param")!= null) {
-			request.setAttribute("listaPaciente", listaPaciente);
+			ArrayList<Paciente> listaPaciente2 = (ArrayList<Paciente>) paNeg.readAll();
+			request.setAttribute("listaPaciente", listaPaciente2);
 			request.setAttribute("exito", false);
 			
 			rd = request.getRequestDispatcher("/MenuPaciente.jsp");

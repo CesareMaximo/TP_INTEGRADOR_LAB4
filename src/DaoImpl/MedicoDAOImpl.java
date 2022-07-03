@@ -271,6 +271,8 @@ public class MedicoDAOImpl implements  MedicoDAO{
 		//
 		me.setEmail(resultSet.getString("Email"));
 		me.setEstado(resultSet.getBoolean("Estado"));
+		me.setTelefono1(resultSet.getString("Telefono1"));
+		me.setTelefono2(resultSet.getString("Telefono2"));
 			
 		return me;
 	}

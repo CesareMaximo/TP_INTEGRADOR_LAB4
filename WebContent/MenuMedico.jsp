@@ -111,16 +111,11 @@ FILTRO DE BUSQUEDA-->
 									<td><%=me.getNombre()%></td>
 									<td><%=me.getApellido()%></td>
 									<td><%=me.geteEspecialidad()%></td>
-									<td><a href="ModificarMedico.jsp" class="edit"
-										title="Edit" data-toggle="tooltip"><i
-											class="material-icons">&#xE254;</i></a> <a
-										href="Horario?param=<%=me.getIdMedico().getIdUsuario()%>"
-										title="Horario" data-toggle="tooltip"><i
-											class="material-icons blue-color" style="color: blue">edit_calendar</i></a>
-										<a href="#myModal" class="delete" title="Delete"
-										data-toggle="modal" data-med-id="<%=me.getDni()%>"><i
-											class="material-icons">&#xE872;</i></a></td>
-
+									<td>
+										<a href="ServletMedico?modificar=<%=me.getIdMedico().getIdUsuario()%>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+										<a href="Horario?param=<%=me.getIdMedico().getIdUsuario()%>" title="Horario" data-toggle="tooltip"><i class="material-icons blue-color" style="color: blue">edit_calendar</i></a>
+										<a href="#myModal" class="delete" title="Delete" data-toggle="modal" data-med-id="<%=me.getDni()%>"><i class="material-icons">&#xE872;</i></a>
+									</td>
 									<%} %>
 								</tr>
 							</tbody>

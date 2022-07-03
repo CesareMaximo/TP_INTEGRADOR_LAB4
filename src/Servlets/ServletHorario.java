@@ -51,7 +51,6 @@ public class ServletHorario extends HttpServlet {
 		if(request.getParameter("Nuevo") != null) {
 			request.getRequestDispatcher("/AgregarHorario.jsp").forward(request, response);
 		}
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

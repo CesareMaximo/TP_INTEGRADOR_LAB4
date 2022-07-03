@@ -7,31 +7,31 @@ import DaoImpl.TurnoDAOImpl;
 import Entidad.Turno;
 import Negocio.TurnoNegocio;
 
-public abstract class TurnoNegocioImpl implements TurnoNegocio {
+public class TurnoNegocioImpl implements TurnoNegocio {
 	
-	TurnoDAO turno = new TurnoDAOImpl();
+	TurnoDAO tur = new TurnoDAOImpl();
 
 	@Override
 	public boolean insert(ArrayList<Turno> listaTurnos) {
 		
-		return turno.insert(listaTurnos);
+		return tur.insert(listaTurnos);
 	}
 
 	@Override
 	public ArrayList<Turno> readAll() {
-		return turno.readAll();
+		return tur.readAll();
 	}
 
 	@Override
 	public Turno devuelveTurno(int id) {
 		
-		return turno.devuelveTurno(id);
+		return tur.devuelveTurno(id);
 	}
 
 	@Override
 	public boolean agendarTurno(String dni, Turno turno) {
-		TurnoDAO tu = new TurnoDAOImpl();
-		return tu.agendarTurno(dni, turno);
+
+		return tur.agendarTurno(dni, turno);
 	}
 
 }
