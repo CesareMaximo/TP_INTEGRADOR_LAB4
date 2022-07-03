@@ -218,6 +218,7 @@
 	</script>
 	<script>
 		var table = $('#table_turnos').DataTable({
+			"order": [[4, 'asc'] , [5, 'asc']],
 			columnDefs : [ {
 				targets : [ 7 ],
 				orderable : false

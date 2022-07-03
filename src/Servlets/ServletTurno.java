@@ -178,6 +178,8 @@ public class ServletTurno extends HttpServlet {
 				}
 				
 				if(tneg.insert(listaAgenda)) {
+					ArrayList<Turno> listaTurno3 = (ArrayList<Turno>) tneg.readAll();
+					request.getSession().setAttribute("listaTurnos", listaTurno3);
 					request.getRequestDispatcher("/ListaTurnos.jsp").forward(request, response);
 				}
 				
