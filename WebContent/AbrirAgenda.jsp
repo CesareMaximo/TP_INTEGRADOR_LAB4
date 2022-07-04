@@ -70,7 +70,7 @@ SI NO ESTA REGISTRADO, MENSAJE "PACIENTE NO REGISTRADO, BOTON PARA REGISTRAR"
 				
 				
 				<tr><td><label>Medico:</label></td><td><select class="textbox" name="slcMedicos" id="medicoReal" required></select></tr> 
-				<tr><td class="top"><label>Fecha Apertura:</label></td><td><input type="date" name="FechaApertura" id="datefield" min="" class="inputForm"></input></tr>
+				<tr><td class="top"><label>Fecha Apertura:</label></td><td><input type="date"  name="FechaApertura" id="datefield" min="" class="inputForm"></input></tr>
 				<tr><td class="top"><label>Fecha Cierre:</label></td><td><input type="date" name="FechaCierre" id="datefield2" class="inputForm" min="" ></input></tr>
 		
 				 
@@ -158,7 +158,7 @@ function addOptions(domElement, array, a,b) {
 
 <script>
 var today = new Date();
-var dd = today.getDate();
+var dd = today.getDate() + 1;
 var mm = today.getMonth() + 1; //January is 0!
 var yyyy = today.getFullYear();
 
