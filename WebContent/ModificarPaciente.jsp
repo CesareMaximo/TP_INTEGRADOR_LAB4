@@ -147,9 +147,9 @@
 								}
 											}
 							%>
-
+				
 					</select>
-				</tr>
+				</td></tr>
 				<tr><td><label>Localidad:</label></td><td><select class="textbox" required id="localidadReal"  name="slcLocalidad" value=<%=id2%>>
 				<option selected="selected" value=<%=id2%>>${paciente.lLocalidad}</option>
 				<%

@@ -87,12 +87,12 @@ public class ServletMedico extends HttpServlet {
 			int idMedico = Integer.parseInt((request.getParameter("modificar").toString()));
 			me = meNeg.mostrarMedico(idMedico);
 			request.getSession().setAttribute("medico", me);	
-			request.setAttribute("listaEspecialidad", listaEspecialidad);
-			request.setAttribute("listaNacionalidad", listaNacionalidad);
-			request.setAttribute("listaProvincia", listaProvincia);
-			request.setAttribute("listaLocalidad", listaLocalidad);
-			//ArrayList<Localidad> listaLocalidad2 = (ArrayList<Localidad>) loNeg.readAllxid(me.getlLocalidad().getpProvincia().getIdProvincia());
-			//request.setAttribute("listaLocalidad2", listaLocalidad2);
+			//request.setAttribute("listaEspecialidad", listaEspecialidad);
+			//request.setAttribute("listaNacionalidad", listaNacionalidad);
+			//request.setAttribute("listaProvincia", listaProvincia);
+			//request.setAttribute("listaLocalidad", listaLocalidad);
+			ArrayList<Localidad> listaLocalidad2 = (ArrayList<Localidad>) loNeg.readAllxid(me.getlLocalidad().getpProvincia().getIdProvincia());
+			request.setAttribute("listaLocalidad2", listaLocalidad2);
 			rd = request.getRequestDispatcher("/ModificarMedico.jsp");
 			rd.forward(request, response);
 		}	
@@ -144,7 +144,7 @@ public class ServletMedico extends HttpServlet {
 			String dni = request.getParameter("medId");
 			
 			if(meNeg.delete(dni)==true) {
-				request.setAttribute("exito", true);
+				request.setAttribute("delete", true);
 				request.setAttribute("mensaje", "");
 				ArrayList<Medico> listaMedico = (ArrayList<Medico>) meNeg.readAll();
 				request.setAttribute("listaMedico", listaMedico);
@@ -219,6 +219,44 @@ public class ServletMedico extends HttpServlet {
 				request.getRequestDispatcher("AgregarHorario.jsp").forward(request, response);
 			}
 		}
+		
+		//Modificar
+		
+		if(request.getParameter("modificarMedico") != null) {
+			me.setNombre(request.getParameter("txtNombre").toString());
+			me.setApellido(request.getParameter("txtApellido").toString());
+			me.setDni(request.getParameter("txtDni").toString());
+			SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+			Date dateFormateado = new Date();
+			try {
+				dateFormateado = formato.parse(request.getParameter("txtFechaNac"));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}  
+			java.sql.Date date1 = new java.sql.Date(dateFormateado.getTime());
+			me.setFechaNacimiento(date1);
+			me.setSexo(request.getParameter("slcSexo").charAt(0));
+			Nacionalidad nacionalidad = new Nacionalidad();
+			nacionalidad.setIdNacionalidad(Integer.parseInt(request.getParameter("slcNacionalidad")));
+			me.setnNacionalidad(nacionalidad);
+			Localidad localidad = new Localidad();
+			localidad.setIdLocalidad(Integer.parseInt(request.getParameter("slcLocalidad")));
+			me.setlLocalidad(localidad);
+			me.setDireccion(request.getParameter("txtDireccion"));
+			me.setEmail(request.getParameter("txtEmail"));
+			me.setTelefono1(request.getParameter("txtTelefono1"));
+			me.setTelefono2(request.getParameter("txtTelefono2"));
+			
+			if(meNeg.update(me) == true) {
+				request.setAttribute("update", true);
+				request.setAttribute("mensaje", "");
+				ArrayList<Medico> listaMedico = (ArrayList<Medico>) meNeg.readAll();
+				request.setAttribute("listaMedico", listaMedico);
+				rd = request.getRequestDispatcher("/MenuMedico.jsp");
+				rd.forward(request, response);
+			}
+		}
+		
 	}
 
 }

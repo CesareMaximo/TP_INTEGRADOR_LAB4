@@ -16,7 +16,9 @@ public class MedicoDAOImpl implements  MedicoDAO{
 	private static final String delete = "UPDATE Persona set Estado = 0 where DNI like ?";
 	private static final String readall = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad WHERE p.Estado = 1";
 	private static final String readallFiltro = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad where m.idEspecialidad = ? and p.Estado = 1";
-	private static final String readMedico = "SELECT P.DNI, P.Nombre, P.Apellido, P.Sexo, P.idNacionalidad, P.FechaNacimiento, P.Direccion, P.idLocalidad, P.Email, P.Telefono1, P.Telefono2, P.Estado, M.idMedico, M.idEspecialidad, E.Descripcion AS DesEspe, L.Descripcion AS DesLoc, PRO.Descripcion AS DesPro, N.Descripcion AS DesNac, U.NombreUsuario, U.Clave FROM Medico AS M INNER JOIN Persona AS P ON P.DNI = M.DNI INNER JOIN Especialidad E ON E.idEspecialidad = M.idEspecialidad INNER JOIN Localidad L ON L.idLocalidad = P.idLocalidad INNER JOIN Provincia PRO ON PRO.idProvincia = L.idProvincia INNER JOIN Nacionalidad N ON N.idNacionalidad = P.idNacionalidad INNER JOIN usuarios U ON U.idUsuario=M.idMedico WHERE IdMedico=?";
+	private static final String readMedico = "SELECT P.DNI, P.Nombre, P.Apellido, P.Sexo, P.idNacionalidad, P.FechaNacimiento, P.Direccion, P.idLocalidad, P.Email, P.Telefono1, P.Telefono2, P.Estado, M.idMedico, M.idEspecialidad, E.Descripcion AS DesEspe, L.Descripcion AS DesLoc, PRO.idProvincia, PRO.Descripcion AS DesPro, N.Descripcion AS DesNac, U.NombreUsuario, U.Clave FROM Medico AS M INNER JOIN Persona AS P ON P.DNI = M.DNI INNER JOIN Especialidad E ON E.idEspecialidad = M.idEspecialidad INNER JOIN Localidad L ON L.idLocalidad = P.idLocalidad INNER JOIN Provincia PRO ON PRO.idProvincia = L.idProvincia INNER JOIN Nacionalidad N ON N.idNacionalidad = P.idNacionalidad INNER JOIN usuarios U ON U.idUsuario=M.idMedico WHERE IdMedico=?";
+	private static final String update = "UPDATE Persona SET Nombre = ?, Apellido = ?, Sexo = ?, idNacionalidad = ?, FechaNacimiento = ?, Direccion = ?, idLocalidad = ?, Email = ?, Telefono1 = ?, Telefono2 = ? WHERE Dni = ?";
+
 	//private static final String readallBuscar = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad where p.Nombre like '%"++"%' or p.Apellido like '%"++"%' ";
 	
 	@Override
@@ -247,6 +249,7 @@ public class MedicoDAOImpl implements  MedicoDAO{
 		Medico me = new Medico();
 		Especialidad es = new Especialidad();
 		Nacionalidad na = new Nacionalidad();
+		Provincia pro = new Provincia();
 		Localidad lo = new Localidad();
 		Usuario us = new Usuario();
 		me.setDni(resultSet.getString("DNI"));
@@ -270,8 +273,12 @@ public class MedicoDAOImpl implements  MedicoDAO{
 		me.setFechaNacimiento(resultSet.getDate("FechaNacimiento"));
 		me.setDireccion(resultSet.getString("Direccion"));
 		//
+		pro.setIdProvincia(resultSet.getInt("idProvincia"));
+		pro.setDescripcion(resultSet.getString("DesPro"));
 		lo.setIdLocalidad(resultSet.getInt("idLocalidad"));
 		lo.setDescripcion(resultSet.getString("DesLoc"));
+		lo.setpProvincia(pro);
+		
 		me.setlLocalidad(lo);
 		//
 		me.setEmail(resultSet.getString("Email"));
@@ -280,6 +287,37 @@ public class MedicoDAOImpl implements  MedicoDAO{
 		me.setTelefono2(resultSet.getString("Telefono2"));
 			
 		return me;
+	}
+
+	@Override
+	public boolean update(Medico me) {
+		boolean isUpdateExitoso = false;		
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		try 
+		{
+			statement = conexion.prepareStatement(update);
+			statement.setString(1, me.getNombre());
+			statement.setString(2, me.getApellido());
+			statement.setString(3, String.valueOf(me.getSexo()));
+			statement.setInt(4, me.getnNacionalidad().getIdNacionalidad());
+			statement.setDate(5, me.getFechaNacimiento());
+			statement.setString(6, me.getDireccion());
+			statement.setInt(7, me.getlLocalidad().getIdLocalidad());
+			statement.setString(8, me.getEmail());
+			statement.setString(9, me.getTelefono1());
+			statement.setString(10, me.getTelefono2());
+			statement.setString(11, me.getDni());
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isUpdateExitoso = true;
+			}
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return isUpdateExitoso;
 	}
 
 }

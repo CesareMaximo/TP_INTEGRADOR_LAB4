@@ -19,7 +19,7 @@
 
 				Medico me = new Medico();
 				me = (Medico) session.getAttribute("medico");
-				//String id = String.valueOf(me.getlLocalidad().getpProvincia().getIdProvincia());
+				String id = String.valueOf(me.getlLocalidad().getpProvincia().getIdProvincia());
 				String id2 = String.valueOf(me.getlLocalidad().getIdLocalidad());
 %>
 
@@ -36,7 +36,7 @@
 	<br>
 </form>	
 	<div class="registro">
-		<form>
+		<form action="ServletMedico" method="post">
 			<h1>Modificar M&eacutedico</h1>
 			<table class="formulario">
 				<tr><td><label>DNI:</label></td><td><input name="txtDni" type="text" class="inputForm" size="20" required readonly value="${medico.dni}"></td></tr>
@@ -99,7 +99,32 @@
 							%>
 					</select></td>
 				</tr>
-				<tr><td><label>Provincia:</label></td><td><select class="select"></select></tr>
+				<tr><td><label>Provincia:</label></td><td><select class="textbox" onchange="cargar_localidades()"
+						required id="provincia1" name="slcProvincia" value=<%=id%>>
+							
+							<%
+								ArrayList<Provincia> listaProvincia = null;
+
+										if (request.getAttribute("listaProvincia") != null) {
+
+											listaProvincia = (ArrayList<Provincia>) request.getAttribute("listaProvincia");
+										}
+
+										if (listaProvincia != null){
+											for (Provincia es : listaProvincia) {
+												//if (es.getIdProvincia() != Integer.parseInt(id)){
+							%>
+							<option value="<%=es.getIdProvincia()%>">
+								<%=es.getDescripcion()%>
+							</option>
+
+							<%
+								}
+											}
+							%>
+
+					</select>
+					</td></tr>
 				<tr><td><label>Localidad:</label></td>
 				<td><select class="textbox" required id="localidadReal"
 						name="slcLocalidad" value=<%=id2%>>
@@ -122,104 +147,147 @@
 					</select>
 					</td>
 				</tr>
-				<tr><td><label>Direcci&oacuten:</label></td><td><textarea name="txtDireccion" style="resize: none;" class="inputForm" cols="21" rows="3" required value="${medico.direccion}"></textarea></td></tr>
-				<tr><td><label>E-mail:</label></td><td><input name="email " type="email" class="inputForm" size="20" required value="${medico.email}"></td></tr>
+				<tr><td><label>Direcci&oacuten:</label></td><td><textarea name="txtDireccion" style="resize: none;" class="inputForm" cols="21" rows="3" required >${medico.direccion}</textarea></td></tr>
+				<tr><td><label>E-mail:</label></td><td><input name="txtEmail" type="email" class="inputForm" size="20" required value="${medico.email}"></td></tr>
 				<tr><td><label>Tel&eacutefono:</label></td><td><input name="txtTelefono1" type="text"  class="inputForm"size="20" required value="${medico.telefono1}"></td></tr>
 				<tr><td><label>Tel&eacutefono Opcional:</label></td><td><input name="txtTelefono2" type="text" class="inputForm" size="20" value="${medico.telefono2}"></td></tr>
-				<tr><td><label>Especialidad:</label></td>
-					<td><select name="slcEspecialidad" class="select">
-							<%
-								int value2 = me.geteEspecialidad().getIdEspecialidad();
-							%>
-							<option selected="selected" value=<%=value2%>>${medico.eEspecialidad.descripcion}</option>										
-							<% ArrayList<Especialidad> listaEspecialidad= null;							
-							if(request.getAttribute("listaEspecialidad")!=null){					
-								listaEspecialidad = (ArrayList<Especialidad>) request.getAttribute("listaEspecialidad");
-							}											
-							if(listaEspecialidad!=null)
-								for(Especialidad es : listaEspecialidad){
-									if(es.getIdEspecialidad() != value2){
+<!-- 				<tr><td><label>Especialidad:</label></td> -->
+<!-- 					<td><select name="slcEspecialidad" class="select"> -->
+<%-- 							<% --%>
+<!-- // 								int value2 = me.geteEspecialidad().getIdEspecialidad();
+<%-- 							%> --%>
+<%-- 							<option selected="selected" value=<%=value2%>>${medico.eEspecialidad.descripcion}</option>										 --%>
+<%-- 							<% ArrayList<Especialidad> listaEspecialidad= null;							 --%>
+// 							if(request.getAttribute("listaEspecialidad")!=null){					
+// 								listaEspecialidad = (ArrayList<Especialidad>) request.getAttribute("listaEspecialidad");
+// 							}											
+// 							if(listaEspecialidad!=null)
+// 								for(Especialidad es : listaEspecialidad){
+// 									if(es.getIdEspecialidad() != value2){
 										
-									%>
-									<option value="<%= es.getIdEspecialidad()%>"><%=es.getDescripcion() %></option> 		
-									<% 
-									}
-								}							
-							%>
-						</select>										
-					</td>
-				</tr>
-				<!-- <tr><td class=top><label>Dia de atenci&oacuten:</label></td><td>
-				<div class="control-group">
-    <label class="control control-checkbox">
-        Lunes
-            <input type="checkbox" checked="checked" />
-        <div class="control_indicator"></div>
-    </label>
-    <label class="control control-checkbox">
-        Martes
-            <input type="checkbox" />
-        <div class="control_indicator"></div>
-    </label>
-    <label class="control control-checkbox">
-        Miercoles
-            <input type="checkbox" />
-        <div class="control_indicator"></div>
-    </label>
-    <label class="control control-checkbox">
-        Jueves
-            <input type="checkbox" />
-        <div class="control_indicator"></div>
-    </label>
-    <label class="control control-checkbox">
-        Viernes
-            <input type="checkbox" />
-        <div class="control_indicator"></div>
-    </label>
-    <label class="control control-checkbox">
-        S&aacutebado
-            <input type="checkbox" />
-        <div class="control_indicator"></div>
-    </label>
-</div>
-				<tr><td class="top"><label>Horario de Atenci&oacuten:</label></td><td>
-				
-				<select class="select" ><option>08:00</option>
-				<option>09:00</option>
-				<option>10:00</option>
-				<option>11:00</option>
-				<option>12:00</option>
-				<option>13:00</option>
-				<option>14:00</option>
-				<option>15:00</option>
-				<option>16:00</option>
-				<option>17:00</option>
-				<option>18:00</option>
-				<option>19:00</option>
-				</select><label class="lbl">  Ingreso </label><br>
-				<select class="select">
-				<option>09:00</option>
-				<option>11:00</option>
-				<option>12:00</option>
-				<option>13:00</option>
-				<option>14:00</option>
-				<option>15:00</option>
-				<option>16:00</option>
-				<option>17:00</option>
-				<option>18:00</option>
-				<option>19:00</option>
-				<option>20:00</option></select><label class="lbl">  Salida   </label>
-				
-				</td></tr> -->
-				<tr><td><label>Nombre de Usuario:</label></td><td><input name="txtUser" type="text" class="inputForm" size="20" value="${medico.idMedico.nombreUsuario}"></td></tr>
-				<tr><td><label>Contrase&ntildea:</label></td><td><input name="txtPass" type="password"class="inputForm" size="20" ></td></tr>
-				<tr><td><label>Confirmar contrase&ntildea:</label></td><td><input name="txtPass2" type="password"class="inputForm" size="20"></td></tr>
+<%-- 									%> --%>
+<%-- 									<option value="<%= es.getIdEspecialidad()%>"><%=es.getDescripcion() %></option> 		 --%>
+<%-- 									<%  --%>
+// 									}
+// 								}							
+<%-- 							%> --%>
+<!-- 						</select>										 -->
+<!-- 					</td> -->
+<!-- 				</tr> -->
 			</table>
 			<br>
-				<input name=" insert" type="submit" value="Aceptar" class="btn btn-primary btn-block btn-large">
+				<input name="modificarMedico" type="submit" value="Aceptar" class="btn btn-primary btn-block btn-large">
 			</form>
 	</div>
 
+	<script>
+						
+		
+var temp = <%=id%>;
+var mySelect = document.getElementById('provincia1');
+
+for(var i, j = 0; i = mySelect.options[j]; j++) {
+    if(i.value == temp) {
+        mySelect.selectedIndex = j;
+        break;
+    }
+}
+</script>
+
+
+
+
+<script>
+var temp = <%=id2%>;
+var mySelect = document.getElementById('localidadReal');
+
+for(var i, j = 0; i = mySelect.options[j]; j++) {
+    if(i.value == temp) {
+        mySelect.selectedIndex = j;
+        break;
+    }
+    }
+</script>
+				
+		
+	
+
+	<select name="localidades" id="localidad2">
+		<option selected="selected" value=<%=id2%>>${paciente.lLocalidad}</option>
+		<%
+			ArrayList<Localidad> listaLocalidad2 = null;
+
+					if (request.getAttribute("listaLocalidad") != null) {
+						listaLocalidad2 = (ArrayList<Localidad>) request.getAttribute("listaLocalidad");
+					}
+
+					if (listaLocalidad2 != null) {
+						for (Localidad lo : listaLocalidad2) {
+							//if (lo.getIdLocalidad() != Integer.parseInt(id2)) {
+		%>
+
+		<option value="<%=lo.getpProvincia().getIdProvincia()%>"
+			data-uid="<%=lo.getIdLocalidad()%>"><%=lo.getDescripcion()%></option>
+
+		<%
+			}
+						}
+
+					//}
+		%>
+
+	</select>
+
+
+
+
+	<script>
+		function myOnLoad() {
+			var earrings = document.getElementById('localidad2');
+			earrings.style.visibility = 'hidden';
+		
+		}
+	</script>
+
+
+	<script>
+		function cargar_localidades() {
+			document.getElementById("localidadReal").options.length = 0;
+			
+			var x = document.getElementById("localidad2");
+			var array = new Array();
+			var a = new Array();
+			var b = new Array();
+			for (i = 0; i < x.length; i++) { 
+				
+				array.push(x.options[i].text);
+				a.push(x.options[i].value);
+				b.push(x.options[i].getAttribute('data-uid'));
+				
+		}
+
+			
+
+			 addOptions("slcLocalidad", array, a,b);
+			}
+	
+	</script>
+
+	<script>
+	function addOptions(domElement, array, a,b) {
+		 var select = document.getElementsByName(domElement)[0];
+		 var inde = document.getElementById('provincia1').value;
+
+		 for (value in array) {
+			if(a[value] === inde){
+		  var option = document.createElement("option");
+		  option.text = array[value];
+		  option.value = b[value];
+		  select.add(option);
+			}
+		 }
+		}
+	</script>
 	
 </body>
 </html>

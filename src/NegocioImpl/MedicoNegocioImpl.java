@@ -51,4 +51,10 @@ public class MedicoNegocioImpl implements MedicoNegocio {
 		return meDAO.insertMe(me);
 	}
 
+	@Override
+	public boolean update(Medico me) {
+		
+		return meDAO.update(me);
+	}
+
 }
