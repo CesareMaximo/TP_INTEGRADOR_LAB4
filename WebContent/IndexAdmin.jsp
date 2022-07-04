@@ -25,7 +25,7 @@ request.setAttribute("exito", exito); %>
   
  <div class="User">
  	<form method="post" action ="logout" >
- 		<img width="16px"class="imag" src="img/user.png"/> Bienvenido <b> <%= session.getAttribute("username") %></b>
+ 		<a href="MiCuenta.jsp" title="Mi Cuenta" data-toggle="tooltip""><img width="16px"class="imag" src="img/user.png"/></a> Bienvenido <b> <%= session.getAttribute("username") %></b>
  		<input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary" style="margin-left:10px;">
 	</form>
  </div>
@@ -63,17 +63,8 @@ request.setAttribute("exito", exito); %>
                             </div>
                         </a>
                         
-                        <a href="ServletTurno?Param=1" style="text-decoration: none; color: dimgrey;">
-                            <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:80px;">
-                                <img src="img/ListadoTurnos.png" style="width: 50px" class="card-img-top" alt="..." />
-                                <div class="card-body">
-                                    <p class="card-text" style="font-size: 14px">Listado de Turnos</p>
-                                </div>
-                            </div>
-                        </a>
-                        
                         <a href="MenuReportes.jsp" style="text-decoration: none; color: dimgrey;">
-                            <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:50px;">
+                            <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:80px;">
                                 <img src="img/Reportes.png" style="width: 50px" class="card-img-top" alt="..." />
                                 <div class="card-body">
                                     <p class="card-text" style="font-size: 14px">Reportes</p>
@@ -82,7 +73,7 @@ request.setAttribute("exito", exito); %>
                         </a>
                         
                         <a href="AgregarAdministrativo.jsp" style="text-decoration: none; color: dimgrey;">
-                            <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:80px;">
+                            <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:50px;">
                                 <img src="img/AgregarAdministrador.png" style="width: 50px" class="card-img-top" alt="..." />
                                 <div class="card-body">
                                     <p class="card-text" style="font-size: 14px">Agregar Administrativo</p>
@@ -91,7 +82,7 @@ request.setAttribute("exito", exito); %>
                         </a>
                         
 						<a href="ServletEspecialidad?Param=1" style="text-decoration: none; color: dimgrey;">
-                            <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:50px;">
+                            <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:80px;">
                                 <img src="img/AgregarAdministrador.png" style="width: 50px" class="card-img-top" alt="..." />
                                 <div class="card-body">
                                     <p class="card-text" style="font-size: 14px">Menu Especialidades</p>

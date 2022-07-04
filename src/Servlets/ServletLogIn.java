@@ -40,6 +40,8 @@ public class ServletLogIn extends HttpServlet {
 			HttpSession sesion = request.getSession();
 			sesion.setAttribute("username", usuario.getNombreUsuario());
 			sesion.setAttribute("tipo", usuario.getTipo());
+			sesion.setAttribute("idUsuario", usuario.getIdUsuario());
+			sesion.setAttribute("password", usuario.getClave());
 			if(usuario.getTipo().equals("Admin")) {
 				response.sendRedirect("IndexAdmin.jsp");				
 			}

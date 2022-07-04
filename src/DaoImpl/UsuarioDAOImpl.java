@@ -15,6 +15,7 @@ import java.sql.SQLException;
 public class UsuarioDAOImpl implements UsuarioDAO{
 	
 	private static final String insertAdmin = "INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES(?, ?, ?, 1)";
+	private static final String update = "UPDATE USUARIOS SET Clave = ?, NombreUsuario = ? where idUsuario = ?";
 	private static final String delete = "update usuarios set Estado =0 where idUsuario like '?'";
 	private static final String readall = "SELECT * FROM Usuarios"; 
 	private static final String iniciar = "SELECT U.idUsuario, U.NombreUsuario, U.clave, U.Tipo FROM Usuarios U WHERE U.NombreUsuario = ? AND U.clave = ? AND U.Estado = 1;";
@@ -200,6 +201,38 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 			e.printStackTrace();
 		}
 		return usu.getIdUsuario();
+	}
+
+	@Override
+	public boolean update(Usuario usu) {
+		
+		PreparedStatement statement ;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isInsertExitoso = false;
+		try
+		{
+			statement = conexion.prepareStatement(update);
+			statement.setString(1, usu.getClave());
+			statement.setString(2, usu.getNombreUsuario());
+			statement.setInt(3, usu.getIdUsuario());
+			
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isInsertExitoso = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		
+		return isInsertExitoso;
 	}
 
 }

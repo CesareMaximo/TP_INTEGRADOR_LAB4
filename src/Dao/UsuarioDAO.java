@@ -6,6 +6,7 @@ import Entidad.Usuario;
 
 public interface UsuarioDAO {
 	public boolean insertAdmin(Usuario usu);
+	public boolean update(Usuario usu);
 	public boolean delete(Usuario usuDelete);
 	public List<Usuario> readAll();
 	public Usuario iniciar(String nombre, String clave);

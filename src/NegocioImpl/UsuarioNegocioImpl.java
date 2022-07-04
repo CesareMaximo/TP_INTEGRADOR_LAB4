@@ -43,5 +43,10 @@ public class UsuarioNegocioImpl implements UsuarioNegocio {
 		return usuario.ultimoUsuario();
 	}
 
+	@Override
+	public boolean update(Usuario us) {
+		return usuario.update(us);
+	}
+
 	
 }
