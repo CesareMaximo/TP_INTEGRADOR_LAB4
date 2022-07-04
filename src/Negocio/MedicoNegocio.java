@@ -14,4 +14,5 @@ public interface MedicoNegocio {
 	public List<Medico> readAllFiltro(int id);
 	public List<Medico> readAllBuscar(String nombre);
 	public Medico mostrarMedico(int idMedico);
+	public int totalPacientesXMedico(int idMedico);
 }

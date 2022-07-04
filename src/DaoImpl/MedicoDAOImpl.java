@@ -18,7 +18,7 @@ public class MedicoDAOImpl implements  MedicoDAO{
 	private static final String readallFiltro = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad where m.idEspecialidad = ? and p.Estado = 1";
 	private static final String readMedico = "SELECT P.DNI, P.Nombre, P.Apellido, P.Sexo, P.idNacionalidad, P.FechaNacimiento, P.Direccion, P.idLocalidad, P.Email, P.Telefono1, P.Telefono2, P.Estado, M.idMedico, M.idEspecialidad, E.Descripcion AS DesEspe, L.Descripcion AS DesLoc, PRO.idProvincia, PRO.Descripcion AS DesPro, N.Descripcion AS DesNac, U.NombreUsuario, U.Clave FROM Medico AS M INNER JOIN Persona AS P ON P.DNI = M.DNI INNER JOIN Especialidad E ON E.idEspecialidad = M.idEspecialidad INNER JOIN Localidad L ON L.idLocalidad = P.idLocalidad INNER JOIN Provincia PRO ON PRO.idProvincia = L.idProvincia INNER JOIN Nacionalidad N ON N.idNacionalidad = P.idNacionalidad INNER JOIN usuarios U ON U.idUsuario=M.idMedico WHERE IdMedico=?";
 	private static final String update = "UPDATE Persona SET Nombre = ?, Apellido = ?, Sexo = ?, idNacionalidad = ?, FechaNacimiento = ?, Direccion = ?, idLocalidad = ?, Email = ?, Telefono1 = ?, Telefono2 = ? WHERE Dni = ?";
-
+	private static final String totalPaciente = "SELECT COUNT(distinct idPaciente) AS Total FROM Turno WHERE idMedico = ?";
 	//private static final String readallBuscar = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad where p.Nombre like '%"++"%' or p.Apellido like '%"++"%' ";
 	
 	@Override
@@ -318,6 +318,27 @@ public class MedicoDAOImpl implements  MedicoDAO{
 			e.printStackTrace();
 		}
 		return isUpdateExitoso;
+	}
+
+	@Override
+	public int totalPacientesXMedico(int idMedico) {
+		Connection cn = Conexion.getConexion().getSQLConexion();
+		int total = 0;
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		try
+		 {
+			statement = cn.prepareStatement(totalPaciente);
+			statement.setInt(1, idMedico);
+			resultSet = statement.executeQuery();
+			resultSet.next();
+			total = resultSet.getInt("Total");		
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return total;	
 	}
 
 }

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="Entidad.*"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,7 +9,7 @@
 <style type="text/css">
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
-<title>Insert title here</title>
+<title>Menu Reportes</title>
 
 
  
@@ -82,24 +84,42 @@ PROMEDIO DE PACIENTES POR ESPECIALIDAD
 			</div>
 			</form>
 	</div>
- 
- 
- <div id="openModalMedico" class="modalDialog">
-	<div>
-		<a href="#close" title="Close" class="close">X</a>
-		<h2>Seleccione el Medico:</h2>
-		<label>Medico:</label></td><td><select class="select"></select>
-		<input  name="buscarMedico" type="submit" value="Buscar" class="btn btn-primary" style="margin-left:10px;" ></input>
-		
-	</div>
-</div>
 
- <div id="openModalFechas" class="modalDialog">
+
+	<div id="openModalMedico" class="modalDialog">
+		<div>
+		<form method="post" action="Reportes">
+			<a href="#close" title="Close" class="close">X</a>
+			<h2>Seleccione el Medico:</h2>
+			<label>Medico:</label> <select class="select" name="medicoReporte">
+				<%
+					ArrayList<Medico> listaMedico = null;
+					if (request.getAttribute("listaMedico") != null) {
+						listaMedico = (ArrayList<Medico>) request.getAttribute("listaMedico");
+					}
+
+					if (listaMedico != null)
+						for (Medico me : listaMedico) {
+				%>
+				<option value="<%=me.getIdMedico().getIdUsuario()%>">
+					<%=me.getNombre()%> <%=me.getApellido()%>
+				</option>
+				<%
+					}
+				%>
+			</select> <input name="totalPacientes" type="submit" value="Buscar" class="btn btn-primary" style="margin-left: 10px;"></input>
+			<br>
+			<label><%=session.getAttribute("totalPaciente") %></label>
+		</form>
+		</div>
+	</div>
+
+	<div id="openModalFechas" class="modalDialog">
 	<div>
 		<a href="#close" title="Close" class="close">X</a>
 		<h2>Ingrese las fechas:</h2>
-		<label>Primer Fecha:</label></td><td><input type="date" name="Fecha1" class="inputForm"></input>
-		<label>Segunda Fecha:</label></td><td><input type="date" name="Fecha2" class="inputForm" ></input>
+		<label>Primer Fecha:</label><input type="date" name="Fecha1" class="inputForm"></input>
+		<label>Segunda Fecha:</label><input type="date" name="Fecha2" class="inputForm" ></input>
 		<input  name="buscarFechas" type="submit" value="Buscar" class="btn btn-primary" style="margin-left:10px;" ></input>
 		
 		
@@ -111,7 +131,7 @@ PROMEDIO DE PACIENTES POR ESPECIALIDAD
 	<div>
 		<a href="#close" title="Close" class="close">X</a>
 		<h2>Ingrese el mes y el año:</h2>
-		<label> Fecha:</label></td><td><input type="month" name="Fecha1" class="inputForm"></input>
+		<label> Fecha:</label><input type="month" name="Fecha1" class="inputForm"></input>
 	
 		<input  name="buscarMes" type="submit" value="Buscar" class="btn btn-primary" style="margin-left:10px;" ></input>
 		

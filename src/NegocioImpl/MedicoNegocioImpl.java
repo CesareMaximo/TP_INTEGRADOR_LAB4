@@ -57,4 +57,9 @@ public class MedicoNegocioImpl implements MedicoNegocio {
 		return meDAO.update(me);
 	}
 
+	@Override
+	public int totalPacientesXMedico(int idMedico) {
+		return meDAO.totalPacientesXMedico(idMedico);
+	}
+
 }
