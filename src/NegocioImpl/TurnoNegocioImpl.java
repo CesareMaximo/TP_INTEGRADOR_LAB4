@@ -46,4 +46,10 @@ public class TurnoNegocioImpl implements TurnoNegocio {
 		return tur.readPorMedico(idMedico);
 	}
 
+	@Override
+	public boolean update2(int idTurno, int estado, String observacion) {
+
+		return tur.update2(idTurno, estado, observacion);
+	}
+
 }

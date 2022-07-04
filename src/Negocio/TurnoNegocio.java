@@ -18,4 +18,6 @@ public interface TurnoNegocio {
 	public boolean existeFechaTurno(int idMedico, Date fecha);
 	
 	public ArrayList<Turno> readPorMedico(int idMedico);
+
+	public boolean update2(int idTurno, int estado, String observacion);
 }

@@ -18,5 +18,7 @@ public interface TurnoDAO {
 	public boolean agendarTurno (String dni, Turno turno);
 	
 	public boolean existeFechaTurno(int idMedico, Date fecha);
+
+	public boolean update2(int idTurno, int estado, String observacion);
 	
 }

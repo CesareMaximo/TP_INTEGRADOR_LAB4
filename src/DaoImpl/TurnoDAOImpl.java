@@ -35,8 +35,9 @@ public class TurnoDAOImpl implements TurnoDAO {
 			+ " FROM Turno T LEFT JOIN PACIENTE PA ON T.idPaciente = PA.idPaciente "
 			+ " LEFT JOIN PERSONA P ON P.DNI = PA.DNI "
 			+ " LEFT JOIN ESTADOS ES ON T.idEstado = ES.idEstado "
-			+ " WHERE T.Fecha >= NOW() AND (SELECT P.Estado FROM medico AS M INNER JOIN Persona P ON P.DNI = M.DNI WHERE M.idMedico = T.idMedico) = 1 ORDER BY T.Fecha ASC";
-	private static final String readTurno = "select T.idTurno,E.idEspecialidad,(select P.Apellido from Medico m inner join Persona as P on P.DNI = m.DNI where m.idMedico = t.idMedico) as ApellidoMedico,(select P.Nombre from Medico m inner join Persona as P on P.DNI = m.DNI where m.idMedico = t.idMedico) as NombreMedico,T.Hora,T.Fecha, E.Descripcion from Turno T inner join Medico as M on M.idMedico = T.idMedico inner join Persona P on P.DNI = M.DNI inner join Especialidad as E on E.idEspecialidad = M.idEspecialidad where idTurno = ?";
+			+ " WHERE ((select concat(T.fecha, ' ', T.hora) as FechaHora) >= NOW()) AND (SELECT P.Estado FROM medico AS M INNER JOIN Persona P ON P.DNI = M.DNI WHERE M.idMedico = T.idMedico) = 1 ORDER BY T.Fecha ASC";
+	private static final String readTurno = "select Es.NombreEstado, T.Observación,T.idTurno,E.idEspecialidad,(select P.Apellido from Medico m inner join Persona as P on P.DNI = m.DNI where m.idMedico = t.idMedico) as ApellidoMedico,(select P.Nombre from Medico m inner join Persona as P on P.DNI = m.DNI where m.idMedico = t.idMedico) as NombreMedico,T.Hora,T.Fecha, E.Descripcion from Turno T inner join Medico as M on M.idMedico = T.idMedico inner join Persona P on P.DNI = M.DNI inner join Especialidad as E on E.idEspecialidad = M.idEspecialidad inner join Estados as Es on Es.idEstado = T.idEstado where idTurno = ?";
+	private static final String update2 = "UPDATE Turno SET Observación = ?, idEstado = ? where idTurno = ?";
 	private static final String update = "UPDATE Turno SET idEstado = 2, idPaciente = ? where idTurno = ?";
 	private static final String existeFecha = "SELECT CASE WHEN exists ( SELECT * FROM turno WHERE idMedico = ? AND Fecha = ?) THEN 'TRUE' ELSE 'FALSE' END";
 	private static final String readxMedico = "SELECT T.idTurno, T.idMedico, T.Fecha, T.idPaciente, (SELECT PE.Nombre FROM Paciente PA"
@@ -51,7 +52,7 @@ public class TurnoDAOImpl implements TurnoDAO {
 			+ " FROM Turno T LEFT JOIN PACIENTE PA ON T.idPaciente = PA.idPaciente "
 			+ " LEFT JOIN PERSONA P ON P.DNI = PA.DNI "
 			+ " LEFT JOIN ESTADOS ES ON T.idEstado = ES.idEstado "
-			+ " WHERE T.Fecha >= NOW() AND T.idMedico = ? AND T.idEstado != 1 AND (SELECT P.Estado FROM medico AS M INNER JOIN Persona P ON P.DNI = M.DNI WHERE M.idMedico = T.idMedico) = 1 ORDER BY T.Fecha ASC";
+			+ " WHERE ((select concat(T.fecha, ' ', T.hora) as FechaHora) >= NOW()) AND T.idMedico = ? AND T.idEstado != 1 AND (SELECT P.Estado FROM medico AS M INNER JOIN Persona P ON P.DNI = M.DNI WHERE M.idMedico = T.idMedico) = 1 ORDER BY T.Fecha ASC";
 	
 	
 	@Override
@@ -145,6 +146,7 @@ public class TurnoDAOImpl implements TurnoDAO {
 		Turno tu = new Turno();
 		Medico me = new Medico();
 		Especialidad es = new Especialidad();
+		Estado est = new Estado();
 		PreparedStatement statement;
 		ResultSet resultSet; 
 		try
@@ -156,10 +158,13 @@ public class TurnoDAOImpl implements TurnoDAO {
 			tu.setIdTurno(id);
 			tu.setFecha(resultSet.getDate("Fecha"));
 			tu.setHora(resultSet.getTime("Hora"));
+			tu.setObservacion(resultSet.getString("Observación"));
 			me.setApellido(resultSet.getString("ApellidoMedico"));
 			me.setNombre(resultSet.getString("NombreMedico"));
 			es.setIdEspecialidad(resultSet.getInt("idEspecialidad"));
 			es.setDescripcion(resultSet.getString("Descripcion"));
+			est.setDescripcion(resultSet.getString("NombreEstado"));
+			tu.seteEstado(est);
 			me.seteEspecialidad(es);
 			tu.setmMedico(me);
 			
@@ -271,6 +276,30 @@ public class TurnoDAOImpl implements TurnoDAO {
 		}
 		
 		return listaTurno;
+	}
+
+	@Override
+	public boolean update2(int idTurno, int estado, String observacion) {
+		boolean isUpdateExitoso = false;		
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		try 
+		{
+			statement = conexion.prepareStatement(update2);;
+			statement.setString(1, observacion);
+			statement.setInt(2, estado);
+			statement.setInt(3, idTurno);
+
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isUpdateExitoso = true;
+			}
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return isUpdateExitoso;
 	}
 		
 }

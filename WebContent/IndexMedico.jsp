@@ -99,7 +99,7 @@ EN CADA TURNO PODRA VER LOS DATOS DEL TURNO, AMPLIAR DETALLE DE PACIENTE, AGREGA
 						<td><%=tu.geteEstado().getDescripcion()%></td>
 						<td><a href="ServletIndexMedico?Detalle=<%=tu.getpPaciente().getDni()%>" class="view"
 								title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
-								<a href="#openModalTurno" class="edit" title="Edit"
+								<a href="ServletIndexMedico?Modificar=<%=tu.getIdTurno()%>&Pax=<%= tu.getpPaciente().getDni() %>" class="edit" title="Edit"
 								data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
 							</td>
 						</tr>
@@ -209,6 +209,7 @@ EN CADA TURNO PODRA VER LOS DATOS DEL TURNO, AMPLIAR DETALLE DE PACIENTE, AGREGA
 				</tr>
 			</table>
 					</div>
+					
 				</div>
 			</div>
 		</div>     
@@ -216,48 +217,134 @@ EN CADA TURNO PODRA VER LOS DATOS DEL TURNO, AMPLIAR DETALLE DE PACIENTE, AGREGA
 									
 							
 									
-								 <%} 
+								 <%}
 									%>
+									
+									<% 		
+			
+						
+						boolean modalEdit = false;
+									
+						Turno turno = new Turno();
+						
+						if(request.getAttribute("Turno")!=null){
+							turno = (Turno)request.getAttribute("Turno");
+						}
+					
+						
+						if(request.getAttribute("ModalEdit")!=null){
+						
+							modalEdit = (boolean)request.getAttribute("ModalEdit");				
+							
+						}
+						
+						Paciente paciente = new Paciente();
+						
+						if(request.getAttribute("Paciente")!=null){
+							paciente = (Paciente)request.getAttribute("Paciente");
+						}
 
-
-
-	<div id="openModalTurno" class="modalDialog">
-		<div class="DetallePaciente">
-			<a href="#close" title="Close" class="close">X</a>
-			<h1>Detalle Turno</h1>
+							if(modalEdit == true){
+								%>
+								<script type="text/javascript">
+										window.onload = function() {
+											OpenBootstrapPopup();
+										};
+										function OpenBootstrapPopup() {
+											$("#openModalDetalleTurno").modal('show');
+										}
+										
+									</script>
+									<div id="openModalDetalleTurno" class="modal fade">
+									<div class="modal-dialog modal-det">
+				<div class="modal-content">
+					<div  class="modal-header justify-content-left">						
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body text-center">
+					<h1>Detalle Turno</h1>
 			<table class="tablaDetalle">
+			<form method="post" action="ServletIndexMedico">
+				<tr>
+					<td></td>
+					<td><input type="hidden" name="lblidTurno" value=<%= turno.getIdTurno()%>></td>
+				</tr>
 				<tr>
 					<td class="Campo"><label>Fecha</label></td>
-					<td><label name="lblFecha"> 2022/06/20</label></td>
+					<td><label name="lblFecha"><%= turno.getFecha()%></label></td>
 				</tr>
 				<tr>
 					<td class="Campo"><label>Hora</label></td>
-					<td><label name="lblHora">08:00</label></td>
+					<td><label name="lblHora"><%= turno.getHora() %></label></td>
 				</tr>
 				<tr>
 					<td class="Campo"><label>Paciente</label></td>
-					<td><label name="lblPaciente">Juan Perez</label></td>
+					<td><label name="lblPaciente"><%= paciente.getNombre()%> <%= paciente.getApellido() %></label></td>
 				</tr>
 				<tr>
 					<td class="Campo"><label>Especialidad</label></td>
-					<td><label name="lblEspecialidad"> Cardiología </label></td>
+					<td><label name="lblEspecialidad"><%= turno.getmMedico().geteEspecialidad().getDescripcion() %> </label></td>
 				</tr>
 				<tr>
 					<td class="Campo"><label>Estado</label></td>
-					<td><select class="select"><Option>OCUPADO</Option>
-							<Option>PRESENTE</Option>
-							<Option>AUSENTE</Option></select>
+					<td><select class="select" name= "lblEstado"><Option value=2>OCUPADO</Option>
+							<Option value=4>PRESENTE</Option>
+							<Option value=3>AUSENTE</Option></select>
 				</tr>
 				<tr>
 					<td class="Campo"><label>Observación</label></td>
-					<td><textArea name="txtObservacion" style="resize: none;"
-							class="inputForm" cols="26" rows="3" required></textArea>
+					<td><textArea  name="txtObservacion" style="resize: none;"
+							class="inputForm" cols="26" rows="3"><%= turno.getObservacion() %></textArea>
 				</tr>
 			</table>
 			<input name="actualizarTurno" type="submit" value="Guardar"
 				class="btn btn-primary btn-sm btn-block" style="margin-top: 5px;">
-		</div>
-	</div>
+			</form>
+				</div>
+					</div>
+				</div>
+				</div>
+									<%}
+									%>
+									<% 		
+			
+						
+						boolean exito = false;
+						
+						if(request.getAttribute("exito")!=null){
+						
+							exito = (boolean)request.getAttribute("exito");
+							
+						}
+							if(exito == true){
+								%>
+								<script type="text/javascript">
+										window.onload = function() {
+											OpenBootstrapPopup();
+										};
+										function OpenBootstrapPopup() {
+											$("#simpleModal").modal('show');
+										}
+									</script>
+									
+									<div id="simpleModal" class="modal fade">
+			<div class="modal-dialog modal-ok">
+				<div class="modal-content">
+					<div class="modal-header justify-content-center">
+						<div class="icon-box">
+							<i style="color: green" class="material-icons">&#xE876;</i>
+						</div>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body text-center">
+						<h4>Exito!</h4>	
+						<p>El Turno ha sido modificado satisfactoriamente.</p>
+					</div>
+				</div>
+			</div>
+		</div>     
+								 <%} 
+									%>
 
 
 	<script>
