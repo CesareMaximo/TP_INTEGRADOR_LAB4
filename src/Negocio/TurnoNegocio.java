@@ -16,4 +16,6 @@ public interface TurnoNegocio {
 	public boolean agendarTurno(String dni, Turno turno);
 	
 	public boolean existeFechaTurno(int idMedico, Date fecha);
+	
+	public ArrayList<Turno> readPorMedico(int idMedico);
 }

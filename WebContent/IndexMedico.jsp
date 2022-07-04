@@ -1,19 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+        <%@page import="Entidad.*"%>
+    <%@page import="java.util.ArrayList"%>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <style type="text/css">
 <jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-
-	
-
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 <title>Mis turnos asignados</title>
 </head>
 <body>
@@ -38,14 +44,14 @@ EN CADA TURNO PODRA VER LOS DATOS DEL TURNO, AMPLIAR DETALLE DE PACIENTE, AGREGA
 		<div class="table-responsive">
 			<div class="table-wrapper">
 				<div style="padding-bottom: 0px;" class="table-title">
-					<div class="row justify-content-center">
+					<div class="row justify-content-left">
 						<div class="col-sm-8">
 							<h1>Mis turnos asignados</h1>
 							<table class="filtrosListado">
 								<tr>
 									<td><label>Estado:</label></td>
 									<td><select class="select">
-											<option>LIBRE</option>
+										
 											<option>OCUPADO</option>
 											<option>AUSENTE</option>
 											<option>PRESENTE</option>
@@ -58,120 +64,161 @@ EN CADA TURNO PODRA VER LOS DATOS DEL TURNO, AMPLIAR DETALLE DE PACIENTE, AGREGA
 
 							</table>
 						</div>
-						<div class="col-sm-4">
-							<div class="search-box">
-								<i class="material-icons">&#xE8B6;</i> <input type="text"
-									class="form-control" placeholder="Search&hellip;">
-							</div>
-						</div>
-
-						<div></div>
+	
 					</div>
 				</div>
-				<table class="table table-striped table-hover table-bordered">
+
+
+
+				<table id="table_turnos" class="display">
 					<thead>
 						<tr>
-
-							<th>Fecha <i class="fa fa-sort"></i>
-							</th>
+							<th>Fecha</th>
 							<th>Horario</th>
-							<th>Paciente<i class="fa fa-sort"></i></th>
+							<th>Paciente</th>
 							<th>Estado</th>
 							<th>Acciones</th>
 						</tr>
 					</thead>
+					
+					
 					<tbody>
+					
+					<%  
+					ArrayList<Turno> listaMisTurnos = null;
+					if (request.getAttribute("listaMisTurnos") != null) {
+						listaMisTurnos = (ArrayList<Turno>)request.getAttribute("listaMisTurnos");
+					}
+					for(Turno tu : listaMisTurnos){
+					
+					%>
 						<tr>
-
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td><a href="#openModalDetallePaciente" class="view"
+						<td><%=tu.getFecha()%></td>
+						<td><%=tu.getHora()%></td>
+						<td><%=tu.getpPaciente().getNombre()%> <%=tu.getpPaciente().getApellido()%></td>
+						<td><%=tu.geteEstado().getDescripcion()%></td>
+						<td><a href="ServletIndexMedico?Detalle=<%=tu.getpPaciente().getDni()%>" class="view"
 								title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
 								<a href="#openModalTurno" class="edit" title="Edit"
 								data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
 							</td>
 						</tr>
+						<% } %>
 					</tbody>
 				</table>
-				<div class="clearfix">
-					<div class="hint-text">
-						Showing <b>5</b> out of <b>25</b> entries
-					</div>
-					<ul class="pagination">
-						<li class="page-item disabled"><a href="#"><i
-								class="fa fa-angle-double-left"></i></a></li>
-						<li class="page-item active"><a href="#" class="page-link">1</a></li>
-						<li class="page-item"><a href="#" class="page-link">2</a></li>
-						<li class="page-item"><a href="#" class="page-link">3</a></li>
-						<li class="page-item"><a href="#" class="page-link">4</a></li>
-						<li class="page-item"><a href="#" class="page-link">5</a></li>
-						<li class="page-item"><a href="#" class="page-link"><i
-								class="fa fa-angle-double-right"></i></a></li>
-					</ul>
-				</div>
+
+				
 			</div>
 		</div>
 	</div>
 
-	<div id="openModalDetallePaciente" class="modalDialog">
-		<div class="DetallePaciente">
-			<a href="#close" title="Close" class="close">X</a>
-			<h1>Detalle Paciente</h1>
-			<table class="tablaDetalle">
+
+
+
+						<% 		
+			
+						
+						boolean detalle = false;
+					
+						
+						if(request.getAttribute("detallePaciente")!=null){
+						
+							detalle = (boolean)request.getAttribute("detallePaciente");				
+							
+						}
+						
+						Paciente pa = new Paciente();
+						
+						if(request.getAttribute("Paciente")!=null){
+							pa = (Paciente)request.getAttribute("Paciente");
+						}
+
+							if(detalle == true){
+								%>
+								<script type="text/javascript">
+										window.onload = function() {
+											OpenBootstrapPopup();
+										};
+										function OpenBootstrapPopup() {
+											$("#openModalDetallePaciente").modal('show');
+										}
+										
+									</script>
+									
+									<div id="openModalDetallePaciente" class="modal fade">
+			<div class="modal-dialog modal-det">
+				<div class="modal-content">
+					<div  class="modal-header justify-content-left">						
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body text-center">
+						<h1>Detalle Paciente</h1>	
+						<table class="tablaDetalle">
 				<tr>
 					<td class="Campo"><label>DNI</label></td>
-					<td><label name="lblDni"> 12345678</label></td>
+					<td><label name="lblDni"> <%=pa.getDni()%></label></td>
 				</tr>
 				<tr>
 					<td class="Campo"><label>Nombres</label></td>
-					<td><label name="lblNombre">Juan</label></td>
+					<td><label name="lblNombre"> <%=pa.getNombre()%></label></td>
 				</tr>
 				<tr>
 					<td class="Campo"><label>Apellidos</label></td>
-					<td><label name="lblApellido">Perez</label></td>
+					<td><label name="lblApellido"> <%=pa.getApellido()%></label></td>
 				</tr>
 				<tr>
 					<td class="Campo"><label>Fecha Nacimiento</label></td>
-					<td><label name="lblFechaNac"> 1997/03/16 </label></td>
+					<td><label name="lblFechaNac"> <%=pa.getFechaNacimiento()%> </label></td>
 				</tr>
 				<tr>
 					<td class="Campo"><label>Sexo</label></td>
-					<td><label name="lblSexo">Masculino</label>
+					<td><label name="lblSexo"> <%=pa.getSexo()%></label>
 				</tr>
 				<tr>
 					<td class="Campo"><label>Nacionalidad</label></td>
-					<td><label name="lblNacionalidad">Argentina</label>
+					<td><label name="lblNacionalidad"> <%=pa.getnNacionalidad().getDescripcion()%></label>
 				</tr>
 				<tr>
 					<td class="Campo"><label>Provincia</label></td>
-					<td><label name="lblProvincia">Buenos Aires</label>
+					<td><label name="lblProvincia"> <%=pa.getlLocalidad().getpProvincia().getDescripcion()%></label>
 				</tr>
 				<tr>
 					<td class="Campo"><label>Localidad</label></td>
-					<td><label name="lblLocalidad">Campana</label>
+					<td><label name="lblLocalidad"><%=pa.getlLocalidad().getDescripcion()%></label>
 				</tr>
 				<tr>
 					<td class="Campo"><label>Direcci&oacuten</label></td>
-					<td><label name="lblDireccion">Av. Mitre 1300</label></td>
+					<td><label name="lblDireccion"><%=pa.getDireccion()%></label></td>
 				</tr>
 				<tr>
 					<td class="Campo"><label>E-mail</label></td>
-					<td><label name="email ">juanperez@gmail.com</label></td>
+					<td><label name="email "><%=pa.getEmail()%></label></td>
 				</tr>
 				<tr>
 					<td class="Campo"><label>Tel&eacutefono</label></td>
-					<td><label name="lblTelefono1">11152635262</label></td>
+					<td><label name="lblTelefono1"><%=pa.getTelefono1()%></label></td>
 				</tr>
 				<tr>
 					<td class="Campo"><label>Tel&eacutefono Opcional</label></td>
-					<td><label name="lblTelefono2">-</label></td>
+					
+					<% if(pa.getTelefono2() == null){%> 
+					<td><label name="lblTelefono2"> </label></td>
+					<%}else{%>
+					<td><label name="lblTelefono2"><%=pa.getTelefono2()%></label></td>
+					<%}%>
 				</tr>
 			</table>
+					</div>
+				</div>
+			</div>
+		</div>     
+									
+									
+							
+									
+								 <%} 
+									%>
 
-		</div>
-	</div>
 
 
 	<div id="openModalTurno" class="modalDialog">
@@ -211,6 +258,24 @@ EN CADA TURNO PODRA VER LOS DATOS DEL TURNO, AMPLIAR DETALLE DE PACIENTE, AGREGA
 				class="btn btn-primary btn-sm btn-block" style="margin-top: 5px;">
 		</div>
 	</div>
+
+
+	<script>
+		$(document).ready(function() {
+			$('#table_turnos').DataTable();
+		});
+	</script>
+	<script>
+		var table = $('#table_turnos').DataTable({
+			"order": [[0, 'asc'] , [1, 'asc']],
+			columnDefs : [ {
+				targets : [ 4 ],
+				orderable : false
+			},
+
+			]
+		});
+	</script>
 
 </body>
 </html>

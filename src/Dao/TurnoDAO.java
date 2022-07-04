@@ -10,6 +10,8 @@ public interface TurnoDAO {
 	public boolean insert (ArrayList<Turno> listaTurnos);
 	
 	public ArrayList<Turno> readAll();
+	
+	public ArrayList<Turno> readPorMedico(int idMedico);
 
 	public Turno devuelveTurno(int id);
 	

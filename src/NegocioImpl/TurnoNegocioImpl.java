@@ -40,4 +40,10 @@ public class TurnoNegocioImpl implements TurnoNegocio {
 		return tur.existeFechaTurno(idMedico, fecha);
 	}
 
+	@Override
+	public ArrayList<Turno> readPorMedico(int idMedico) {
+		
+		return tur.readPorMedico(idMedico);
+	}
+
 }

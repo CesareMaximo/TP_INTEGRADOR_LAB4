@@ -46,7 +46,7 @@ public class ServletLogIn extends HttpServlet {
 				response.sendRedirect("IndexAdmin.jsp");				
 			}
 			else {
-				response.sendRedirect("IndexMedico.jsp");
+				response.sendRedirect("ServletIndexMedico?Index=1");
 			}
 		}
 		

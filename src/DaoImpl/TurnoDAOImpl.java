@@ -23,10 +23,36 @@ import NegocioImpl.PacienteNegocioImpl;
 public class TurnoDAOImpl implements TurnoDAO {
 	
 	private static final String insert = "INSERT INTO Turno(idMedico, Fecha, idEstado, Hora) VALUES(?, ?, 1, ?)";
-	private static final String readAll = "SELECT T.idTurno, T.idMedico, T.Fecha, T.idPaciente, (SELECT PE.Nombre FROM Paciente PA INNER JOIN Persona PE ON PE.DNI = PA.DNI WHERE PA.idPaciente = T.idPaciente) AS PacienteNombre, (SELECT PE.Apellido FROM Paciente PA INNER JOIN Persona PE ON PE.DNI = PA.DNI WHERE PA.idPaciente = T.idPaciente) AS PacienteApellido, (SELECT PE.DNI FROM Paciente PA INNER JOIN Persona PE ON PE.DNI = PA.DNI WHERE PA.idPaciente = T.idPaciente) AS PacienteDNI, T.idEstado, ES.NombreEstado, T.Hora, T.Observación,(SELECT P.Apellido FROM medico AS M INNER JOIN Persona P ON P.DNI =M.DNI WHERE M.idMedico = T.idMedico) as MedicoApellido, (SELECT P.Nombre FROM medico AS M INNER JOIN Persona P ON P.DNI =M.DNI WHERE M.idMedico = T.idMedico) as MedicoNombre, (SELECT E.idEspecialidad FROM Especialidad E INNER JOIN Medico M ON M.idEspecialidad = E.idEspecialidad WHERE M.idMedico = T.idMedico) AS idEspe, (SELECT E.Descripcion FROM Especialidad E INNER JOIN Medico M ON M.idEspecialidad = E.idEspecialidad WHERE M.idMedico = T.idMedico) AS idDesEspe FROM Turno T LEFT JOIN PACIENTE PA ON T.idPaciente = PA.idPaciente LEFT JOIN PERSONA P ON P.DNI = PA.DNI LEFT JOIN ESTADOS ES ON T.idEstado = ES.idEstado WHERE T.Fecha >= NOW() AND (SELECT P.Estado FROM medico AS M INNER JOIN Persona P ON P.DNI = M.DNI WHERE M.idMedico = T.idMedico) = 1 ORDER BY T.Fecha ASC";
+	private static final String readAll = "SELECT T.idTurno, T.idMedico, T.Fecha, T.idPaciente, (SELECT PE.Nombre FROM Paciente PA"
+			+ " INNER JOIN Persona PE ON PE.DNI = PA.DNI WHERE PA.idPaciente = T.idPaciente) AS PacienteNombre,"
+			+ " (SELECT PE.Apellido FROM Paciente PA INNER JOIN Persona PE ON PE.DNI = PA.DNI WHERE PA.idPaciente = T.idPaciente) AS PacienteApellido,"
+			+ " (SELECT PE.DNI FROM Paciente PA INNER JOIN Persona PE ON PE.DNI = PA.DNI WHERE PA.idPaciente = T.idPaciente) AS PacienteDNI,"
+			+ " T.idEstado, ES.NombreEstado, T.Hora, T.Observación,"
+			+ " (SELECT P.Apellido FROM medico AS M INNER JOIN Persona P ON P.DNI =M.DNI WHERE M.idMedico = T.idMedico) as MedicoApellido,"
+			+ " (SELECT P.Nombre FROM medico AS M INNER JOIN Persona P ON P.DNI =M.DNI WHERE M.idMedico = T.idMedico) as MedicoNombre, "
+			+ " (SELECT E.idEspecialidad FROM Especialidad E INNER JOIN Medico M ON M.idEspecialidad = E.idEspecialidad WHERE M.idMedico = T.idMedico) AS idEspe,"
+			+ " (SELECT E.Descripcion FROM Especialidad E INNER JOIN Medico M ON M.idEspecialidad = E.idEspecialidad WHERE M.idMedico = T.idMedico) AS idDesEspe"
+			+ " FROM Turno T LEFT JOIN PACIENTE PA ON T.idPaciente = PA.idPaciente "
+			+ " LEFT JOIN PERSONA P ON P.DNI = PA.DNI "
+			+ " LEFT JOIN ESTADOS ES ON T.idEstado = ES.idEstado "
+			+ " WHERE T.Fecha >= NOW() AND (SELECT P.Estado FROM medico AS M INNER JOIN Persona P ON P.DNI = M.DNI WHERE M.idMedico = T.idMedico) = 1 ORDER BY T.Fecha ASC";
 	private static final String readTurno = "select T.idTurno,E.idEspecialidad,(select P.Apellido from Medico m inner join Persona as P on P.DNI = m.DNI where m.idMedico = t.idMedico) as ApellidoMedico,(select P.Nombre from Medico m inner join Persona as P on P.DNI = m.DNI where m.idMedico = t.idMedico) as NombreMedico,T.Hora,T.Fecha, E.Descripcion from Turno T inner join Medico as M on M.idMedico = T.idMedico inner join Persona P on P.DNI = M.DNI inner join Especialidad as E on E.idEspecialidad = M.idEspecialidad where idTurno = ?";
 	private static final String update = "UPDATE Turno SET idEstado = 2, idPaciente = ? where idTurno = ?";
 	private static final String existeFecha = "SELECT CASE WHEN exists ( SELECT * FROM turno WHERE idMedico = ? AND Fecha = ?) THEN 'TRUE' ELSE 'FALSE' END";
+	private static final String readxMedico = "SELECT T.idTurno, T.idMedico, T.Fecha, T.idPaciente, (SELECT PE.Nombre FROM Paciente PA"
+			+ " INNER JOIN Persona PE ON PE.DNI = PA.DNI WHERE PA.idPaciente = T.idPaciente) AS PacienteNombre,"
+			+ " (SELECT PE.Apellido FROM Paciente PA INNER JOIN Persona PE ON PE.DNI = PA.DNI WHERE PA.idPaciente = T.idPaciente) AS PacienteApellido,"
+			+ " (SELECT PE.DNI FROM Paciente PA INNER JOIN Persona PE ON PE.DNI = PA.DNI WHERE PA.idPaciente = T.idPaciente) AS PacienteDNI,"
+			+ " T.idEstado, ES.NombreEstado, T.Hora, T.Observación,"
+			+ " (SELECT P.Apellido FROM medico AS M INNER JOIN Persona P ON P.DNI =M.DNI WHERE M.idMedico = T.idMedico) as MedicoApellido,"
+			+ " (SELECT P.Nombre FROM medico AS M INNER JOIN Persona P ON P.DNI =M.DNI WHERE M.idMedico = T.idMedico) as MedicoNombre, "
+			+ " (SELECT E.idEspecialidad FROM Especialidad E INNER JOIN Medico M ON M.idEspecialidad = E.idEspecialidad WHERE M.idMedico = T.idMedico) AS idEspe,"
+			+ " (SELECT E.Descripcion FROM Especialidad E INNER JOIN Medico M ON M.idEspecialidad = E.idEspecialidad WHERE M.idMedico = T.idMedico) AS idDesEspe"
+			+ " FROM Turno T LEFT JOIN PACIENTE PA ON T.idPaciente = PA.idPaciente "
+			+ " LEFT JOIN PERSONA P ON P.DNI = PA.DNI "
+			+ " LEFT JOIN ESTADOS ES ON T.idEstado = ES.idEstado "
+			+ " WHERE T.Fecha >= NOW() AND T.idMedico = ? AND T.idEstado != 1 AND (SELECT P.Estado FROM medico AS M INNER JOIN Persona P ON P.DNI = M.DNI WHERE M.idMedico = T.idMedico) = 1 ORDER BY T.Fecha ASC";
+	
 	
 	@Override
 	public boolean insert(ArrayList<Turno> listaTurnos) {
@@ -191,6 +217,60 @@ public class TurnoDAOImpl implements TurnoDAO {
 		}
 
 		return existe;
+	}
+
+	@Override
+	public ArrayList<Turno> readPorMedico(int idMedico) {
+		ArrayList<Turno> listaTurno = new ArrayList<Turno>();
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		ResultSet resultSet;
+		
+		try{
+			statement = conexion.prepareStatement(readxMedico);
+			statement.setInt(1, idMedico);
+			resultSet = statement.executeQuery();
+			
+			while (resultSet.next()){
+				
+				Turno turno = new Turno();
+				Medico me = new Medico();
+				Usuario usu = new Usuario();
+				Paciente pac = new Paciente();
+				Estado est = new Estado();
+				Especialidad espe = new Especialidad();
+				
+				turno.setIdTurno(resultSet.getInt("idTurno"));
+				usu.setIdUsuario(resultSet.getInt("idMedico"));
+				espe.setDescripcion(resultSet.getString("idDesEspe"));
+				espe.setIdEspecialidad(resultSet.getInt("idEspe"));
+				me.setIdMedico(usu);
+				me.seteEspecialidad(espe);
+				me.setApellido(resultSet.getString("MedicoNombre"));
+				me.setNombre(resultSet.getString("MedicoApellido"));
+				turno.setmMedico(me);
+				pac.setIdPaciente(resultSet.getInt("idPaciente"));
+				pac.setDni(resultSet.getString("PacienteDNI"));
+				pac.setApellido(resultSet.getString("PacienteApellido"));
+				pac.setNombre(resultSet.getString("PacienteNombre"));
+				turno.setpPaciente(pac);
+				turno.setFecha(resultSet.getDate("Fecha"));
+				est.setIdEstado(resultSet.getInt("idEstado"));
+				est.setDescripcion(resultSet.getString("NombreEstado"));
+				turno.seteEstado(est);
+				turno.setHora(resultSet.getTime("Hora"));
+				turno.setObservacion(resultSet.getString("Observación"));
+				
+				listaTurno.add(turno);
+			}
+			
+			
+		}
+		catch (SQLException e){
+			e.printStackTrace();
+		}
+		
+		return listaTurno;
 	}
 		
 }
