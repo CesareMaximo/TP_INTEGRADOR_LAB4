@@ -85,7 +85,7 @@
 							<td><%=ho.getHorarioEgreso()%></td>
 
                         <td>
-                           <a href="ModificarMedico.jsp" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>                        
+                           <a href="ModificarHorario.jsp" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>                        
                            <a href="#myModal" class="delete" title="Delete" data-toggle="modal" data-med-id="<%=ho.getDia().getId()%>" ><i class="material-icons">&#xE872;</i></a>
                         </td>
         

@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Modificar Especialidad</title>
 
 <style type="text/css">
 <jsp:include page="css\StyleSheet.css"></jsp:include>
@@ -46,7 +46,7 @@
 
 	<div class="registro">
 		<form method="post" action="ServletEspecialidad">
-			<h1>Registro de Nueva Especialidad</h1>
+			<h1>Modificar Especialidad</h1>
 			
 			<table class="formulario">
 			<tr><td><label>ID</label></td><td><input name="txtIdEspecialidad" type="text" class="inputForm" readonly size="20" required value="${especialidad.idEspecialidad}" ></td></tr>

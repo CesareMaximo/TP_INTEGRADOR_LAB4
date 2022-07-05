@@ -68,4 +68,15 @@ public class TurnoNegocioImpl implements TurnoNegocio {
 		return tur.totalAtendidosPorMes(mes, anio);
 	}
 
+	@Override
+	public int total(int anio) {
+		return tur.total(anio);
+	}
+
+	@Override
+	public int totalPresentes(int anio) {
+		
+		return tur.totalPresentes(anio);
+	}
+
 }

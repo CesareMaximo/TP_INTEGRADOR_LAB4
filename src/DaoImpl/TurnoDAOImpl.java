@@ -56,7 +56,9 @@ public class TurnoDAOImpl implements TurnoDAO {
 	private static final String liberarTurno = "UPDATE Turno SET idEstado = 1, idPaciente = null where idTurno = ?";
 	private static final String totalAus = "SELECT COUNT(idPaciente) AS Total FROM Turno WHERE idEstado=3 AND Fecha between ? AND ? ;";
 	private static final String totalAtendidos = "SELECT Count(idTurno) AS Total FROM TURNO WHERE idEstado=4 AND MONTH(Fecha) = ? AND YEAR(Fecha)= ?";
-
+	private static final String totalPacientes = "SELECT SUM(idpaciente) AS Total FROM Turno WHERE YEAR(Fecha)= ?";
+	private static final String totalPresentes = "SELECT SUM(idpaciente) AS Total FROM Turno WHERE idTurno = 4 AND YEAR(Fecha)= ?";
+	
 	@Override
 	public boolean insert(ArrayList<Turno> listaTurnos) {
 		
@@ -368,6 +370,50 @@ public class TurnoDAOImpl implements TurnoDAO {
 			e.printStackTrace();
 		}
 		return total;	
+	}
+
+	@Override
+	public int total(int anio) {
+		Connection cn = Conexion.getConexion().getSQLConexion();
+		int tot = 0;
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		try
+		 {
+			statement = cn.prepareStatement(totalPacientes);
+			statement.setInt(1, anio);
+
+			resultSet = statement.executeQuery();
+			resultSet.next();
+			tot = resultSet.getInt("Total");		
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return tot;
+	}
+
+	@Override
+	public int totalPresentes(int anio) {
+		Connection cn = Conexion.getConexion().getSQLConexion();
+		int tot = 0;
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		try
+		 {
+			statement = cn.prepareStatement(totalPresentes);
+			statement.setInt(1, anio);
+
+			resultSet = statement.executeQuery();
+			resultSet.next();
+			tot = resultSet.getInt("Total");		
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return tot;
 	}
 		
 }

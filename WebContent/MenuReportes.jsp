@@ -80,7 +80,7 @@ PROMEDIO DE PACIENTES POR ESPECIALIDAD
                             </div>
                         </a>
                         
-                        <a href="#openModalAnio" style="text-decoration: none; color: dimgrey;">
+                        <a href="Reportes?Modal4=1" style="text-decoration: none; color: dimgrey;">
                             <div class="card" style="width: 9rem; height: 11rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:80px;">
                                 <img src="img/Reportes.png" style="width: 40px" class="card-img-top" alt="..." />
                                 <div class="card-body">
@@ -389,7 +389,74 @@ PROMEDIO DE PACIENTES POR ESPECIALIDAD
 		}
 	%>
 
+<!-- MODAL PORCENTAJE DE ASISTENCIA-->
+<%
+		boolean exito4 = false;
 
+		if (request.getAttribute("exito4") != null) {
+
+		exito4 = (boolean) request.getAttribute("exito4");
+		}
+		if (exito4 == true) {
+	%>
+	<script type="text/javascript">
+		window.onload = function() {
+			OpenBootstrapPopup();
+		};
+		function OpenBootstrapPopup() {
+			$("#AsistenciaPorAnio").modal('show');
+		}
+	</script>
+
+	<form action="Reportes" method="post">
+		<div id="AsistenciaPorAnio" class="modal fade">
+			<div class="modal-dialog modal-det">
+				<div class="modal-content">
+					<div class="modal-header justify-content-left">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<h4>Ingrese el Año:</h4>
+						
+						<table class="tbModal">
+						<tr>
+							
+						<% if(request.getAttribute("porcentaje") != null){ 
+						%>	
+						<td><input type="number" name="anio" required value="<%=request.getAttribute("anio")%>" class="inputForm"></input></td>
+						<%
+						}else{
+						%>
+						<td><input type="number" min="2000" max="2022" step="1" value="2022" required name="anio" class="inputForm"></input></td>
+						
+						<%} %>
+						<td> <input name="btnBuscarAnio" type="submit" value="Buscar" class="btn btn-primary" style="margin-left: -5px; margin-top:-5px;"></input> </td>
+						</tr>
+						</table>				
+						<%
+						float totalAsistencia=0;
+						if (request.getAttribute("porcentaje") != null){
+							totalAsistencia = (float)request.getAttribute("porcentaje");  %>
+							
+						<table class="tbResultados">
+						<tr>
+						<th>
+						Porcentaje de Asistencia :
+						</th>
+						<th>
+						<%=totalAsistencia%> %
+						</th>
+						</tr>
+						</table>
+						<% } %>		
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<%
+		}
+	%>
 
 
 

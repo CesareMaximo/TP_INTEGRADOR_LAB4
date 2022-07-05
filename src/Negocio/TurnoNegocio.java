@@ -26,6 +26,8 @@ public interface TurnoNegocio {
 	public int totalAusentes(Date fecha1, Date fecha2);
 	
 	public int totalAtendidosPorMes(int mes, int anio);
-
 	
+	public int total(int anio);
+
+	public int totalPresentes(int anio);
 }

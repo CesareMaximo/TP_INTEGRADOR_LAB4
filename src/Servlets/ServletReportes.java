@@ -49,6 +49,10 @@ public class ServletReportes extends HttpServlet {
 			request.getRequestDispatcher("/MenuReportes.jsp").forward(request, response);
 		}
 		
+		if(request.getParameter("Modal4") != null){
+			request.setAttribute("exito4", true);
+			request.getRequestDispatcher("/MenuReportes.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -141,6 +145,28 @@ public class ServletReportes extends HttpServlet {
 			request.setAttribute("mes", mes);
 			request.setAttribute("anio", anio);
 			request.setAttribute("exito3", true);
+			request.getRequestDispatcher("MenuReportes.jsp").forward(request, response);
+		}
+		
+		if(request.getParameter("btnBuscarAnio")!=null) {
+			
+			int anio = Integer.parseInt(request.getParameter("anio"));
+			
+
+			int total = tuNeg.total(anio);
+			int totalPacientes = tuNeg.totalPresentes(anio);
+			
+			float porcentaje;
+			
+			try {
+				porcentaje = (float)totalPacientes*100/total;
+			} catch (ArithmeticException e) {
+				porcentaje = 0;
+			}			
+		
+			request.setAttribute("porcentaje", porcentaje);
+			request.setAttribute("anio", anio);
+			request.setAttribute("exito4", true);
 			request.getRequestDispatcher("MenuReportes.jsp").forward(request, response);
 		}
 		
