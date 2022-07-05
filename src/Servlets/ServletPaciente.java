@@ -109,6 +109,11 @@ public class ServletPaciente extends HttpServlet {
 		
 		request.setAttribute("listaLocalidad", listaLocalidad);
 		
+		NacionalidadNegocio nacNeg = new NacionalidadNegocioImpl();
+		ArrayList<Nacionalidad> listaNacionalidad = (ArrayList<Nacionalidad>)nacNeg.readAll();
+		ProvinciaNegocio provNeg = new ProvinciaNegocioImpl();
+		ArrayList<Provincia> listaProvincia = (ArrayList<Provincia>)provNeg.readAll();
+		
 		
 		if (request.getParameter("Eliminar") != null) {
 			String dni = request.getParameter("pacId");
@@ -139,6 +144,19 @@ public class ServletPaciente extends HttpServlet {
 		}
 		
 		if (request.getParameter("insert") != null) {
+			
+			if(paNeg.existePaciente(request.getParameter("txtDni"))) {
+				
+				request.setAttribute("mensaje", "Este Documento ya está registrado");
+				request.setAttribute("listaLocalidad", listaLocalidad);
+				request.setAttribute("listaNacionalidad", listaNacionalidad);
+				request.setAttribute("listaProvincia", listaProvincia);
+				
+				request.getRequestDispatcher("AgregarPaciente.jsp").forward(request, response);
+				
+				
+			} else {
+			
 			
 			paciente.setDni(request.getParameter("txtDni").toString());
 			paciente.setNombre(request.getParameter("txtNombre").toString());
@@ -181,6 +199,7 @@ public class ServletPaciente extends HttpServlet {
 			request.setAttribute("listaPaciente", listaPaciente);
 			rd = request.getRequestDispatcher("/MenuPaciente.jsp");
 			rd.forward(request, response);	
+		}
 		}
 		
 		if(request.getParameter("btnModificarPaciente") != null) {

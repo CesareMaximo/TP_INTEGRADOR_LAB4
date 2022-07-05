@@ -32,6 +32,8 @@ import NegocioImpl.MedicoNegocioImpl;
 import NegocioImpl.NacionalidadNegocioImpl;
 import NegocioImpl.ProvinciaNegocioImpl;
 import NegocioImpl.UsuarioNegocioImpl;
+import Negocio.*;
+import NegocioImpl.*;
 
 
 @WebServlet("/ServletMedico")
@@ -100,6 +102,11 @@ public class ServletMedico extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		NacionalidadNegocio nacNeg = new NacionalidadNegocioImpl();
+		ArrayList<Nacionalidad> listaNacionalidad = (ArrayList<Nacionalidad>)nacNeg.readAll();
+		ProvinciaNegocio provNeg = new ProvinciaNegocioImpl();
+		ArrayList<Provincia> listaProvincia = (ArrayList<Provincia>)provNeg.readAll();
+		
 		//Especialidad
 		
 		EspecialidadNegocio esNeg = new EspecialidadNegocioImpl();
@@ -123,6 +130,10 @@ public class ServletMedico extends HttpServlet {
 		
 		ArrayList<Localidad> listaLocalidad = (ArrayList<Localidad>) loNeg.readAll();
 		request.setAttribute("listaLocalidad", listaLocalidad);
+		
+		
+		PacienteNegocio paNeg = new PacienteNegocioImpl();
+		
 		
 		//BtnFiltrar
 		if(request.getParameter("btnFiltrar")!=null) {
@@ -169,12 +180,42 @@ public class ServletMedico extends HttpServlet {
 			String pass1 = request.getParameter("txtPass");
 			String pass2 = request.getParameter("txtPass2");
 			request.setAttribute("exito", false);
+			
+			
+			
+			if(usNeg.existe(request.getParameter("txtUser"))){
+				
+				request.setAttribute("mensaje", "Nombre de usuario no disponible");
+				request.setAttribute("listaLocalidad", listaLocalidad);
+				request.setAttribute("listaEspecialidad", listaEspecialidad);
+				request.setAttribute("listaNacionalidad", listaNacionalidad);
+				request.setAttribute("listaProvincia", listaProvincia);
+			
+				request.getRequestDispatcher("AgregarMedico.jsp").forward(request, response);
+			} else {
+				
+			
+			if(paNeg.existePaciente(request.getParameter("txtDni"))) {
+				
+				request.setAttribute("mensaje", "Este Documento ya está registrado");
+				request.setAttribute("listaLocalidad", listaLocalidad);
+				request.setAttribute("listaEspecialidad", listaEspecialidad);
+				request.setAttribute("listaNacionalidad", listaNacionalidad);
+				request.setAttribute("listaProvincia", listaProvincia);
+				
+				request.getRequestDispatcher("AgregarMedico.jsp").forward(request, response);
+				
+				
+			}	else {
+			
 			if( !(pass1.equals(pass2))) {
 				request.setAttribute("mensaje", "Las contraseñas no coinciden");
 				request.getRequestDispatcher("AgregarMedico.jsp").forward(request, response);
 
 			}
 			else {
+				
+	
 				me.setDni(request.getParameter("txtDni"));
 				me.setNombre(request.getParameter("txtNombre"));
 				me.setApellido(request.getParameter("txtApellido"));
@@ -218,6 +259,8 @@ public class ServletMedico extends HttpServlet {
 				request.getSession().setAttribute("medico", me);
 				request.getRequestDispatcher("AgregarHorario.jsp").forward(request, response);
 			}
+		}
+		}
 		}
 		
 		//Modificar

@@ -46,9 +46,9 @@ TELEFONO
 		<form method="post" action= "ServletPaciente">
 			<h1>Registro de Nuevo Paciente</h1>
 			<table class="formulario">
-				<tr><td><label>DNI:</label></td><td><input name="txtDni" type="text" class="inputForm" size="20" required></td></tr>
-				<tr><td><label>Nombres:</label></td><td><input name="txtNombre" type="text" class="inputForm" size="20" required></td></tr>
-				<tr><td><label>Apellidos:</label></td><td><input name="txtApellido" type="text" class="inputForm" size="20" required></td></tr>
+				<tr><td><label>DNI:</label></td><td><input name="txtDni" type="text" placeholder="Ingrese un DNI" class="inputForm" size="20" required></td></tr>
+				<tr><td><label>Nombres:</label></td><td><input name="txtNombre" type="text" placeholder="Ingrese un Nombre" class="inputForm" size="20" required></td></tr>
+				<tr><td><label>Apellidos:</label></td><td><input name="txtApellido" type="text" placeholder="Ingrese un Apellido" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Fecha Nacimiento:</label></td><td><input name="txtFechaNac" type="date" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Sexo</label></td><td><select class="select" name="slcSexo">
 					
@@ -104,12 +104,26 @@ TELEFONO
 				
 				</select></tr>
 				<tr><td><label>Localidad:</label></td><td><select class="textbox" required id="localidadReal"  name="slcLocalidad"></select></tr>
-				<tr><td><label>Direcci&oacuten:</label></td><td><textarea name="txtDireccion" style="resize: none;" class="inputForm" cols="21" rows="3" required></textarea></td></tr>
-				<tr><td><label>E-mail:</label></td><td><input name="txtEmail" type="email" class="inputForm" size="20" required></td></tr>
-				<tr><td><label>Tel&eacutefono:</label></td><td><input name="txtTelefono1" type="text"  class="inputForm"size="20" required></td></tr>
-				<tr><td><label>Tel&eacutefono Opcional:</label></td><td><input name="txtTelefono2" type="text" class="inputForm" size="20"></td></tr>				
+				<tr><td><label>Direcci&oacuten:</label></td><td><textarea name="txtDireccion" placeholder="Ingrese una Dirección" style="resize: none;" class="inputForm" cols="21" rows="3" required></textarea></td></tr>
+				<tr><td><label>E-mail:</label></td><td><input name="txtEmail" type="email" class="inputForm" placeholder="Ingrese un Email" size="20" required></td></tr>
+				<tr><td><label>Tel&eacutefono:</label></td><td><input name="txtTelefono1" type="text" placeholder="Ingrese un Telefono" class="inputForm"size="20" required></td></tr>
+				<tr><td><label>Tel&eacutefono Opcional:</label></td><td><input name="txtTelefono2" placeholder="Ingrese un Telefono" type="text" class="inputForm" size="20"></td></tr>				
 			</table>
 			<br>
+	
+			<div>
+				<p style="color: red; margin-left: 125px;">
+					<%
+						String resultado = (String) request.getAttribute("mensaje");
+								String mensaje = "";
+								if (resultado != null) {
+									mensaje = resultado;
+								}
+					%>
+					<%=mensaje%>
+				</p>
+
+			</div>
 				<input name="insert" type="submit" value="Aceptar" class="btn btn-primary btn-block btn-large">
 				
 			</form>

@@ -22,6 +22,7 @@ public class MedicoDAOImpl implements  MedicoDAO{
 	private static final String totalPaciente = "SELECT COUNT(distinct idPaciente) AS Total FROM Turno WHERE idMedico = ? AND idEstado=4 AND Fecha between ? AND ? ;";
 	//private static final String readallBuscar = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad where p.Nombre like '%"++"%' or p.Apellido like '%"++"%' ";
 	
+	
 	@Override
 	public boolean insert(Medico me) {
 		Connection conexion = null;

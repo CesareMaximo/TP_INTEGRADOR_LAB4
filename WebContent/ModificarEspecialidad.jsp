@@ -50,7 +50,7 @@
 			
 			<table class="formulario">
 			<tr><td><label>ID</label></td><td><input name="txtIdEspecialidad" type="text" class="inputForm" readonly size="20" required value="${especialidad.idEspecialidad}" ></td></tr>
-			<tr><td><label>Descripcion</label></td><td><input name="txtDescripcion" type="text" class="inputForm" size="20" required value="${especialidad.descripcion}" ></td></tr>
+			<tr><td><label>Descripcion</label></td><td><input name="txtDescripcion" placerholder="Ingrese la Descripción" type="text" class="inputForm" size="20" required value="${especialidad.descripcion}" ></td></tr>
 			
 			 </table>
 			
