@@ -22,4 +22,10 @@ public interface TurnoNegocio {
 	public boolean update2(int idTurno, int estado, String observacion);
 	
 	public boolean liberarTurno (int idTurno);
+	
+	public int totalAusentes(Date fecha1, Date fecha2);
+	
+	public int totalAtendidosPorMes(int mes, int anio);
+
+	
 }

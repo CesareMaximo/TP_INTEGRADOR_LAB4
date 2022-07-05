@@ -23,4 +23,8 @@ public interface TurnoDAO {
 	
 	public boolean liberarTurno (int idTurno);
 	
+	public int totalAusentes(Date fecha1, Date fecha2);
+	
+	
+	public int totalAtendidosPorMes(int mes, int anio);
 }

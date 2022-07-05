@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import Entidad.Medico;
 import Negocio.MedicoNegocio;
+import Negocio.TurnoNegocio;
 import NegocioImpl.MedicoNegocioImpl;
+import NegocioImpl.TurnoNegocioImpl;
 
 
 @WebServlet("/Reportes")
@@ -36,14 +38,70 @@ public class ServletReportes extends HttpServlet {
 			request.setAttribute("listaMedico", listaMedico);
 			request.getRequestDispatcher("/MenuReportes.jsp").forward(request, response);
 		}
+		
+		if(request.getParameter("Modal2") != null){
+			request.setAttribute("exito2", true);
+			request.getRequestDispatcher("/MenuReportes.jsp").forward(request, response);
+		}
+		
+		if(request.getParameter("Modal3") != null){
+			request.setAttribute("exito3", true);
+			request.getRequestDispatcher("/MenuReportes.jsp").forward(request, response);
+		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		MedicoNegocio meNeg = new MedicoNegocioImpl();
 		Medico me = new Medico();
+		TurnoNegocio tuNeg = new TurnoNegocioImpl();
+		
 		if(request.getParameter("totalPacientes")!=null) {
+					
 			int idMedico = Integer.parseInt(request.getParameter("medicoReporte").toString());
+			if( idMedico == 0) {
+				
+				ArrayList<Medico> listaMedico = (ArrayList<Medico>) meNeg.readAll();
+				request.setAttribute("medico", me);
+				request.setAttribute("listaMedico", listaMedico);
+				request.setAttribute("advertencia", "Debe seleccionar todos los campos.");
+				request.setAttribute("exito", true);
+				request.getRequestDispatcher("MenuReportes.jsp").forward(request, response);
+				
+			}else {
+				
+				SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+				Date dateFormateado = new Date();
+				try {
+					dateFormateado = formato.parse(request.getParameter("Fecha1"));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}  
+				java.sql.Date date1 = new java.sql.Date(dateFormateado.getTime());
+				formato = new SimpleDateFormat("yyyy-MM-dd");
+				dateFormateado = new Date();
+				try {
+					dateFormateado = formato.parse(request.getParameter("Fecha2"));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}  
+				java.sql.Date date2 = new java.sql.Date(dateFormateado.getTime());
+				int total = meNeg.totalPacientesXMedico(idMedico, date1, date2);
+				ArrayList<Medico> listaMedico = (ArrayList<Medico>) meNeg.readAll();
+				me = meNeg.mostrarMedico(idMedico);
+				request.setAttribute("medico", me);
+				request.setAttribute("listaMedico", listaMedico);
+				request.setAttribute("totalPaciente", total);
+				request.setAttribute("fecha1", date1);
+				request.setAttribute("fecha2", date2);
+				request.setAttribute("exito", true);
+				request.getRequestDispatcher("MenuReportes.jsp").forward(request, response);
+			}
+		}
+		
+		if(request.getParameter("btnTotalAusentes")!=null) {
+			
 			SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 			Date dateFormateado = new Date();
 			try {
@@ -60,13 +118,29 @@ public class ServletReportes extends HttpServlet {
 				e.printStackTrace();
 			}  
 			java.sql.Date date2 = new java.sql.Date(dateFormateado.getTime());
-			int total = meNeg.totalPacientesXMedico(idMedico, date1, date2);
-			ArrayList<Medico> listaMedico = (ArrayList<Medico>) meNeg.readAll();
-			me = meNeg.mostrarMedico(idMedico);
-			request.setAttribute("medico", me);
-			request.setAttribute("listaMedico", listaMedico);
-			request.setAttribute("totalPaciente", total);
-			request.setAttribute("exito", true);
+			int totalAusentes = tuNeg.totalAusentes(date1, date2);
+			
+			request.setAttribute("totalAusentes", totalAusentes);
+			request.setAttribute("fecha1", date1);
+			request.setAttribute("fecha2", date2);
+			request.setAttribute("exito2", true);
+			request.getRequestDispatcher("MenuReportes.jsp").forward(request, response);
+		}
+		
+		
+		
+		if(request.getParameter("btnTotalAtendidos")!=null) {
+			
+			int mes = Integer.parseInt(request.getParameter("slcMes"));
+			int anio = Integer.parseInt(request.getParameter("slcAnio"));
+
+			int totalAtendidos = tuNeg.totalAtendidosPorMes(mes, anio);
+
+			
+			request.setAttribute("totalAtendidos", totalAtendidos);
+			request.setAttribute("mes", mes);
+			request.setAttribute("anio", anio);
+			request.setAttribute("exito3", true);
 			request.getRequestDispatcher("MenuReportes.jsp").forward(request, response);
 		}
 		

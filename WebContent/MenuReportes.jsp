@@ -56,26 +56,26 @@ PROMEDIO DE PACIENTES POR ESPECIALIDAD
                             <div class="card" style="width: 9rem; height: 11rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:50px;">
                                 <img src="img/Reportes.png" style="width: 40px" class="card-img-top" alt="..." />
                                 <div class="card-body">
-                                    <p class="card-text" style="font-size: 12px">Total de pacientes atendidos por medico</p>
+                                    <p class="card-textR" >Total de pacientes atendidos por medico</p>
                                 </div>
                             </div>
                         </a>
                         
-                        <a href="#openModalFechas" style="text-decoration: none; color: dimgrey;">
+                        <a href="Reportes?Modal2=1" style="text-decoration: none; color: dimgrey;">
                             <div class="card" style="width: 9rem; height: 11rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:80px;">
                                 <img src="img/Reportes.png" style="width: 40px" class="card-img-top" alt="..." />
                                 <div class="card-body">
-                                    <p class="card-text" style="font-size: 12px">Total turnos ausente entre fechas</p>
+                                    <p class="card-textR" >Total turnos ausente entre fechas</p>
                                 </div>
                             </div>
                         </a>
                         
                        
-                       <a href="#openModalMes" style="text-decoration: none; color: dimgrey;">
+                       <a href="Reportes?Modal3=1" style="text-decoration: none; color: dimgrey;">
                             <div class="card" style="width: 9rem; height: 11rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:50px;">
                                 <img src="img/Reportes.png" style="width: 40px" class="card-img-top" alt="..." />
                                 <div class="card-body">
-                                    <p class="card-text" style="font-size: 12px">Cantidad turnos atendido por mes y año</p>
+                                    <p class="card-textR" >Cantidad turnos atendido por mes y año</p>
                                 </div>
                             </div>
                         </a>
@@ -84,7 +84,7 @@ PROMEDIO DE PACIENTES POR ESPECIALIDAD
                             <div class="card" style="width: 9rem; height: 11rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:80px;">
                                 <img src="img/Reportes.png" style="width: 40px" class="card-img-top" alt="..." />
                                 <div class="card-body">
-                                    <p class="card-text" style="font-size: 12px">Porcentaje de asistencia por año</p>
+                                    <p class="card-textR" >Porcentaje de asistencia por año</p>
                                 </div>
                             </div>
                         </a>
@@ -95,6 +95,10 @@ PROMEDIO DE PACIENTES POR ESPECIALIDAD
 			</div>
 			</form>
 	</div>
+
+
+<!-- MODAL TOTAL PACIENTES ATENDIDOS POR MÉDICO -->
+
 
 	<%
 		boolean exito = false;
@@ -119,18 +123,40 @@ PROMEDIO DE PACIENTES POR ESPECIALIDAD
 
 	<form action="Reportes" method="post">
 		<div id="simpleModal" class="modal fade">
-			<div class="modal-dialog modal-ok">
+			<div class="modal-dialog modal-det">
 				<div class="modal-content">
 					<div class="modal-header justify-content-left">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
-						<h2>Ingrese las fechas:</h2>
-						<label>Primer Fecha:</label><input type="date" name="Fecha1" class="inputForm"></input>
-						<label>Segunda Fecha:</label><input type="date" name="Fecha2" class="inputForm" ></input>
-						<h2>Seleccione el Medico:</h2>
-						<label>Medico:</label> <select class="select" name="medicoReporte">
-							<option selected="true" disabled="disabled">Selecciona una opción</option>
+						<h4>Ingrese las fechas:</h4>
+						
+						<table class="tbModal">
+						<tr>
+						<% if(request.getAttribute("totalPaciente") != null){ 
+						%>	
+						<td><input type="date" name="Fecha1" required value="<%=request.getAttribute("fecha1")%>" class="inputForm"></input></td>
+						<td><label>Hasta:</label></td>
+						<td><input type="date" name="Fecha2"   required  value="<%=request.getAttribute("fecha2")%>"  class="inputForm" ></input><td>
+						<%
+						}else{
+						%>
+						<td><input type="date" name="Fecha1"  required  class="inputForm"></input></td>
+						<td><label>Hasta:</label></td>
+						<td><input type="date" name="Fecha2"   required class="inputForm" ></input><td>
+						
+						<%} %>
+						</tr>
+						</table>
+						
+						
+						<h5>Seleccione el Medico:</h5>
+						
+						<table class="tbModal">
+						<tr>
+						<td><label>Medico:</label></td>
+						<td><select class="select" name="medicoReporte">
+							<option selected="true" value="0" >Selecciona una opción</option>
 							<%
 							int total;
 							Medico medico = new Medico();
@@ -148,14 +174,47 @@ PROMEDIO DE PACIENTES POR ESPECIALIDAD
 							<%
 								}
 							%>
-						</select> <input name="totalPacientes" type="submit" value="Buscar" class="btn btn-primary" style="margin-left: 10px;"></input> <br>
+						</select> </input></td>
+						<td><input name="totalPacientes" type="submit" value="Buscar" class="btn btn-primary" style="margin-left: 20px;"></input></td>
+						</tr>
+						</table>
+
+						<div>
+							<p style="color:red; margin-top:15px" >
+								<%
+								
+										String mensaje = "";
+										if (request.getAttribute("advertencia") != null) {
+											mensaje = request.getAttribute("advertencia").toString();
+										}
+								%>
+								<%=mensaje%>
+							</p>
+						</div>
+
+
+
 						<%if(request.getAttribute("totalPaciente") != null && request.getAttribute("medico") != null){
 							total = (int)request.getAttribute("totalPaciente");
 							medico = (Medico)request.getAttribute("medico");
 							%>
-						<h5><%=medico.getNombre()%> <%=medico.getApellido()%> : <%=total%></h5>
+						<table class="tbResultados">
+						<tr>
+						<th>
+						Médico
+						</th>
+						<th>
+						Total pacientes atendidos
+						</th>
+						</tr>
+						<tr>
+						<td><%=medico.getNombre()%> <%=medico.getApellido()%></td>
+						<td><%=total%></td>
+						</tr>
+						</table>
 						<% }else{
 							%><label> </label><%}%>
+							
 					</div>
 				</div>
 			</div>
@@ -164,18 +223,183 @@ PROMEDIO DE PACIENTES POR ESPECIALIDAD
 	<%
 		}
 	%>
-	<div id="openModalFechas" class="modalDialog">
-	<div>
-		<a href="#close" title="Close" class="close">X</a>
-		<h2>Ingrese las fechas:</h2>
-		<label>Primer Fecha:</label><input type="date" name="Fecha1" class="inputForm"></input>
-		<br>
-		<label>Segunda Fecha:</label><input type="date" name="Fecha2" class="inputForm" ></input>
-		<input  name="buscarFechas" type="submit" value="Buscar" class="btn btn-primary" style="margin-left:10px;" ></input>
-		
-		
-	</div>
-</div>
+	
+
+
+<!-- MODAL TOTAL TURNOS AUSENTE-->
+<%
+		boolean exito2 = false;
+
+		if (request.getAttribute("exito2") != null) {
+
+		exito2 = (boolean) request.getAttribute("exito2");
+		}
+		if (exito2 == true) {
+	%>
+	<script type="text/javascript">
+		window.onload = function() {
+			OpenBootstrapPopup();
+		};
+		function OpenBootstrapPopup() {
+			$("#totalAusentes").modal('show');
+		}
+	</script>
+
+	<form action="Reportes" method="post">
+		<div id="totalAusentes" class="modal fade">
+			<div class="modal-dialog modal-det">
+				<div class="modal-content">
+					<div class="modal-header justify-content-left">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<h4>Ingrese las fechas:</h4>
+						
+						<table class="tbModal">
+						<tr>
+						<td><label>De:</label></td>
+						
+						<% if(request.getAttribute("totalAusentes") != null){ 
+						%>	
+						<td><input type="date" name="Fecha1" required value="<%=request.getAttribute("fecha1")%>" class="inputForm"></input></td>
+						<td><label>Hasta:</label></td>
+						<td><input type="date" name="Fecha2" required value="<%=request.getAttribute("fecha2")%>"  class="inputForm" ></input><td>
+						<%
+						}else{
+						%>
+						<td><input type="date" required name="Fecha1" class="inputForm"></input></td>
+						<td><label>Hasta:</label></td>
+						<td><input type="date" required name="Fecha2" class="inputForm" ></input><td>
+						
+						<%} %>
+						<td> <input name="btnTotalAusentes" type="submit" value="Buscar" class="btn btn-primary" style="margin-left: -5px; margin-top:-5px;"></input> </td>
+						</tr>
+						</table>				
+						<%
+						int totalAusentes=0;
+						if (request.getAttribute("totalAusentes") != null){
+							totalAusentes = (int)request.getAttribute("totalAusentes");  %>
+							
+						<table class="tbResultados">
+						<tr>
+						<th>
+						Total Turnos Ausentes :
+						</th>
+						<th>
+						<%=totalAusentes%>
+						</th>
+						</tr>
+						</table>
+						<% } %>
+
+						
+							
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<%
+		}
+	%>
+
+
+<!-- MODAL CANTIDAD TURNOS ATENDIDOS POR MES Y AÑO -->
+
+<%
+		boolean exito3 = false;
+
+		if (request.getAttribute("exito3") != null) {
+
+		exito3 = (boolean) request.getAttribute("exito3");
+		}
+		if (exito3 == true) {
+	%>
+	<script type="text/javascript">
+		window.onload = function() {
+			OpenBootstrapPopup();
+		};
+		function OpenBootstrapPopup() {
+			$("#totalAtendidos").modal('show');
+		}
+	</script>
+
+	<form action="Reportes" method="post">
+		<div id="totalAtendidos" class="modal fade">
+			<div class="modal-dialog modal-det">
+				<div class="modal-content">
+					<div class="modal-header justify-content-left">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<h4>Ingrese las fechas:</h4>
+						
+						<table class="tbModal">
+						<tr>
+						<td><label>Mes:</label></td>
+						<td><select name="slcMes" type="select" class="select"> 
+						<option value=1>Enero</option>
+						<option value=2>Febrero</option>
+						<option value=3>Marzo</option>
+						<option value=4>Abril</option>
+						<option value=5>Mayo</option>
+						<option value=6>Junio</option>
+						<option value=7>Julio</option>
+						<option value=8>Agosto</option>
+						<option value=9>Septiembre</option>
+						<option value=10>Octubre</option>
+						<option value=11>Noviembre</option>
+						<option value=12>Diciembre</option>
+						</select></td>
+						<td><label>Año:</label></td>
+						<td><select name="slcAnio" type="select" class="select">
+						<%for(int i=2015; i <= 2022 ; i = i + 1){ %>
+						<option><%=i%></option>
+						<%}%>				
+						</select></td>
+						
+						<td> <input name="btnTotalAtendidos" type="submit" value="Buscar" class="btn btn-primary" style="margin-left: 10px; margin-top:-5px;"></input> </td>
+						</tr>
+						</table>				
+						<%
+						int totalAtendidos=0;
+						if (request.getAttribute("totalAtendidos") != null){
+							totalAtendidos = (int)request.getAttribute("totalAtendidos");  %>
+							
+						<table class="tbResultados">
+						<tr>
+						<th>
+						Cantidad de turnos atendidos en <%=request.getAttribute("mes")%>/<%=request.getAttribute("anio")%>:
+						</th>
+						<th>
+						<%=totalAtendidos%>
+						</th>
+						</tr>
+						</table>
+						<% } %>
+
+						
+							
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<%
+		}
+	%>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <div id="openModalMes" class="modalDialog">

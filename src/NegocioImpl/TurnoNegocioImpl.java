@@ -57,4 +57,15 @@ public class TurnoNegocioImpl implements TurnoNegocio {
 		return tur.liberarTurno(idTurno);
 	}
 
+	@Override
+	public int totalAusentes(Date fecha1, Date fecha2) {
+		
+		return tur.totalAusentes(fecha1, fecha2);
+	}
+
+	@Override
+	public int totalAtendidosPorMes(int mes, int anio) {
+		return tur.totalAtendidosPorMes(mes, anio);
+	}
+
 }
