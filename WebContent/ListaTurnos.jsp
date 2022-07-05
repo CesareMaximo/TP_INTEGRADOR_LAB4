@@ -158,9 +158,20 @@
 							<td><%=tu.getHora()%></td>
 							<td><%=tu.geteEstado().getDescripcion()%></td>
 							<td>
+							<% if (tu.geteEstado().getDescripcion().equals("LIBRE")) { %>
 	                    	<a href="ServletTurno?AsignarTurno=<%=tu.getIdTurno()%>" class="edit" title="Asignar" data-toggle="tooltip" style="color:green"><i class="material-icons">assignment_ind</i></a>
+	                       	<% }
+							else { 
+								if (tu.geteEstado().getDescripcion().equals("OCUPADO")) {
+							%>
+	                       	<a href="#myModal" class="delete" title="Liberar" data-toggle="modal" style="color:red" data-turno-id="<%=tu.getIdTurno()%>"><i class="material-icons">event_busy</i></a>
+
+	                       	<% } else {%>
+	                       	<a href="ServletTurno?VerDetalleTurno=<%=tu.getIdTurno()%>&Pax=<%= tu.getpPaciente().getDni() %>" class="view" title="Detalle" data-toggle="tooltip" style="color:blue"><i class="material-icons">&#xE417;</i></a>
+	                       	<% } %>
 	                       	</td>     	
 	                 	</tr>
+	               	<% } %>
 	               	<% } %>
                 </tbody>
 				</table>
@@ -178,6 +189,10 @@
 		texto = "registrado";
 
 		}
+			if (request.getAttribute("exito3") != null ){
+				exito = (boolean) request.getAttribute("exito3");
+				texto = "liberado";
+			}
 		if (exito == true) {
 	%>
 	<script type="text/javascript">
@@ -266,5 +281,132 @@
 			]
 		});
 	</script>
+	
+	
+	<script type="text/javascript">
+	                        $(document).ready(function (e) {
+	                        	  $('#myModal').on('show.bs.modal', function(e) {
+	                        	 
+	                        		  var id = $(e.relatedTarget).data('turno-id'); 
+	                        		  $(e.currentTarget).find('input[name="turnoId"]').val(id);
+										
+	                        		  
+	                        	  });
+	                        	});
+							
+							</script>	
+
+
+			<form action="ServletTurno?LiberarTurno=1" method="post">
+							<div id="myModal" class="modal fade">
+								<div class="modal-dialog modal-confirm">
+									<div class="modal-content">
+										<div class="modal-header flex-column">
+											<div class="icon-box">
+												<i class="material-icons">&#xE5CD;</i>
+											</div>						
+											<h4 class="modal-title w-100">¿Estás seguro?</h4>	
+							                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+										</div>
+										<div class="modal-body">
+											<p>¿Desea liberar el turno?</p>
+											<input type="hidden" name="turnoId" id="turnoId">
+										</div>
+										<div class="modal-footer justify-content-center">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+											<button type="submit" class="btn btn-danger">Liberar</button>
+										</div>
+									</div>
+								</div>
+							</div>    
+						</form>
+						
+						
+						<% 		
+			
+						
+						boolean modalEdit = false;
+									
+						Turno turno = new Turno();
+						
+						if(request.getAttribute("Turno")!=null){
+							turno = (Turno)request.getAttribute("Turno");
+						}
+					
+						
+						if(request.getAttribute("ModalEdit")!=null){
+						
+							modalEdit = (boolean)request.getAttribute("ModalEdit");				
+							
+						}
+						
+						Paciente paciente = new Paciente();
+						
+						if(request.getAttribute("Paciente")!=null){
+							paciente = (Paciente)request.getAttribute("Paciente");
+						}
+
+							if(modalEdit == true){
+								%>
+								<script type="text/javascript">
+										window.onload = function() {
+											OpenBootstrapPopup();
+										};
+										function OpenBootstrapPopup() {
+											$("#openModalDetalleTurno").modal('show');
+										}
+										
+									</script>
+									
+									<div id="openModalDetalleTurno" class="modal fade">
+									<div class="modal-dialog modal-det">
+				<div class="modal-content">
+					<div  class="modal-header justify-content-left">						
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+					<h1>Detalle Turno</h1>
+			<table class="tablaDetalle">
+				<tr>
+					<td></td>
+					<td><input type="hidden" name="lblidTurno" value=<%= turno.getIdTurno()%>></td>
+				</tr>
+				<tr>
+					<td class="Campo"><label>Fecha</label></td>
+					<td><label name="lblFecha"><%= turno.getFecha()%></label></td>
+				</tr>
+				<tr>
+					<td class="Campo"><label>Hora</label></td>
+					<td><label name="lblHora"><%= turno.getHora() %></label></td>
+				</tr>
+				<tr>
+					<td class="Campo"><label>Paciente</label></td>
+					<td><label name="lblPaciente"><%= paciente.getNombre()%> <%= paciente.getApellido() %></label></td>
+				</tr>
+				<tr>
+					<td class="Campo"><label>Especialidad</label></td>
+					<td><label name="lblEspecialidad"><%= turno.getmMedico().geteEspecialidad().getDescripcion() %> </label></td>
+				</tr>
+				<tr>
+					<td class="Campo"><label>Observación</label></td>
+					<td>
+					<% if (turno.getObservacion() != null){
+						%>
+					<textarea rows="4" cols="20" name="txtObservacion" style="resize:none;"><%=turno.getObservacion() %></textarea>
+					<%}
+					else{%>
+					<label  name="txtObservacion"></label>
+					<%} %>
+					</td>
+				</tr>
+			</table>
+				</div>
+					</div>
+				</div>
+				</div>
+									<%}
+									%>
+	
+	
 </body>
 </html>

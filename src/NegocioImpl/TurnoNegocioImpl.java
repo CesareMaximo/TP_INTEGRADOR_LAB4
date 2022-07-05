@@ -52,4 +52,9 @@ public class TurnoNegocioImpl implements TurnoNegocio {
 		return tur.update2(idTurno, estado, observacion);
 	}
 
+	@Override
+	public boolean liberarTurno(int idTurno) {
+		return tur.liberarTurno(idTurno);
+	}
+
 }

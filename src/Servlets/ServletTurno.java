@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import Entidad.DiaXMedico;
 import Entidad.Especialidad;
 import Entidad.Medico;
+import Entidad.Paciente;
 import Entidad.Turno;
 import Entidad.Usuario;
 import Negocio.DiaXMedicoNegocio;
@@ -84,7 +85,27 @@ public class ServletTurno extends HttpServlet {
 			rd = request.getRequestDispatcher("/AsignacionTurnos.jsp");
 			rd.forward(request, response);
 		}
-
+		
+		
+		if(request.getParameter("VerDetalleTurno") != null && request.getParameter("Pax") != null) {
+			
+			
+			Turno tu = new Turno();
+			Paciente pax = new Paciente();
+			PacienteNegocio pNeg = new PacienteNegocioImpl();
+			int idTurno;
+			idTurno = Integer.parseInt(request.getParameter("VerDetalleTurno"));
+			String dni;
+			dni = request.getParameter("Pax");
+			tu = tuNeg.devuelveTurno(idTurno);
+			request.setAttribute("Turno", tu);
+			pax = pNeg.mostrarPaciente(dni);
+			request.setAttribute("Paciente", pax);
+			request.setAttribute("ModalEdit", true);
+			request.getRequestDispatcher("/ListaTurnos.jsp").forward(request, response);
+		
+	}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -194,6 +215,19 @@ public class ServletTurno extends HttpServlet {
 			}
 
 		}
+		
+		if(request.getParameter("LiberarTurno") != null) {
+			int id = Integer.parseInt(request.getParameter("turnoId"));
+			if (tneg.liberarTurno(id)) {
+				request.setAttribute("exito3", true);
+				ArrayList<Turno> listaTurno = (ArrayList<Turno>) tneg.readAll();
+				request.getSession().setAttribute("listaTurnos", listaTurno);
+				request.getRequestDispatcher("/ListaTurnos.jsp").forward(request, response);		
+			}
+		}
+		
+			
 	}
-
+	
+	
 }

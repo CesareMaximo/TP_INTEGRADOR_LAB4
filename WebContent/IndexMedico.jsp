@@ -293,8 +293,16 @@ EN CADA TURNO PODRA VER LOS DATOS DEL TURNO, AMPLIAR DETALLE DE PACIENTE, AGREGA
 				</tr>
 				<tr>
 					<td class="Campo"><label>Observación</label></td>
-					<td><textArea  name="txtObservacion" style="resize: none;"
-							class="inputForm" cols="26" rows="3"><%= turno.getObservacion() %></textArea>
+					<td>
+					<% if (turno.getObservacion() != null){
+						%>
+					<textarea rows="4" cols="20" name="txtObservacion" style="resize:none;"><%=turno.getObservacion() %></textarea>
+					<%}
+					else{%>
+					<textArea  name="txtObservacion" style="resize: none;"
+							class="inputForm" cols="26" rows="3"></textArea>
+					<%} %>
+				</td>				
 				</tr>
 			</table>
 			<input name="actualizarTurno" type="submit" value="Guardar"

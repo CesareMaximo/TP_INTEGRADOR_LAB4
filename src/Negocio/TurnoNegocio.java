@@ -20,4 +20,6 @@ public interface TurnoNegocio {
 	public ArrayList<Turno> readPorMedico(int idMedico);
 
 	public boolean update2(int idTurno, int estado, String observacion);
+	
+	public boolean liberarTurno (int idTurno);
 }

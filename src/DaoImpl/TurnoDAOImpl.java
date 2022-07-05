@@ -53,7 +53,7 @@ public class TurnoDAOImpl implements TurnoDAO {
 			+ " LEFT JOIN PERSONA P ON P.DNI = PA.DNI "
 			+ " LEFT JOIN ESTADOS ES ON T.idEstado = ES.idEstado "
 			+ " WHERE ((select concat(T.fecha, ' ', T.hora) as FechaHora) >= NOW()) AND T.idMedico = ? AND T.idEstado != 1 AND (SELECT P.Estado FROM medico AS M INNER JOIN Persona P ON P.DNI = M.DNI WHERE M.idMedico = T.idMedico) = 1 ORDER BY T.Fecha ASC";
-	
+	private static final String liberarTurno = "UPDATE Turno SET idEstado = 1, idPaciente = null where idTurno = ?";
 	
 	@Override
 	public boolean insert(ArrayList<Turno> listaTurnos) {
@@ -289,6 +289,28 @@ public class TurnoDAOImpl implements TurnoDAO {
 			statement.setString(1, observacion);
 			statement.setInt(2, estado);
 			statement.setInt(3, idTurno);
+
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isUpdateExitoso = true;
+			}
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return isUpdateExitoso;
+	}
+
+	@Override
+	public boolean liberarTurno(int idTurno) {
+		boolean isUpdateExitoso = false;		
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		try 
+		{
+			statement = conexion.prepareStatement(liberarTurno);;
+			statement.setInt(1, idTurno);
 
 			if(statement.executeUpdate() > 0)
 			{

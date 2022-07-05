@@ -58,7 +58,7 @@ request.setAttribute("exito", exito); %>
                             <div class="card" style="width: 9rem; height: 8.5rem; border: solid 2px dimgrey; padding: 12px; margin: 10px; margin-left:50px;">
                                 <img src="img/AsignacionTurno.png" style="width: 50px" class="card-img-top" alt="..." />
                                 <div class="card-body">
-                                    <p class="card-text" style="font-size: 14px">Asignación de Turnos</p>
+                                    <p class="card-text" style="font-size: 14px">Administrar Turnos</p>
                                 </div>
                             </div>
                         </a>
