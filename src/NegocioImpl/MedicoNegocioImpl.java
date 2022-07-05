@@ -1,5 +1,6 @@
 package NegocioImpl;
 
+import java.sql.Date;
 import java.util.List;
 
 import Dao.MedicoDAO;
@@ -58,8 +59,8 @@ public class MedicoNegocioImpl implements MedicoNegocio {
 	}
 
 	@Override
-	public int totalPacientesXMedico(int idMedico) {
-		return meDAO.totalPacientesXMedico(idMedico);
+	public int totalPacientesXMedico(int idMedico, Date fecha1, Date fecha2) {
+		return meDAO.totalPacientesXMedico(idMedico, fecha1, fecha2);
 	}
 
 }
