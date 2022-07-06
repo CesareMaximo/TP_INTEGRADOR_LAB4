@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Entidad.*;
+import Exceptions.PacienteNotFoundException;
 import Dao.PacienteDAO;
 import javafx.css.PseudoClass;
 
@@ -271,7 +272,7 @@ public class PacienteDAOImpl implements PacienteDAO{
 	}
 
 	@Override
-	public boolean existePaciente(String dni) {
+	public boolean existePaciente(String dni) throws PacienteNotFoundException{
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean existe = false;
@@ -287,7 +288,11 @@ public class PacienteDAOImpl implements PacienteDAO{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		
+		if (existe == false) {
+			throw new PacienteNotFoundException();
+		}
+		
 		return existe;
 	}
 	

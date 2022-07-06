@@ -8,6 +8,7 @@ import java.util.List;
 
 import Dao.UsuarioDAO;
 import Entidad.Usuario;
+import Exceptions.UserNotFoundException;
 
 import java.sql.SQLException;
 
@@ -130,7 +131,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 	
 
 	@Override
-	public Usuario iniciar(String nombre, String clave) {
+	public Usuario iniciar(String nombre, String clave) throws UserNotFoundException{
 		Usuario usuario = null;
 		Connection cn = null;
 		PreparedStatement statement = null;
@@ -153,6 +154,10 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
+		
+		if (usuario == null) {
+			throw new UserNotFoundException();
+		}
 		
 		return usuario;
 	}

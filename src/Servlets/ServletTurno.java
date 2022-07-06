@@ -21,6 +21,7 @@ import Entidad.Medico;
 import Entidad.Paciente;
 import Entidad.Turno;
 import Entidad.Usuario;
+import Exceptions.PacienteNotFoundException;
 import Negocio.DiaXMedicoNegocio;
 import Negocio.EspecialidadNegocio;
 import Negocio.MedicoNegocio;
@@ -121,20 +122,20 @@ public class ServletTurno extends HttpServlet {
 		Turno turno = new Turno();
 
 		if(request.getParameter("reservar") != null) {
-			existe = pNeg.existePaciente(request.getParameter("txtDni"));
-			if(existe == true) {
-				turno = (Turno)request.getSession().getAttribute("Turno");
-				tneg.agendarTurno(request.getParameter("txtDni"), turno);
-				request.setAttribute("exito", true);
-				ArrayList<Turno> listaTurno2 = (ArrayList<Turno>) tneg.readAll();
-				request.getSession().setAttribute("listaTurnos", listaTurno2);
-				request.getRequestDispatcher("ListaTurnos.jsp").forward(request, response);
-			}
-			else {
-				request.setAttribute("mensaje", "El DNI ingresado no se encuentra registrado");
-				request.getRequestDispatcher("AsignacionTurnos.jsp").forward(request, response);
-			}
+			try {
+			pNeg.existePaciente(request.getParameter("txtDni"));
+			turno = (Turno)request.getSession().getAttribute("Turno");
+			tneg.agendarTurno(request.getParameter("txtDni"), turno);
+			request.setAttribute("exito", true);
+			ArrayList<Turno> listaTurno2 = (ArrayList<Turno>) tneg.readAll();
+			request.getSession().setAttribute("listaTurnos", listaTurno2);
+			request.getRequestDispatcher("ListaTurnos.jsp").forward(request, response);
 		}
+		catch (PacienteNotFoundException e) {
+			request.setAttribute("mensaje", e.getMessage());
+			request.getRequestDispatcher("AsignacionTurnos.jsp").forward(request, response);
+		}
+	}
 		
 		if (request.getParameter("abrirAgenda") != null) {
 

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import Entidad.Usuario;
+import Exceptions.UserNotFoundException;
 import Negocio.UsuarioNegocio;
 import NegocioImpl.UsuarioNegocioImpl;
 
@@ -26,28 +27,27 @@ public class ServletLogIn extends HttpServlet {
     }
 
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nombre = request.getParameter("username");
-		String clave = request.getParameter("pass");
-
-		UsuarioNegocio usNeg = new UsuarioNegocioImpl();
-		Usuario usuario = usNeg.iniciar(nombre, clave); // TRAE USUARIO Y CONTRASEÑA 
-		
-		if (usuario == null) {
-			request.setAttribute("mensaje", "Error nombre de usuario y/o clave");
+    	try {			
+			String nombre = request.getParameter("username");
+			String clave = request.getParameter("pass");
+			UsuarioNegocio usNeg = new UsuarioNegocioImpl();
+			Usuario usuario = usNeg.iniciar(nombre, clave); // TRAE USUARIO Y CONTRASEÑA 
+				//GUARDO LA SESION
+				HttpSession sesion = request.getSession();
+				sesion.setAttribute("username", usuario.getNombreUsuario());
+				sesion.setAttribute("tipo", usuario.getTipo());
+				sesion.setAttribute("idUsuario", usuario.getIdUsuario());
+				sesion.setAttribute("password", usuario.getClave());
+				if(usuario.getTipo().equals("Admin")) {
+					response.sendRedirect("IndexAdmin.jsp");				
+				}
+				else {
+					response.sendRedirect("ServletIndexMedico?Index=1");
+				}
+		}
+		catch (UserNotFoundException e){
+			request.setAttribute("mensaje", e.getMessage());
 			request.getRequestDispatcher("Login.jsp").forward(request, response);
-		} else {
-			//GUARDO LA SESION
-			HttpSession sesion = request.getSession();
-			sesion.setAttribute("username", usuario.getNombreUsuario());
-			sesion.setAttribute("tipo", usuario.getTipo());
-			sesion.setAttribute("idUsuario", usuario.getIdUsuario());
-			sesion.setAttribute("password", usuario.getClave());
-			if(usuario.getTipo().equals("Admin")) {
-				response.sendRedirect("IndexAdmin.jsp");				
-			}
-			else {
-				response.sendRedirect("ServletIndexMedico?Index=1");
-			}
 		}
 		
 	}
