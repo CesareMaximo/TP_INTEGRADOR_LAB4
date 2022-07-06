@@ -22,7 +22,7 @@ public class EspeclidadImpl implements EspecialidadDAO{
 	private static final String readall = "select * from especialidad";
 	private static final String readallxId = "select * from especialidad where idEspecialidad =?";
 	private static final String update = "update especialidad set Descripcion = ? where idEspecialidad = ?";
-	
+	private static final String exists = "SELECT CASE WHEN exists ( SELECT * FROM especialidad WHERE Descripcion like  ?) THEN 'TRUE' ELSE 'FALSE' END";
 	@Override
 	public boolean insert(Especialidad es) {
 	
@@ -183,6 +183,28 @@ public class EspeclidadImpl implements EspecialidadDAO{
 		}
 		
 		return isInsertExitoso;
+	}
+
+	@Override
+	public boolean existe(String des) {
+	
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean existe = false;
+		ResultSet resultSet;
+		try {
+			statement = conexion.prepareStatement(exists);
+			statement.setString(1, des);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				existe = Boolean.valueOf(resultSet.getString(1));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return existe;
 	}
 	
 	

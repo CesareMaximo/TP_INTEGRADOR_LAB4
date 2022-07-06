@@ -37,11 +37,11 @@
 			<table class="formulario">
 				<tr>
 					<td><label>Nombre de Usuario:</label></td>
-					<td><label name="txtUser" type="user" size="20"><%= session.getAttribute("username") %></label></td>
+					<td><label name="txtUser" type="user"  size="20"><%= session.getAttribute("username") %></label></td>
 				</tr>
 				<tr>
 					<td><label>Nuevo Nombre de Usuario:</label></td>
-					<td><input name="txtUserNuevo" type="user" class="inputForm" size="20" ></td>
+					<td><input name="txtUserNuevo" type="user" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')" class="inputForm" size="20" ></td>
 				</tr>
 				<tr>
 					<td><label>Contrase&ntildea anterior:</label></td>

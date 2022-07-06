@@ -110,6 +110,15 @@ public class ServletEspecialidad extends HttpServlet {
 			
 			String Descripcion= request.getParameter("txtDescripcion").toString();		
 			es.setDescripcion(Descripcion);
+			
+			if(esNeg.existe(request.getParameter("txtDescripcion").toString())) {
+				request.setAttribute("mensaje", "Especialidad ya registrada , por favor intente con otra");
+				ArrayList<Especialidad> listaEspecialidad = (ArrayList<Especialidad>) esNeg.readAll();
+				request.setAttribute("listaEspecialidad", listaEspecialidad);
+				request.getRequestDispatcher("AgregarEspecialidad.jsp").forward(request, response);
+				
+			}
+			else {
 			if(esNeg.insert(es)==true) {
 				
 				request.setAttribute("exito", true);
@@ -120,6 +129,7 @@ public class ServletEspecialidad extends HttpServlet {
 				rd.forward(request, response);
 				
 			}
+			}
 		
 		}
 		
@@ -128,14 +138,27 @@ public class ServletEspecialidad extends HttpServlet {
 			int id = Integer.parseInt(request.getParameter("txtIdEspecialidad").toString());
 			es.setIdEspecialidad(id);
 			es.setDescripcion(Descripcion);
+			ArrayList<Especialidad> listaEspecialidad = (ArrayList<Especialidad>) esNeg.readAll();
+			
+			if(esNeg.existe(request.getParameter("txtDescripcion").toString())) {
+				request.setAttribute("mensaje", "Especialidad ya registrada, por favor intente con otra");
+				
+			
+				request.setAttribute("listaEspecialidad", listaEspecialidad);
+				request.getRequestDispatcher("MenuEspecialidad.jsp").forward(request, response);
+				
+			}
+			else {
+			
 			if(esNeg.update(es)==true) {
 				
 				request.setAttribute("exito", true);
 				request.setAttribute("mensaje", "");
-				ArrayList<Especialidad> listaEspecialidad = (ArrayList<Especialidad>) esNeg.readAll();
+				
 				request.setAttribute("listaEspecialidad", listaEspecialidad);
 				rd = request.getRequestDispatcher("/MenuEspecialidad.jsp");
 				rd.forward(request, response);
+			}
 			}
 		}
 		

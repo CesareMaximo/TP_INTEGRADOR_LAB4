@@ -58,9 +58,9 @@ CONTRASEÑA
 		<form method="post" action="ServletMedico">
 			<h1>Registro de Nuevo M&eacutedico</h1>
 			<table class="formulario">
-				<tr><td><label>DNI:</label></td><td><input name="txtDni" type="text" placeholder="Ingrese el DNI" class="inputForm" size="20" required></td></tr>
-				<tr><td><label>Nombres:</label></td><td><input name="txtNombre" type="text" placeholder="Ingrese el Nombre" class="inputForm" size="20" required></td></tr>
-				<tr><td><label>Apellidos:</label></td><td><input name="txtApellido" type="text" placeholder="Ingrese el Apellido" class="inputForm" size="20" required></td></tr>
+				<tr><td><label>DNI:</label></td><td><input name="txtDni" type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')" placeholder="Ingrese el DNI" class="inputForm" size="20" required></td></tr>
+				<tr><td><label>Nombres:</label></td><td><input name="txtNombre" type="text" oninput="this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ ]/,'')" placeholder="Ingrese el Nombre" class="inputForm" size="20" required></td></tr>
+				<tr><td><label>Apellidos:</label></td><td><input name="txtApellido" type="text" oninput="this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ ]/,'')" placeholder="Ingrese el Apellido" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Fecha Nacimiento:</label></td><td><input name="txtFechaNac"  type="date" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Sexo</label></td><td><select class="select" name="slcSexo">
 				<option value="M">Masculino</option>
@@ -116,10 +116,10 @@ CONTRASEÑA
 				
 				</select></tr>
 				<tr><td><label>Localidad:</label></td><td><select class="textbox" required id="localidadReal" name="slcLocalidad"></select></tr>
-				<tr><td><label>Direcci&oacuten:</label></td><td><textarea name="txtDireccion" placeholder="Ingrese una Dirección" style="resize: none;" class="inputForm" cols="21" rows="3" required></textarea></td></tr>
-				<tr><td><label>E-mail:</label></td><td><input name="txtEmail" type="email" placeholder="Ingrese un Email" class="inputForm" size="20" required></td></tr>
-				<tr><td><label>Tel&eacutefono:</label></td><td><input name="txtTelefono1" placeholder="Ingrese un telefono" type="text"  class="inputForm"size="20" required></td></tr>
-				<tr><td><label>Tel&eacutefono Opcional:</label></td><td><input name="txtTelefono2" placeholder="Ingrese un telefono" type="text" class="inputForm" size="20"></td></tr>
+				<tr><td><label>Direcci&oacuten:</label></td><td><textarea name="txtDireccion" oninput="this.value = this.value.replace(/[^a-zA-Z0-9_á_é_í_ó_ú_Á_É_Í_Ó_ÚñÑ ]/,'')" placeholder="Ingrese una Dirección" style="resize: none;" class="inputForm" cols="21" rows="3" required></textarea></td></tr>
+				<tr><td><label>E-mail:</label></td><td><input name="txtEmail" type="email" oninput="this.value = this.value.replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚ@._-]/,'')" placeholder="Ingrese un Email" class="inputForm" size="20" required></td></tr>
+				<tr><td><label>Tel&eacutefono:</label></td><td><input name="txtTelefono1" oninput="this.value = this.value.replace(/[^0-9]/,'')" placeholder="Ingrese un telefono" type="text"  class="inputForm"size="20" required></td></tr>
+				<tr><td><label>Tel&eacutefono Opcional:</label></td><td><input name="txtTelefono2"  oninput="this.value = this.value.replace(/[^0-9]/,'')" placeholder="Ingrese un telefono" type="text" class="inputForm" size="20"></td></tr>
 				<tr><td><label>Especialidad:</label></td>
 				<td><select name="slcEspecialidad" class="select">
 											
@@ -206,9 +206,9 @@ CONTRASEÑA
 				<option>20:00</option></select><label class="lbl">  Salida   </label>
 				
 				</td></tr> -->
-				<tr><td><label>Nombre de Usuario:</label></td><td><input name="txtUser" placeholder="Ingrese un Usuario" type="text" required class="inputForm" size="20"></td></tr>
-				<tr><td><label>Contrase&ntildea:</label></td><td><input name="txtPass" placeholder="Ingrese una Contraeña" type="password"class="inputForm" required size="20"></td></tr>
-				<tr><td><label>Confirmar contrase&ntildea:</label></td><td><input name="txtPass2" placeholder="Repita la Contraseña" type="password"class="inputForm" required size="20"></td></tr>
+				<tr><td><label>Nombre de Usuario:</label></td><td><input name="txtUser" placeholder="Ingrese un Usuario" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')"  type="text" required class="inputForm" size="20"></td></tr>
+				<tr><td><label>Contrase&ntildea:</label></td><td><input name="txtPass" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')" placeholder="Ingrese una Contraeña" type="password"class="inputForm" required size="20"></td></tr>
+				<tr><td><label>Confirmar contrase&ntildea:</label></td><td><input name="txtPass2" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')" placeholder="Repita la Contraseña" type="password"class="inputForm" required size="20"></td></tr>
 			</table>
 			<br>
 			<div>

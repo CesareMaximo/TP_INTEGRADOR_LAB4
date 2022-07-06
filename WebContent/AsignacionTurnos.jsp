@@ -49,7 +49,7 @@ SI NO ESTA REGISTRADO, MENSAJE "PACIENTE NO REGISTRADO, BOTON PARA REGISTRAR"
 				<tr><td><label>Especialidad:</label></td><td><input class="inputForm" name="especialidad" id="especialidad" readonly value="${Turno.mMedico.eEspecialidad.descripcion}"></input></tr>
 				<tr><td><label>Fecha:</label></td><td><input class="inputForm" name="fecha" id="fecha" readonly value="${Turno.fecha}"></input></tr> 
 				<tr><td><label>Horario de Atenci&oacuten:</label></td><td><input class="inputForm" name="atencion" id="atencion" readonly value="${Turno.hora}"></input></tr> 
-				<tr><td><label>DNI:</label></td><td><input name="txtDni" type="text" placeholder="Ingrese un DNI" class="inputForm" size="20" required></input></td></tr>
+				<tr><td><label>DNI:</label></td><td><input name="txtDni" type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')" placeholder="Ingrese un DNI" class="inputForm" size="20" required></input></td></tr>
 			</table>
 			<br>
 			        <div>

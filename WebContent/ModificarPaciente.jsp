@@ -46,17 +46,17 @@
 			<table class="formulario">
 				<tr>
 					<td><label>DNI</label></td>
-					<td><input name="txtDni" type="text" class="inputForm"
+					<td><input name="txtDni" type="text" class="inputForm" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')"
 						size="20" readonly value="${paciente.dni}"></td>
 				</tr>
 				<tr>
 					<td><label>Nombres</label></td>
-					<td><input name="txtNombre" type="text" class="inputForm"
+					<td><input name="txtNombre" type="text" class="inputForm" oninput="this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ ]/,'')"
 						size="20" required value="${paciente.nombre}"></td>
 				</tr>
 				<tr>
 					<td><label>Apellidos</label></td>
-					<td><input name="txtApellido" type="text" class="inputForm"
+					<td><input name="txtApellido" type="text" class="inputForm" oninput="this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ ]/,'')"
 						size="20" required value="${paciente.apellido}"></td>
 				</tr>
 				<tr>
@@ -177,22 +177,22 @@
 				</select></tr>
 				<tr>
 					<td><label>Direcci&oacuten</label></td>
-					<td><textarea name="txtDireccion" style="resize: none;"
+					<td><textarea name="txtDireccion" style="resize: none;" oninput="this.value = this.value.replace(/[^a-zA-Z0-9_á_é_í_ó_ú_Á_É_Í_Ó_ÚñÑ ]/,'')"
 							class="inputForm" cols="21" rows="3" required>${paciente.direccion}</textarea></td>
 				</tr>
 				<tr>
 					<td><label>E-mail</label></td>
-					<td><input name="txtEmail" type="email" class="inputForm"
+					<td><input name="txtEmail" type="email" class="inputForm" oninput="this.value = this.value.replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚ@._-]/,'')" 
 						size="20" required value="${paciente.email}"></td>
 				</tr>
 				<tr>
 					<td><label>Tel&eacutefono</label></td>
-					<td><input name="txtTelefono1" type="text" class="inputForm"
+					<td><input name="txtTelefono1" type="text" class="inputForm" oninput="this.value = this.value.replace(/[^0-9]/,'')"
 						size="20" required value="${paciente.telefono1}"></td>
 				</tr>
 				<tr>
 					<td><label>Tel&eacutefono Opcional</label></td>
-					<td><input name="txtTelefono2" type="text" class="inputForm"
+					<td><input name="txtTelefono2" type="text" class="inputForm" oninput="this.value = this.value.replace(/[^0-9]/,'')"
 						size="20" value="${paciente.telefono2}"></td>
 				</tr>
 			</table>

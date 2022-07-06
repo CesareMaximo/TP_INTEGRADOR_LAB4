@@ -38,7 +38,7 @@
 			<table class="formulario">
 				<tr>
 					<td><label>Nombre de Usuario:</label></td>
-					<td><input name="txtUser" type="user" class="inputForm" size="20" required></td>
+					<td><input name="txtUser" type="user" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')" class="inputForm" size="20" required></td>
 				</tr>
 				<tr>
 					<td><label>Contrase&ntildea:</label></td>

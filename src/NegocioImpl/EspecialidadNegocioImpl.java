@@ -40,6 +40,12 @@ public class EspecialidadNegocioImpl implements EspecialidadNegocio{
 		
 		return dao.update(esMod);
 	}
+
+	@Override
+	public boolean existe(String des) {
+		
+		return dao.existe(des);
+	}
 	
 	
 	

@@ -45,11 +45,25 @@
 			<h1>Registro de Nueva Especialidad</h1>
 			
 			<table class="formulario">
-			<tr><td><label>Descripcion</label></td><td><input name="txtDescripcion" placeholder="Ingrese la descripción" type="text" class="inputForm" size="20" required></td></tr>
+			<tr><td><label>Descripcion</label></td><td><input name="txtDescripcion" oninput="this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚ ]/,'')" placeholder="Ingrese la descripción" type="text" class="inputForm" size="20" required></td></tr>
 			 </table>
 			
 			<input name="btnNuevo" type="submit" value="Aceptar"	class="btn btn-primary btn-block btn-large">
 		</form>
+		<br>
+		<div>
+				<p style="color: red; margin-left: 125px;">
+					<%
+						String resultado = (String) request.getAttribute("mensaje");
+								String mensaje = "";
+								if (resultado != null) {
+									mensaje = resultado;
+								}
+					%>
+					<%=mensaje%>
+				</p>
+
+			</div>
 	</div>
 
 </body>

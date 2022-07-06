@@ -36,6 +36,19 @@
  <input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary btn-sm" style="margin-left:10px;"></div>
 	<br>
 </form>	
+		</div>
+						<p style="color: red; margin-left: 125px;">
+					<%
+						String resultado = (String) request.getAttribute("mensaje");
+								String mensaje = "";
+								if (resultado != null) {
+									mensaje = resultado;
+								}
+					%>
+					<%=mensaje%>
+				</p>
+
+			</div>
 	
 	<div class="container-xl">
     <div class="table-responsive">
@@ -46,7 +59,7 @@
                     <div class="col-md-6 d-flex justify-content-end">
                     <a  style="height:38px;" href="ServletEspecialidad?Nuevo=1" name="nuevoMedico" class="btn btn-primary btn-ml">Nueva Especialidad</a>
 						
-						</div>
+					
                   
             <form action="ServletEspecialidad" method="get">
 	            <%

@@ -46,9 +46,9 @@ TELEFONO
 		<form method="post" action= "ServletPaciente">
 			<h1>Registro de Nuevo Paciente</h1>
 			<table class="formulario">
-				<tr><td><label>DNI:</label></td><td><input name="txtDni" type="text" placeholder="Ingrese un DNI" class="inputForm" size="20" required></td></tr>
-				<tr><td><label>Nombres:</label></td><td><input name="txtNombre" type="text" placeholder="Ingrese un Nombre" class="inputForm" size="20" required></td></tr>
-				<tr><td><label>Apellidos:</label></td><td><input name="txtApellido" type="text" placeholder="Ingrese un Apellido" class="inputForm" size="20" required></td></tr>
+				<tr><td><label>DNI:</label></td><td><input name="txtDni" type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')" placeholder="Ingrese un DNI" class="inputForm" size="20" required></td></tr>
+				<tr><td><label>Nombres:</label></td><td><input name="txtNombre" type="text" oninput="this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ ]/,'')" placeholder="Ingrese un Nombre" class="inputForm" size="20" required></td></tr>
+				<tr><td><label>Apellidos:</label></td><td><input name="txtApellido" type="text" oninput="this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ ]/,'')" placeholder="Ingrese un Apellido" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Fecha Nacimiento:</label></td><td><input name="txtFechaNac" type="date" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Sexo</label></td><td><select class="select" name="slcSexo">
 					
@@ -104,10 +104,10 @@ TELEFONO
 				
 				</select></tr>
 				<tr><td><label>Localidad:</label></td><td><select class="textbox" required id="localidadReal"  name="slcLocalidad"></select></tr>
-				<tr><td><label>Direcci&oacuten:</label></td><td><textarea name="txtDireccion" placeholder="Ingrese una Dirección" style="resize: none;" class="inputForm" cols="21" rows="3" required></textarea></td></tr>
-				<tr><td><label>E-mail:</label></td><td><input name="txtEmail" type="email" class="inputForm" placeholder="Ingrese un Email" size="20" required></td></tr>
-				<tr><td><label>Tel&eacutefono:</label></td><td><input name="txtTelefono1" type="text" placeholder="Ingrese un Telefono" class="inputForm"size="20" required></td></tr>
-				<tr><td><label>Tel&eacutefono Opcional:</label></td><td><input name="txtTelefono2" placeholder="Ingrese un Telefono" type="text" class="inputForm" size="20"></td></tr>				
+				<tr><td><label>Direcci&oacuten:</label></td><td><textarea name="txtDireccion"   oninput="this.value = this.value.replace(/[^a-zA-Z0-9_á_é_í_ó_ú_Á_É_Í_Ó_ÚñÑ ]/,'')" placeholder="Ingrese una Dirección" style="resize: none;" class="inputForm" cols="21" rows="3" required></textarea></td></tr>
+				<tr><td><label>E-mail:</label></td><td><input name="txtEmail" type="email" oninput="this.value = this.value.replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚ@._-]/,'')"  class="inputForm"  placeholder="Ingrese un Email" size="20" required></td></tr>
+				<tr><td><label>Tel&eacutefono:</label></td><td><input name="txtTelefono1" type="text" oninput="this.value = this.value.replace(/[^0-9]/,'')" placeholder="Ingrese un Telefono" class="inputForm"size="20" required></td></tr>
+				<tr><td><label>Tel&eacutefono Opcional:</label></td><td><input name="txtTelefono2"  oninput="this.value = this.value.replace(/[^0-9]/,'')" placeholder="Ingrese un Telefono" type="text" class="inputForm" size="20"></td></tr>				
 			</table>
 			<br>
 	

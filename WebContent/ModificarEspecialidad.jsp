@@ -50,12 +50,26 @@
 			
 			<table class="formulario">
 			<tr><td><label>ID</label></td><td><input name="txtIdEspecialidad" type="text" class="inputForm" readonly size="20" required value="${especialidad.idEspecialidad}" ></td></tr>
-			<tr><td><label>Descripcion</label></td><td><input name="txtDescripcion" placerholder="Ingrese la Descripción" type="text" class="inputForm" size="20" required value="${especialidad.descripcion}" ></td></tr>
+			<tr><td><label>Descripcion</label></td><td><input name="txtDescripcion" oninput="this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚ ]/,'')" placerholder="Ingrese la Descripción" type="text" class="inputForm" size="20" required value="${especialidad.descripcion}" ></td></tr>
 			
 			 </table>
 			
 			<input name="btnModificarEspecialidad" type="submit" value="Aceptar"	class="btn btn-primary btn-block btn-large">
 		</form>
+		<br>
+		<div>
+				<p style="color: red; margin-left: 125px;">
+					<%
+						String resultado = (String) request.getAttribute("mensaje");
+								String mensaje = "";
+								if (resultado != null) {
+									mensaje = resultado;
+								}
+					%>
+					<%=mensaje%>
+				</p>
+
+			</div>
 	</div>
 
 
