@@ -31,4 +31,17 @@ public interface TurnoDAO {
 	
 	public int totalPresentes(int anio);
 	
+	public ArrayList<Turno> filtroFechaEstado(int idEstado, Date fecha);
+	
+	public ArrayList<Turno> filtroFecha(Date fecha);
+	
+	public ArrayList<Turno> filtroEstado(int idEstado);
+
+	public ArrayList<Turno> filtroFechaEstado(int idEstado, Date fecha, int idMedico);
+
+	public ArrayList<Turno> filtroFecha(Date fecha, int idMedico);
+
+	public ArrayList<Turno> filtroEstado(int idEstado, int idMedico);
+	
+	
 }

@@ -47,22 +47,25 @@ EN CADA TURNO PODRA VER LOS DATOS DEL TURNO, AMPLIAR DETALLE DE PACIENTE, AGREGA
 					<div class="row justify-content-left">
 						<div class="col-sm-8">
 							<h1>Mis turnos asignados</h1>
+							<form method="post" action="ServletIndexMedico">
 							<table class="filtrosListado">
 								<tr>
 									<td><label>Estado:</label></td>
-									<td><select class="select">
-										
-											<option>OCUPADO</option>
-											<option>AUSENTE</option>
-											<option>PRESENTE</option>
+									<td><select name="slcEstado" class="select">
+											<option value=0>TODOS</option>
+									
+											<option value=2>OCUPADO</option>
+											<option value=3>AUSENTE</option>
+											<option value=4>PRESENTE</option>
 									</select></td>
 									<td><label>Fecha:</label></td>
-									<td><input type="date"></td>
+									<td><input type="date" name="fechaFiltro"></td>
 									<td><input name="btnFiltrar" type="submit" value="Filtrar"
 										class="btn btn-primary btn-sm"></td>
 								</tr>
 
 							</table>
+							</form>
 						</div>
 	
 					</div>

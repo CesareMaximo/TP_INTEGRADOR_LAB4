@@ -129,7 +129,6 @@ public class ServletTurno extends HttpServlet {
 			request.setAttribute("exito", true);
 			ArrayList<Turno> listaTurno2 = (ArrayList<Turno>) tneg.readAll();
 			request.getSession().setAttribute("listaTurnos", listaTurno2);
-			request.getRequestDispatcher("ListaTurnos.jsp").forward(request, response);
 		}
 		catch (PacienteNotFoundException e) {
 			request.setAttribute("mensaje", e.getMessage());
@@ -202,12 +201,10 @@ public class ServletTurno extends HttpServlet {
 					ArrayList<Turno> listaTurno3 = (ArrayList<Turno>) tneg.readAll();
 					request.getSession().setAttribute("listaTurnos", listaTurno3);
 					request.setAttribute("exito2", true);	
-					request.getRequestDispatcher("/ListaTurnos.jsp").forward(request, response);
 				}else {
 					ArrayList<Turno> listaTurno3 = (ArrayList<Turno>) tneg.readAll();
 					request.getSession().setAttribute("listaTurnos", listaTurno3);
 					request.setAttribute("exito2", false);	
-					request.getRequestDispatcher("/ListaTurnos.jsp").forward(request, response);
 				}
 				
 				
@@ -223,9 +220,60 @@ public class ServletTurno extends HttpServlet {
 				request.setAttribute("exito3", true);
 				ArrayList<Turno> listaTurno = (ArrayList<Turno>) tneg.readAll();
 				request.getSession().setAttribute("listaTurnos", listaTurno);
-				request.getRequestDispatcher("/ListaTurnos.jsp").forward(request, response);		
 			}
 		}
+		
+		if (request.getParameter("btnFiltrar") != null) {
+
+			int idEstado = Integer.parseInt(request.getParameter("slcEstado"));
+
+			if (request.getParameter("fechaFiltro") != "") {
+
+				SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+				Date dateFormateado = new Date();
+				try {
+					dateFormateado = formato.parse(request.getParameter("fechaFiltro"));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				java.sql.Date fechaFiltro = new java.sql.Date(dateFormateado.getTime());
+
+				if (idEstado != 0) {
+
+					
+					ArrayList<Turno> listaTurnoFiltros =tneg.filtroFechaEstado(idEstado, fechaFiltro);
+					request.getSession().setAttribute("listaTurnos", listaTurnoFiltros);
+					// CONSULTA BUSQUEDA X DOS FILTROS
+				} else {
+
+					
+					
+					ArrayList<Turno> listaTurnoFecha =	tneg.filtroFecha(fechaFiltro);
+					request.getSession().setAttribute("listaTurnos", listaTurnoFecha);
+					// CONSULTA BUSQUEDA SOLO POR FECHA
+
+				}
+
+			} else {
+
+				if (idEstado != 0) {
+
+				ArrayList<Turno> listaTurnoEstado =	tneg.filtroEstado(idEstado);
+				request.getSession().setAttribute("listaTurnos", listaTurnoEstado);
+				} else {
+
+					ArrayList<Turno> listaTurno = (ArrayList<Turno>) tneg.readAll();
+					request.getSession().setAttribute("listaTurnos", listaTurno);	
+					// LISTA SIN FILTRO
+				}
+
+			}
+
+		}
+		
+		request.getRequestDispatcher("/ListaTurnos.jsp").forward(request, response);	
+		
+		
 		
 			
 	}

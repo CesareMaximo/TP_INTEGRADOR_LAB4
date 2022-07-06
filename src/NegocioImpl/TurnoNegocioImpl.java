@@ -79,4 +79,37 @@ public class TurnoNegocioImpl implements TurnoNegocio {
 		return tur.totalPresentes(anio);
 	}
 
+	@Override
+	public ArrayList<Turno> filtroFechaEstado(int idEstado, Date fecha) {
+		
+		return tur.filtroFechaEstado(idEstado, fecha);
+	}
+
+	@Override
+	public ArrayList<Turno> filtroFecha(Date fecha) {
+
+		return tur.filtroFecha(fecha);
+	}
+
+	@Override
+	public ArrayList<Turno> filtroEstado(int idEstado) {
+		return tur.filtroEstado(idEstado);
+	}
+
+	@Override
+	public ArrayList<Turno> filtroFechaEstado(int idEstado, Date fecha, int idMedico) {
+		
+		return tur.filtroFechaEstado(idEstado, fecha, idMedico);
+	}
+
+	@Override
+	public ArrayList<Turno> filtroFecha(Date fecha, int idMedico) {
+		return tur.filtroFecha(fecha, idMedico);
+	}
+
+	@Override
+	public ArrayList<Turno> filtroEstado(int idEstado, int idMedico) {
+		return tur.filtroEstado(idEstado, idMedico);
+	}
+
 }

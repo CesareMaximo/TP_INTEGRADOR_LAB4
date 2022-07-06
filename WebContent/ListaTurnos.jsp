@@ -48,74 +48,36 @@
 	<div class="container-xl">
     <div class="table-responsive">
         <div class="table-wrapper">
-            <div style="padding-bottom: 0px;" class="table-title">
+        
+          <div style="padding-bottom: 0px;" class="table-title">
                 <div class="row justify-content-left">
                     <div class="col-md-6">
                     	<h1>Turnos</h1></div>
                     	<div class="col-md-6 d-flex justify-content-end">
                     	<a style="height:38px;" href="ServletTurno?Agenda=1" name="abrirAgenda" class="btn btn-primary btn-ml">Abrir agenda</a></div>
-                    	
+                    	<form method="post" action="ServletTurno">
                 		<table class ="filtrosListado">
                 			<tr>
 							<td><label>Estado:</label></td>
-							<td><select class="select">
-									<option>TODOS</option>
-									<option>LIBRE</option>
-									<option>OCUPADO</option>
-									<option>AUSENTE</option>
-									<option>PRESENTE</option>
-							</select></td>
+							<td><select name="slcEstado" class="select">
+											<option value=0>TODOS</option>
+											<option value=1>LIBRE</option>
+											<option value=2>OCUPADO</option>
+											<option value=3>AUSENTE</option>
+											<option value=4>PRESENTE</option>
+									</select></td>
 							<td><label>Fecha:</label></td>
-							<td><input type="date" ></td>
-
-							<td><label>Especialidad:</label></td>
-								<td><select class="select" id="especialidadMedico" name="especialidades">
-										<option>TODOS</option>
-										<%
-											ArrayList<Especialidad> listaEspecialidad = null;
-											if (request.getAttribute("listaEspecialidad") != null) {
-												listaEspecialidad = (ArrayList<Especialidad>) request.getAttribute("listaEspecialidad");
-											}
-
-											if (listaEspecialidad != null) {
-												for (Especialidad es : listaEspecialidad) {
-										%>
-										<option value="<%=es.getIdEspecialidad()%>">
-											<%=es.getDescripcion()%>
-										</option>
-										<%
-											}
-											}
-										%>
-								</select></td><td><label>Medico:</label></td><td><select class="select" name="medicos" id="medicoReal">
-										<option>TODOS</option>
-
-											<%
-												ArrayList<Medico> listaMedico2 = null;
-
-												if (request.getAttribute("listaMedico") != null) {
-													listaMedico2 = (ArrayList<Medico>) request.getAttribute("listaMedico");
-												}
-
-												if (listaMedico2 != null) {
-													for (Medico me : listaMedico2) {
-											%>
-
-											<option
-												value="<%=me.geteEspecialidad().getIdEspecialidad()%>"
-												data-uid="<%=me.getIdMedico().getIdUsuario()%>">
-												<%=me.getApellido()%>
-											</option>
-										<%
-											}
-											}
-										%>
-								</select>
+								<td><input type="date" name="fechaFiltro"></td>
+							
 							<td><input name="btnFiltrar" type="submit" value="Filtrar" class="btn btn-primary btn-sm"></td>
 						</tr> 
                 		</table>
+                		</form>
                     </div>  
+                    
                 </div>
+        
+       
      
 				 <%
 					ArrayList<Turno> listaTurnos = (ArrayList<Turno>)session.getAttribute("listaTurnos"); 
