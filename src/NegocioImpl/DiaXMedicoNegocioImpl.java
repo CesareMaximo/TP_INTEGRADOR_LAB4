@@ -30,4 +30,9 @@ public class DiaXMedicoNegocioImpl implements DiaXMedicoNegocio{
 		return hoDAO.readDias(idMedico);
 	}
 
+	@Override
+	public boolean diaTrabajoMedico(int idMedico, int idHorario) {
+		return hoDAO.diaTrabajoMedico(idMedico, idHorario);
+	}
+
 }

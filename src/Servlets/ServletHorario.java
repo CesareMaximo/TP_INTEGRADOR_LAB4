@@ -63,16 +63,32 @@ public class ServletHorario extends HttpServlet {
 		int idMedico = me.getIdMedico().getIdUsuario();
 		
 		if (request.getParameter("btnNuevoHorario")!=null) {
-			dia.setId(Integer.parseInt(request.getParameter("slcDia")));
-			diaXMedico.setDia(dia);
-			diaXMedico.setMedico(me);
-			diaXMedico.setHorarioIngreso(Time.valueOf(request.getParameter("slcIngreso")));
-			diaXMedico.setHorarioEgreso(Time.valueOf(request.getParameter("slcEgreso")));
-			hoNeg.insert(diaXMedico);
-			ArrayList<DiaXMedico> listaHorario = (ArrayList<DiaXMedico>) hoNeg.readall(idMedico);
-			request.getSession().setAttribute("listaHorario", listaHorario);//hace un get y lo setea
-			rd = request.getRequestDispatcher("/MenuHorario.jsp");
-			rd.forward(request, response);
+			Time ingreso = Time.valueOf(request.getParameter("slcIngreso")); 
+			Time egreso = Time.valueOf(request.getParameter("slcEgreso"));
+			if(ingreso.compareTo(egreso) > 0 || ingreso.compareTo(egreso) == 0) {
+				request.setAttribute("mensaje", "ERROR: Horario Ingreso debe ser menor al Horario Egreso");
+				request.getRequestDispatcher("AgregarHorario.jsp").forward(request, response);
+				return;
+			}
+			else {
+				int diaMedico = Integer.parseInt(request.getParameter("slcDia"));
+				if(hoNeg.diaTrabajoMedico(idMedico, diaMedico)) {
+					request.setAttribute("mensaje", "ERROR: Ya tiene Horarios para ese dia");
+					request.getRequestDispatcher("AgregarHorario.jsp").forward(request, response);
+				}
+				else {					
+					dia.setId(Integer.parseInt(request.getParameter("slcDia")));
+					diaXMedico.setDia(dia);
+					diaXMedico.setMedico(me);
+					diaXMedico.setHorarioIngreso(Time.valueOf(request.getParameter("slcIngreso")));
+					diaXMedico.setHorarioEgreso(Time.valueOf(request.getParameter("slcEgreso")));
+					hoNeg.insert(diaXMedico);
+					ArrayList<DiaXMedico> listaHorario = (ArrayList<DiaXMedico>) hoNeg.readall(idMedico);
+					request.getSession().setAttribute("listaHorario", listaHorario);//hace un get y lo setea
+					rd = request.getRequestDispatcher("/MenuHorario.jsp");
+					rd.forward(request, response);
+				}
+			}
 		}
 	}
 

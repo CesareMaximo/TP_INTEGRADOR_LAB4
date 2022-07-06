@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@page import="Entidad.*"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Date"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -367,7 +368,10 @@ PROMEDIO DE PACIENTES POR ESPECIALIDAD
 						</select></td>
 						<td><label>Año:</label></td>
 						<td><select name="slcAnio" type="select" class="select">
-						<%for(int i=2015; i <= 2022 ; i = i + 1){ %>
+						<%
+						Date dt=new Date();
+						int year = dt.getYear() + 1900;
+						for(int i=2015; i <= year ; i = i + 1){ %>
 						<option><%=i%></option>
 						<%}%>				
 						</select></td>
@@ -437,11 +441,25 @@ PROMEDIO DE PACIENTES POR ESPECIALIDAD
 							
 						<% if(request.getAttribute("porcentaje") != null){ 
 						%>	
-						<td><input type="number" name="anio" required value="<%=request.getAttribute("anio")%>" class="inputForm"></input></td>
+						<td><select type="number" name="anio" required value="<%=request.getAttribute("anio")%>" class="select">
+						<%
+						Date dt=new Date();
+						int year = dt.getYear() + 1900;
+						for(int i=2015; i <= year ; i = i + 1){ %>
+						<option><%=i%></option>
+						<%}%></select></td>
 						<%
 						}else{
 						%>
-						<td><input type="number" min="2000" max="2022" step="1" value="2022" required name="anio" class="inputForm"></input></td>
+						<!-- <td><input type="number" min="2000" max="2022" step="1" value="2022" required name="anio" class="inputForm"></input></td> -->
+						<td><select name="anio" type="select" class="select">
+						<%
+						Date dt=new Date();
+						int year = dt.getYear() + 1900;
+						for(int i=2015; i <= year ; i = i + 1){ %>
+						<option><%=i%></option>
+						<%}%>				
+						</select></td>
 						
 						<%} %>
 						<td> <input name="btnBuscarAnio" type="submit" value="Buscar" class="btn btn-primary" style="margin-left: -5px; margin-top:-5px;"></input> </td>

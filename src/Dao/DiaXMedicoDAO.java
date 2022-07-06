@@ -9,4 +9,5 @@ public interface DiaXMedicoDAO {
 	public boolean Insert(DiaXMedico diaXMedico);
 	public boolean delete(int idMedico,int idHorario);
 	public ArrayList<DiaXMedico> readDias(int idMedico);
+	public boolean diaTrabajoMedico(int idMedico,int idHorario);
 }

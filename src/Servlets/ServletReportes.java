@@ -195,6 +195,9 @@ public class ServletReportes extends HttpServlet {
 			
 			try {
 				porcentaje = (float)totalPacientes*100/total;
+				if(Float.isNaN(porcentaje)) {
+					porcentaje = 0;
+				}
 			} catch (ArithmeticException e) {
 				porcentaje = 0;
 			}			

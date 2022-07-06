@@ -20,7 +20,7 @@ public class DiaXMedicoDAOImpl implements DiaXMedicoDAO{
 	private static final String insert = "insert into Dia_x_Medico (idDia, idMedico, HorarioIngreso, HorarioEgreso, Estado) values (?,?,?,?,?)";
 	private static final String delete = "delete from medico_x_horario where idMedico = ? and idHorario = ?";
 	private static final String readDias = "SELECT * from Dia_x_Medico WHERE idMedico = ? AND Estado=1";
-	
+	private static final String existeHorario = "SELECT CASE WHEN exists ( SELECT * FROM Dia_x_medico WHERE idMedico = ? AND idDia = ?) THEN 'TRUE' ELSE 'FALSE' END";
 	
 	@Override
 	public List<DiaXMedico> readall(int idMedico) {
@@ -158,6 +158,28 @@ public class DiaXMedicoDAOImpl implements DiaXMedicoDAO{
 			e.printStackTrace();
 		}
 		return dias;		
+	}
+
+	@Override
+	public boolean diaTrabajoMedico(int idMedico, int idHorario) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean existe = false;
+		ResultSet resultSet;
+		try {
+			statement = conexion.prepareStatement(existeHorario);
+			statement.setInt(1, idMedico);
+			statement.setInt(2, idHorario);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				existe = Boolean.valueOf(resultSet.getString(1));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return existe;
 	}
 
 }
