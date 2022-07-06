@@ -14,4 +14,5 @@ public interface DiaXMedicoNegocio {
 	public boolean diaTrabajoMedico(int idMedico,int idHorario);
 	public boolean darAlta(DiaXMedico diaXMedico);
 	public boolean delete(DiaXMedico diaXMedico);
+	public boolean estadoBaja(DiaXMedico diaXMedico);
 }

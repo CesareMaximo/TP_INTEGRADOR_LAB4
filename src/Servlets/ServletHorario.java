@@ -99,8 +99,18 @@ public class ServletHorario extends HttpServlet {
 					diaXMedico.setMedico(me);
 					diaXMedico.setHorarioIngreso(Time.valueOf(request.getParameter("slcIngreso")));
 					diaXMedico.setHorarioEgreso(Time.valueOf(request.getParameter("slcEgreso")));
-					if(hoNeg.insert(diaXMedico)) {
-						request.setAttribute("exito", true);
+					if(hoNeg.estadoBaja(diaXMedico)) {
+						//si es true es que existe y doy alta
+						if(hoNeg.darAlta(diaXMedico) == true) {
+							request.setAttribute("exito", true);
+						}
+						
+					}
+					else {
+						if(hoNeg.insert(diaXMedico)) {
+							request.setAttribute("exito", true);
+						}
+						
 					}
 					ArrayList<DiaXMedico> listaHorario = (ArrayList<DiaXMedico>) hoNeg.readall(idMedico);
 					request.getSession().setAttribute("listaHorario", listaHorario);//hace un get y lo setea
@@ -133,8 +143,6 @@ public class ServletHorario extends HttpServlet {
 		
 			
 			
-		
-		
 		
 	}
 

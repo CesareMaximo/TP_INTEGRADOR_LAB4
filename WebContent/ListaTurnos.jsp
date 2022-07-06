@@ -226,6 +226,47 @@
 		</div>     
 								 <%} 
 									%>
+									<% 		
+			
+						
+						boolean advertencia = false;				
+						if(request.getAttribute("advertencia")!=null){
+						
+							advertencia = (boolean)request.getAttribute("advertencia");
+					
+							
+						}
+							
+							
+							if(advertencia == true){
+								%>
+								<script type="text/javascript">
+										window.onload = function() {
+											OpenBootstrapPopup();
+										};
+										function OpenBootstrapPopup() {
+											$("#modalAdvertencia").modal('show');
+										}
+									</script>
+									<div id="modalAdvertencia" class="modal fade">
+			<div class="modal-dialog modal-confirm">
+				<div class="modal-content">
+					<div class="modal-header flex-column">
+						<div class="icon-box">
+							<i style="color: red" class="material-icons">&#xE5CD;</i>
+						</div>	
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body text-center">
+					
+						<p> Profesional de la Salud ya posee agenda abierta para algunos de los dias seleccionados.
+						Se agregaran solo los nuevos.</p>
+					</div>
+				</div>
+			</div>
+		</div>    
+								 <%} 
+									%>
 	
 	<script>
 		$(document).ready(function() {

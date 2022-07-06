@@ -11,4 +11,5 @@ public interface DiaXMedicoDAO {
 	public ArrayList<DiaXMedico> readDias(int idMedico);
 	public boolean diaTrabajoMedico(int idMedico,int idHorario);
 	public boolean darAlta(DiaXMedico diaXMedico);
+	public boolean estadoBaja(DiaXMedico diaXMedico);
 }

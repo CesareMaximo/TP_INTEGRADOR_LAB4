@@ -45,6 +45,11 @@ public class DiaXMedicoNegocioImpl implements DiaXMedicoNegocio{
 	public boolean delete(DiaXMedico diaXMedico) {
 		return hoDAO.delete(diaXMedico);
 	}
+
+	@Override
+	public boolean estadoBaja(DiaXMedico diaXMedico) {
+		return hoDAO.estadoBaja(diaXMedico);
+	}
 	
 	
 

@@ -217,4 +217,26 @@ public class DiaXMedicoDAOImpl implements DiaXMedicoDAO{
 		return isInsertExitoso;
 	}
 
+	@Override
+	public boolean estadoBaja(DiaXMedico diaXMedico) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean existe = false;
+		ResultSet resultSet;
+		try {
+			statement = conexion.prepareStatement(estaDeBaja);
+			statement.setInt(1, diaXMedico.getMedico().getIdMedico().getIdUsuario());
+			statement.setInt(2, diaXMedico.getDia().getId());
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				existe = Boolean.valueOf(resultSet.getString(1));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return existe;
+	}
+
 }

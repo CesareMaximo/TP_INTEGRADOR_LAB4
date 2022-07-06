@@ -91,6 +91,7 @@
 			<input name="btnNuevoHorario" type="submit" value="Aceptar"	class="btn btn-primary btn-block btn-large">
 		</form>
 	</div>
+	
 
 </body>
 </html>

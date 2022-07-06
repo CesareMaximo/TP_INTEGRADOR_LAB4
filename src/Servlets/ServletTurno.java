@@ -214,6 +214,9 @@ public class ServletTurno extends HttpServlet {
 							}
 						}
 					}
+					else {
+						request.setAttribute("advertencia", true);
+					}
 					calendar.add(Calendar.DATE, 1);
 					inicio = new java.sql.Date(calendar.getTimeInMillis());
 				}
