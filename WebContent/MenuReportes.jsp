@@ -274,7 +274,21 @@ PROMEDIO DE PACIENTES POR ESPECIALIDAD
 						<%} %>
 						<td> <input name="btnTotalAusentes" type="submit" value="Buscar" class="btn btn-primary" style="margin-left: -5px; margin-top:-5px;"></input> </td>
 						</tr>
-						</table>				
+						</table>		
+						
+						<div>
+							<p style="color:red; margin-top:15px" >
+								<%
+								
+										String mensaje = "";
+										if (request.getAttribute("advertencia2") != null) {
+											mensaje = request.getAttribute("advertencia2").toString();
+										}
+								%>
+								<%=mensaje%>
+							</p>
+						</div>
+								
 						<%
 						int totalAusentes=0;
 						if (request.getAttribute("totalAusentes") != null){

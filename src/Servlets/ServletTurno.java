@@ -120,6 +120,12 @@ public class ServletTurno extends HttpServlet {
 		PacienteNegocio pNeg = new PacienteNegocioImpl();
 		boolean existe = false;
 		Turno turno = new Turno();
+		MedicoNegocio meNeg = new MedicoNegocioImpl();
+		
+		EspecialidadNegocio esNeg = new EspecialidadNegocioImpl();
+		
+		ArrayList<Especialidad> listaEspecialidad = (ArrayList<Especialidad>) esNeg.readAll();
+		ArrayList<Medico> listaMedico = (ArrayList<Medico>) meNeg.readAll();
 
 		if(request.getParameter("reservar") != null) {
 			try {
@@ -143,8 +149,11 @@ public class ServletTurno extends HttpServlet {
 
 			SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 			Date dateFormateado = new Date();
-			try {
+			Date fecha1 = new Date();
+			Date fecha2 = new Date();
+			try { 
 				dateFormateado = formato.parse(request.getParameter("FechaApertura"));
+				fecha1= formato.parse(request.getParameter("FechaApertura"));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
@@ -154,11 +163,22 @@ public class ServletTurno extends HttpServlet {
 			dateFormateado = new Date();
 			try {
 				dateFormateado = formato.parse(request.getParameter("FechaCierre"));
+				fecha2= formato.parse(request.getParameter("FechaCierre"));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 			java.sql.Date fin = new java.sql.Date(dateFormateado.getTime());
-
+			
+			if(fecha2.before(fecha1)) {
+				
+				request.setAttribute("mensaje", "La fecha de cierre tiene que ser mayor a la de apertura");
+				request.setAttribute("listaEspecialidad", listaEspecialidad);
+				request.setAttribute("listaMedico", listaMedico);
+				
+				request.getRequestDispatcher("AbrirAgenda.jsp").forward(request, response);
+				return;
+			}
+			else {
 			ArrayList<DiaXMedico> diasTrabajo = dxmNeg.readDias(med.getIdMedico().getIdUsuario());
 			
 			
@@ -212,6 +232,7 @@ public class ServletTurno extends HttpServlet {
 				e.printStackTrace();
 			}
 
+		}
 		}
 		
 		if(request.getParameter("LiberarTurno") != null) {
@@ -270,6 +291,7 @@ public class ServletTurno extends HttpServlet {
 			}
 
 		}
+		
 		
 		request.getRequestDispatcher("/ListaTurnos.jsp").forward(request, response);	
 		

@@ -61,7 +61,7 @@ CONTRASEÑA
 				<tr><td><label>DNI:</label></td><td><input name="txtDni" type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')" placeholder="Ingrese el DNI" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Nombres:</label></td><td><input name="txtNombre" type="text" oninput="this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ ]/,'')" placeholder="Ingrese el Nombre" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Apellidos:</label></td><td><input name="txtApellido" type="text" oninput="this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ ]/,'')" placeholder="Ingrese el Apellido" class="inputForm" size="20" required></td></tr>
-				<tr><td><label>Fecha Nacimiento:</label></td><td><input name="txtFechaNac"  type="date" class="inputForm" size="20" required></td></tr>
+				<tr><td><label>Fecha Nacimiento:</label></td><td><input id="datefield" name="txtFechaNac" type="date" class="inputForm" size="20" required></td></tr>
 				<tr><td><label>Sexo</label></td><td><select class="select" name="slcSexo">
 				<option value="M">Masculino</option>
 				<option value="F">Femenino</option>
@@ -251,6 +251,25 @@ CONTRASEÑA
 	
 	 </select>
 	
+	
+	<script>
+	
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth() + 1; //January is 0!
+	var yyyy = today.getFullYear();
+
+	if (dd < 10) {
+	   dd = '0' + dd;
+	}
+
+	if (mm < 10) {
+	   mm = '0' + mm;
+	} 
+	    
+	today = yyyy + '-' + mm + '-' + dd;
+	document.getElementById("datefield").setAttribute("max", today);
+	</script>
 
 	 <script>
 function myOnLoad() {

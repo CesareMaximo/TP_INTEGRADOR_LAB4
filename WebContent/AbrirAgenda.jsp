@@ -40,7 +40,7 @@ SI NO ESTA REGISTRADO, MENSAJE "PACIENTE NO REGISTRADO, BOTON PARA REGISTRAR"
 </form>	
 	<div class="registro">
 		<form action="ServletTurno" method="post">
-			<h1>Registro de Turnos</h1>
+			<h1>Abrir Agenda</h1>
 			<table class="formulario">
 				<tr><td><label>Especialidad:</label></td><td><select class="textbox" id="especialidadMedico" name="especialidades" required onchange="cargar_medicos()">
 				
@@ -78,8 +78,23 @@ SI NO ESTA REGISTRADO, MENSAJE "PACIENTE NO REGISTRADO, BOTON PARA REGISTRAR"
 			
 			</table>
 			<br>
-				<input name="abrirAgenda" type="submit" value="NuevosTurnos" class="btn btn-primary btn-block btn-large">
+				<input name="abrirAgenda" type="submit" value="Confirmar" class="btn btn-primary btn-block btn-large">
 			</form>
+			
+			<br>
+			<div>
+				<p style="color: red; margin-left: 125px;">
+					<%
+						String resultado = (String) request.getAttribute("mensaje");
+								String mensaje = "";
+								if (resultado != null) {
+									mensaje = resultado;
+								}
+					%>
+					<%=mensaje%>
+				</p>
+
+			</div>
 	</div>
 	
 	

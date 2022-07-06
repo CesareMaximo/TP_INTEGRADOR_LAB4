@@ -60,13 +60,14 @@ public class ServletReportes extends HttpServlet {
 		MedicoNegocio meNeg = new MedicoNegocioImpl();
 		Medico me = new Medico();
 		TurnoNegocio tuNeg = new TurnoNegocioImpl();
+		ArrayList<Medico> listaMedico = (ArrayList<Medico>) meNeg.readAll();
 		
 		if(request.getParameter("totalPacientes")!=null) {
 					
 			int idMedico = Integer.parseInt(request.getParameter("medicoReporte").toString());
 			if( idMedico == 0) {
 				
-				ArrayList<Medico> listaMedico = (ArrayList<Medico>) meNeg.readAll();
+				
 				request.setAttribute("medico", me);
 				request.setAttribute("listaMedico", listaMedico);
 				request.setAttribute("advertencia", "Debe seleccionar todos los campos.");
@@ -77,8 +78,11 @@ public class ServletReportes extends HttpServlet {
 				
 				SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 				Date dateFormateado = new Date();
+				Date fecha1 = new Date();
+				Date fecha2 = new Date();
 				try {
 					dateFormateado = formato.parse(request.getParameter("Fecha1"));
+					fecha1 = formato.parse(request.getParameter("Fecha1"));
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}  
@@ -87,12 +91,26 @@ public class ServletReportes extends HttpServlet {
 				dateFormateado = new Date();
 				try {
 					dateFormateado = formato.parse(request.getParameter("Fecha2"));
+					fecha2 = formato.parse(request.getParameter("Fecha2"));
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}  
+				
+				if(fecha2.before(fecha1)) {
+					
+					request.setAttribute("advertencia", "La fecha de cierre tiene que ser mayor a la de apertura");
+					
+					
+					request.setAttribute("listaMedico", listaMedico);
+			
+					request.setAttribute("exito", true);
+					request.getRequestDispatcher("MenuReportes.jsp").forward(request, response);
+				}
+				else {
+				
 				java.sql.Date date2 = new java.sql.Date(dateFormateado.getTime());
 				int total = meNeg.totalPacientesXMedico(idMedico, date1, date2);
-				ArrayList<Medico> listaMedico = (ArrayList<Medico>) meNeg.readAll();
+				
 				me = meNeg.mostrarMedico(idMedico);
 				request.setAttribute("medico", me);
 				request.setAttribute("listaMedico", listaMedico);
@@ -102,14 +120,18 @@ public class ServletReportes extends HttpServlet {
 				request.setAttribute("exito", true);
 				request.getRequestDispatcher("MenuReportes.jsp").forward(request, response);
 			}
+			}
 		}
 		
 		if(request.getParameter("btnTotalAusentes")!=null) {
 			
 			SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 			Date dateFormateado = new Date();
+			Date fecha1 = new Date();
+			Date fecha2 = new Date();
 			try {
 				dateFormateado = formato.parse(request.getParameter("Fecha1"));
+				fecha1 = formato.parse(request.getParameter("Fecha1"));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}  
@@ -118,10 +140,23 @@ public class ServletReportes extends HttpServlet {
 			dateFormateado = new Date();
 			try {
 				dateFormateado = formato.parse(request.getParameter("Fecha2"));
+				fecha2 = formato.parse(request.getParameter("Fecha2"));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}  
 			java.sql.Date date2 = new java.sql.Date(dateFormateado.getTime());
+			
+			if(fecha2.before(fecha1)) {
+				
+				request.setAttribute("advertencia2", "La fecha de cierre tiene que ser mayor a la de apertura");
+				
+				
+				request.setAttribute("exito2", true);
+				
+				request.getRequestDispatcher("MenuReportes.jsp").forward(request, response);
+			}
+			else {
+			
 			int totalAusentes = tuNeg.totalAusentes(date1, date2);
 			
 			request.setAttribute("totalAusentes", totalAusentes);
@@ -130,7 +165,7 @@ public class ServletReportes extends HttpServlet {
 			request.setAttribute("exito2", true);
 			request.getRequestDispatcher("MenuReportes.jsp").forward(request, response);
 		}
-		
+		}
 		
 		
 		if(request.getParameter("btnTotalAtendidos")!=null) {
