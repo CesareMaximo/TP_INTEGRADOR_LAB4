@@ -139,6 +139,7 @@ public class ServletTurno extends HttpServlet {
 		catch (PacienteNotFoundException e) {
 			request.setAttribute("mensaje", e.getMessage());
 			request.getRequestDispatcher("AsignacionTurnos.jsp").forward(request, response);
+			return;
 		}
 	}
 		

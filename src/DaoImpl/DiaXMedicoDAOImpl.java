@@ -18,10 +18,11 @@ public class DiaXMedicoDAOImpl implements DiaXMedicoDAO{
 	
 	private static final String readall = "SELECT dxm.idDia as idD, dxm.idMedico, dxm.HorarioIngreso, dxm.HorarioEgreso, d.Descripcion FROM Dia_x_Medico as dxm inner join Dia as d on dxm.idDia = d.idDia WHERE dxm.idMedico = ? and dxm.Estado = 1";
 	private static final String insert = "insert into Dia_x_Medico (idDia, idMedico, HorarioIngreso, HorarioEgreso, Estado) values (?,?,?,?,?)";
-	private static final String delete = "delete from medico_x_horario where idMedico = ? and idHorario = ?";
 	private static final String readDias = "SELECT * from Dia_x_Medico WHERE idMedico = ? AND Estado=1";
-	private static final String existeHorario = "SELECT CASE WHEN exists ( SELECT * FROM Dia_x_medico WHERE idMedico = ? AND idDia = ?) THEN 'TRUE' ELSE 'FALSE' END";
-	
+	private static final String existeHorario = "SELECT CASE WHEN exists ( SELECT * FROM Dia_x_medico WHERE idMedico = ? AND idDia = ? AND Estado = 1) THEN 'TRUE' ELSE 'FALSE' END";
+	private static final String estaDeBaja = "SELECT CASE WHEN exists ( SELECT * FROM Dia_x_medico WHERE idMedico = ? AND idDia = ? AND Estado = 0) THEN 'TRUE' ELSE 'FALSE' END";
+	private static final String delete = "UPDATE dia_x_medico SET Estado = 0 WHERE idMedico = ? AND idDia = ?";
+	private static final String darAlta = "UPDATE dia_x_medico SET Estado = 1, HorarioIngreso = ?, HorarioEgreso = ? WHERE idMedico = ? AND idDia = ?";
 	@Override
 	public List<DiaXMedico> readall(int idMedico) {
 		
@@ -96,7 +97,7 @@ public class DiaXMedicoDAOImpl implements DiaXMedicoDAO{
 	}
 
 	@Override
-	public boolean delete(int idMedico, int idHorario) {
+	public boolean delete(DiaXMedico diaXMedico) {
 		
 		PreparedStatement statement ;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -104,8 +105,8 @@ public class DiaXMedicoDAOImpl implements DiaXMedicoDAO{
 		try
 		{
 			statement = conexion.prepareStatement(delete);
-			statement.setInt(1, idMedico);
-			statement.setInt(2, idHorario);
+			statement.setInt(1, diaXMedico.getMedico().getIdMedico().getIdUsuario());
+			statement.setInt(2, diaXMedico.getDia().getId());
 			
 			
 			if(statement.executeUpdate() > 0)
@@ -180,6 +181,40 @@ public class DiaXMedicoDAOImpl implements DiaXMedicoDAO{
 		}
 
 		return existe;
+	}
+
+	@Override
+	public boolean darAlta(DiaXMedico diaXMedico) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isInsertExitoso = false;
+		try
+		{
+			statement = conexion.prepareStatement(darAlta);
+		
+			statement.setTime(1, diaXMedico.getHorarioIngreso());
+			statement.setTime(2, diaXMedico.getHorarioEgreso());
+			statement.setInt(3, diaXMedico.getMedico().getIdMedico().getIdUsuario());
+			statement.setInt(4, diaXMedico.getDia().getId());
+			
+			
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isInsertExitoso = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		
+		return isInsertExitoso;
 	}
 
 }

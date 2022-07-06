@@ -12,4 +12,6 @@ public interface DiaXMedicoNegocio {
 	public boolean insert (DiaXMedico diaXMedico);
 	public ArrayList<DiaXMedico> readDias(int idMedico);
 	public boolean diaTrabajoMedico(int idMedico,int idHorario);
+	public boolean darAlta(DiaXMedico diaXMedico);
+	public boolean delete(DiaXMedico diaXMedico);
 }

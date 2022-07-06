@@ -35,4 +35,17 @@ public class DiaXMedicoNegocioImpl implements DiaXMedicoNegocio{
 		return hoDAO.diaTrabajoMedico(idMedico, idHorario);
 	}
 
+	@Override
+	public boolean darAlta(DiaXMedico diaXMedico) {
+		return hoDAO.darAlta(diaXMedico);
+		
+	}
+
+	@Override
+	public boolean delete(DiaXMedico diaXMedico) {
+		return hoDAO.delete(diaXMedico);
+	}
+	
+	
+
 }

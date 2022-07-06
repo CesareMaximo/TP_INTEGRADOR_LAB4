@@ -5,6 +5,7 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -47,10 +48,26 @@ public class ServletHorario extends HttpServlet {
 			request.getSession().setAttribute("listaHorario", listaHorario);
 			rd = request.getRequestDispatcher("/MenuHorario.jsp");
 			rd.forward(request, response);
+			return;
 		}
 		if(request.getParameter("Nuevo") != null) {
 			request.getRequestDispatcher("/AgregarHorario.jsp").forward(request, response);
+			return;
 		}
+		
+		
+		if( request.getParameter("IdD") != null) {
+			
+			request.setAttribute("eliminar", true);
+			
+			int dia = Integer.parseInt(request.getParameter("IdD"));
+			
+			request.setAttribute("idDia", dia);
+			request.getRequestDispatcher("/MenuHorario.jsp").forward(request, response);
+			return;
+		}
+		
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -82,14 +99,43 @@ public class ServletHorario extends HttpServlet {
 					diaXMedico.setMedico(me);
 					diaXMedico.setHorarioIngreso(Time.valueOf(request.getParameter("slcIngreso")));
 					diaXMedico.setHorarioEgreso(Time.valueOf(request.getParameter("slcEgreso")));
-					hoNeg.insert(diaXMedico);
+					if(hoNeg.insert(diaXMedico)) {
+						request.setAttribute("exito", true);
+					}
 					ArrayList<DiaXMedico> listaHorario = (ArrayList<DiaXMedico>) hoNeg.readall(idMedico);
 					request.getSession().setAttribute("listaHorario", listaHorario);//hace un get y lo setea
 					rd = request.getRequestDispatcher("/MenuHorario.jsp");
 					rd.forward(request, response);
+					return;
 				}
 			}
 		}
+		
+		if (request.getParameter("btnBorrarHorario")!=null) {
+			
+			int idDia = Integer.parseInt(request.getParameter("idDia"));
+			
+			dia.setId(idDia);
+			diaXMedico.setDia(dia);
+			diaXMedico.setMedico(me);
+			
+			if(hoNeg.delete(diaXMedico)) {
+				request.setAttribute("delete", true);
+				ArrayList<DiaXMedico> listaHorario = (ArrayList<DiaXMedico>) hoNeg.readall(idMedico);
+				request.getSession().setAttribute("listaHorario", listaHorario);//hace un get y lo setea
+				rd = request.getRequestDispatcher("/MenuHorario.jsp");
+				rd.forward(request, response);
+				return;
+
+			}
+	
+		}
+		
+			
+			
+		
+		
+		
 	}
 
 }

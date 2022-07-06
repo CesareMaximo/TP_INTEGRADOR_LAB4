@@ -85,8 +85,7 @@
 							<td><%=ho.getHorarioEgreso()%></td>
 
                         <td>
-                           <a href="ModificarHorario.jsp" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>                        
-                           <a href="#myModal" class="delete" title="Delete" data-toggle="modal" data-med-id="<%=ho.getDia().getId()%>" ><i class="material-icons">&#xE872;</i></a>
+                           <a href="Horario?IdD=<%=ho.getDia().getId()%>" class="delete" title="Delete" ><i class="material-icons">&#xE872;</i></a>
                         </td>
         
 					<%} %>
@@ -110,6 +109,123 @@
 			    ]
 			} );
 			</script>	
+			
+			
+		
+						<% 		
+			
+						
+						boolean exito = false;
+						String texto = "";
+						
+						if(request.getAttribute("exito")!=null){
+						
+							exito = (boolean)request.getAttribute("exito");
+							 texto = "registrado";
+							
+						}
+						
+						if(request.getAttribute("update")!=null){
+							
+							exito = (boolean)request.getAttribute("update");
+							 texto = "modificado";
+							
+						}
+						
+						if(request.getAttribute("delete")!=null){
+							
+							exito = (boolean)request.getAttribute("delete");
+							 texto = "eliminado";
+							
+						}
+							
+							if(exito == true){
+								%>
+								<script type="text/javascript">
+										window.onload = function() {
+											OpenBootstrapPopup();
+										};
+										function OpenBootstrapPopup() {
+											$("#simpleModal").modal('show');
+										}
+									</script>
+									
+									<div id="simpleModal" class="modal fade">
+			<div class="modal-dialog modal-ok">
+				<div class="modal-content">
+					<div class="modal-header justify-content-center">
+						<div class="icon-box">
+							<i style="color: green" class="material-icons">&#xE876;</i>
+						</div>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body text-center">
+						<h4>Exito!</h4>	
+						<p>El horario se ha <%=texto %> satisfactoriamente.</p>
+					</div>
+				</div>
+			</div>
+		</div>     
+								 <%} 
+									%>		
+									
+									
+		<% 		
+			
+						
+						boolean eliminar = false;				
+						if(request.getAttribute("eliminar")!=null){
+						
+							eliminar = (boolean)request.getAttribute("eliminar");
+					
+							
+						}
+						int idDia=0;
+						if(request.getAttribute("idDia")!=null){
+							idDia = (int)request.getAttribute("idDia");
+						}
+							
+							
+							if(eliminar == true){
+								%>
+								<script type="text/javascript">
+										window.onload = function() {
+											OpenBootstrapPopup();
+										};
+										function OpenBootstrapPopup() {
+											$("#modalEliminar").modal('show');
+										}
+									</script>
+									<form method="post" action="Horario">
+									<div id="modalEliminar" class="modal fade">
+			<div class="modal-dialog modal-confirm">
+				<div class="modal-content">
+					<div class="modal-header flex-column">
+						<div class="icon-box">
+							<i style="color: red" class="material-icons">&#xE5CD;</i>
+						</div>
+						<h4 class="modal-title w-100">¿Estás seguro?</h4>	
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<input type="hidden" name="idDia" value="<%=idDia%>"/>
+					<div class="modal-body text-center">
+					
+						<p>¿Desea eliminar el horario? Esta operación no se puede deshacer</p>
+					</div>
+					<div class="modal-footer justify-content-center">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" name="btnBorrarHorario" class="btn btn-danger">Borrar</button>
+					</div>
+				</div>
+			</div>
+		</div>    
+		</form> 
+								 <%} 
+									%>									
+									
+									
+									
+			
 	
 </body>
 </html>
