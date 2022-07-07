@@ -3,6 +3,7 @@ package Negocio;
 import java.util.List;
 
 import Entidad.Paciente;
+import Exceptions.PacienteNotFoundException;
 
 public interface PacienteNegocio {
 
@@ -13,4 +14,6 @@ public interface PacienteNegocio {
 	public boolean update(Paciente pa);
 	public Paciente mostrarPaciente(String dni);
 	public boolean existePaciente(String dni);
+	public boolean existePaciente2(String dni) throws PacienteNotFoundException;
+
 }

@@ -272,7 +272,27 @@ public class PacienteDAOImpl implements PacienteDAO{
 	}
 
 	@Override
-	public boolean existePaciente(String dni) throws PacienteNotFoundException{
+	public boolean existePaciente(String dni){
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean existe = false;
+		ResultSet resultSet;
+		try {
+			statement = conexion.prepareStatement(exists);
+			statement.setString(1, dni);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				existe = Boolean.valueOf(resultSet.getString(1));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return existe;
+	}
+	
+	@Override
+	public boolean existePaciente2(String dni) throws PacienteNotFoundException{
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean existe = false;

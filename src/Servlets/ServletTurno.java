@@ -129,7 +129,7 @@ public class ServletTurno extends HttpServlet {
 
 		if(request.getParameter("reservar") != null) {
 			try {
-			pNeg.existePaciente(request.getParameter("txtDni"));
+			pNeg.existePaciente2(request.getParameter("txtDni"));
 			turno = (Turno)request.getSession().getAttribute("Turno");
 			tneg.agendarTurno(request.getParameter("txtDni"), turno);
 			request.setAttribute("exito", true);

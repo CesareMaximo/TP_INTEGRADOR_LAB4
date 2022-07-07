@@ -2668,6 +2668,15 @@ INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES('Medico3', '1111
 INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES('Medico4', '1111', 'Medico', 1);
 INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES('Medico5', '1111', 'Medico', 1);
 INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES('Medico6', '1111', 'Medico', 1);
+INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES('MedicoRaul', '1111', 'Medico', 1);
+INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES('MedicoAlvarez', '1111', 'Medico', 1);
+INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES('MedicoSamuel', '1111', 'Medico', 1);
+INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES('MedicoRomualdo', '1111', 'Medico', 1);
+INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES('MedicoJaviera', '1111', 'Medico', 1);
+INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES('MedicoTristan', '1111', 'Medico', 1);
+INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES('MedicoCatalano', '1111', 'Medico', 1);
+INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES('MedicoCamera', '1111', 'Medico', 1);
+INSERT INTO Usuarios(NombreUsuario, Clave, Tipo, Estado) VALUES('MedicoGuazon', '1111', 'Medico', 1);
 
 #ESPECIALIDAD
 INSERT INTO Especialidad(Descripcion) VALUES('Cardiología');
@@ -2694,6 +2703,15 @@ INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento
 INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('20700900', 'Diego', 'Gonzalez', 'M', 12,'1982-10-21', 'Avenida de Mayo 100', 256, 'diegog@gmail.com', 1, '418414', null);
 INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('30300900', 'Macarena', 'Alvarez', 'F', 12,'1983-08-22', 'Avenida Cordoba 1900', 303, 'macaalvarez@gmail.com', 1, '215612896', null);
 INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('20200900', 'Luciano', 'Ceballos', 'M', 12,'1977-09-29', 'Libertador 1300', 303, 'lucianoceballos@gmail.com', 1, '1815955885', null);
+INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('20200000', 'Raul', 'Caceres', 'M', 12,'1987-10-29', 'Libertador 300', 303, 'raulCaceres@gmail.com', 1, '1815454545', null);
+INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('20200800', 'Romina', 'Alvarez', 'F', 12,'1977-09-29', 'Libertad 1300', 300, 'lucianoceballos@gmail.com', 1, '146464565', null);
+INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('20200500', 'Luciano', 'Samuel', 'M', 12,'1973-09-29', 'Callao 1300', 302, 'lucianoceballos@gmail.com', 1, '15464545', null);
+INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('20200400', 'Lilo', 'Romualdo', 'M', 12,'1978-01-22', 'Alvarez Tomas 300', 301, 'lucianoceballos@gmail.com', 1, '18646455', null);
+INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('20200300', 'Javiera', 'Castro', 'F', 12,'1999-07-29', 'Maipu 1200', 290, 'lucianoceballos@gmail.com', 1, '156346435', null);
+INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('20200200', 'Oscar', 'Tristan', 'M', 12,'1990-06-29', 'Ugarte 1400', 299, 'lucianoceballos@gmail.com', 1, '18455555', null);
+INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('20200100', 'Lucia', 'Catalano', 'F', 12,'1992-05-29', 'Caracas 1500', 298, 'lucianoceballos@gmail.com', 1, '166565654', null);
+INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('20200700', 'Laura', 'Camera', 'F', 12,'1998-09-22', 'Dante 1700', 296, 'lucianoceballos@gmail.com', 1, '18456565', null);
+INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('21200900', 'Christian', 'Guazon', 'M', 12,'1977-03-22', 'San Martin 1900', 292, 'lucianoceballos@gmail.com', 1, '18344344', null);
 
 #MEDICO
 INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(2,'20900900', 1);
@@ -2702,6 +2720,14 @@ INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(4, '20600900', 3);
 INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(5, '20700900', 4);
 INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(6, '30300900', 5);
 INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(7, '20200900', 6);
+INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(8, '20200000', 1);
+INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(9, '20200500', 2);
+INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(10, '20200400', 3);
+INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(11, '20200300', 4);
+INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(12, '20200200', 5);
+INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(13, '20200100', 6);
+INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(14, '20200700', 1);
+INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(15, '21200900', 2);
 
 #HORARIO
 INSERT INTO Dia_x_Medico(idDia, idMedico, HorarioIngreso, HorarioEgreso, Estado) VALUES(2, 2, '8:00:00', '20:00:00', 1);
@@ -2715,24 +2741,77 @@ INSERT INTO Dia_x_Medico(idDia, idMedico, HorarioIngreso, HorarioEgreso, Estado)
 INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('22333444', 'Rosalia', 'Gonzalez', 'M', 12,'1982-10-21', 'Avenida de Mayo 1004', 256, 'rosaliag@gmail.com', 1, '123456', null);
 INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('33222111', 'Laura', 'Alvarez', 'F', 12,'1983-08-22', 'Las Heras 1900', 303, 'lau10@gmail.com', 1, '54645645', null);
 INSERT INTO Persona(DNI, Nombre, Apellido, Sexo, idNacionalidad, FechaNacimiento, Direccion, idLocalidad, Email, Estado, Telefono1, Telefono2) VALUES('44333222', 'Mauro', 'Ceballos', 'M', 12,'1977-09-29', 'Libertador 1200', 303, 'mauceba@gmail.com', 1, '44849592', null);
-
+INSERT INTO  persona  VALUES ('10200100','Juan','Cristobal','M',12,'1985-02-12','Mitre 123',1461,'juancristobal@gmai.com',1,'15623625','');
+INSERT INTO  persona  VALUES ('10200200','Carla','Rosa','F',12,'1997-07-12','Alvarez 210',290,'carlarosa@gmail.com',1,'1253563','');
+INSERT INTO  persona  VALUES ('10200300','Sofia','Chocarro','F',12,'1997-02-15','Saavedra 1845',213,'sofiachoc@gmail.com',1,'1256321','');
+INSERT INTO  persona  VALUES ('10200400','Cristian','Sosa','M',17,'1976-03-15','Oro 256',1687,'cristiansosa@gmail.com',1,'2536952','');
+INSERT INTO  persona  VALUES ('10200500','David','Ponce','M',12,'1998-06-15','Alvear 210',12,'davidponce@gmail.com',1,'15268526','');
+INSERT INTO  persona  VALUES ('10200600','Candela','Juarez','F',12,'1998-12-16','Mitre 2695',1420,'candelajuarez@gmail.com',1,'26462352','');
+INSERT INTO  persona  VALUES ('10200700','Walter','Diaz','M',12,'1992-02-20','Varela 126',134,'walterdiaz@gmail.com',1,'12546305','');
+INSERT INTO  persona  VALUES ('10200800','Bruno','Milagro','M',12,'1997-12-16','Pueblo 125',997,'brunomig@gmail.com',1,'132665282','');
+INSERT INTO  persona  VALUES ('10200900','Rosa','Diaz','F',10,'1970-06-12','Rivadavia 256',1611,'rosadiaz@gmail.com',1,'12645529','');
+INSERT INTO  persona  VALUES ('10300100','Soledad','Arena','F',32,'1998-12-16','Parana 1569',1439,'solearena@gmail.com',1,'12569832','');
+INSERT INTO  persona  VALUES ('10300200','Florencia','Farias','F',89,'1990-05-19','Saavedra 126',2270,'florfarias@gmail.com',1,'12134542','');
+INSERT INTO  persona  VALUES ('10300300','Gonzalo','Murias','M',88,'1995-09-08','La pampa 126',420,'gonzamurias@gmail.com',1,'2516462','');
 #TELEFONO--MEDICO
 #INSERT INTO
 #TELEFONO--PACIENTE
 
 #PACIENTE
 INSERT INTO Paciente(DNI) VALUES('22333444'), ('33222111'), ('44333222'); 
-
+INSERT INTO  paciente  VALUES (4,'10200100');
+INSERT INTO  paciente  VALUES (5,'10200200');
+INSERT INTO  paciente  VALUES (6,'10200300');
+INSERT INTO  paciente  VALUES (7,'10200400');
+INSERT INTO  paciente  VALUES (8,'10200500');
+INSERT INTO  paciente  VALUES (9,'10200600');
+INSERT INTO  paciente  VALUES (10,'10200700');
+INSERT INTO  paciente  VALUES (11,'10200800');
+INSERT INTO  paciente  VALUES (12,'10200900');
+INSERT INTO  paciente  VALUES (13,'10300100');
+INSERT INTO  paciente  VALUES (14,'10300200');
+INSERT INTO  paciente  VALUES (15,'10300300');
 #TURNO
-INSERT INTO Turno(idMedico, Fecha, idEstado, Hora) VALUES(2, '2022-07-04', 1, '08:00:00'), 
+INSERT INTO Turno(idMedico, Fecha, idEstado, Hora) VALUES(2, '2022-07-08', 1, '08:00:00'), 
 (2, '2022-07-04', 1, '09:00:00'),
 (2, '2022-07-04', 1, '10:00:00'),
 (2, '2022-07-04', 1, '11:00:00'),
 (2, '2022-07-04', 1, '12:00:00'),
 (2, '2022-07-04', 1, '13:00:00'),
-(2, '2022-07-04', 1, '14:00:00'),
-(2, '2022-07-04', 1, '15:00:00'),
-(2, '2022-07-04', 1, '16:00:00'),
-(2, '2022-07-04', 1, '17:00:00'),
-(2, '2022-07-04', 1, '18:00:00'),
-(2, '2022-07-04', 1, '19:00:00');
+(2, '2022-07-08', 1, '14:00:00'),
+(2, '2022-07-08', 1, '15:00:00'),
+(2, '2022-07-08', 1, '16:00:00'),
+(2, '2022-07-08', 1, '17:00:00'),
+(2, '2022-07-08', 1, '18:00:00'),
+(2, '2022-07-08', 1, '19:00:00');
+
+
+UPDATE turno SET Observación='Covid', idPaciente=4, idEstado=4 WHERE idTurno = 2; 
+UPDATE turno SET idPaciente=4, idEstado=3 WHERE idTurno = 4; 
+
+INSERT INTO  turno  VALUES (13,10,'2022-07-08',13,2,'12:00:00',NULL);
+INSERT INTO  turno  VALUES (14,10,'2022-07-08',NULL,1,'13:00:00',NULL);
+INSERT INTO  turno  VALUES (15,10,'2022-07-08',NULL,1,'14:00:00',NULL);
+INSERT INTO  turno  VALUES (16,10,'2022-07-08',NULL,1,'15:00:00',NULL);
+INSERT INTO  turno  VALUES (17,10,'2022-07-08',NULL,1,'16:00:00',NULL);
+INSERT INTO  turno  VALUES (18,10,'2022-07-08',NULL,1,'17:00:00',NULL);
+INSERT INTO  turno  VALUES (19,10,'2022-07-12',NULL,1,'10:00:00',NULL);
+INSERT INTO  turno  VALUES (20,10,'2022-07-12',NULL,1,'11:00:00',NULL);
+INSERT INTO  turno  VALUES (21,10,'2022-07-12',NULL,1,'12:00:00',NULL);
+INSERT INTO  turno  VALUES (22,10,'2022-07-12',NULL,1,'13:00:00',NULL);
+INSERT INTO  turno  VALUES (23,10,'2022-07-12',NULL,1,'14:00:00',NULL);
+INSERT INTO  turno  VALUES (24,10,'2022-07-12',NULL,1,'15:00:00',NULL);
+INSERT INTO  turno  VALUES (25,10,'2022-07-15',NULL,1,'12:00:00',NULL);
+INSERT INTO  turno  VALUES (26,10,'2022-07-15',NULL,1,'13:00:00',NULL);
+INSERT INTO  turno  VALUES (27,10,'2022-07-15',NULL,1,'14:00:00',NULL);
+INSERT INTO  turno  VALUES (28,10,'2022-07-15',NULL,1,'15:00:00',NULL);
+INSERT INTO  turno  VALUES (29,10,'2022-07-15',NULL,1,'16:00:00',NULL);
+INSERT INTO  turno  VALUES (30,10,'2022-07-15',NULL,1,'17:00:00',NULL);
+INSERT INTO  turno  VALUES (31,10,'2022-07-19',NULL,1,'10:00:00',NULL);
+INSERT INTO  turno  VALUES (32,10,'2022-07-19',NULL,1,'11:00:00',NULL);
+INSERT INTO  turno  VALUES (33,10,'2022-07-19',NULL,1,'12:00:00',NULL);
+INSERT INTO  turno  VALUES (34,10,'2022-07-19',NULL,1,'13:00:00',NULL);
+INSERT INTO  turno  VALUES (35,10,'2022-07-19',NULL,1,'14:00:00',NULL);
+INSERT INTO  turno  VALUES (36,10,'2022-07-19',NULL,1,'15:00:00',NULL);
+
+

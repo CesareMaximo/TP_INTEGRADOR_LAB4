@@ -3,6 +3,7 @@ package Dao;
 import java.util.List;
 
 import Entidad.Paciente;
+import Exceptions.PacienteNotFoundException;
 
 public interface PacienteDAO {
 
@@ -13,4 +14,5 @@ public interface PacienteDAO {
 	public boolean update(Paciente pa);
 	public Paciente mostrarPaciente(String dni);
 	public boolean existePaciente(String dni);
+	public boolean existePaciente2(String dni) throws PacienteNotFoundException;
 }

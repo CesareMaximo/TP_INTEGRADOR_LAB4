@@ -4,6 +4,7 @@ import java.util.List;
 
 import Entidad.Medico;
 import Entidad.Paciente;
+import Exceptions.PacienteNotFoundException;
 import Negocio.PacienteNegocio;
 import Dao.*;
 import DaoImpl.*;
@@ -47,6 +48,11 @@ public class PacienteNegocioImpl implements PacienteNegocio {
 	@Override
 	public boolean existePaciente(String dni) {
 		return paDAO.existePaciente(dni);
+	}
+
+	@Override
+	public boolean existePaciente2(String dni) throws PacienteNotFoundException {
+		return paDAO.existePaciente2(dni);
 	}
 
 	
