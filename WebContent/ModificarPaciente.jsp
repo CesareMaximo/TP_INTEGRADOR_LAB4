@@ -3,6 +3,7 @@
 <%@page import="NegocioImpl.*"%>
 <%@page import="Negocio.*"%>
 <%@page import="java.util.ArrayList"%>
+<%@ page buffer="64kb" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,15 +15,30 @@
 </style>
 <title>Modificar Paciente</title>
 </head>
-<% 	
-
-				Paciente pa = new Paciente();
-				pa = (Paciente) session.getAttribute("paciente");
-				String id = String.valueOf(pa.getlLocalidad().getpProvincia().getIdProvincia());
-				String id2 = String.valueOf(pa.getlLocalidad().getIdLocalidad());
-%>
-
 <body onLoad="myOnLoad()">
+<% 
+HttpServletResponse res = (HttpServletResponse) response;
+HttpSession sesion = ((HttpServletRequest) request).getSession();
+
+	if(sesion.getAttribute("username")==null){
+		res.sendRedirect("Login.jsp");
+		return;
+	}
+	if(sesion.getAttribute("tipo")!=null){
+		if(sesion.getAttribute("tipo").toString().equals("Medico")){
+			res.sendRedirect("Error.jsp");
+			return;
+	}
+	}
+	
+	Paciente pa = new Paciente();
+	if (session.getAttribute("paciente")!=null){
+	pa = (Paciente) session.getAttribute("paciente");
+		
+	}
+	String id = String.valueOf(pa.getlLocalidad().getpProvincia().getIdProvincia());
+	String id2 = String.valueOf(pa.getlLocalidad().getIdLocalidad());
+%>  
 	<!-- MISMO FORMULARIO QUE AGREGAR PERO CON DATOS PRECARGADOS -->
 
 	<div style="float: left; margin-left: 12px; margin-top: 6px;">

@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
         <%@page import="Entidad.*"%>
     <%@page import="java.util.ArrayList"%>
+    <%@ page buffer="64kb" %>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <style type="text/css">
 <jsp:include page="css\StyleSheet.css"></jsp:include>
@@ -24,7 +25,21 @@
 </head>
 <body>
 
+<% 
+HttpServletResponse res = (HttpServletResponse) response;
+HttpSession sesion = ((HttpServletRequest) request).getSession();
 
+	if(sesion.getAttribute("username")==null){
+		res.sendRedirect("Login.jsp");
+		return;
+	}
+	if(sesion.getAttribute("tipo")!=null){
+		if(sesion.getAttribute("tipo").toString().equals("Admin")){
+			res.sendRedirect("Error.jsp");
+			return;
+	}
+	}
+%>  
 
 	<!--LISTADO DE TURNOS ASIGNADOS CON BUSQUEDA  
 EN CADA TURNO PODRA VER LOS DATOS DEL TURNO, AMPLIAR DETALLE DE PACIENTE, AGREGAR OBSERVACIÓN, CAMBIAR ESTADO 

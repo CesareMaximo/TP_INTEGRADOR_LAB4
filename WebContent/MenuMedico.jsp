@@ -2,6 +2,7 @@
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="Entidad.*"%>
 <%@page import="java.util.ArrayList"%>
+<%@ page buffer="64kb" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -26,6 +27,20 @@
 
 </head>
 <body>
+<% 
+HttpServletResponse res = (HttpServletResponse) response;
+HttpSession sesion = ((HttpServletRequest) request).getSession();
+
+	if(sesion.getAttribute("username")==null){
+		res.sendRedirect("Login.jsp");
+	}
+	if(sesion.getAttribute("tipo")!=null){
+		if(sesion.getAttribute("tipo").toString().equals("Medico")){
+			res.sendRedirect("Error.jsp");
+			return;
+	}
+	}
+%>  
 	<!-- LISTADO DE MEDICOS CON BOTON AGREGAR PACIENTE Y BOTONES MODIFICAR Y ELIMINAR EN CADA FILA 
 CUANDO APRETAS ELIMINAR SALTA VENTANA DE CONFIRMACIÓN 
 FILTRO DE BUSQUEDA-->

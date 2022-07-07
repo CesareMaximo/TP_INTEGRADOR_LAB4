@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
     <%@page import="Entidad.*"%>
 <%@page import="NegocioImpl.*"%>
+<%@ page buffer="64kb" %>
 <%@page import="Negocio.*"%>
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -25,7 +26,20 @@
 %>
 
 <body>
+<% 
+HttpServletResponse res = (HttpServletResponse) response;
+HttpSession sesion = ((HttpServletRequest) request).getSession();
 
+	if(sesion.getAttribute("username")==null){
+		res.sendRedirect("Login.jsp");
+	}
+	if(sesion.getAttribute("tipo")!=null){
+		if(sesion.getAttribute("tipo").toString().equals("Medico")){
+			res.sendRedirect("Error.jsp");
+			return;
+	}
+	}
+%>  
 
 <div style="float: left; margin-left: 12px; margin-top: 6px;">
 		<a href="ServletEspecialidad?Param=1"><img src="img/atras.png"

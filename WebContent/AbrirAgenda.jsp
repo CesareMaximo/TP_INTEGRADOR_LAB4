@@ -3,6 +3,7 @@
     <%@page import="Entidad.*"%>
     <%@page import="java.util.ArrayList"%>
     <%@page import="java.time.LocalDate"%>
+	<%@ page buffer="64kb" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -36,6 +37,22 @@ BOTON RESERVAR TURNO, AL APRETAR BOTON DEBERA CHEQUEAR SI EL DNI ESTA REGISTRADO
 DE CONFIRMACION Y EN EL BACK CAMBIAR EL ESTADO DE TURNO A OCUPADO Y ASIGNAR ID PACIENTE 
 SI NO ESTA REGISTRADO, MENSAJE "PACIENTE NO REGISTRADO, BOTON PARA REGISTRAR"
 -->
+<% 
+HttpServletResponse res = (HttpServletResponse) response;
+HttpSession sesion = ((HttpServletRequest) request).getSession();
+
+	if(sesion.getAttribute("username")==null){
+		res.sendRedirect("Login.jsp");
+	}
+	if(sesion.getAttribute("tipo")!=null){
+		if(sesion.getAttribute("tipo").toString().equals("Medico")){
+			res.sendRedirect("Error.jsp");
+			return;
+	}
+	}
+%>  
+
+
   <div style="float: left; margin-left: 12px; margin-top:6px;">
 <a href="ServletTurno?Param=1"><img src="img/atras.png" height="20px" /></a>
 <a href="IndexAdmin.jsp"> <img src="img/home.png" height="20px" style="margin-left:10px;" width="20px" ></a> 

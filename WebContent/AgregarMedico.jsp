@@ -3,6 +3,7 @@
 <%@page import="NegocioImpl.*"%>
 <%@page import="Negocio.*"%>
 <%@page import="java.util.ArrayList"%>
+<%@ page buffer="64kb" %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -23,7 +24,20 @@
 
 
 <body onLoad="myOnLoad()">
+<% 
+HttpServletResponse res = (HttpServletResponse) response;
+HttpSession sesion = ((HttpServletRequest) request).getSession();
 
+	if(sesion.getAttribute("username")==null){
+		res.sendRedirect("Login.jsp");
+	}
+	if(sesion.getAttribute("tipo")!=null){
+		if(sesion.getAttribute("tipo").toString().equals("Medico")){
+			res.sendRedirect("Error.jsp");
+			return;
+	}
+	}
+%>  
 
 <!-- FORMULARIO PARA AGREGAR UN MEDICO
 DNI

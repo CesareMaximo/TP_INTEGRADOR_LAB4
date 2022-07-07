@@ -2,22 +2,39 @@
     pageEncoding="ISO-8859-1"%>
     <%@page import="Entidad.*"%>
     <%@page import="java.util.ArrayList"%>
+<%@ page buffer="64kb" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <style type="text/css">
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
-	
-	
-	
-        
 </style>
 <title>Asignaci&oacuten de Turnos</title>
 </head>
 
 
 <body  onLoad="myOnLoad()" >
+<% 
+HttpServletResponse res = (HttpServletResponse) response;
+HttpSession sesion = ((HttpServletRequest) request).getSession();
+
+	if(sesion.getAttribute("username")==null){
+		res.sendRedirect("Login.jsp");
+		return;
+	}
+	if(sesion.getAttribute("tipo")!=null){
+		if(sesion.getAttribute("tipo").toString().equals("Medico")){
+			res.sendRedirect("Error.jsp");
+			return;
+	}
+	}
+	
+	Turno tu = new Turno();
+	if (session.getAttribute("Turno")!=null){
+	   tu = (Turno)session.getAttribute("Turno");
+	}
+	%>
 <!-- DESPLAGLE DE ESPECIALIDADES QUE FILTRE LOS MEDICOS
 DESPLEGABLE DE MEDICOS
 FECHAS CON HORARIOS DISPONIBLES FILTRAR (SELECT * DE TURNOS WHERE ID MEDICO ES EL SELECCIONADO EN EL DESPLEGABLE AND IDESTADO = 1)
@@ -37,9 +54,7 @@ SI NO ESTA REGISTRADO, MENSAJE "PACIENTE NO REGISTRADO, BOTON PARA REGISTRAR"
  <input name="cerrarSesion" type="submit" value="Cerrar Sesión" class="btn btn-primary btn-sm" style="margin-left:10px;"></div>
 	<br>
 </form>	
-	<% Turno tu = new Turno();
-	   tu = (Turno)session.getAttribute("Turno");
-	%>
+	
 	<div class="registro">
 		<form method="post" action="ServletTurno">
 			<h1>Registro de Turnos</h1>

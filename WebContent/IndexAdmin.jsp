@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import="javax.servlet.http.HttpSession"%> 
+    <%@ page buffer="64kb" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,8 +22,21 @@ ASIGNACION DE TURNOS
 LISTADO DE TURNOS
 REPORTES 
   -->
-<% boolean exito = false;
-request.setAttribute("exito", exito); %>  
+<% 
+HttpServletResponse res = (HttpServletResponse) response;
+HttpSession sesion = ((HttpServletRequest) request).getSession();
+
+	if(sesion.getAttribute("username")==null){
+		res.sendRedirect("Login.jsp");
+	}
+	if(sesion.getAttribute("tipo")!=null){
+		if(sesion.getAttribute("tipo").toString().equals("Medico")){
+			res.sendRedirect("Error.jsp");
+			return;
+	}
+	}
+	boolean exito = false;
+	request.setAttribute("exito", exito); %>  
   
  <div class="User">
  	<form method="post" action ="logout" >
