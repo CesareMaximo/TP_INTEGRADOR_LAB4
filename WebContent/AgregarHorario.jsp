@@ -30,7 +30,7 @@ HttpSession sesion = ((HttpServletRequest) request).getSession();
 		}
     %>
 	<div style="float: left; margin-left: 12px; margin-top: 6px;">
-		<a href="ServletMedico?Param=1"><img src="img/atras.png"
+		<a href="Horario?param=<%=me.getIdMedico().getIdUsuario()%>"><img src="img/atras.png"
 			height="20px" /></a> <a href="IndexAdmin.jsp"> <img
 			src="img/home.png" height="20px" style="margin-left: 10px;"
 			width="20px"></a>
