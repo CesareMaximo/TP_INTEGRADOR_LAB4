@@ -20,6 +20,7 @@ public class MedicoDAOImpl implements  MedicoDAO{
 	private static final String readMedico = "SELECT P.DNI, P.Nombre, P.Apellido, P.Sexo, P.idNacionalidad, P.FechaNacimiento, P.Direccion, P.idLocalidad, P.Email, P.Telefono1, P.Telefono2, P.Estado, M.idMedico, M.idEspecialidad, E.Descripcion AS DesEspe, L.Descripcion AS DesLoc, PRO.idProvincia, PRO.Descripcion AS DesPro, N.Descripcion AS DesNac, U.NombreUsuario, U.Clave FROM Medico AS M INNER JOIN Persona AS P ON P.DNI = M.DNI INNER JOIN Especialidad E ON E.idEspecialidad = M.idEspecialidad INNER JOIN Localidad L ON L.idLocalidad = P.idLocalidad INNER JOIN Provincia PRO ON PRO.idProvincia = L.idProvincia INNER JOIN Nacionalidad N ON N.idNacionalidad = P.idNacionalidad INNER JOIN usuarios U ON U.idUsuario=M.idMedico WHERE IdMedico=?";
 	private static final String update = "UPDATE Persona SET Nombre = ?, Apellido = ?, Sexo = ?, idNacionalidad = ?, FechaNacimiento = ?, Direccion = ?, idLocalidad = ?, Email = ?, Telefono1 = ?, Telefono2 = ? WHERE Dni = ?";
 	private static final String totalPaciente = "SELECT COUNT(distinct idPaciente) AS Total FROM Turno WHERE idMedico = ? AND idEstado=4 AND Fecha between ? AND ? ;";
+	private static final String exists = "SELECT CASE WHEN exists ( SELECT * FROM Medico WHERE DNI = ?) THEN 'TRUE' ELSE 'FALSE' END";
 	//private static final String readallBuscar = "select * from medico as m inner join persona as p on p.DNI like m.DNI inner join especialidad as es on es.idEspecialidad = m.idEspecialidad where p.Nombre like '%"++"%' or p.Apellido like '%"++"%' ";
 	
 	
@@ -343,6 +344,26 @@ public class MedicoDAOImpl implements  MedicoDAO{
 			e.printStackTrace();
 		}
 		return total;	
+	}
+
+	@Override
+	public boolean existeMedico(String dni) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean existe = false;
+		ResultSet resultSet;
+		try {
+			statement = conexion.prepareStatement(exists);
+			statement.setString(1, dni);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				existe = Boolean.valueOf(resultSet.getString(1));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return existe;
 	}
 
 }

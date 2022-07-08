@@ -16,4 +16,5 @@ public interface MedicoDAO {
 	public List<Medico> readAllBuscar(String nombre);
 	public Medico mostrarMedico(int idMedico);
 	public int totalPacientesXMedico(int idMedico, Date fecha1, Date fecha2);
+	public boolean existeMedico(String dni);
 }

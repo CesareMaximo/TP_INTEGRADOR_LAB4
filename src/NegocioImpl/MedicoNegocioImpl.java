@@ -63,4 +63,9 @@ public class MedicoNegocioImpl implements MedicoNegocio {
 		return meDAO.totalPacientesXMedico(idMedico, fecha1, fecha2);
 	}
 
+	@Override
+	public boolean existeMedico(String dni) {
+		return meDAO.existeMedico(dni);
+	}
+
 }
