@@ -82,7 +82,7 @@ public class ServletEspecialidad extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EspecialidadNegocio esNeg = new EspecialidadNegocioImpl();
 		Especialidad es = new Especialidad();
-		
+		ArrayList<Especialidad> listaEspecialidad;
 		
 		
 		RequestDispatcher rd;
@@ -97,7 +97,7 @@ public class ServletEspecialidad extends HttpServlet {
 			if(esNeg.delete(es)==true) {
 				request.setAttribute("exito", true);
 				request.setAttribute("mensaje", "");
-				ArrayList<Especialidad> listaEspecialidad = (ArrayList<Especialidad>) esNeg.readAll();
+				listaEspecialidad = (ArrayList<Especialidad>) esNeg.readAll();
 				request.setAttribute("listaEspecialidad", listaEspecialidad);
 				rd = request.getRequestDispatcher("/MenuEspecialidad.jsp");
 				rd.forward(request, response);
@@ -113,7 +113,7 @@ public class ServletEspecialidad extends HttpServlet {
 			
 			if(esNeg.existe(request.getParameter("txtDescripcion").toString())) {
 				request.setAttribute("mensaje", "Especialidad ya registrada , por favor intente con otra");
-				ArrayList<Especialidad> listaEspecialidad = (ArrayList<Especialidad>) esNeg.readAll();
+				listaEspecialidad = (ArrayList<Especialidad>) esNeg.readAll();
 				request.setAttribute("listaEspecialidad", listaEspecialidad);
 				request.getRequestDispatcher("AgregarEspecialidad.jsp").forward(request, response);
 				
@@ -123,7 +123,7 @@ public class ServletEspecialidad extends HttpServlet {
 				
 				request.setAttribute("exito", true);
 				request.setAttribute("mensaje", "");
-				ArrayList<Especialidad> listaEspecialidad = (ArrayList<Especialidad>) esNeg.readAll();
+				listaEspecialidad = (ArrayList<Especialidad>) esNeg.readAll();
 				request.setAttribute("listaEspecialidad", listaEspecialidad);
 				rd = request.getRequestDispatcher("/MenuEspecialidad.jsp");
 				rd.forward(request, response);
@@ -138,12 +138,12 @@ public class ServletEspecialidad extends HttpServlet {
 			int id = Integer.parseInt(request.getParameter("txtIdEspecialidad").toString());
 			es.setIdEspecialidad(id);
 			es.setDescripcion(Descripcion);
-			ArrayList<Especialidad> listaEspecialidad = (ArrayList<Especialidad>) esNeg.readAll();
+
 			
 			if(esNeg.existe(request.getParameter("txtDescripcion").toString())) {
 				request.setAttribute("mensaje", "Especialidad ya registrada, por favor intente con otra");
 				
-			
+				listaEspecialidad = (ArrayList<Especialidad>) esNeg.readAll();
 				request.setAttribute("listaEspecialidad", listaEspecialidad);
 				request.getRequestDispatcher("MenuEspecialidad.jsp").forward(request, response);
 				
@@ -155,6 +155,7 @@ public class ServletEspecialidad extends HttpServlet {
 				request.setAttribute("exito", true);
 				request.setAttribute("mensaje", "");
 				
+				listaEspecialidad = (ArrayList<Especialidad>) esNeg.readAll();
 				request.setAttribute("listaEspecialidad", listaEspecialidad);
 				rd = request.getRequestDispatcher("/MenuEspecialidad.jsp");
 				rd.forward(request, response);
