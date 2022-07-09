@@ -2721,13 +2721,14 @@ INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(5, '20700900', 4);
 INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(6, '30300900', 5);
 INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(7, '20200900', 6);
 INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(8, '20200000', 1);
-INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(9, '20200500', 2);
-INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(10, '20200400', 3);
-INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(11, '20200300', 4);
-INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(12, '20200200', 5);
-INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(13, '20200100', 6);
-INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(14, '20200700', 1);
-INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(15, '21200900', 2);
+INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(9, '20200800', 2);
+INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(10, '20200500', 3);
+INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(11, '20200400', 4);
+INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(12, '20200300', 5);
+INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(13, '20200200', 6);
+INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(14, '20200100', 1);
+INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(15, '20200700', 2);
+INSERT INTO Medico(idMedico, DNI, idEspecialidad) VALUES(16, '21200900', 2);
 
 #HORARIO
 INSERT INTO Dia_x_Medico(idDia, idMedico, HorarioIngreso, HorarioEgreso, Estado) VALUES(2, 2, '8:00:00', '20:00:00', 1);
@@ -2813,5 +2814,3 @@ INSERT INTO  turno  VALUES (33,10,'2022-07-19',NULL,1,'12:00:00',NULL);
 INSERT INTO  turno  VALUES (34,10,'2022-07-19',NULL,1,'13:00:00',NULL);
 INSERT INTO  turno  VALUES (35,10,'2022-07-19',NULL,1,'14:00:00',NULL);
 INSERT INTO  turno  VALUES (36,10,'2022-07-19',NULL,1,'15:00:00',NULL);
-
-
